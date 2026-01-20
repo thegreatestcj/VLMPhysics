@@ -1,0 +1,33 @@
+# ===========================================
+# VLM-Physics Minimal Requirements
+# For quick testing on OSCAR cluster
+# ===========================================
+
+# Core (install torch separately first!)
+# pip install torch==2.2.0 torchvision==0.17.0 --index-url https://download.pytorch.org/whl/cu121
+
+# Video generation
+diffusers>=0.31.0
+transformers>=4.44.2
+accelerate>=0.33.0
+safetensors
+imageio
+imageio-ffmpeg
+
+# Memory optimization (critical for 24GB GPU)
+torchao==0.7.0  # Must match torch version - 0.15.0 requires torch>=2.6
+bitsandbytes
+
+# VLM
+qwen-vl-utils
+
+# Evaluation
+t2v-metrics
+openai
+
+# Basic utilities
+opencv-python
+Pillow
+numpy
+tqdm
+decord
