@@ -41,7 +41,7 @@ class PhysionDataset(Dataset):
     def __init__(
         self,
         data_root: str,
-        split: str = "train",
+        split: str = "all",  # 'all' = use everything, 'train'/'val' = split
         train_ratio: float = 0.85,
         video_dir: str = "mp4s-redyellow",  # Use red-yellow marked videos for model
         num_frames: int = 49,  # CogVideoX default
@@ -55,15 +55,20 @@ class PhysionDataset(Dataset):
         # Load labels
         self.samples = self._load_labels()
 
-        # Train/val split
+        # Split handling
         np.random.seed(seed)
         indices = np.random.permutation(len(self.samples))
-        split_idx = int(len(indices) * train_ratio)
 
-        if split == "train":
-            self.indices = indices[:split_idx]
+        if split == "all":
+            # Use all data for training (evaluate on PhyGenBench instead)
+            self.indices = indices
         else:
-            self.indices = indices[split_idx:]
+            # Train/val split
+            split_idx = int(len(indices) * train_ratio)
+            if split == "train":
+                self.indices = indices[:split_idx]
+            else:
+                self.indices = indices[split_idx:]
 
         print(f"PhysionDataset [{split}]: {len(self.indices)} samples")
         self._print_label_distribution()
@@ -77,7 +82,7 @@ class PhysionDataset(Dataset):
             reader = csv.reader(f)
             next(reader)  # Skip header: ",ground truth outcome"
 
-            for row in reader:
+            for row_idx, row in enumerate(reader):
                 if len(row) < 2:
                     continue
 
@@ -89,7 +94,10 @@ class PhysionDataset(Dataset):
                 scenario = self._parse_scenario(video_name)
 
                 # Find video file
-                video_path = self._find_video_path(scenario, video_name)
+                debug = row_idx < 3  # Debug first few rows
+                if debug:
+                    print(f"  DEBUG: video_name={video_name}, scenario={scenario}")
+                video_path = self._find_video_path(scenario, video_name, debug=debug)
 
                 if video_path and os.path.exists(video_path):
                     samples.append(
@@ -126,29 +134,50 @@ class PhysionDataset(Dataset):
 
         return "Unknown"
 
-    def _find_video_path(self, scenario: str, video_name: str) -> Optional[str]:
+    def _find_video_path(
+        self, scenario: str, video_name: str, debug: bool = False
+    ) -> Optional[str]:
         """Find the video file path."""
-        # Try different naming patterns
-        possible_paths = [
-            os.path.join(self.data_root, scenario, self.video_dir, f"{video_name}.mp4"),
-            os.path.join(
-                self.data_root, scenario, self.video_dir, f"{video_name}_img.mp4"
-            ),
-            os.path.join(
-                self.data_root, scenario.lower(), self.video_dir, f"{video_name}.mp4"
-            ),
-        ]
+        # video_name from labels.csv: pilot_dominoes_0mid_d3chairs_o1plants_tdwroom_0018_img
+        # actual filename:            pilot_dominoes_0mid_d3chairs_o1plants_tdwroom-redyellow_0018_img.mp4
+        # Need to insert "-redyellow" before the number
 
-        for path in possible_paths:
-            if os.path.exists(path):
-                return path
-
-        # Search in directory
         scenario_dir = os.path.join(self.data_root, scenario, self.video_dir)
-        if os.path.exists(scenario_dir):
-            for fname in os.listdir(scenario_dir):
-                if video_name in fname and fname.endswith(".mp4"):
-                    return os.path.join(scenario_dir, fname)
+
+        if not os.path.exists(scenario_dir):
+            scenario_dir = os.path.join(
+                self.data_root, scenario.lower(), self.video_dir
+            )
+
+        if not os.path.exists(scenario_dir):
+            if debug:
+                print(f"  DEBUG: scenario_dir not found: {scenario_dir}")
+            return None
+
+        # Method 1: Direct transformation
+        # Split at last occurrence of "_" before a 4-digit number
+        # pilot_dominoes_0mid_d3chairs_o1plants_tdwroom_0018_img
+        # -> pilot_dominoes_0mid_d3chairs_o1plants_tdwroom-redyellow_0018_img.mp4
+
+        parts = video_name.rsplit("_", 2)  # Split into 3 parts from the right
+        if len(parts) == 3:
+            # parts = ['pilot_dominoes_0mid_d3chairs_o1plants_tdwroom', '0018', 'img']
+            transformed_name = f"{parts[0]}-redyellow_{parts[1]}_{parts[2]}.mp4"
+            transformed_path = os.path.join(scenario_dir, transformed_name)
+            if debug:
+                print(f"  DEBUG: trying transformed path: {transformed_name}")
+            if os.path.exists(transformed_path):
+                return transformed_path
+
+        # Method 2: Search by matching key parts
+        for fname in os.listdir(scenario_dir):
+            if not fname.endswith(".mp4"):
+                continue
+
+            # Remove -redyellow and .mp4, then compare
+            fname_normalized = fname.replace("-redyellow", "").replace(".mp4", "")
+            if fname_normalized == video_name:
+                return os.path.join(scenario_dir, fname)
 
         return None
 
@@ -221,30 +250,64 @@ class PhysionDataset(Dataset):
 
 
 def get_dataloaders(
-    data_root: str, batch_size: int = 4, num_workers: int = 4, **dataset_kwargs
-) -> Tuple[DataLoader, DataLoader]:
-    """Get train and validation dataloaders."""
+    data_root: str,
+    batch_size: int = 4,
+    num_workers: int = 4,
+    split_data: bool = False,  # False = use all data, True = train/val split
+    **dataset_kwargs,
+) -> DataLoader:
+    """
+    Get dataloader(s) for training.
 
-    train_dataset = PhysionDataset(data_root, split="train", **dataset_kwargs)
-    val_dataset = PhysionDataset(data_root, split="val", **dataset_kwargs)
+    Args:
+        data_root: Path to Physion directory
+        batch_size: Batch size
+        num_workers: Number of data loading workers
+        split_data: If False, return single loader with all data (recommended)
+                    If True, return (train_loader, val_loader) tuple
+        **dataset_kwargs: Additional arguments for PhysionDataset
 
-    train_loader = DataLoader(
-        train_dataset,
-        batch_size=batch_size,
-        shuffle=True,
-        num_workers=num_workers,
-        pin_memory=True,
-    )
+    Returns:
+        DataLoader if split_data=False
+        (train_loader, val_loader) if split_data=True
+    """
 
-    val_loader = DataLoader(
-        val_dataset,
-        batch_size=batch_size,
-        shuffle=False,
-        num_workers=num_workers,
-        pin_memory=True,
-    )
+    if split_data:
+        # Return train/val split
+        train_dataset = PhysionDataset(data_root, split="train", **dataset_kwargs)
+        val_dataset = PhysionDataset(data_root, split="val", **dataset_kwargs)
 
-    return train_loader, val_loader
+        train_loader = DataLoader(
+            train_dataset,
+            batch_size=batch_size,
+            shuffle=True,
+            num_workers=num_workers,
+            pin_memory=True,
+        )
+
+        val_loader = DataLoader(
+            val_dataset,
+            batch_size=batch_size,
+            shuffle=False,
+            num_workers=num_workers,
+            pin_memory=True,
+        )
+
+        return train_loader, val_loader
+
+    else:
+        # Use all data for training (evaluate on PhyGenBench)
+        dataset = PhysionDataset(data_root, split="all", **dataset_kwargs)
+
+        loader = DataLoader(
+            dataset,
+            batch_size=batch_size,
+            shuffle=True,
+            num_workers=num_workers,
+            pin_memory=True,
+        )
+
+        return loader
 
 
 # ============ Test Code ============
