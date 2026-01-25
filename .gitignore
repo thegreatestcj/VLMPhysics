@@ -6,3 +6,12 @@
 *.jpg
 *.jpeg
 *.gif
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.swo
+.DS_Store
+.vscode/
+.idea/
