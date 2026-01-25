@@ -1,0 +1,748 @@
+{
+  "model": "CogVideoX-2b",
+  "gpu_info": {
+    "gpu_available": true,
+    "device_id": 0,
+    "device_name": "NVIDIA GeForce RTX 3090",
+    "device_capability": [
+      8,
+      6
+    ],
+    "total_memory_gb": 25.3,
+    "cuda_version": "12.4",
+    "pytorch_version": "2.5.1+cu124"
+  },
+  "selection": {
+    "method": "range",
+    "stratified": false,
+    "seed": 42,
+    "selected_indices": [
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159
+    ]
+  },
+  "total_prompts": 80,
+  "successful": 80,
+  "total_time_seconds": 16316.637061357498,
+  "avg_time_per_video": 203.95796326696873,
+  "results": [
+    {
+      "index": 80,
+      "category": "Light",
+      "prompt": "A puddle of oil on the road under the sunlight.",
+      "output": "outputs/phygenbench/baseline/output_video_81.mp4",
+      "time": 204.50491881370544,
+      "status": "success"
+    },
+    {
+      "index": 81,
+      "category": "Light",
+      "prompt": "A soap bubble floating in the air under the sunlight.",
+      "output": "outputs/phygenbench/baseline/output_video_82.mp4",
+      "time": 204.2716224193573,
+      "status": "success"
+    },
+    {
+      "index": 82,
+      "category": "Light",
+      "prompt": "A film of soap on a wand under the sunlight.",
+      "output": "outputs/phygenbench/baseline/output_video_83.mp4",
+      "time": 203.93954467773438,
+      "status": "success"
+    },
+    {
+      "index": 83,
+      "category": "Light",
+      "prompt": "A thin layer of gasoline on water under the sunlight.",
+      "output": "outputs/phygenbench/baseline/output_video_84.mp4",
+      "time": 204.25664377212524,
+      "status": "success"
+    },
+    {
+      "index": 84,
+      "category": "Light",
+      "prompt": "A layer of detergent on a wet surface under the sunlight.",
+      "output": "outputs/phygenbench/baseline/output_video_85.mp4",
+      "time": 204.24532270431519,
+      "status": "success"
+    },
+    {
+      "index": 85,
+      "category": "Light",
+      "prompt": "A beam of light passes through a prism.",
+      "output": "outputs/phygenbench/baseline/output_video_86.mp4",
+      "time": 203.90254068374634,
+      "status": "success"
+    },
+    {
+      "index": 86,
+      "category": "Light",
+      "prompt": "A beam of light passes through a crystal chandelier.",
+      "output": "outputs/phygenbench/baseline/output_video_87.mp4",
+      "time": 204.07616329193115,
+      "status": "success"
+    },
+    {
+      "index": 87,
+      "category": "Light",
+      "prompt": "A beam of light passes through a droplet of water.",
+      "output": "outputs/phygenbench/baseline/output_video_88.mp4",
+      "time": 204.1184651851654,
+      "status": "success"
+    },
+    {
+      "index": 88,
+      "category": "Light",
+      "prompt": "A beam of light passes through a glass diamond.",
+      "output": "outputs/phygenbench/baseline/output_video_89.mp4",
+      "time": 203.9704201221466,
+      "status": "success"
+    },
+    {
+      "index": 89,
+      "category": "Light",
+      "prompt": "A beam of light passes through a soap bubble.",
+      "output": "outputs/phygenbench/baseline/output_video_90.mp4",
+      "time": 203.67271971702576,
+      "status": "success"
+    },
+    {
+      "index": 90,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation of a glass of water as the temperature significantly drops to very low levels.",
+      "output": "outputs/phygenbench/baseline/output_video_91.mp4",
+      "time": 203.9472301006317,
+      "status": "success"
+    },
+    {
+      "index": 91,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation of a glass of juice as the temperature significantly drops to very low levels.",
+      "output": "outputs/phygenbench/baseline/output_video_92.mp4",
+      "time": 203.91149401664734,
+      "status": "success"
+    },
+    {
+      "index": 92,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation of a glass of milk as the temperature significantly drops to very low levels.",
+      "output": "outputs/phygenbench/baseline/output_video_93.mp4",
+      "time": 203.9613869190216,
+      "status": "success"
+    },
+    {
+      "index": 93,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation of a glass of oil as the temperature significantly drops to very low levels.",
+      "output": "outputs/phygenbench/baseline/output_video_94.mp4",
+      "time": 204.05447602272034,
+      "status": "success"
+    },
+    {
+      "index": 94,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation of a glass of beer as the temperature significantly drops to very low levels.",
+      "output": "outputs/phygenbench/baseline/output_video_95.mp4",
+      "time": 204.052316904068,
+      "status": "success"
+    },
+    {
+      "index": 95,
+      "category": "Heat",
+      "prompt": "A timelapse captures the gradual transformation of a piece of ice as the temperature rises significantly.",
+      "output": "outputs/phygenbench/baseline/output_video_96.mp4",
+      "time": 204.0791745185852,
+      "status": "success"
+    },
+    {
+      "index": 96,
+      "category": "Heat",
+      "prompt": "A timelapse captures the gradual transformation of a candle as the temperature rises significantly.",
+      "output": "outputs/phygenbench/baseline/output_video_97.mp4",
+      "time": 204.06067419052124,
+      "status": "success"
+    },
+    {
+      "index": 97,
+      "category": "Heat",
+      "prompt": "A timelapse captures the gradual transformation of butter as the temperature rises significantly.",
+      "output": "outputs/phygenbench/baseline/output_video_98.mp4",
+      "time": 203.99387788772583,
+      "status": "success"
+    },
+    {
+      "index": 98,
+      "category": "Heat",
+      "prompt": "A timelapse captures the gradual transformation of ice cream as the temperature rises significantly.",
+      "output": "outputs/phygenbench/baseline/output_video_99.mp4",
+      "time": 204.0289008617401,
+      "status": "success"
+    },
+    {
+      "index": 99,
+      "category": "Heat",
+      "prompt": "A timelapse captures the gradual transformation of wax as the temperature rises significantly.",
+      "output": "outputs/phygenbench/baseline/output_video_100.mp4",
+      "time": 204.00171279907227,
+      "status": "success"
+    },
+    {
+      "index": 100,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation as water vapor in a humid environment comes into contact with a cool glass surface.",
+      "output": "outputs/phygenbench/baseline/output_video_101.mp4",
+      "time": 204.08511781692505,
+      "status": "success"
+    },
+    {
+      "index": 101,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation as fog in a cold environment comes into contact with a warm car window.",
+      "output": "outputs/phygenbench/baseline/output_video_102.mp4",
+      "time": 204.0394103527069,
+      "status": "success"
+    },
+    {
+      "index": 102,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation as steam in a kitchen environment comes into contact with a cool metal pot lid.",
+      "output": "outputs/phygenbench/baseline/output_video_103.mp4",
+      "time": 204.08475422859192,
+      "status": "success"
+    },
+    {
+      "index": 103,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation as mist in a greenhouse environment comes into contact with a cool plastic sheet.",
+      "output": "outputs/phygenbench/baseline/output_video_104.mp4",
+      "time": 204.0303831100464,
+      "status": "success"
+    },
+    {
+      "index": 104,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation as water vapor in a greenhouse environment comes into contact with a cool plastic sheet.",
+      "output": "outputs/phygenbench/baseline/output_video_105.mp4",
+      "time": 204.01496291160583,
+      "status": "success"
+    },
+    {
+      "index": 105,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation of water in a pot as the temperature rapidly rises above 100°C.",
+      "output": "outputs/phygenbench/baseline/output_video_106.mp4",
+      "time": 203.81235337257385,
+      "status": "success"
+    },
+    {
+      "index": 106,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation of milk in a kettle as the temperature rapidly rises above 100°C.",
+      "output": "outputs/phygenbench/baseline/output_video_107.mp4",
+      "time": 203.90711903572083,
+      "status": "success"
+    },
+    {
+      "index": 107,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation of soup in a saucepan as the temperature rapidly rises above 100°C.",
+      "output": "outputs/phygenbench/baseline/output_video_108.mp4",
+      "time": 204.14444875717163,
+      "status": "success"
+    },
+    {
+      "index": 108,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation of tea in a teapot as the temperature rapidly rises above 100°C.",
+      "output": "outputs/phygenbench/baseline/output_video_109.mp4",
+      "time": 204.0245852470398,
+      "status": "success"
+    },
+    {
+      "index": 109,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation of oil in a cauldron as the temperature rapidly rises above 100°C.",
+      "output": "outputs/phygenbench/baseline/output_video_110.mp4",
+      "time": 204.03510928153992,
+      "status": "success"
+    },
+    {
+      "index": 110,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation as water vapor in a humid environment comes into contact with a cold glass surface.",
+      "output": "outputs/phygenbench/baseline/output_video_111.mp4",
+      "time": 204.0132167339325,
+      "status": "success"
+    },
+    {
+      "index": 111,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation as steam in a kitchen comes into contact with a cold window.",
+      "output": "outputs/phygenbench/baseline/output_video_112.mp4",
+      "time": 204.03820323944092,
+      "status": "success"
+    },
+    {
+      "index": 112,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation as mist in a rainforest comes into contact with a cold metal surface.",
+      "output": "outputs/phygenbench/baseline/output_video_113.mp4",
+      "time": 203.8826925754547,
+      "status": "success"
+    },
+    {
+      "index": 113,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation as fog in a mountainous region comes into contact with a cold car windshield.",
+      "output": "outputs/phygenbench/baseline/output_video_114.mp4",
+      "time": 203.930570602417,
+      "status": "success"
+    },
+    {
+      "index": 114,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation as moisture in the air of a refrigerated room comes into contact with a cold plastic bottle.",
+      "output": "outputs/phygenbench/baseline/output_video_115.mp4",
+      "time": 203.96850442886353,
+      "status": "success"
+    },
+    {
+      "index": 115,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation of dry ice as it is exposed to a gradually increasing temperature at room temperature",
+      "output": "outputs/phygenbench/baseline/output_video_116.mp4",
+      "time": 203.98357343673706,
+      "status": "success"
+    },
+    {
+      "index": 116,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation of naphthalene as it is exposed to gradually increasing temperature at room temperature",
+      "output": "outputs/phygenbench/baseline/output_video_117.mp4",
+      "time": 203.89633131027222,
+      "status": "success"
+    },
+    {
+      "index": 117,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation of iodine crystals as they are exposed to gradually increasing temperature at room temperature",
+      "output": "outputs/phygenbench/baseline/output_video_118.mp4",
+      "time": 203.92028641700745,
+      "status": "success"
+    },
+    {
+      "index": 118,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation of camphor as it is exposed to gradually increasing temperature at room temperature",
+      "output": "outputs/phygenbench/baseline/output_video_119.mp4",
+      "time": 203.90402579307556,
+      "status": "success"
+    },
+    {
+      "index": 119,
+      "category": "Heat",
+      "prompt": "A timelapse captures the transformation of arsenic trioxide as it is exposed to gradually increasing temperature at room temperature",
+      "output": "outputs/phygenbench/baseline/output_video_120.mp4",
+      "time": 203.82110977172852,
+      "status": "success"
+    },
+    {
+      "index": 120,
+      "category": "Physical Properties",
+      "prompt": "Equal amounts of red and blue paint are rapidly combined, with the mixture being vigorously stirred until fully blended.",
+      "output": "outputs/phygenbench/baseline/output_video_121.mp4",
+      "time": 204.0965120792389,
+      "status": "success"
+    },
+    {
+      "index": 121,
+      "category": "Physical Properties",
+      "prompt": "Equal amounts of yellow and red paint are rapidly combined, with the mixture being vigorously stirred until fully blended.",
+      "output": "outputs/phygenbench/baseline/output_video_122.mp4",
+      "time": 203.93397760391235,
+      "status": "success"
+    },
+    {
+      "index": 122,
+      "category": "Physical Properties",
+      "prompt": "Equal amounts of green and blue paint are rapidly combined, with the mixture being vigorously stirred until fully blended.",
+      "output": "outputs/phygenbench/baseline/output_video_123.mp4",
+      "time": 203.93351984024048,
+      "status": "success"
+    },
+    {
+      "index": 123,
+      "category": "Physical Properties",
+      "prompt": "Equal amounts of cyan and magenta paint are rapidly combined, with the mixture being vigorously stirred until fully blended.",
+      "output": "outputs/phygenbench/baseline/output_video_124.mp4",
+      "time": 204.18827271461487,
+      "status": "success"
+    },
+    {
+      "index": 124,
+      "category": "Physical Properties",
+      "prompt": "Equal amounts of pink and white paint are rapidly combined, with the mixture being vigorously stirred until fully blended.",
+      "output": "outputs/phygenbench/baseline/output_video_125.mp4",
+      "time": 204.3007378578186,
+      "status": "success"
+    },
+    {
+      "index": 125,
+      "category": "Physical Properties",
+      "prompt": "A piece of copper is ignited, emitting a vivid and unique flame as it burns steadily.",
+      "output": "outputs/phygenbench/baseline/output_video_126.mp4",
+      "time": 203.98125648498535,
+      "status": "success"
+    },
+    {
+      "index": 126,
+      "category": "Physical Properties",
+      "prompt": "A piece of magnesium is ignited, emitting a vivid and unique flame as it burns steadily.",
+      "output": "outputs/phygenbench/baseline/output_video_127.mp4",
+      "time": 203.95529651641846,
+      "status": "success"
+    },
+    {
+      "index": 127,
+      "category": "Physical Properties",
+      "prompt": "A piece of lithium is ignited, emitting a vivid and unique flame as it burns steadily.",
+      "output": "outputs/phygenbench/baseline/output_video_128.mp4",
+      "time": 203.89650630950928,
+      "status": "success"
+    },
+    {
+      "index": 128,
+      "category": "Physical Properties",
+      "prompt": "A piece of sodium is ignited, emitting a vivid and unique flame as it burns steadily.",
+      "output": "outputs/phygenbench/baseline/output_video_129.mp4",
+      "time": 203.75908064842224,
+      "status": "success"
+    },
+    {
+      "index": 129,
+      "category": "Physical Properties",
+      "prompt": "A piece of potassium is ignited, emitting a vivid and unique flame as it burns steadily.",
+      "output": "outputs/phygenbench/baseline/output_video_130.mp4",
+      "time": 203.84364533424377,
+      "status": "success"
+    },
+    {
+      "index": 130,
+      "category": "Physical Properties",
+      "prompt": "A delicate, fragile egg is hurled with significant force towards a rugged, solid rock surface, where it collides upon impact",
+      "output": "outputs/phygenbench/baseline/output_video_131.mp4",
+      "time": 203.68939018249512,
+      "status": "success"
+    },
+    {
+      "index": 131,
+      "category": "Physical Properties",
+      "prompt": "A lightweight, fragile vase is thrown with great force against a sturdy, concrete wall, where it collides upon impact",
+      "output": "outputs/phygenbench/baseline/output_video_132.mp4",
+      "time": 203.68172812461853,
+      "status": "success"
+    },
+    {
+      "index": 132,
+      "category": "Physical Properties",
+      "prompt": "A delicate, fragile glass bottle is hurled with significant force towards a rugged, solid rock surface, where it collides upon impact",
+      "output": "outputs/phygenbench/baseline/output_video_133.mp4",
+      "time": 203.7521779537201,
+      "status": "success"
+    },
+    {
+      "index": 133,
+      "category": "Physical Properties",
+      "prompt": "A flimsy, brittle glass cup is propelled with force towards a solid, metallic surface, where it collides upon impact",
+      "output": "outputs/phygenbench/baseline/output_video_134.mp4",
+      "time": 203.47126603126526,
+      "status": "success"
+    },
+    {
+      "index": 134,
+      "category": "Physical Properties",
+      "prompt": "A weak, frail porcelain plate is flung with significant speed at a robust, wooden table, where it collides upon impact",
+      "output": "outputs/phygenbench/baseline/output_video_135.mp4",
+      "time": 203.77732729911804,
+      "status": "success"
+    },
+    {
+      "index": 135,
+      "category": "Physical Properties",
+      "prompt": "A clear glass of oil is gently poured into a glass of water.",
+      "output": "outputs/phygenbench/baseline/output_video_136.mp4",
+      "time": 203.74654507637024,
+      "status": "success"
+    },
+    {
+      "index": 136,
+      "category": "Physical Properties",
+      "prompt": "A clear glass of honey is gently poured into a glass of milk.",
+      "output": "outputs/phygenbench/baseline/output_video_137.mp4",
+      "time": 203.66223573684692,
+      "status": "success"
+    },
+    {
+      "index": 137,
+      "category": "Physical Properties",
+      "prompt": "A clear glass of vinegar is gently poured into a glass of water.",
+      "output": "outputs/phygenbench/baseline/output_video_138.mp4",
+      "time": 203.66460490226746,
+      "status": "success"
+    },
+    {
+      "index": 138,
+      "category": "Physical Properties",
+      "prompt": "A clear glass of juice is gently poured into a glass of water.",
+      "output": "outputs/phygenbench/baseline/output_video_139.mp4",
+      "time": 203.5785894393921,
+      "status": "success"
+    },
+    {
+      "index": 139,
+      "category": "Physical Properties",
+      "prompt": "A bottle of vinegar is gently poured into a glass of oil.",
+      "output": "outputs/phygenbench/baseline/output_video_140.mp4",
+      "time": 203.84146332740784,
+      "status": "success"
+    },
+    {
+      "index": 140,
+      "category": "Physical Properties",
+      "prompt": "A small burning ball of paper was thrown into a pile of dry paper.",
+      "output": "outputs/phygenbench/baseline/output_video_141.mp4",
+      "time": 203.88572239875793,
+      "status": "success"
+    },
+    {
+      "index": 141,
+      "category": "Physical Properties",
+      "prompt": "A small burning match was thrown into a pile of dry leaves.",
+      "output": "outputs/phygenbench/baseline/output_video_142.mp4",
+      "time": 204.05448651313782,
+      "status": "success"
+    },
+    {
+      "index": 142,
+      "category": "Physical Properties",
+      "prompt": "A small burning stick was thrown into a pile of hay.",
+      "output": "outputs/phygenbench/baseline/output_video_143.mp4",
+      "time": 204.29470777511597,
+      "status": "success"
+    },
+    {
+      "index": 143,
+      "category": "Physical Properties",
+      "prompt": "A small burning candle was thrown into a pile of dry grass.",
+      "output": "outputs/phygenbench/baseline/output_video_144.mp4",
+      "time": 204.02074480056763,
+      "status": "success"
+    },
+    {
+      "index": 144,
+      "category": "Physical Properties",
+      "prompt": "A small burning piece of cloth was thrown into a pile of old newspapers.",
+      "output": "outputs/phygenbench/baseline/output_video_145.mp4",
+      "time": 204.18188643455505,
+      "status": "success"
+    },
+    {
+      "index": 145,
+      "category": "Chemical Properties",
+      "prompt": "A timelapse captures the transformation as colorless vinegar is poured into a glass of purple litmus solution.",
+      "output": "outputs/phygenbench/baseline/output_video_146.mp4",
+      "time": 203.93925189971924,
+      "status": "success"
+    },
+    {
+      "index": 146,
+      "category": "Chemical Properties",
+      "prompt": "A timelapse captures the transformation as hydrochloric acid is poured into a glass of purple litmus solution.",
+      "output": "outputs/phygenbench/baseline/output_video_147.mp4",
+      "time": 203.99163579940796,
+      "status": "success"
+    },
+    {
+      "index": 147,
+      "category": "Chemical Properties",
+      "prompt": "A timelapse captures the transformation as colorless soda water is added to a glass of blue litmus solution.",
+      "output": "outputs/phygenbench/baseline/output_video_148.mp4",
+      "time": 204.0497887134552,
+      "status": "success"
+    },
+    {
+      "index": 148,
+      "category": "Chemical Properties",
+      "prompt": "A timelapse captures the transformation as lemon juice is poured into a glass of red cabbage juice.",
+      "output": "outputs/phygenbench/baseline/output_video_149.mp4",
+      "time": 204.07883834838867,
+      "status": "success"
+    },
+    {
+      "index": 149,
+      "category": "Chemical Properties",
+      "prompt": "A timelapse captures the transformation as orange juice is mixed with baking soda in a clear cup.",
+      "output": "outputs/phygenbench/baseline/output_video_150.mp4",
+      "time": 203.9957423210144,
+      "status": "success"
+    },
+    {
+      "index": 150,
+      "category": "Chemical Properties",
+      "prompt": "A timelapse captures the reaction as concentrated sulfuric acid is poured onto a piece of bread.",
+      "output": "outputs/phygenbench/baseline/output_video_151.mp4",
+      "time": 204.0292375087738,
+      "status": "success"
+    },
+    {
+      "index": 151,
+      "category": "Chemical Properties",
+      "prompt": "A timelapse captures the reaction as concentrated sulfuric acid is poured onto a slice of apple.",
+      "output": "outputs/phygenbench/baseline/output_video_152.mp4",
+      "time": 203.92815232276917,
+      "status": "success"
+    },
+    {
+      "index": 152,
+      "category": "Chemical Properties",
+      "prompt": "A timelapse captures the reaction as concentrated sulfuric acid is poured onto a sheet of paper.",
+      "output": "outputs/phygenbench/baseline/output_video_153.mp4",
+      "time": 203.95338344573975,
+      "status": "success"
+    },
+    {
+      "index": 153,
+      "category": "Chemical Properties",
+      "prompt": "A timelapse captures the reaction as concentrated sulfuric acid is poured onto a cotton ball.",
+      "output": "outputs/phygenbench/baseline/output_video_154.mp4",
+      "time": 203.94431447982788,
+      "status": "success"
+    },
+    {
+      "index": 154,
+      "category": "Chemical Properties",
+      "prompt": "A timelapse captures the reaction as concentrated sulfuric acid is poured onto a sponge.",
+      "output": "outputs/phygenbench/baseline/output_video_155.mp4",
+      "time": 203.76394248008728,
+      "status": "success"
+    },
+    {
+      "index": 155,
+      "category": "Chemical Properties",
+      "prompt": "A timelapse captures the transformation of a clean and smooth piece of iron in a humid environment over decades.",
+      "output": "outputs/phygenbench/baseline/output_video_156.mp4",
+      "time": 203.5845866203308,
+      "status": "success"
+    },
+    {
+      "index": 156,
+      "category": "Chemical Properties",
+      "prompt": "A timelapse captures the transformation of a clean and smooth piece of steel in a humid environment over decades.",
+      "output": "outputs/phygenbench/baseline/output_video_157.mp4",
+      "time": 203.88732171058655,
+      "status": "success"
+    },
+    {
+      "index": 157,
+      "category": "Chemical Properties",
+      "prompt": "A timelapse shows the changes in a shiny and new metal chair left outdoors in the rain over a long period.",
+      "output": "outputs/phygenbench/baseline/output_video_158.mp4",
+      "time": 203.98910474777222,
+      "status": "success"
+    },
+    {
+      "index": 158,
+      "category": "Chemical Properties",
+      "prompt": "A timelapse video documents the gradual decay of a polished metal railing exposed to the elements over years.",
+      "output": "outputs/phygenbench/baseline/output_video_159.mp4",
+      "time": 203.8834228515625,
+      "status": "success"
+    },
+    {
+      "index": 159,
+      "category": "Chemical Properties",
+      "prompt": "A timelapse records the oxidation process of a bright and new metal bedframe kept in a damp location over several years.",
+      "output": "outputs/phygenbench/baseline/output_video_160.mp4",
+      "time": 203.84029269218445,
+      "status": "success"
+    }
+  ]
+}

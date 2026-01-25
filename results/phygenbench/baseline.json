@@ -1,0 +1,146 @@
+{
+  "config": {
+    "videos_dir": "outputs/phygenbench/baseline",
+    "prompts_file": "data/phygenbench/prompts.json",
+    "stages": [
+      2,
+      3
+    ],
+    "model": "gpt-4.1-mini",
+    "indices_evaluated": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "summary": {
+    "total_videos": 5,
+    "overall": {},
+    "by_category": {},
+    "by_stage": {}
+  },
+  "results": [
+    {
+      "index": 0,
+      "prompt": "A cup of water is slowly poured out in the space station, releasing the liquid into the surrounding area",
+      "category": "Force",
+      "sub_category": "Gravity",
+      "video_path": "outputs/phygenbench/baseline/output_video_1.mp4",
+      "stages": {
+        "stage2": {
+          "stage": 2,
+          "method": "GPT-4o",
+          "score": 0.0,
+          "error": "Max retries exceeded",
+          "status": "failed"
+        },
+        "stage3": {
+          "stage": 3,
+          "method": "GPT-4o",
+          "score": 0.0,
+          "error": "Max retries exceeded",
+          "status": "failed"
+        }
+      },
+      "pca_score": null
+    },
+    {
+      "index": 1,
+      "prompt": "A cup of oil is slowly poured out in the space station, releasing the liquid into the surrounding area",
+      "category": "Force",
+      "sub_category": "Gravity",
+      "video_path": "outputs/phygenbench/baseline/output_video_2.mp4",
+      "stages": {
+        "stage2": {
+          "stage": 2,
+          "method": "GPT-4o",
+          "score": 0.0,
+          "error": "Max retries exceeded",
+          "status": "failed"
+        },
+        "stage3": {
+          "stage": 3,
+          "method": "GPT-4o",
+          "score": 0.0,
+          "error": "Max retries exceeded",
+          "status": "failed"
+        }
+      },
+      "pca_score": null
+    },
+    {
+      "index": 2,
+      "prompt": "A bottle of juice is slowly poured out in the space station, releasing the liquid into the surrounding area",
+      "category": "Force",
+      "sub_category": "Gravity",
+      "video_path": "outputs/phygenbench/baseline/output_video_3.mp4",
+      "stages": {
+        "stage2": {
+          "stage": 2,
+          "method": "GPT-4o",
+          "score": 0.0,
+          "error": "Max retries exceeded",
+          "status": "failed"
+        },
+        "stage3": {
+          "stage": 3,
+          "method": "GPT-4o",
+          "score": 0.0,
+          "error": "Max retries exceeded",
+          "status": "failed"
+        }
+      },
+      "pca_score": null
+    },
+    {
+      "index": 3,
+      "prompt": "A squeeze of honey is slowly released in the space station, spreading the liquid into the surrounding area",
+      "category": "Force",
+      "sub_category": "Gravity",
+      "video_path": "outputs/phygenbench/baseline/output_video_4.mp4",
+      "stages": {
+        "stage2": {
+          "stage": 2,
+          "method": "GPT-4o",
+          "score": 0.0,
+          "error": "Max retries exceeded",
+          "status": "failed"
+        },
+        "stage3": {
+          "stage": 3,
+          "method": "GPT-4o",
+          "score": 0.0,
+          "error": "Max retries exceeded",
+          "status": "failed"
+        }
+      },
+      "pca_score": null
+    },
+    {
+      "index": 4,
+      "prompt": "A can of soda is slowly poured out in the space station, releasing the liquid into the surrounding area",
+      "category": "Force",
+      "sub_category": "Gravity",
+      "video_path": "outputs/phygenbench/baseline/output_video_5.mp4",
+      "stages": {
+        "stage2": {
+          "stage": 2,
+          "method": "GPT-4o",
+          "score": 0.0,
+          "error": "Max retries exceeded",
+          "status": "failed"
+        },
+        "stage3": {
+          "stage": 3,
+          "method": "GPT-4o",
+          "score": 0.0,
+          "error": "Max retries exceeded",
+          "status": "failed"
+        }
+      },
+      "pca_score": null
+    }
+  ]
+}

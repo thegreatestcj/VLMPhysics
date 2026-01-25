@@ -43,15 +43,29 @@ def load_prompts(prompts_file: str) -> list[dict]:
     # Normalize format
     if isinstance(data, list):
         if isinstance(data[0], str):
+            # Simple string list
             return [
                 {"prompt": p, "index": i, "category": "unknown"}
                 for i, p in enumerate(data)
             ]
-        # Ensure index field exists
+
+        # Dict list - normalize field names (handle both our format and official PhyGenBench format)
+        normalized = []
         for i, item in enumerate(data):
-            if "index" not in item:
-                item["index"] = i
-        return data
+            norm_item = {
+                # Handle both 'prompt' and 'caption' fields
+                "prompt": item.get("prompt") or item.get("caption", ""),
+                # Handle both 'category' and 'main_category' fields
+                "category": item.get("category")
+                or item.get("main_category", "unknown"),
+                # Additional fields from PhyGenBench
+                "sub_category": item.get("sub_category", ""),
+                "physical_laws": item.get("physical_laws", ""),
+                "index": item.get("index", i),
+            }
+            normalized.append(norm_item)
+        return normalized
+
     return data
 
 
@@ -159,6 +173,25 @@ def print_selected_prompts(selected: list[tuple], verbose: bool = True):
                 print(f"        └─ Law: {law}")
 
     print(f"{'=' * 70}\n")
+
+
+def get_gpu_info() -> dict:
+    """Get GPU device information for logging."""
+    if not torch.cuda.is_available():
+        return {"gpu_available": False}
+
+    device_id = torch.cuda.current_device()
+    return {
+        "gpu_available": True,
+        "device_id": device_id,
+        "device_name": torch.cuda.get_device_name(device_id),
+        "device_capability": torch.cuda.get_device_capability(device_id),
+        "total_memory_gb": round(
+            torch.cuda.get_device_properties(device_id).total_memory / 1e9, 2
+        ),
+        "cuda_version": torch.version.cuda,
+        "pytorch_version": torch.__version__,
+    }
 
 
 def setup_pipeline(model_size: str, device: str = "cuda"):
@@ -307,6 +340,17 @@ def main():
     # Setup pipeline
     pipe = setup_pipeline(args.model)
 
+    # Print GPU info
+    gpu_info = get_gpu_info()
+    print(f"\n{'─' * 60}")
+    print(
+        f"GPU: {gpu_info.get('device_name', 'N/A')} ({gpu_info.get('total_memory_gb', '?')} GB)"
+    )
+    print(
+        f"CUDA: {gpu_info.get('cuda_version', 'N/A')}, PyTorch: {gpu_info.get('pytorch_version', 'N/A')}"
+    )
+    print(f"{'─' * 60}\n")
+
     # Generate videos
     results = []
     total_time = 0
@@ -321,7 +365,7 @@ def main():
             continue
 
         # Get prompt text
-        prompt_text = item["prompt"] if isinstance(item, dict) else item
+        prompt_text = (item.get("prompt") or item.get("caption", "")) if isinstance(item, dict) else item
         category = (
             item.get("category", "unknown") if isinstance(item, dict) else "unknown"
         )
@@ -371,11 +415,13 @@ def main():
             )
 
     # Save generation log
+    gpu_info = get_gpu_info()
     log_path = output_dir / "generation_log.json"
     with open(log_path, "w", encoding="utf-8") as f:
         json.dump(
             {
                 "model": f"CogVideoX-{args.model}",
+                "gpu_info": gpu_info,
                 "selection": {
                     "method": "indices"
                     if indices
@@ -397,8 +443,10 @@ def main():
 
     print(f"\n{'=' * 60}")
     print(f"Generation complete!")
+    print(f"  GPU: {gpu_info.get('device_name', 'N/A')}")
     print(f"  Total videos: {sum(1 for r in results if r['status'] == 'success')}")
     print(f"  Total time: {total_time / 60:.1f} min")
+    print(f"  Avg time/video: {total_time / max(1, len(results)):.1f}s")
     print(f"  Log saved to: {log_path}")
 
 

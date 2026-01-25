@@ -1,3 +1,8 @@
 *.mp4
 *.out
 *.sh
+/slurm
+*.png
+*.jpg
+*.jpeg
+*.gif
