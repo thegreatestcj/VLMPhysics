@@ -45,7 +45,7 @@ du -sh "$INPUT_DIR"
 echo ""
 
 # Run pooling
-python -m utils.pool_features \
+python src/data/pool_features.py \
     --input_dir "$INPUT_DIR" \
     --output_dir "$OUTPUT_DIR" \
     --num_frames 13

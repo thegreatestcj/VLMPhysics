@@ -183,8 +183,8 @@ class FeatureDataset(Dataset):
 
         return {
             "features": features,  # [T, D] = [13, 1920]
-            "label": torch.tensor(label),  # scalar
-            "timestep": torch.tensor(timestep),  # scalar (200, 400, 600, 800)
+            "labels": torch.tensor(label),  # scalar
+            "timesteps": timestep,  # scalar (200, 400, 600, 800)
             "video_id": video_id,  # string
         }
 
@@ -290,8 +290,8 @@ class FeatureDatasetRandomTimestep(Dataset):
 
         return {
             "features": features,
-            "label": torch.tensor(label),
-            "timestep": torch.tensor(timestep),
+            "labels": torch.tensor(label),
+            "timesteps": timestep,
             "video_id": video_id,
         }
 
