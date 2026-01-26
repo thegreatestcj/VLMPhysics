@@ -1,82 +1,237 @@
 """
-Physion Dataset Loader for Physics Discriminator Training
+Physion Dataset Loader with Fixed Video Name Matching
 
-Loads videos from Physion test set with OCP (Object Contact Prediction) labels.
-Label: True = red object contacts yellow object, False = no contact
+Key insight:
+- pilot_* videos: Located in {Scenario}/mp4s-redyellow/, filename has -redyellow suffix
+- test* videos (Drape): Located in Drape/mp4s/, filename is simply {video_id}.mp4
+
+The labels.csv uses names WITHOUT -redyellow suffix for pilot videos.
 """
 
 import os
+import re
 import csv
 import torch
-from torch.utils.data import Dataset, DataLoader
-from typing import Dict, List, Tuple, Optional
 import numpy as np
+from pathlib import Path
+from typing import Dict, List, Optional, Tuple
+import logging
+from torch.utils.data import Dataset, DataLoader
 
-# For video loading
 try:
-    import decord
-    from decord import VideoReader, cpu
-
-    decord.bridge.set_bridge("torch")
-    USE_DECORD = True
+    import torchvision.io as tvio
 except ImportError:
-    USE_DECORD = False
-    print("Warning: decord not found, falling back to imageio")
-    import imageio
+    tvio = None
+
+logger = logging.getLogger(__name__)
 
 
 class PhysionDataset(Dataset):
     """
-    Physion dataset for physics discriminator training.
+    Dataset for loading Physion videos with physics labels.
 
-    Args:
-        data_root: Path to Physion directory (containing labels.csv and scenario folders)
-        split: 'train' or 'val' (will split based on ratio)
-        train_ratio: Fraction of data for training (default 0.85)
-        video_dir: Which video directory to use ('mp4s-redyellow' for model, 'mp4s' for human)
-        num_frames: Number of frames to sample from each video
-        seed: Random seed for reproducible splits
+    Handles the complex filename mapping between labels.csv and actual video files.
     """
+
+    SCENARIOS = [
+        "Collide",
+        "Contain",
+        "Dominoes",
+        "Drape",
+        "Drop",
+        "Link",
+        "Roll",
+        "Support",
+    ]
+
+    # Mapping from labels.csv scenario prefix to folder name
+    SCENARIO_MAPPING = {
+        "collision": "Collide",
+        "containment": "Contain",
+        "dominoes": "Dominoes",
+        "drape": "Drape",
+        "drop": "Drop",
+        "link": "Link",
+        "roll": "Roll",
+        "support": "Support",
+    }
 
     def __init__(
         self,
         data_root: str,
-        split: str = "all",  # 'all' = use everything, 'train'/'val' = split
-        train_ratio: float = 0.85,
-        video_dir: str = "mp4s-redyellow",  # Use red-yellow marked videos for model
-        num_frames: int = 49,  # CogVideoX default
+        split: str = "all",
+        num_frames: int = 49,
+        frame_size: Tuple[int, int] = (480, 720),
+        val_ratio: float = 0.1,
         seed: int = 42,
+        debug: bool = False,
     ):
-        self.data_root = data_root
+        """
+        Args:
+            data_root: Path to Physion data folder (contains Collide, Contain, etc.)
+            split: Data split - "train", "val", "test", or "all"
+            num_frames: Number of frames to sample from each video
+            frame_size: Target frame size (H, W)
+            val_ratio: Fraction of data to use for validation
+            seed: Random seed for split
+            debug: Enable debug output
+        """
+        self.data_root = Path(data_root)
         self.split = split
-        self.video_dir = video_dir
         self.num_frames = num_frames
+        self.frame_size = frame_size
+        self.val_ratio = val_ratio
+        self.seed = seed
+        self.debug = debug
 
-        # Load labels
-        self.samples = self._load_labels()
+        # Load labels and find corresponding video files
+        self.samples = []  # List of (video_path, label, scenario, video_name)
+        self._load_labels()
 
-        # Split handling
-        np.random.seed(seed)
-        indices = np.random.permutation(len(self.samples))
+        # Apply train/val split
+        self._apply_split()
 
-        if split == "all":
-            # Use all data for training (evaluate on PhyGenBench instead)
-            self.indices = indices
-        else:
-            # Train/val split
-            split_idx = int(len(indices) * train_ratio)
-            if split == "train":
-                self.indices = indices[:split_idx]
-            else:
-                self.indices = indices[split_idx:]
-
-        print(f"PhysionDataset [{split}]: {len(self.indices)} samples")
+        logger.info(f"PhysionDataset [{split}]: {len(self.samples)} samples")
         self._print_label_distribution()
 
-    def _load_labels(self) -> List[Dict]:
+    def _detect_scenario_from_name(self, video_name: str) -> Optional[str]:
+        """
+        Detect scenario from video name.
+
+        Examples:
+            pilot_it2_collision_xxx -> Collide
+            pilot-containment-xxx -> Contain
+            pilot_dominoes_xxx -> Dominoes
+            testNN_xxxx_img -> Drape
+            pilot_it2_drop_xxx -> Drop
+            pilot_it2_linking_xxx -> Link
+            pilot_it2_rolling_xxx -> Roll
+            pilot_towers_xxx -> Support
+        """
+        video_name_lower = video_name.lower()
+
+        # Test videos are all Drape scenario
+        if video_name_lower.startswith("test"):
+            return "Drape"
+
+        # Check for scenario keywords
+        if "collision" in video_name_lower or "_collide" in video_name_lower:
+            return "Collide"
+        if "containment" in video_name_lower or "-containment" in video_name_lower:
+            return "Contain"
+        if "dominoes" in video_name_lower:
+            return "Dominoes"
+        if "_drop_" in video_name_lower:
+            return "Drop"
+        if "linking" in video_name_lower or "_link_" in video_name_lower:
+            return "Link"
+        if "rolling" in video_name_lower or "_roll_" in video_name_lower:
+            return "Roll"
+        if "towers" in video_name_lower or "_support" in video_name_lower:
+            return "Support"
+
+        return None
+
+    def _find_video_path(self, scenario: str, video_name: str) -> Optional[Path]:
+        """
+        Find the actual video file path for a video ID.
+
+        Handles two cases:
+        1. test* videos (Drape): in mp4s/ folder with simple filename
+        2. pilot* videos: in mp4s-redyellow/ folder with -redyellow suffix
+        """
+        # Case 1: Test videos (Drape scenario)
+        # test videos are in Drape/mp4s/ with simple filenames like test10_0007_img.mp4
+        if video_name.startswith("test"):
+            # Try mp4s folder first (NOT mp4s-redyellow)
+            mp4s_dir = self.data_root / scenario / "mp4s"
+            if mp4s_dir.exists():
+                # Direct match: test10_0007_img -> test10_0007_img.mp4
+                direct_path = mp4s_dir / f"{video_name}.mp4"
+                if direct_path.exists():
+                    if self.debug:
+                        logger.debug(f"  Found test video: {direct_path}")
+                    return direct_path
+
+                # Search in directory
+                for fname in mp4s_dir.iterdir():
+                    if fname.suffix == ".mp4" and video_name in fname.stem:
+                        if self.debug:
+                            logger.debug(f"  Found test video via search: {fname}")
+                        return fname
+
+            # Also try mp4s-redyellow in case test videos are there too
+            redyellow_dir = self.data_root / scenario / "mp4s-redyellow"
+            if redyellow_dir.exists():
+                # Try with -redyellow suffix
+                match = re.match(r"^(.+?)_(\d{4})_(img)$", video_name)
+                if match:
+                    prefix, num, suffix = match.groups()
+                    redyellow_name = f"{prefix}-redyellow_{num}_{suffix}.mp4"
+                    redyellow_path = redyellow_dir / redyellow_name
+                    if redyellow_path.exists():
+                        if self.debug:
+                            logger.debug(
+                                f"  Found test video in redyellow: {redyellow_path}"
+                            )
+                        return redyellow_path
+
+            if self.debug:
+                logger.warning(f"  Test video not found: {video_name}")
+            return None
+
+        # Case 2: Pilot videos (all other scenarios)
+        # Located in {Scenario}/mp4s-redyellow/ with -redyellow in filename
+        scenario_dir = self.data_root / scenario / "mp4s-redyellow"
+
+        if not scenario_dir.exists():
+            # Try lowercase scenario name
+            scenario_dir = self.data_root / scenario.lower() / "mp4s-redyellow"
+
+        if not scenario_dir.exists():
+            if self.debug:
+                logger.warning(f"  Scenario dir not found: {scenario_dir}")
+            return None
+
+        # Method 1: Transform name by inserting -redyellow before the 4-digit number
+        # labels.csv:  pilot_dominoes_0mid_xxx_tdwroom_0018_img
+        # actual file: pilot_dominoes_0mid_xxx_tdwroom-redyellow_0018_img.mp4
+        match = re.match(r"^(.+?)_(\d{4})_(img)$", video_name)
+        if match:
+            prefix, num, suffix = match.groups()
+            transformed_name = f"{prefix}-redyellow_{num}_{suffix}.mp4"
+            transformed_path = scenario_dir / transformed_name
+            if transformed_path.exists():
+                if self.debug:
+                    logger.debug(f"  Found via transform: {transformed_path}")
+                return transformed_path
+
+        # Method 2: Search by comparing normalized names (remove -redyellow)
+        for fname in scenario_dir.iterdir():
+            if fname.suffix != ".mp4":
+                continue
+
+            # Remove -redyellow from filename and compare
+            fname_normalized = fname.stem.replace("-redyellow", "")
+            if fname_normalized == video_name:
+                if self.debug:
+                    logger.debug(f"  Found via normalized search: {fname}")
+                return fname
+
+        if self.debug:
+            logger.warning(f"  Pilot video not found: {video_name} in {scenario_dir}")
+        return None
+
+    def _load_labels(self):
         """Load labels.csv and match with video files."""
-        labels_path = os.path.join(self.data_root, "labels.csv")
-        samples = []
+        labels_path = self.data_root / "labels.csv"
+
+        if not labels_path.exists():
+            raise FileNotFoundError(f"Labels file not found: {labels_path}")
+
+        found_count = 0
+        missing_count = 0
+        missing_by_scenario = {}
 
         with open(labels_path, "r") as f:
             reader = csv.reader(f)
@@ -90,267 +245,209 @@ class PhysionDataset(Dataset):
                 label_str = row[1].strip()
                 label = 1 if label_str == "True" else 0
 
-                # Parse scenario from video name (e.g., "pilot_dominoes_..." -> "Dominoes")
-                scenario = self._parse_scenario(video_name)
+                # Detect scenario from video name
+                scenario = self._detect_scenario_from_name(video_name)
+
+                if scenario is None:
+                    if self.debug:
+                        logger.warning(f"Cannot detect scenario for: {video_name}")
+                    missing_count += 1
+                    continue
 
                 # Find video file
-                debug = row_idx < 3  # Debug first few rows
-                if debug:
-                    print(f"  DEBUG: video_name={video_name}, scenario={scenario}")
-                video_path = self._find_video_path(scenario, video_name, debug=debug)
+                video_path = self._find_video_path(scenario, video_name)
 
-                if video_path and os.path.exists(video_path):
-                    samples.append(
-                        {
-                            "video_name": video_name,
-                            "video_path": video_path,
-                            "label": label,
-                            "scenario": scenario,
-                        }
+                if video_path is not None:
+                    self.samples.append((video_path, label, scenario, video_name))
+                    found_count += 1
+                else:
+                    missing_count += 1
+                    missing_by_scenario[scenario] = (
+                        missing_by_scenario.get(scenario, 0) + 1
                     )
 
-        print(f"Loaded {len(samples)} samples from labels.csv")
-        return samples
+        logger.info(f"Loaded {found_count} samples from labels.csv")
 
-    def _parse_scenario(self, video_name: str) -> str:
-        """Extract scenario name from video filename."""
-        # Format: pilot_<scenario>_... or test_<scenario>_...
-        scenarios = [
-            "collide",
-            "contain",
-            "dominoes",
-            "drape",
-            "drop",
-            "link",
-            "roll",
-            "support",
-        ]
-        video_name_lower = video_name.lower()
+        if missing_count > 0:
+            logger.warning(f"Missing {missing_count} videos")
+            for scenario, count in sorted(missing_by_scenario.items()):
+                logger.warning(f"  {scenario}: {count} missing")
 
-        for scenario in scenarios:
-            if scenario in video_name_lower:
-                # Return with proper capitalization for folder name
-                return scenario.capitalize()
+    def _apply_split(self):
+        """Apply train/val/test split."""
+        if self.split == "all":
+            return
 
-        return "Unknown"
+        # Shuffle samples with fixed seed for reproducibility
+        rng = np.random.RandomState(self.seed)
+        indices = np.arange(len(self.samples))
+        rng.shuffle(indices)
 
-    def _find_video_path(
-        self, scenario: str, video_name: str, debug: bool = False
-    ) -> Optional[str]:
-        """Find the video file path."""
-        # video_name from labels.csv: pilot_dominoes_0mid_d3chairs_o1plants_tdwroom_0018_img
-        # actual filename:            pilot_dominoes_0mid_d3chairs_o1plants_tdwroom-redyellow_0018_img.mp4
-        # Need to insert "-redyellow" before the number
+        n_val = int(len(self.samples) * self.val_ratio)
 
-        scenario_dir = os.path.join(self.data_root, scenario, self.video_dir)
+        if self.split == "train":
+            selected_indices = indices[n_val:]
+        elif self.split == "val":
+            selected_indices = indices[:n_val]
+        else:
+            # For "test", use all data (same as "all" for now)
+            return
 
-        if not os.path.exists(scenario_dir):
-            scenario_dir = os.path.join(
-                self.data_root, scenario.lower(), self.video_dir
-            )
-
-        if not os.path.exists(scenario_dir):
-            if debug:
-                print(f"  DEBUG: scenario_dir not found: {scenario_dir}")
-            return None
-
-        # Method 1: Direct transformation
-        # Split at last occurrence of "_" before a 4-digit number
-        # pilot_dominoes_0mid_d3chairs_o1plants_tdwroom_0018_img
-        # -> pilot_dominoes_0mid_d3chairs_o1plants_tdwroom-redyellow_0018_img.mp4
-
-        parts = video_name.rsplit("_", 2)  # Split into 3 parts from the right
-        if len(parts) == 3:
-            # parts = ['pilot_dominoes_0mid_d3chairs_o1plants_tdwroom', '0018', 'img']
-            transformed_name = f"{parts[0]}-redyellow_{parts[1]}_{parts[2]}.mp4"
-            transformed_path = os.path.join(scenario_dir, transformed_name)
-            if debug:
-                print(f"  DEBUG: trying transformed path: {transformed_name}")
-            if os.path.exists(transformed_path):
-                return transformed_path
-
-        # Method 2: Search by matching key parts
-        for fname in os.listdir(scenario_dir):
-            if not fname.endswith(".mp4"):
-                continue
-
-            # Remove -redyellow and .mp4, then compare
-            fname_normalized = fname.replace("-redyellow", "").replace(".mp4", "")
-            if fname_normalized == video_name:
-                return os.path.join(scenario_dir, fname)
-
-        return None
+        self.samples = [self.samples[i] for i in selected_indices]
 
     def _print_label_distribution(self):
-        """Print label distribution for current split."""
-        labels = [self.samples[i]["label"] for i in self.indices]
+        """Print label distribution info."""
+        if len(self.samples) == 0:
+            logger.warning("No samples loaded!")
+            return
+
+        labels = [s[1] for s in self.samples]
         pos = sum(labels)
         neg = len(labels) - pos
-        print(
+        logger.info(
             f"  Label distribution: {pos} positive ({pos / len(labels) * 100:.1f}%), "
             f"{neg} negative ({neg / len(labels) * 100:.1f}%)"
         )
 
-    def _load_video(self, video_path: str) -> torch.Tensor:
-        """Load video frames."""
-        if USE_DECORD:
-            vr = VideoReader(video_path, ctx=cpu(0))
-            total_frames = len(vr)
-
-            # Sample frames uniformly
-            if total_frames >= self.num_frames:
-                indices = np.linspace(0, total_frames - 1, self.num_frames, dtype=int)
-            else:
-                # If video is shorter, repeat last frame
-                indices = list(range(total_frames))
-                indices += [total_frames - 1] * (self.num_frames - total_frames)
-
-            frames = vr.get_batch(indices)  # [T, H, W, C]
-            frames = frames.permute(0, 3, 1, 2)  # [T, C, H, W]
-        else:
-            # Fallback to imageio
-            reader = imageio.get_reader(video_path)
-            frames = []
-            for frame in reader:
-                frames.append(torch.from_numpy(frame).permute(2, 0, 1))
-            reader.close()
-
-            frames = torch.stack(frames)  # [T, C, H, W]
-
-            # Sample frames
-            total_frames = len(frames)
-            if total_frames >= self.num_frames:
-                indices = np.linspace(0, total_frames - 1, self.num_frames, dtype=int)
-                frames = frames[indices]
-            else:
-                # Pad with last frame
-                padding = frames[-1:].repeat(self.num_frames - total_frames, 1, 1, 1)
-                frames = torch.cat([frames, padding], dim=0)
-
-        # Normalize to [0, 1]
-        frames = frames.float() / 255.0
-
-        return frames
-
     def __len__(self) -> int:
-        return len(self.indices)
+        return len(self.samples)
+
+    def _load_video(self, video_path: Path) -> torch.Tensor:
+        """Load and preprocess video frames."""
+        if tvio is None:
+            raise ImportError("torchvision is required for video loading")
+
+        # Read video
+        video, audio, info = tvio.read_video(str(video_path), pts_unit="sec")
+        # video shape: [T, H, W, C] in uint8
+
+        # Sample frames uniformly
+        total_frames = video.shape[0]
+        if total_frames >= self.num_frames:
+            indices = np.linspace(0, total_frames - 1, self.num_frames, dtype=int)
+        else:
+            # Repeat last frame if video is too short
+            indices = list(range(total_frames))
+            indices.extend([total_frames - 1] * (self.num_frames - total_frames))
+
+        video = video[indices]  # [num_frames, H, W, C]
+
+        # Convert to float and normalize to [0, 1]
+        video = video.float() / 255.0
+
+        # Resize if needed
+        if video.shape[1:3] != self.frame_size:
+            video = video.permute(0, 3, 1, 2)  # [T, C, H, W]
+            video = torch.nn.functional.interpolate(
+                video,
+                size=self.frame_size,
+                mode="bilinear",
+                align_corners=False,
+            )
+            video = video.permute(0, 2, 3, 1)  # [T, H, W, C]
+
+        # Rearrange to [T, C, H, W]
+        video = video.permute(0, 3, 1, 2)
+
+        return video
 
     def __getitem__(self, idx: int) -> Dict:
-        sample = self.samples[self.indices[idx]]
+        video_path, label, scenario, video_name = self.samples[idx]
 
-        # Load video
-        video = self._load_video(sample["video_path"])
+        video = self._load_video(video_path)
 
         return {
             "video": video,  # [T, C, H, W]
-            "label": sample["label"],
-            "scenario": sample["scenario"],
-            "video_name": sample["video_name"],
+            "label": label,
+            "scenario": scenario,
+            "video_name": video_name,
         }
 
 
 def get_dataloaders(
     data_root: str,
-    batch_size: int = 4,
+    batch_size: int = 1,
     num_workers: int = 4,
-    split_data: bool = False,  # False = use all data, True = train/val split
+    num_frames: int = 49,
     **dataset_kwargs,
-) -> DataLoader:
-    """
-    Get dataloader(s) for training.
+) -> Tuple[DataLoader, DataLoader]:
+    """Create train and validation dataloaders."""
+    train_dataset = PhysionDataset(
+        data_root, split="train", num_frames=num_frames, **dataset_kwargs
+    )
+    val_dataset = PhysionDataset(
+        data_root, split="val", num_frames=num_frames, **dataset_kwargs
+    )
 
-    Args:
-        data_root: Path to Physion directory
-        batch_size: Batch size
-        num_workers: Number of data loading workers
-        split_data: If False, return single loader with all data (recommended)
-                    If True, return (train_loader, val_loader) tuple
-        **dataset_kwargs: Additional arguments for PhysionDataset
+    train_loader = DataLoader(
+        train_dataset,
+        batch_size=batch_size,
+        shuffle=True,
+        num_workers=num_workers,
+        pin_memory=True,
+    )
 
-    Returns:
-        DataLoader if split_data=False
-        (train_loader, val_loader) if split_data=True
-    """
+    val_loader = DataLoader(
+        val_dataset,
+        batch_size=batch_size,
+        shuffle=False,
+        num_workers=num_workers,
+        pin_memory=True,
+    )
 
-    if split_data:
-        # Return train/val split
-        train_dataset = PhysionDataset(data_root, split="train", **dataset_kwargs)
-        val_dataset = PhysionDataset(data_root, split="val", **dataset_kwargs)
-
-        train_loader = DataLoader(
-            train_dataset,
-            batch_size=batch_size,
-            shuffle=True,
-            num_workers=num_workers,
-            pin_memory=True,
-        )
-
-        val_loader = DataLoader(
-            val_dataset,
-            batch_size=batch_size,
-            shuffle=False,
-            num_workers=num_workers,
-            pin_memory=True,
-        )
-
-        return train_loader, val_loader
-
-    else:
-        # Use all data for training (evaluate on PhyGenBench)
-        dataset = PhysionDataset(data_root, split="all", **dataset_kwargs)
-
-        loader = DataLoader(
-            dataset,
-            batch_size=batch_size,
-            shuffle=True,
-            num_workers=num_workers,
-            pin_memory=True,
-        )
-
-        return loader
+    return train_loader, val_loader
 
 
 # ============ Test Code ============
 if __name__ == "__main__":
     import argparse
 
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--data_root", type=str, default="data/Physion")
-    parser.add_argument("--num_frames", type=int, default=49)
+    parser.add_argument("--debug", action="store_true")
     args = parser.parse_args()
 
-    print("=" * 50)
-    print("Testing PhysionDataset")
-    print("=" * 50)
+    print("=" * 60)
+    print("Testing PhysionDataset with Fixed Video Matching")
+    print("=" * 60)
+
+    # Enable debug logging if requested
+    if args.debug:
+        logging.getLogger().setLevel(logging.DEBUG)
 
     # Test dataset
     dataset = PhysionDataset(
-        data_root=args.data_root, split="train", num_frames=args.num_frames
+        data_root=args.data_root,
+        split="all",
+        debug=args.debug,
     )
 
-    print(f"\nTotal samples: {len(dataset)}")
+    print(f"\nTotal samples loaded: {len(dataset)}")
 
-    # Test loading one sample
-    print("\nLoading first sample...")
-    sample = dataset[0]
-    print(f"  Video shape: {sample['video'].shape}")
-    print(f"  Label: {sample['label']}")
-    print(f"  Scenario: {sample['scenario']}")
-    print(f"  Video name: {sample['video_name']}")
+    # Show samples per scenario
+    scenario_counts = {}
+    for _, _, scenario, _ in dataset.samples:
+        scenario_counts[scenario] = scenario_counts.get(scenario, 0) + 1
 
-    # Test dataloader
-    print("\nTesting DataLoader...")
-    train_loader, val_loader = get_dataloaders(
-        args.data_root,
-        batch_size=2,
-        num_workers=0,  # 0 for testing
-        num_frames=args.num_frames,
-    )
+    print("\nSamples per scenario:")
+    for scenario in sorted(scenario_counts.keys()):
+        print(f"  {scenario}: {scenario_counts[scenario]}")
 
-    batch = next(iter(train_loader))
-    print(f"  Batch video shape: {batch['video'].shape}")
-    print(f"  Batch labels: {batch['label']}")
+    # Show expected vs actual
+    print(f"\nExpected: 1200 (150 per scenario × 8 scenarios)")
+    print(f"Actual: {len(dataset)}")
+    print(f"Missing: {1200 - len(dataset)}")
 
-    print("\n" + "=" * 50)
-    print("Dataset test passed!")
-    print("=" * 50)
+    if len(dataset) > 0:
+        print("\nLoading first sample...")
+        sample = dataset[0]
+        print(f"  Video shape: {sample['video'].shape}")
+        print(f"  Label: {sample['label']}")
+        print(f"  Scenario: {sample['scenario']}")
+        print(f"  Video name: {sample['video_name']}")
+
+    print("\n" + "=" * 60)
+    print("Test complete!")
+    print("=" * 60)

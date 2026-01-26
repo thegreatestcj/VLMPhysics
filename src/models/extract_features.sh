@@ -50,7 +50,7 @@ LAYERS="5 10 15 20 25"
 # Timesteps (for trajectory pruning checkpoints)
 TIMESTEPS="400"
 
-MAX_VIDEOS=200
+MAX_VIDEOS=9999
 
 # ============================================================
 # Run extraction
@@ -67,24 +67,35 @@ echo ""
 
 # Extract train split
 echo "Extracting..."
+# Run extraction for shard 0
 python -m src.models.extract_features \
-    --data_dir $DATA_DIR \
-    --output_dir $OUTPUT_DIR \
-    --layers $LAYERS \
-    --timesteps $TIMESTEPS \
+    --data_dir data/Physion \
+    --output_dir /users/$USER/scratch/physics/physion_features \
+    --layers 5 10 15 20 25 \
+    --timesteps 200 400 600 800 \
     --use-8bit \
-    --max_videos $MAX_VIDEOS
+    --resume \
+    --shard 0 \
+    --num_shards 2
 
+# Run extraction for shard 1
+python -m src.models.extract_features \
+    --data_dir data/Physion \
+    --output_dir /users/$USER/scratch/physics/physion_features \
+    --layers 5 10 15 20 25 \
+    --timesteps 200 400 600 800 \
+    --use-8bit \
+    --resume \
+    --shard 1 \
+    --num_shards 2
 
-# ============================================================
-# Summary
-# ============================================================
+echo "=========================================="
+echo "Shard 1 completed: $(date)"
+echo "=========================================="
 
-echo ""
-echo "========================================"
-echo "Extraction complete!"
-echo "End: $(date)"
-echo "========================================"
+echo "=========================================="
+echo "Shard 0 completed: $(date)"
+echo "=========================================="
 
 echo ""
 echo "Output directory contents:"
@@ -93,5 +104,3 @@ ls -la $OUTPUT_DIR
 echo ""
 echo "Disk usage:"
 du -sh $OUTPUT_DIR
-
-echo "Phase 1, testing w/ $(MAX_VIDEOS) videos complete."

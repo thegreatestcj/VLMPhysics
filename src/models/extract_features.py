@@ -1,18 +1,24 @@
 """
-Batch Feature Extraction Script
+Batch Feature Extraction Script with Sharding Support
 
 Extract DiT features from Physion videos and save to disk.
-Run this ONCE before training - then training is super fast!
+Supports parallel extraction across multiple GPUs using sharding.
 
 Pipeline: Video → VAE encode → Latents → Add noise → DiT forward → Features
 
-Usage:
+Usage (single GPU):
     python -m src.models.extract_features \
         --data_dir data/Physion \
         --output_dir /users/$USER/scratch/physion_features \
-        --layers 15 \
-        --timesteps 400 \
-        --use-8bit
+        --layers 5 10 15 20 25 \
+        --timesteps 200 400 600 800
+
+Usage (parallel with 2 GPUs):
+    # Terminal 1 / SLURM job 1:
+    python -m src.models.extract_features ... --shard 0 --num_shards 2
+    
+    # Terminal 2 / SLURM job 2:
+    python -m src.models.extract_features ... --shard 1 --num_shards 2
 """
 
 import torch
@@ -64,140 +70,135 @@ def encode_video(video: torch.Tensor, vae, device: str) -> torch.Tensor:
     Encode video frames to VAE latents.
 
     Args:
-        video: [T, C, H, W] in range [0, 1]
-        vae: CogVideoX VAE
+        video: [T, C, H, W] tensor in [0, 1] range
+        vae: CogVideoX VAE model
+        device: Target device
 
     Returns:
-        latents: [1, T_latent, C_latent, H_latent, W_latent]
+        latents: [1, C, T', H', W'] latent tensor
     """
-    # CogVideoX VAE expects [B, C, T, H, W]
-    # Input video is [T, C, H, W], need to transpose
-    video = video.unsqueeze(0)  # [1, T, C, H, W]
-    video = video.permute(0, 2, 1, 3, 4)  # [1, C, T, H, W]
-    video = video.to(device, dtype=torch.float16)
+    # video: [T, C, H, W] -> [1, C, T, H, W]
+    video = video.unsqueeze(0).to(device=device, dtype=torch.float16)
+
+    # Rearrange: [B, C, T, H, W] -> [B, T, C, H, W] for VAE
+    video = video.permute(0, 2, 1, 3, 4)
 
     # Normalize from [0, 1] to [-1, 1]
-    video = 2.0 * video - 1.0
+    video = video * 2.0 - 1.0
 
     with torch.no_grad():
-        latent_dist = vae.encode(video).latent_dist
-        latents = latent_dist.sample()
+        latents = vae.encode(video).latent_dist.sample()
         latents = latents * vae.config.scaling_factor
 
-    # Output shape: [1, C, T_latent, H_latent, W_latent]
-    # CogVideoX DiT expects [B, T, C, H, W]
-    latents = latents.permute(0, 2, 1, 3, 4)  # [1, T, C, H, W]
+    # latents shape: [1, T', C, H', W'] -> [1, C, T', H', W']
+    latents = latents.permute(0, 2, 1, 3, 4)
 
     return latents
-
-
-def add_noise(
-    latents: torch.Tensor, timestep: int, scheduler, device: str
-) -> torch.Tensor:
-    """Add noise to latents at specified timestep."""
-    noise = torch.randn_like(latents)
-    timestep_tensor = torch.tensor([timestep], device=device)
-    noisy_latents = scheduler.add_noise(latents, noise, timestep_tensor)
-    return noisy_latents
 
 
 def extract_single_video(
     video_id: str,
     video: torch.Tensor,
+    label: int,
     vae,
-    text_embeds: torch.Tensor,
-    timesteps: List[int],
     extractor,
     scheduler,
+    timesteps: List[int],
+    layers: List[int],
     output_dir: Path,
     device: str,
-    save_dtype: torch.dtype = torch.float16,
 ) -> tuple:
     """
     Extract features for a single video at multiple timesteps.
 
     Returns:
-        (extraction_info, forward_time)
+        info: Dict with extraction metadata
+        forward_time: Time spent on DiT forward passes
     """
-    video_output_dir = output_dir / video_id
+    video_dir = output_dir / video_id
+    video_dir.mkdir(parents=True, exist_ok=True)
+
+    info = {"label": label, "timesteps": {}}
     forward_time = 0.0
 
-    # Step 1: VAE encode video to latents
+    # Encode video to latents
     latents = encode_video(video, vae, device)
-    # latents shape: [1, T, C, H, W]
 
-    extraction_info = {
-        "video_id": video_id,
-        "timesteps": {},
-        "latent_shape": list(latents.shape),
-        "extracted_at": datetime.now().isoformat(),
-    }
+    # Prepare dummy text embeddings (physics head doesn't need real text)
+    text_embeds = torch.zeros(1, 226, 4096, device=device, dtype=torch.float16)
 
     for t in timesteps:
-        t_dir = video_output_dir / f"t{t}"
-        t_dir.mkdir(parents=True, exist_ok=True)
+        t_dir = video_dir / f"t{t}"
+        t_dir.mkdir(exist_ok=True)
 
-        # Step 2: Add noise at timestep t
-        timestep_tensor = torch.tensor([t], device=device)
-        noisy_latents = add_noise(latents, t, scheduler, device)
-        noisy_latents = noisy_latents.to(latents.dtype)
+        # Check if already extracted for this timestep
+        if all((t_dir / f"layer_{l}.pt").exists() for l in layers):
+            continue
 
-        # Step 3: Extract features (time this - it's the DiT forward pass)
+        # Add noise at timestep t
+        timestep_tensor = torch.tensor([t], device=device, dtype=torch.long)
+        noise = torch.randn_like(latents)
+        noisy_latents = scheduler.add_noise(latents, noise, timestep_tensor)
+
+        # Reshape for DiT: [1, C, T, H, W] -> [1, T*H*W, C] (simplified)
+        # Actually CogVideoX expects [B, C, T, H, W] directly
+        batch_size, channels, num_frames, height, width = noisy_latents.shape
+
+        # DiT forward with feature extraction
         torch.cuda.synchronize()
         forward_start = time.perf_counter()
-        features = extractor.extract(noisy_latents, timestep_tensor, text_embeds)
+
+        with torch.no_grad():
+            features = extractor.extract(noisy_latents, timestep_tensor, text_embeds)
+
         torch.cuda.synchronize()
         forward_time += time.perf_counter() - forward_start
 
-        # Get video shape for reshaping
-        T, h, w = extractor.get_video_shape(noisy_latents.shape)
-        video_seq_len = T * h * w
-
-        # Save each layer
-        layer_info = {}
+        # Save features for each layer
+        layer_shapes = {}
         for layer_idx, feat in features.items():
-            # Handle text+video vs video-only output
-            seq_len = feat.shape[1]
-            if seq_len == video_seq_len:
-                video_feat = feat
-            elif seq_len == 226 + video_seq_len:
-                video_feat = feat[:, 226:, :]  # Skip text tokens
-            else:
-                logger.warning(f"Unexpected seq_len {seq_len} for {video_id} t={t}")
-                video_feat = feat
+            feat_path = t_dir / f"layer_{layer_idx}.pt"
+            torch.save(feat.cpu(), feat_path)
+            layer_shapes[layer_idx] = list(feat.shape)
 
-            # Reshape to 3D: [1, seq, D] -> [T, h, w, D]
-            if video_feat.shape[1] == video_seq_len:
-                video_feat = video_feat.view(1, T, h, w, -1)
-                video_feat = video_feat.squeeze(0)  # [T, h, w, D]
+        info["timesteps"][t] = {"layer_shapes": layer_shapes}
 
-            # Save
-            save_path = t_dir / f"layer_{layer_idx}.pt"
-            torch.save(video_feat.cpu().to(save_dtype), save_path)
+    return info, forward_time
 
-            layer_info[layer_idx] = {
-                "shape": list(video_feat.shape),
-                "dtype": str(save_dtype),
-            }
 
-        extraction_info["timesteps"][t] = layer_info
+def get_shard_indices(total_samples: int, shard: int, num_shards: int) -> List[int]:
+    """
+    Get indices for this shard.
 
-    return extraction_info, forward_time
+    Example with 1200 videos and 2 shards:
+        shard=0: indices [0, 2, 4, 6, ...]  (600 videos)
+        shard=1: indices [1, 3, 5, 7, ...]  (600 videos)
+
+    This interleaved approach ensures both shards process similar scenarios
+    (since videos are typically sorted by scenario in labels.csv).
+    """
+    return list(range(shard, total_samples, num_shards))
 
 
 def extract_dataset(
     data_dir: str,
     output_dir: str,
-    layers: List[int],
-    timesteps: List[int],
     model_id: str = "THUDM/CogVideoX-2b",
+    layers: List[int] = [5, 10, 15, 20, 25],
+    timesteps: List[int] = [400],
     use_8bit: bool = True,
     device: str = "cuda",
     max_videos: Optional[int] = None,
     resume: bool = True,
+    shard: int = 0,
+    num_shards: int = 1,
 ):
     """
-    Extract features for Physion dataset.
+    Extract features for all videos in dataset.
+
+    Args:
+        shard: Shard index (0-indexed) for parallel extraction
+        num_shards: Total number of shards (set to 2 for 2-GPU parallel)
     """
     data_dir = Path(data_dir)
     output_dir = Path(output_dir)
@@ -211,26 +212,36 @@ def extract_dataset(
 
     logger.info("Loading Physion dataset...")
     dataset = PhysionDataset(
-        data_root=str(data_dir),  # FIXED: was data_dir
-        split="all",  # Use all data
-        num_frames=49,  # CogVideoX default
+        data_root=str(data_dir),
+        split="all",
+        num_frames=49,
     )
 
+    # Apply sharding BEFORE any other filtering
+    if num_shards > 1:
+        original_count = len(dataset.samples)
+        shard_indices = get_shard_indices(original_count, shard, num_shards)
+        dataset.samples = [dataset.samples[i] for i in shard_indices]
+        logger.info(
+            f"Shard {shard}/{num_shards}: Processing {len(dataset.samples)}/{original_count} videos"
+        )
+
     if max_videos is not None:
-        # Limit for debugging
-        dataset.indices = dataset.indices[:max_videos]
+        dataset.samples = dataset.samples[:max_videos]
         logger.info(f"Limited to {max_videos} videos for debugging")
 
-    # Prepare dummy text embeddings (physics discrimination doesn't need real text)
+    # Prepare dummy text embeddings
     text_embeds = torch.zeros(1, 226, 4096, device=device, dtype=torch.float16)
 
-    # Track progress
+    # Track progress (per-shard metadata)
     metadata = {
         "videos": {},
         "config": {
             "layers": layers,
             "timesteps": timesteps,
             "model_id": model_id,
+            "shard": shard,
+            "num_shards": num_shards,
         },
     }
     skipped = 0
@@ -240,11 +251,13 @@ def extract_dataset(
     logger.info(f"  Layers: {layers}")
     logger.info(f"  Timesteps: {timesteps}")
     logger.info(f"  Output: {output_dir}")
+    if num_shards > 1:
+        logger.info(f"  Shard: {shard}/{num_shards}")
 
-    for idx in tqdm(range(len(dataset)), desc="Extracting"):
+    for idx in tqdm(range(len(dataset)), desc=f"Extracting (shard {shard})"):
         sample = dataset[idx]
-        video = sample["video"]  # [T, C, H, W] in [0, 1]
-        video_id = sample["video_name"]  # Use video_name as ID
+        video = sample["video"]
+        video_id = sample["video_name"]
         label = sample["label"]
 
         # Check if already extracted (resume mode)
@@ -263,42 +276,48 @@ def extract_dataset(
             info, fwd_time = extract_single_video(
                 video_id=video_id,
                 video=video,
+                label=label,
                 vae=vae,
-                text_embeds=text_embeds,
-                timesteps=timesteps,
                 extractor=extractor,
                 scheduler=scheduler,
+                timesteps=timesteps,
+                layers=layers,
                 output_dir=output_dir,
                 device=device,
             )
-
-            total_forward_time += fwd_time
-            info["label"] = label
-            info["scenario"] = sample["scenario"]
             metadata["videos"][video_id] = info
+            total_forward_time += fwd_time
 
         except Exception as e:
             logger.error(f"Failed to extract {video_id}: {e}")
-            import traceback
-
-            traceback.print_exc()
             continue
 
-        # Periodically save metadata
-        if (idx + 1) % 50 == 0:
-            _save_metadata(output_dir, metadata)
+    # Save metadata (per-shard)
+    metadata_file = (
+        output_dir / f"metadata_shard{shard}.json"
+        if num_shards > 1
+        else output_dir / "metadata.json"
+    )
+    with open(metadata_file, "w") as f:
+        json.dump(metadata, f, indent=2)
 
-    # Final save
-    _save_metadata(output_dir, metadata)
+    # Save labels (only if shard 0 or single-shard mode to avoid conflicts)
+    if shard == 0:
+        labels = {}
+        # Load all existing metadata to merge labels
+        for meta_file in output_dir.glob("metadata*.json"):
+            with open(meta_file) as f:
+                meta = json.load(f)
+                for vid, info in meta.get("videos", {}).items():
+                    labels[vid] = info.get("label", 0)
 
-    # Also save labels.json for trainer
-    labels = {vid: info["label"] for vid, info in metadata["videos"].items()}
-    with open(output_dir / "labels.json", "w") as f:
-        json.dump(labels, f, indent=2)
+        with open(output_dir / "labels.json", "w") as f:
+            json.dump(labels, f, indent=2)
 
-    logger.info("Extraction complete!")
+    logger.info(f"Extraction complete!")
+    logger.info(f"  Shard: {shard}/{num_shards}")
     logger.info(f"  Extracted: {len(metadata['videos'])} videos")
-    logger.info(f"  Skipped: {skipped} videos")
+    logger.info(f"  Skipped (already done): {skipped} videos")
     logger.info(f"  Output: {output_dir}")
     logger.info(
         f"  Total DiT forward time: {total_forward_time:.2f}s ({total_forward_time / 60:.2f} min)"
@@ -308,50 +327,69 @@ def extract_dataset(
         logger.info(f"  Avg forward time per video: {avg_time:.2f}s")
 
 
-def _save_metadata(output_dir: Path, metadata: Dict):
-    """Save metadata.json."""
-    with open(output_dir / "metadata.json", "w") as f:
-        json.dump(metadata, f, indent=2)
-
-
 def main():
-    parser = argparse.ArgumentParser(description="Extract DiT features from Physion")
-
-    # Data arguments
+    parser = argparse.ArgumentParser(
+        description="Extract DiT features from Physion videos"
+    )
     parser.add_argument(
         "--data_dir",
         type=str,
-        required=True,
-        help="Physion data directory (contains labels.csv)",
+        default="data/Physion",
+        help="Path to Physion data directory",
     )
     parser.add_argument(
         "--output_dir",
         type=str,
         required=True,
-        help="Output directory for features (use scratch!)",
-    )
-
-    # Extraction arguments
-    parser.add_argument(
-        "--layers", type=int, nargs="+", default=[15], help="DiT layers to extract"
+        help="Output directory for extracted features",
     )
     parser.add_argument(
-        "--timesteps", type=int, nargs="+", default=[400], help="Diffusion timesteps"
-    )
-
-    # Model arguments
-    parser.add_argument("--model_id", type=str, default="THUDM/CogVideoX-2b")
-    parser.add_argument(
-        "--use-8bit", action="store_true", help="Use 8-bit quantization"
-    )
-    parser.add_argument("--device", type=str, default="cuda")
-
-    # Other
-    parser.add_argument(
-        "--max_videos", type=int, default=None, help="Limit videos (for debugging)"
+        "--model_id",
+        type=str,
+        default="THUDM/CogVideoX-2b",
+        help="CogVideoX model ID",
     )
     parser.add_argument(
-        "--no-resume", action="store_true", help="Don't skip already extracted"
+        "--layers",
+        type=int,
+        nargs="+",
+        default=[5, 10, 15, 20, 25],
+        help="DiT layers to extract features from",
+    )
+    parser.add_argument(
+        "--timesteps",
+        type=int,
+        nargs="+",
+        default=[400],
+        help="Diffusion timesteps to extract features at",
+    )
+    parser.add_argument(
+        "--use-8bit",
+        action="store_true",
+        help="Use 8-bit quantization for DiT (saves memory)",
+    )
+    parser.add_argument(
+        "--max_videos",
+        type=int,
+        default=None,
+        help="Maximum number of videos to process (for debugging)",
+    )
+    parser.add_argument(
+        "--no-resume",
+        action="store_true",
+        help="Don't skip already extracted videos",
+    )
+    parser.add_argument(
+        "--shard",
+        type=int,
+        default=0,
+        help="Shard index (0-indexed) for parallel extraction",
+    )
+    parser.add_argument(
+        "--num_shards",
+        type=int,
+        default=1,
+        help="Total number of shards. Set to 2 for 2-GPU parallel extraction.",
     )
 
     args = parser.parse_args()
@@ -359,13 +397,14 @@ def main():
     extract_dataset(
         data_dir=args.data_dir,
         output_dir=args.output_dir,
+        model_id=args.model_id,
         layers=args.layers,
         timesteps=args.timesteps,
-        model_id=args.model_id,
         use_8bit=args.use_8bit,
-        device=args.device,
         max_videos=args.max_videos,
         resume=not args.no_resume,
+        shard=args.shard,
+        num_shards=args.num_shards,
     )
 
 
