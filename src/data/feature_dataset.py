@@ -1,52 +1,50 @@
 """
-Feature Dataset for Loading Pre-extracted DiT Features
+Feature Dataset for Loading Pre-extracted (and Pooled) DiT Features
 
-This dataset loads features that were extracted by extract_features.py.
-Since features are pre-computed, training is extremely fast (~3 min for 100 epochs).
+Supports two feature formats:
+1. Original: [num_patches, D] = [17550, 1920] (~67MB per file)
+2. Pooled:   [T, D] = [13, 1920] (~100KB per file) <- RECOMMENDED
 
-Expected directory structure:
+Directory structure (same for both formats):
     feature_dir/
-    ├── metadata.json           # Contains layers, timesteps info
-    ├── labels.json             # {video_id: 0 or 1}
-    ├── pilot_dominoes_xxx/     # One folder per video
+    ├── video_id_1/
     │   ├── t200/
-    │   │   └── layer_15.pt     # Feature tensor (various shapes)
-    │   ├── t400/
+    │   │   ├── layer_5.pt
+    │   │   ├── layer_10.pt
     │   │   └── layer_15.pt
+    │   ├── t400/
     │   └── ...
-    └── test10_xxx/
-        └── ...
-
-Supported feature shapes:
-    - [T, h, w, D] - Original spatial format (e.g., [13, 30, 45, 1920])
-    - [1, seq, D]  - Flattened with batch dim (e.g., [1, 17550, 1920])
-    - [seq, D]     - Flattened without batch dim (e.g., [17550, 1920])
+    ├── video_id_2/
+    └── labels.json
 
 Usage:
+    # For pooled features (fast training)
     dataset = FeatureDataset(
-        feature_dir="/users/xxx/scratch/physion_features",
+        feature_dir="~/scratch/physics/physion_features_pooled",
+        label_file="~/scratch/physics/physion_features_pooled/labels.json",
         layer=15,
-        timesteps=[200, 400, 600, 800],
-        pool_spatial=True  # Pool to [D] for classification
+        is_pooled=True  # Set this to True for pooled features
     )
 
-    loader = DataLoader(dataset, batch_size=32, shuffle=True, collate_fn=collate_features)
-    for batch in loader:
-        features = batch['features']   # [B, D] when pooled
-        labels = batch['labels']       # [B]
-        timesteps = batch['timesteps'] # List[int]
+    # Create dataloaders
+    train_loader, val_loader = create_dataloaders(
+        feature_dir="~/scratch/physics/physion_features_pooled",
+        layer=15,
+        batch_size=32,
+        is_pooled=True
+    )
 """
 
-import os
 import json
-import csv
-import torch
-import numpy as np
-from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Union
-from torch.utils.data import Dataset, DataLoader
+import random
 import logging
+from pathlib import Path
+from typing import Dict, List, Optional, Tuple
 
+import torch
+from torch.utils.data import Dataset, DataLoader
+
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
@@ -54,197 +52,104 @@ class FeatureDataset(Dataset):
     """
     Dataset for loading pre-extracted DiT features.
 
-    Key design decisions:
-    1. Load features on-the-fly (not all in memory) - handles large datasets
-    2. Support multiple timesteps - essential for noise-robust discriminator
-    3. Optional spatial pooling - reduces memory, pooled features work well
-    4. Timestep embedding support - model learns noise-level awareness
-    5. Flexible shape handling - works with various feature formats
+    Supports both original (full spatial) and pooled (temporal only) formats.
+    The pooled format is ~700x smaller and much faster to load.
     """
 
     def __init__(
         self,
         feature_dir: str,
-        label_file: Optional[str] = None,
+        label_file: str,
         layer: int = 15,
         timesteps: Optional[List[int]] = None,
-        pool_spatial: bool = True,
-        pool_temporal: bool = False,
-        split: Optional[str] = None,  # 'train', 'test', or None for all
-        dtype: torch.dtype = torch.float32,
-        max_samples: Optional[int] = None,  # For debugging
+        split: str = "train",
+        train_ratio: float = 0.85,
+        is_pooled: bool = True,
+        num_frames: int = 13,
+        seed: int = 42,
     ):
         """
         Args:
-            feature_dir: Directory containing extracted features
-            label_file: Path to labels.json (optional, will auto-detect)
-            layer: Which DiT layer to use (e.g., 15)
-            timesteps: List of timesteps to use. None = use all available
-            pool_spatial: If True, global average pool to [D]
-            pool_temporal: If True, also pool temporal (only matters if not already pooled)
-            split: 'train', 'test', or None (all data)
-            dtype: Data type for features (default float32)
-            max_samples: Limit samples (for debugging)
+            feature_dir: Path to features directory
+            label_file: Path to labels.json
+            layer: DiT layer to use (5, 10, 15, 20, 25)
+            timesteps: List of timesteps to use (default: [200, 400, 600, 800])
+            split: "train" or "val"
+            train_ratio: Ratio of data for training (default: 0.85)
+            is_pooled: True if features are pre-pooled [T, D], False for original [num_patches, D]
+            num_frames: Number of frames T (default: 13, only used if is_pooled=False)
+            seed: Random seed for train/val split
         """
         self.feature_dir = Path(feature_dir)
-        self.label_file = Path(label_file) if label_file else None
         self.layer = layer
-        self.pool_spatial = pool_spatial
-        self.pool_temporal = pool_temporal
-        self.dtype = dtype
-
-        # Load metadata
-        metadata_path = self.feature_dir / "metadata.json"
-        if metadata_path.exists():
-            with open(metadata_path) as f:
-                self.metadata = json.load(f)
-            logger.debug(
-                f"Loaded metadata: layers={self.metadata.get('layers')}, "
-                f"timesteps={self.metadata.get('timesteps')}"
-            )
-        else:
-            self.metadata = {}
-
-        # Determine timesteps
-        if timesteps is None:
-            self.timesteps = self.metadata.get("timesteps", [200, 400, 600, 800])
-        else:
-            self.timesteps = timesteps
+        self.timesteps = timesteps or [200, 400, 600, 800]
+        self.split = split
+        self.is_pooled = is_pooled
+        self.num_frames = num_frames
 
         # Load labels
-        self.labels = self._load_labels()
+        with open(label_file, "r") as f:
+            self.all_labels = json.load(f)
 
-        # Find all video directories with extracted features
-        self.video_ids = self._find_videos()
+        # Find available videos by scanning directory
+        self.video_ids = self._find_available_videos()
 
-        # Apply split filter
+        # Train/val split
+        random.seed(seed)
+        shuffled = self.video_ids.copy()
+        random.shuffle(shuffled)
+
+        split_idx = int(len(shuffled) * train_ratio)
         if split == "train":
-            self.video_ids = [v for v in self.video_ids if not v.startswith("test")]
-        elif split == "test":
-            self.video_ids = [v for v in self.video_ids if v.startswith("test")]
+            self.video_ids = shuffled[:split_idx]
+        else:
+            self.video_ids = shuffled[split_idx:]
 
-        # Limit samples for debugging
-        if max_samples is not None:
-            self.video_ids = self.video_ids[:max_samples]
-
-        # Create (video_id, timestep) pairs for indexing
-        # Each sample is one (video, timestep) combination
+        # Build sample list: (video_id, timestep) pairs
         self.samples = []
-        for vid in self.video_ids:
+        for video_id in self.video_ids:
             for t in self.timesteps:
-                # Only add if feature exists
-                feature_path = (
-                    self.feature_dir / vid / f"t{t}" / f"layer_{self.layer}.pt"
-                )
+                # Check if feature file exists
+                feature_path = self._get_feature_path(video_id, t)
                 if feature_path.exists():
-                    self.samples.append((vid, t))
+                    self.samples.append((video_id, t))
 
         logger.info(
-            f"FeatureDataset: {len(self.video_ids)} videos, layer={layer}, split={split}"
-        )
-        logger.info(
-            f"Total samples: {len(self.samples)} "
-            f"({len(self.video_ids)} videos × {len(self.timesteps)} timesteps)"
+            f"FeatureDataset [{split}]: {len(self.samples)} samples "
+            f"({len(self.video_ids)} videos × {len(self.timesteps)} timesteps), "
+            f"layer={layer}, is_pooled={is_pooled}"
         )
 
-    def _load_labels(self) -> Dict[str, int]:
-        """Load labels from labels.json or labels.csv."""
-        labels = {}
+    def _find_available_videos(self) -> List[str]:
+        """Find all video IDs that have features and labels."""
+        video_ids = []
 
-        # Try explicit label file first
-        if self.label_file and self.label_file.exists():
-            if self.label_file.suffix == ".json":
-                with open(self.label_file) as f:
-                    raw_labels = json.load(f)
-                for vid, label in raw_labels.items():
-                    if isinstance(label, bool):
-                        labels[vid] = 1 if label else 0
-                    else:
-                        labels[vid] = int(label)
-                return labels
-
-        # Try JSON in feature dir
-        json_path = self.feature_dir / "labels.json"
-        if json_path.exists():
-            with open(json_path) as f:
-                raw_labels = json.load(f)
-            for vid, label in raw_labels.items():
-                if isinstance(label, bool):
-                    labels[vid] = 1 if label else 0
-                else:
-                    labels[vid] = int(label)
-            return labels
-
-        # Try CSV in feature dir
-        csv_path = self.feature_dir / "labels.csv"
-        if csv_path.exists():
-            with open(csv_path) as f:
-                reader = csv.DictReader(f)
-                for row in reader:
-                    vid = row.get("video_id") or row.get("stimulus_name")
-                    label = row.get("label") or row.get("contacted_zone")
-                    if vid and label is not None:
-                        if isinstance(label, str):
-                            label = label.lower() in ("true", "1", "yes")
-                        labels[vid] = int(label)
-            return labels
-
-        # Try parent directory (Physion labels)
-        parent_csv = self.feature_dir.parent / "Physion" / "labels.csv"
-        if parent_csv.exists():
-            with open(parent_csv) as f:
-                reader = csv.DictReader(f)
-                for row in reader:
-                    vid = row.get("stimulus_name", "")
-                    label = row.get("contacted_zone", "")
-                    if vid:
-                        labels[vid] = 1 if label.lower() == "true" else 0
-            return labels
-
-        raise FileNotFoundError(
-            f"No labels found. Tried:\n"
-            f"  - {self.label_file}\n"
-            f"  - {json_path}\n"
-            f"  - {csv_path}\n"
-            f"  - {parent_csv}"
-        )
-
-    def _find_videos(self) -> List[str]:
-        """Find all video directories that have extracted features."""
-        videos = []
-
-        for item in self.feature_dir.iterdir():
-            if not item.is_dir():
-                continue
-            if item.name.endswith(".json") or item.name.endswith(".csv"):
+        for video_dir in sorted(self.feature_dir.iterdir()):
+            if not video_dir.is_dir():
                 continue
 
-            video_id = item.name
+            video_id = video_dir.name
 
-            # Check if this video has labels
-            if video_id not in self.labels:
-                # Try fuzzy matching
-                found_label = False
-                for label_key in self.labels.keys():
-                    if label_key in video_id or video_id in label_key:
-                        self.labels[video_id] = self.labels[label_key]
-                        found_label = True
-                        break
-                if not found_label:
-                    continue
+            # Check if video has label
+            if video_id not in self.all_labels:
+                continue
 
-            # Check if features exist for at least one timestep
+            # Check if at least one timestep exists
             has_features = False
             for t in self.timesteps:
-                feature_path = item / f"t{t}" / f"layer_{self.layer}.pt"
+                feature_path = self._get_feature_path(video_id, t)
                 if feature_path.exists():
                     has_features = True
                     break
 
             if has_features:
-                videos.append(video_id)
+                video_ids.append(video_id)
 
-        return sorted(videos)
+        return video_ids
+
+    def _get_feature_path(self, video_id: str, timestep: int) -> Path:
+        """Get path to feature file."""
+        return self.feature_dir / video_id / f"t{timestep}" / f"layer_{self.layer}.pt"
 
     def __len__(self) -> int:
         return len(self.samples)
@@ -252,220 +157,113 @@ class FeatureDataset(Dataset):
     def __getitem__(self, idx: int) -> Dict[str, torch.Tensor]:
         video_id, timestep = self.samples[idx]
 
-        # Load feature file
-        feature_path = (
-            self.feature_dir / video_id / f"t{timestep}" / f"layer_{self.layer}.pt"
-        )
-
-        if not feature_path.exists():
-            raise FileNotFoundError(f"Feature not found: {feature_path}")
-
         # Load features
+        feature_path = self._get_feature_path(video_id, timestep)
         features = torch.load(feature_path, map_location="cpu", weights_only=True)
 
-        # ================================================================
-        # Handle different feature shapes and restore structure:
-        # ================================================================
-        # Expected:  [T, h, w, D] = [13, 30, 45, 1920]  (4D spatial)
-        # Common:    [1, seq, D]  = [1, 17550, 1920]    (3D with batch, flattened)
-        # Also:      [seq, D]    = [17550, 1920]       (2D flattened)
-        #
-        # Key insight: 17550 = 13 × 30 × 45 = T × h × w
-        # We can reshape back to recover temporal structure!
-        # ================================================================
+        # Ensure float32 for training
+        features = features.float()
 
-        # Known dimensions from CogVideoX feature extraction
-        # These are typical values; adjust if your extraction used different settings
-        KNOWN_T = 13  # Number of frames (temporal)
-        KNOWN_H = 30  # Height after patchification
-        KNOWN_W = 45  # Width after patchification
-        KNOWN_SEQ = KNOWN_T * KNOWN_H * KNOWN_W  # 17550
-
-        # Step 1: Remove spurious batch dimension if present
-        if features.dim() == 3 and features.shape[0] == 1:
-            # [1, seq, D] -> [seq, D]
-            features = features.squeeze(0)
-
-        # Step 2: Try to restore [T, h, w, D] structure from flattened features
-        if features.dim() == 2:
-            seq_len, D = features.shape
-
-            # Check if this matches known flattened sequence length
-            if seq_len == KNOWN_SEQ:
-                # Reshape back to [T, h, w, D]
-                features = features.reshape(KNOWN_T, KNOWN_H, KNOWN_W, D)
-            elif seq_len % KNOWN_T == 0:
-                # Sequence length is divisible by T, assume [T, spatial, D]
-                spatial = seq_len // KNOWN_T
-                features = features.reshape(KNOWN_T, spatial, D)
-
-        # Step 3: Apply pooling based on current shape
-        if self.pool_spatial:
-            if features.dim() == 4:
-                # [T, h, w, D] -> [T, D] (pool only spatial, keep temporal!)
-                features = features.mean(dim=(1, 2))
-            elif features.dim() == 3:
-                # [T, spatial, D] -> [T, D]
-                features = features.mean(dim=1)
-            elif features.dim() == 2:
-                # Already [T, D] or [seq, D] - check if we should pool
-                if features.shape[0] > 100:  # Likely still flattened, pool everything
-                    features = features.mean(dim=0)
-                # Otherwise keep as [T, D]
-            # dim == 1: already [D], no change
+        # Handle shape based on format
+        if self.is_pooled:
+            # Already pooled: [T, D] = [13, 1920]
+            # No additional processing needed
+            pass
         else:
-            # No spatial pooling - keep full resolution
-            if features.dim() == 4:
-                # [T, h, w, D] -> [T*h*w, D] for sequence models
-                T, h, w, D = features.shape
-                features = features.reshape(T * h * w, D)
-            # [seq, D] is fine as-is
-
-        # Step 4: Apply temporal pooling if requested
-        if self.pool_temporal and features.dim() >= 2:
-            # [T, D] -> [D] or [T, h, w, D] -> [D]
-            features = features.mean(dim=tuple(range(features.dim() - 1)))
-
-        # Convert to target dtype
-        features = features.to(self.dtype)
+            # Original format: [num_patches, D] = [17550, 1920]
+            # Need to pool spatial dimensions to get [T, D]
+            if features.dim() == 2:
+                num_patches, hidden_dim = features.shape
+                spatial_patches = num_patches // self.num_frames
+                features = features.view(self.num_frames, spatial_patches, hidden_dim)
+                features = features.mean(dim=1)  # [T, D]
 
         # Get label
-        label = self.labels.get(video_id, 0)
+        label = float(self.all_labels[video_id])
 
         return {
-            "video_id": video_id,
-            "features": features,
-            "labels": torch.tensor(label, dtype=torch.float32),  # Note: plural 'labels'
-            "timesteps": timestep,  # Return as int, collate will handle
+            "features": features,  # [T, D] = [13, 1920]
+            "label": torch.tensor(label),  # scalar
+            "timestep": torch.tensor(timestep),  # scalar (200, 400, 600, 800)
+            "video_id": video_id,  # string
         }
 
 
-def collate_features(batch: List[Dict]) -> Dict[str, torch.Tensor]:
+class FeatureDatasetRandomTimestep(Dataset):
     """
-    Custom collate function for FeatureDataset.
+    Dataset that randomly samples one timestep per video per epoch.
 
-    Handles variable-length sequences by padding or stacking.
-
-    Returns:
-        video_ids: List[str]
-        features: [B, ...] tensor (stacked if same shape, padded if different)
-        labels: [B] tensor
-        timesteps: List[int]
-    """
-    video_ids = [item["video_id"] for item in batch]
-    labels = torch.stack([item["labels"] for item in batch])
-    timesteps = [item["timesteps"] for item in batch]  # Keep as list of ints
-
-    # Stack features (assumes same shape within batch)
-    features = torch.stack([item["features"] for item in batch])
-
-    return {
-        "video_ids": video_ids,
-        "features": features,
-        "labels": labels,
-        "timesteps": timesteps,
-    }
-
-
-class MultiTimestepFeatureDataset(Dataset):
-    """
-    Dataset that returns all timesteps for a video in one sample.
-
-    Useful for models that need to see features across multiple noise levels.
-
-    Returns:
-        features: [num_timesteps, D] (if pooled)
-        labels: scalar
-        timesteps: [num_timesteps]
+    This is useful for training when you want each video to appear
+    once per epoch with a random timestep (data augmentation).
     """
 
     def __init__(
         self,
         feature_dir: str,
-        label_file: Optional[str] = None,
+        label_file: str,
         layer: int = 15,
-        timesteps: List[int] = [200, 400, 600, 800],
-        pool_spatial: bool = True,
-        pool_temporal: bool = True,
-        split: Optional[str] = None,
-        dtype: torch.dtype = torch.float32,
-        max_samples: Optional[int] = None,
+        timesteps: Optional[List[int]] = None,
+        split: str = "train",
+        train_ratio: float = 0.85,
+        is_pooled: bool = True,
+        num_frames: int = 13,
+        seed: int = 42,
     ):
         self.feature_dir = Path(feature_dir)
-        self.label_file = Path(label_file) if label_file else None
         self.layer = layer
-        self.timesteps = sorted(timesteps)
-        self.pool_spatial = pool_spatial
-        self.pool_temporal = pool_temporal
-        self.dtype = dtype
+        self.timesteps = timesteps or [200, 400, 600, 800]
+        self.split = split
+        self.is_pooled = is_pooled
+        self.num_frames = num_frames
 
         # Load labels
-        self.labels = self._load_labels()
+        with open(label_file, "r") as f:
+            self.all_labels = json.load(f)
 
-        # Find videos
-        self.video_ids = self._find_videos()
+        # Find available videos
+        self.video_ids = self._find_available_videos()
 
-        # Apply split filter
+        # Train/val split
+        random.seed(seed)
+        shuffled = self.video_ids.copy()
+        random.shuffle(shuffled)
+
+        split_idx = int(len(shuffled) * train_ratio)
         if split == "train":
-            self.video_ids = [v for v in self.video_ids if not v.startswith("test")]
-        elif split == "test":
-            self.video_ids = [v for v in self.video_ids if v.startswith("test")]
+            self.video_ids = shuffled[:split_idx]
+        else:
+            self.video_ids = shuffled[split_idx:]
 
-        if max_samples:
-            self.video_ids = self.video_ids[:max_samples]
+        # Store available timesteps per video
+        self.video_timesteps = {}
+        for video_id in self.video_ids:
+            available = []
+            for t in self.timesteps:
+                if self._get_feature_path(video_id, t).exists():
+                    available.append(t)
+            self.video_timesteps[video_id] = available
 
         logger.info(
-            f"MultiTimestepDataset: {len(self.video_ids)} videos, "
-            f"{len(self.timesteps)} timesteps each"
+            f"FeatureDatasetRandomTimestep [{split}]: {len(self.video_ids)} videos, "
+            f"layer={layer}"
         )
 
-    def _load_labels(self) -> Dict[str, int]:
-        """Load labels from various sources."""
-        labels = {}
+    def _find_available_videos(self) -> List[str]:
+        """Find all video IDs that have features and labels."""
+        video_ids = []
 
-        # Try explicit label file
-        if self.label_file and self.label_file.exists():
-            with open(self.label_file) as f:
-                raw = json.load(f)
-            for vid, label in raw.items():
-                labels[vid] = (
-                    int(label) if not isinstance(label, bool) else (1 if label else 0)
-                )
-            return labels
-
-        # Try feature_dir/labels.json
-        json_path = self.feature_dir / "labels.json"
-        if json_path.exists():
-            with open(json_path) as f:
-                raw = json.load(f)
-            for vid, label in raw.items():
-                labels[vid] = (
-                    int(label) if not isinstance(label, bool) else (1 if label else 0)
-                )
-            return labels
-
-        return labels
-
-    def _find_videos(self) -> List[str]:
-        """Find videos that have ALL required timesteps."""
-        videos = []
-        for item in self.feature_dir.iterdir():
-            if not item.is_dir() or item.name.endswith(".json"):
+        for video_dir in sorted(self.feature_dir.iterdir()):
+            if not video_dir.is_dir():
                 continue
 
-            video_id = item.name
-            if video_id not in self.labels:
-                continue
+            video_id = video_dir.name
+            if video_id in self.all_labels:
+                video_ids.append(video_id)
 
-            # Must have all timesteps
-            has_all = all(
-                (item / f"t{t}" / f"layer_{self.layer}.pt").exists()
-                for t in self.timesteps
-            )
-            if has_all:
-                videos.append(video_id)
+        return video_ids
 
-        return sorted(videos)
+    def _get_feature_path(self, video_id: str, timestep: int) -> Path:
+        return self.feature_dir / video_id / f"t{timestep}" / f"layer_{self.layer}.pt"
 
     def __len__(self) -> int:
         return len(self.video_ids)
@@ -473,47 +271,28 @@ class MultiTimestepFeatureDataset(Dataset):
     def __getitem__(self, idx: int) -> Dict[str, torch.Tensor]:
         video_id = self.video_ids[idx]
 
-        # Known dimensions from CogVideoX feature extraction
-        KNOWN_T = 13
-        KNOWN_H = 30
-        KNOWN_W = 45
-        KNOWN_SEQ = KNOWN_T * KNOWN_H * KNOWN_W  # 17550
+        # Randomly select timestep
+        timestep = random.choice(self.video_timesteps[video_id])
 
-        features_list = []
-        for t in self.timesteps:
-            path = self.feature_dir / video_id / f"t{t}" / f"layer_{self.layer}.pt"
-            feat = torch.load(path, map_location="cpu", weights_only=True)
+        # Load features
+        feature_path = self._get_feature_path(video_id, timestep)
+        features = torch.load(feature_path, map_location="cpu", weights_only=True)
+        features = features.float()
 
-            # Handle various shapes - same logic as FeatureDataset
-            if feat.dim() == 3 and feat.shape[0] == 1:
-                feat = feat.squeeze(0)  # [1, seq, D] -> [seq, D]
+        # Pool if needed
+        if not self.is_pooled and features.dim() == 2:
+            num_patches, hidden_dim = features.shape
+            spatial_patches = num_patches // self.num_frames
+            features = features.view(self.num_frames, spatial_patches, hidden_dim)
+            features = features.mean(dim=1)
 
-            # Try to restore structure
-            if feat.dim() == 2:
-                seq_len, D = feat.shape
-                if seq_len == KNOWN_SEQ:
-                    feat = feat.reshape(KNOWN_T, KNOWN_H, KNOWN_W, D)
-
-            if self.pool_spatial:
-                if feat.dim() == 4:
-                    feat = feat.mean(dim=(1, 2))  # [T, h, w, D] -> [T, D]
-                elif feat.dim() == 2 and feat.shape[0] > 100:
-                    feat = feat.mean(dim=0)  # [seq, D] -> [D]
-
-            if self.pool_temporal:
-                if feat.dim() >= 2:
-                    feat = feat.mean(dim=tuple(range(feat.dim() - 1)))  # -> [D]
-
-            features_list.append(feat.to(self.dtype))
-
-        # Stack: [num_timesteps, T, D] or [num_timesteps, D]
-        features = torch.stack(features_list, dim=0)
+        label = float(self.all_labels[video_id])
 
         return {
-            "video_id": video_id,
             "features": features,
-            "labels": torch.tensor(self.labels[video_id], dtype=torch.float32),
-            "timesteps": torch.tensor(self.timesteps, dtype=torch.long),
+            "label": torch.tensor(label),
+            "timestep": torch.tensor(timestep),
+            "video_id": video_id,
         }
 
 
@@ -521,63 +300,65 @@ def create_dataloaders(
     feature_dir: str,
     label_file: Optional[str] = None,
     layer: int = 15,
-    timesteps: List[int] = [200, 400, 600, 800],
+    timesteps: Optional[List[int]] = None,
     batch_size: int = 32,
     num_workers: int = 4,
-    pool_spatial: bool = True,
-    pool_temporal: bool = False,
-    multi_timestep: bool = False,
-    val_ratio: float = 0.15,
+    is_pooled: bool = True,
+    random_timestep: bool = False,
+    train_ratio: float = 0.85,
     seed: int = 42,
 ) -> Tuple[DataLoader, DataLoader]:
     """
-    Create train and validation dataloaders.
+    Create train and val dataloaders.
 
     Args:
-        feature_dir: Directory with extracted features
-        label_file: Path to labels.json
+        feature_dir: Path to features directory
+        label_file: Path to labels.json (default: feature_dir/labels.json)
         layer: DiT layer to use
-        timesteps: List of diffusion timesteps
+        timesteps: List of timesteps
         batch_size: Batch size
-        num_workers: DataLoader workers
-        pool_spatial: Pool spatial dimensions
-        pool_temporal: Pool temporal dimension
-        multi_timestep: If True, use MultiTimestepFeatureDataset
-        val_ratio: Validation split ratio
+        num_workers: Number of dataloader workers
+        is_pooled: Whether features are pre-pooled
+        random_timestep: If True, randomly sample one timestep per video per epoch
+        train_ratio: Ratio of data for training
         seed: Random seed
 
     Returns:
         (train_loader, val_loader)
     """
-    DatasetClass = MultiTimestepFeatureDataset if multi_timestep else FeatureDataset
+    feature_dir = Path(feature_dir)
 
-    # Create full dataset first, then split
-    full_dataset = DatasetClass(
-        feature_dir=feature_dir,
-        label_file=label_file,
+    # Find labels file
+    if label_file is None:
+        label_file = feature_dir / "labels.json"
+
+    # Choose dataset class
+    DatasetClass = FeatureDatasetRandomTimestep if random_timestep else FeatureDataset
+
+    # Create datasets
+    train_dataset = DatasetClass(
+        feature_dir=str(feature_dir),
+        label_file=str(label_file),
         layer=layer,
         timesteps=timesteps,
-        pool_spatial=pool_spatial,
-        pool_temporal=pool_temporal,
-        split="train",  # Use train split (excludes test videos)
+        split="train",
+        train_ratio=train_ratio,
+        is_pooled=is_pooled,
+        seed=seed,
     )
 
-    # Manual train/val split
-    n_samples = len(full_dataset)
-    indices = list(range(n_samples))
+    val_dataset = DatasetClass(
+        feature_dir=str(feature_dir),
+        label_file=str(label_file),
+        layer=layer,
+        timesteps=timesteps,
+        split="val",
+        train_ratio=train_ratio,
+        is_pooled=is_pooled,
+        seed=seed,
+    )
 
-    rng = np.random.RandomState(seed)
-    rng.shuffle(indices)
-
-    n_val = int(n_samples * val_ratio)
-    train_indices = indices[n_val:]
-    val_indices = indices[:n_val]
-
-    from torch.utils.data import Subset
-
-    train_dataset = Subset(full_dataset, train_indices)
-    val_dataset = Subset(full_dataset, val_indices)
-
+    # Create dataloaders
     train_loader = DataLoader(
         train_dataset,
         batch_size=batch_size,
@@ -585,7 +366,6 @@ def create_dataloaders(
         num_workers=num_workers,
         pin_memory=True,
         drop_last=True,
-        collate_fn=collate_features,
     )
 
     val_loader = DataLoader(
@@ -594,7 +374,6 @@ def create_dataloaders(
         shuffle=False,
         num_workers=num_workers,
         pin_memory=True,
-        collate_fn=collate_features,
     )
 
     return train_loader, val_loader
@@ -605,66 +384,39 @@ def create_dataloaders(
 # =============================================================================
 
 if __name__ == "__main__":
-    import argparse
+    import sys
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--feature_dir", type=str, required=True)
-    parser.add_argument("--layer", type=int, default=15)
-    args = parser.parse_args()
+    if len(sys.argv) < 2:
+        print("Usage: python -m src.data.feature_dataset <feature_dir>")
+        print(
+            "Example: python -m src.data.feature_dataset ~/scratch/physics/physion_features_pooled"
+        )
+        sys.exit(1)
 
-    logging.basicConfig(level=logging.INFO)
+    feature_dir = sys.argv[1]
+    label_file = Path(feature_dir) / "labels.json"
 
-    print("=" * 60)
-    print("Testing FeatureDataset")
-    print("=" * 60)
+    print(f"Testing with feature_dir: {feature_dir}")
+    print()
 
-    dataset = FeatureDataset(
-        feature_dir=args.feature_dir,
-        layer=args.layer,
-        pool_spatial=True,
-        max_samples=10,
-    )
-
-    print(f"\nDataset size: {len(dataset)}")
-
-    sample = dataset[0]
-    print(f"Sample keys: {sample.keys()}")
-    print(f"Features shape: {sample['features'].shape}")
-    print(f"Features dtype: {sample['features'].dtype}")
-    print(f"Features mean: {sample['features'].mean():.4f}")
-    print(f"Features std: {sample['features'].std():.4f}")
-    print(f"Label: {sample['labels']}")
-    print(f"Timestep: {sample['timesteps']}")
-    print(f"Video ID: {sample['video_id']}")
-
-    print("\n" + "=" * 60)
-    print("Testing collate_features")
-    print("=" * 60)
-
-    batch = [dataset[i] for i in range(min(4, len(dataset)))]
-    collated = collate_features(batch)
-    print(f"Batch features shape: {collated['features'].shape}")
-    print(f"Batch labels shape: {collated['labels'].shape}")
-    print(f"Batch timesteps: {collated['timesteps']}")
-
-    print("\n" + "=" * 60)
-    print("Testing DataLoader")
-    print("=" * 60)
-
+    # Test FeatureDataset
     train_loader, val_loader = create_dataloaders(
-        feature_dir=args.feature_dir,
-        layer=args.layer,
+        feature_dir=feature_dir,
+        label_file=str(label_file),
+        layer=15,
         batch_size=4,
         num_workers=0,
+        is_pooled=True,
     )
 
     print(f"Train batches: {len(train_loader)}")
     print(f"Val batches: {len(val_loader)}")
+    print()
 
-    for batch in train_loader:
-        print(f"\nBatch features: {batch['features'].shape}")
-        print(f"Batch labels: {batch['labels'].shape}")
-        print(f"Batch timesteps: {batch['timesteps']}")
-        break
-
-    print("\n✓ All tests passed!")
+    # Get a sample batch
+    batch = next(iter(train_loader))
+    print("Sample batch:")
+    print(f"  features shape: {batch['features'].shape}")
+    print(f"  labels: {batch['label']}")
+    print(f"  timesteps: {batch['timestep']}")
+    print(f"  video_ids: {batch['video_id']}")

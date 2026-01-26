@@ -126,6 +126,7 @@ python -m trainer.train_physics_head \
     --early_stopping $EARLY_STOPPING \
     --num_workers $NUM_WORKERS \
     --seed $SEED \
+    --is_pooled \
     --output_dir ${OUTPUT_DIR}/head_ablation
 
 echo ""
@@ -164,6 +165,7 @@ echo ""
 #     --val_ratio $VAL_RATIO \
 #     --early_stopping $EARLY_STOPPING \
 #     --num_workers $NUM_WORKERS \
+#     --is_pooled \
 #     --seed $SEED \
 #     --output_dir ${OUTPUT_DIR}/layer_ablation
 
@@ -203,6 +205,7 @@ echo ""
 #     --val_ratio $VAL_RATIO \
 #     --early_stopping $EARLY_STOPPING \
 #     --num_workers $NUM_WORKERS \
+#     --is_pooled \
 #     --seed $SEED \
 #     --output_dir ${OUTPUT_DIR}/timestep_ablation
 
