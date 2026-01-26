@@ -113,6 +113,11 @@ class PhysionDataset(Dataset):
         # Test videos are all Drape scenario
         if video_name_lower.startswith("test"):
             return "Drape"
+        # IMPORTANT: Check rollingSliding BEFORE collision!
+        # pilot_it2_rollingSliding_simple_collision_* contains "collision" 
+        # but belongs to Roll scenario
+        if "rollingsliding" in video_name_lower:
+            return "Roll"
 
         # Check for scenario keywords
         if "collision" in video_name_lower or "_collide" in video_name_lower:

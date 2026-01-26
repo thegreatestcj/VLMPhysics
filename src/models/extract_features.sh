@@ -5,7 +5,7 @@
 #SBATCH --partition=gpu
 #SBATCH --gres=gpu:1
 #SBATCH --mem=64G
-#SBATCH --cpus-per-task=8
+#SBATCH --cpus-per-task=4
 
 # ============================================================
 # Feature Extraction for VLM-Physics
@@ -65,7 +65,7 @@ echo "  Timesteps: $TIMESTEPS"
 echo "  Max videos: $MAX_VIDEOS"
 echo ""
 
-# Extract train split
+
 echo "Extracting..."
 # Run extraction for shard 0
 python -m src.models.extract_features \
@@ -74,28 +74,27 @@ python -m src.models.extract_features \
     --layers 5 10 15 20 25 \
     --timesteps 200 400 600 800 \
     --use-8bit \
-    --resume \
     --shard 0 \
     --num_shards 2
 
-# Run extraction for shard 1
-python -m src.models.extract_features \
-    --data_dir data/Physion \
-    --output_dir /users/$USER/scratch/physics/physion_features \
-    --layers 5 10 15 20 25 \
-    --timesteps 200 400 600 800 \
-    --use-8bit \
-    --resume \
-    --shard 1 \
-    --num_shards 2
-
-echo "=========================================="
-echo "Shard 1 completed: $(date)"
-echo "=========================================="
 
 echo "=========================================="
 echo "Shard 0 completed: $(date)"
 echo "=========================================="
+
+# # Run extraction for shard 1
+# python -m src.models.extract_features \
+#     --data_dir data/Physion \
+#     --output_dir /users/$USER/scratch/physics/physion_features \
+#     --layers 5 10 15 20 25 \
+#     --timesteps 200 400 600 800 \
+#     --use-8bit \
+#     --shard 1 \
+#     --num_shards 2
+
+# echo "=========================================="
+# echo "Shard 1 completed: $(date)"
+# echo "=========================================="
 
 echo ""
 echo "Output directory contents:"
