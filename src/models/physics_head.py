@@ -1,518 +1,1023 @@
 """
-Physics Discriminator Heads for Ablation Study
+Physics Discriminator Heads with AdaLN Timestep Conditioning
 
-5 variants testing different hypotheses:
-1. MeanPool: Simplest baseline
-2. MeanPool+T: Add timestep conditioning  
-3. TempAttn+T: Temporal attention (bidirectional)
-4. CausalAttn+T: Causal temporal attention
-5. MultiView+T: Multi-view pooling combination
+This module implements physics discriminator heads using Adaptive Layer Normalization
+(AdaLN) for timestep conditioning, following the design principles from DiT
+(Diffusion Transformers).
 
-Input: [B, T, H, W, D] = [B, 13, 30, 45, 1920]
-Output: [B, 1] physics plausibility logit
+Key Design Decision: AdaLN vs Concatenation
+============================================
+
+Previous approach (concat):
+    features ──┬── attention ── concat([features, t_emb]) ── classifier
+               │
+    timestep ──┘ (only used at the end)
+
+New approach (AdaLN):
+    features ── AdaLN(t_emb) ── attention ── AdaLN(t_emb) ── classifier
+                   ↑                            ↑
+    timestep ──────┴────────────────────────────┘ (modulates every layer)
+
+Why AdaLN?
+----------
+1. Timestep affects the entire computation, not just final classification
+2. Features at t=200 (low noise) vs t=800 (high noise) need different processing
+3. This is how DiT handles timestep, and our features come from DiT
+4. AdaLN allows the same network to behave differently at different timesteps
+
+AdaLN Formula:
+    Standard LayerNorm: y = LayerNorm(x) * γ + β        (γ, β are learned constants)
+    AdaLN:              y = LayerNorm(x) * (1 + scale) + shift   (scale, shift from t_emb)
+
+Head Variants:
+    1. MeanPool:         Global mean pooling baseline (no timestep)
+    2. MeanPoolAdaLN:    Mean pooling + AdaLN timestep conditioning
+    3. TemporalAdaLN:    Bidirectional attention with AdaLN
+    4. CausalAdaLN:      Causal attention with AdaLN
+    5. MultiViewAdaLN:   Multi-view pooling with AdaLN
+
+Author: VLMPhysics Project
 """
 
 import math
+from typing import Optional, Dict, List, Tuple
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from typing import Optional
 
 
 # =============================================================================
-# Timestep Embedding (shared across heads)
+# Timestep Embedding
 # =============================================================================
 
-def get_timestep_embedding(timesteps: torch.Tensor, dim: int = 128) -> torch.Tensor:
-    """Sinusoidal timestep embedding, same as diffusion models."""
+
+def get_timestep_embedding(timesteps: torch.Tensor, dim: int = 256) -> torch.Tensor:
+    """
+    Create sinusoidal timestep embeddings.
+
+    Args:
+        timesteps: [B] tensor of timestep values (e.g., 200, 400, 600, 800)
+        dim: Embedding dimension
+
+    Returns:
+        [B, dim] sinusoidal embedding
+    """
     half = dim // 2
-    freqs = torch.exp(-math.log(10000) * torch.arange(half, device=timesteps.device) / half)
-    args = timesteps[:, None].float() * freqs[None]
-    return torch.cat([torch.cos(args), torch.sin(args)], dim=-1)
+    freqs = torch.exp(
+        -math.log(10000.0) * torch.arange(half, device=timesteps.device) / half
+    )
+    args = timesteps[:, None].float() * freqs[None, :]
+    embedding = torch.cat([torch.cos(args), torch.sin(args)], dim=-1)
+    if dim % 2:
+        embedding = F.pad(embedding, (0, 1))
+    return embedding
+
+
+class TimestepEmbedder(nn.Module):
+    """
+    Embeds scalar timesteps into vector representations.
+
+    Architecture: sinusoidal_embed → Linear → SiLU → Linear
+
+    This follows DiT's design where timestep embeddings are projected
+    to a higher dimension before being used for AdaLN modulation.
+    """
+
+    def __init__(self, hidden_size: int, frequency_dim: int = 256):
+        """
+        Args:
+            hidden_size: Output dimension (should match model hidden size)
+            frequency_dim: Dimension of sinusoidal embedding
+        """
+        super().__init__()
+        self.mlp = nn.Sequential(
+            nn.Linear(frequency_dim, hidden_size),
+            nn.SiLU(),
+            nn.Linear(hidden_size, hidden_size),
+        )
+        self.frequency_dim = frequency_dim
+
+    def forward(self, timesteps: torch.Tensor) -> torch.Tensor:
+        """
+        Args:
+            timesteps: [B] integer timesteps
+
+        Returns:
+            [B, hidden_size] timestep embeddings
+        """
+        t_freq = get_timestep_embedding(timesteps, self.frequency_dim)
+        t_emb = self.mlp(t_freq)
+        return t_emb
 
 
 # =============================================================================
-# 1. MeanPool: Simplest Baseline
+# Adaptive Layer Normalization (AdaLN)
 # =============================================================================
 
-class MeanPoolHead(nn.Module):
+
+class AdaLN(nn.Module):
     """
-    最简单的 baseline: 全部 mean pooling
-    
-    测试假设: DiT 特征是否本身就包含物理信息
-    
-    流程:
-        [B, T, H, W, D] → mean(T,H,W) → [B, D] → MLP → [B, 1]
+    Adaptive Layer Normalization.
+
+    Instead of learning fixed scale (γ) and shift (β) parameters,
+    AdaLN generates them dynamically from a conditioning signal (timestep).
+
+    Formula:
+        y = LayerNorm(x) * (1 + scale) + shift
+
+        where scale, shift = Linear(t_emb)
+
+    The (1 + scale) formulation ensures that when scale ≈ 0 (at initialization),
+    the layer behaves like standard LayerNorm.
     """
-    
-    def __init__(self, hidden_dim: int = 1920, mlp_dim: int = 512):
+
+    def __init__(self, hidden_size: int, conditioning_size: int):
+        """
+        Args:
+            hidden_size: Dimension of input features
+            conditioning_size: Dimension of conditioning signal (t_emb)
+        """
+        super().__init__()
+        self.norm = nn.LayerNorm(hidden_size, elementwise_affine=False)
+
+        # Project conditioning to scale and shift
+        # Output: [scale, shift] each of dimension hidden_size
+        self.adaLN_modulation = nn.Sequential(
+            nn.SiLU(),
+            nn.Linear(conditioning_size, 2 * hidden_size),
+        )
+
+        # Initialize to output near-zero, so initially behaves like standard LayerNorm
+        nn.init.zeros_(self.adaLN_modulation[-1].weight)
+        nn.init.zeros_(self.adaLN_modulation[-1].bias)
+
+    def forward(self, x: torch.Tensor, t_emb: torch.Tensor) -> torch.Tensor:
+        """
+        Args:
+            x: [B, ..., hidden_size] input features
+            t_emb: [B, conditioning_size] timestep embedding
+
+        Returns:
+            [B, ..., hidden_size] modulated features
+        """
+        # Generate scale and shift from timestep
+        modulation = self.adaLN_modulation(t_emb)  # [B, 2 * hidden_size]
+        scale, shift = modulation.chunk(2, dim=-1)  # [B, hidden_size] each
+
+        # Expand for broadcasting if x has more dimensions
+        # x: [B, T, D] or [B, D], t_emb: [B, D]
+        while scale.dim() < x.dim():
+            scale = scale.unsqueeze(1)  # [B, 1, D]
+            shift = shift.unsqueeze(1)  # [B, 1, D]
+
+        # Apply adaptive normalization
+        x = self.norm(x)
+        x = x * (1 + scale) + shift
+
+        return x
+
+
+class AdaLNZero(nn.Module):
+    """
+    AdaLN-Zero: AdaLN with additional gate for residual connections.
+
+    Used in DiT for gating the output of attention and FFN blocks.
+
+    Formula:
+        y = LayerNorm(x) * (1 + scale) + shift
+        output = gate * y  (applied to block output before residual add)
+
+    The gate starts at 0, meaning the block initially does nothing,
+    allowing for stable training of deep networks.
+    """
+
+    def __init__(self, hidden_size: int, conditioning_size: int):
+        """
+        Args:
+            hidden_size: Dimension of input features
+            conditioning_size: Dimension of conditioning signal
+        """
+        super().__init__()
+        self.norm = nn.LayerNorm(hidden_size, elementwise_affine=False)
+
+        # Project conditioning to scale, shift, and gate
+        # Output: [scale, shift, gate] each of dimension hidden_size
+        self.adaLN_modulation = nn.Sequential(
+            nn.SiLU(),
+            nn.Linear(conditioning_size, 3 * hidden_size),
+        )
+
+        # Initialize to zero for stable training
+        nn.init.zeros_(self.adaLN_modulation[-1].weight)
+        nn.init.zeros_(self.adaLN_modulation[-1].bias)
+
+    def forward(
+        self, x: torch.Tensor, t_emb: torch.Tensor
+    ) -> Tuple[torch.Tensor, torch.Tensor]:
+        """
+        Args:
+            x: [B, ..., hidden_size] input features
+            t_emb: [B, conditioning_size] timestep embedding
+
+        Returns:
+            normalized: [B, ..., hidden_size] normalized and modulated features
+            gate: [B, ..., hidden_size] gate values for residual connection
+        """
+        modulation = self.adaLN_modulation(t_emb)  # [B, 3 * hidden_size]
+        scale, shift, gate = modulation.chunk(3, dim=-1)
+
+        # Expand for broadcasting
+        while scale.dim() < x.dim():
+            scale = scale.unsqueeze(1)
+            shift = shift.unsqueeze(1)
+            gate = gate.unsqueeze(1)
+
+        # Normalize and modulate
+        normalized = self.norm(x) * (1 + scale) + shift
+
+        return normalized, gate
+
+
+# =============================================================================
+# Helper Functions
+# =============================================================================
+
+
+def _init_weights(module: nn.Module):
+    """Initialize weights with truncated normal."""
+    for m in module.modules():
+        if isinstance(m, nn.Linear):
+            nn.init.trunc_normal_(m.weight, std=0.02)
+            if m.bias is not None:
+                nn.init.zeros_(m.bias)
+
+
+# =============================================================================
+# Head 1: MeanPool (Baseline, No Timestep)
+# =============================================================================
+
+
+class MeanPool(nn.Module):
+    """
+    Simplest baseline: Global mean pooling without timestep conditioning.
+
+    This serves as the lower bound for ablation studies.
+
+    Pipeline:
+        [B, T, H, W, D] → mean(T, H, W) → [B, D] → MLP → [B, 1]
+
+    Parameters: ~1.0M
+    """
+
+    def __init__(
+        self,
+        hidden_dim: int = 1920,
+        mlp_dim: int = 512,
+        dropout: float = 0.1,
+    ):
         super().__init__()
         self.classifier = nn.Sequential(
             nn.Linear(hidden_dim, mlp_dim),
             nn.LayerNorm(mlp_dim),
             nn.GELU(),
-            nn.Dropout(0.1),
+            nn.Dropout(dropout),
             nn.Linear(mlp_dim, mlp_dim // 2),
             nn.GELU(),
-            nn.Linear(mlp_dim // 2, 1)
+            nn.Linear(mlp_dim // 2, 1),
         )
-    
-    def forward(self, features: torch.Tensor, timestep: Optional[torch.Tensor] = None):
-        # [B, T, H, W, D] → [B, D]
+        _init_weights(self)
+
+    def forward(
+        self,
+        features: torch.Tensor,
+        timestep: Optional[torch.Tensor] = None,
+    ) -> torch.Tensor:
+        """
+        Args:
+            features: [B, T, H, W, D] DiT features
+            timestep: ignored
+
+        Returns:
+            [B, 1] logits
+        """
         if features.dim() == 5:
             x = features.mean(dim=(1, 2, 3))
         elif features.dim() == 3:
             x = features.mean(dim=1)
         else:
             x = features
-        
         return self.classifier(x)
 
-
-# =============================================================================
-# 2. MeanPool + Timestep: Add timestep conditioning
-# =============================================================================
-
-class MeanPoolTimestepHead(nn.Module):
-    """
-    Mean pooling + timestep conditioning
-    
-    测试假设: 知道噪声水平是否有帮助
-    
-    流程:
-        [B, T, H, W, D] → mean → [B, D]
-        timestep → embedding → [B, 128]
-        concat → [B, D+128] → MLP → [B, 1]
-    """
-    
-    def __init__(self, hidden_dim: int = 1920, mlp_dim: int = 512, t_dim: int = 128):
-        super().__init__()
-        self.t_dim = t_dim
-        
-        # Timestep MLP
-        self.t_mlp = nn.Sequential(
-            nn.Linear(t_dim, t_dim),
-            nn.SiLU(),
-            nn.Linear(t_dim, t_dim)
-        )
-        
-        # Classifier
-        self.classifier = nn.Sequential(
-            nn.Linear(hidden_dim + t_dim, mlp_dim),
-            nn.LayerNorm(mlp_dim),
-            nn.GELU(),
-            nn.Dropout(0.1),
-            nn.Linear(mlp_dim, mlp_dim // 2),
-            nn.GELU(),
-            nn.Linear(mlp_dim // 2, 1)
-        )
-    
-    def forward(self, features: torch.Tensor, timestep: torch.Tensor):
-        # Spatial-temporal pooling: [B, T, H, W, D] → [B, D]
-        if features.dim() == 5:
-            x = features.mean(dim=(1, 2, 3))
-        elif features.dim() == 3:
-            x = features.mean(dim=1)
-        else:
-            x = features
-        
-        # Timestep embedding
-        t_emb = get_timestep_embedding(timestep, self.t_dim)
-        t_emb = self.t_mlp(t_emb)
-        
-        # Concat and classify
-        x = torch.cat([x, t_emb], dim=-1)
-        return self.classifier(x)
+    def get_num_params(self) -> int:
+        return sum(p.numel() for p in self.parameters() if p.requires_grad)
 
 
 # =============================================================================
-# 3. Temporal Attention + Timestep: Bidirectional temporal modeling
+# Head 2: MeanPoolAdaLN (Mean Pooling + AdaLN)
 # =============================================================================
 
-class TemporalAttnHead(nn.Module):
+
+class MeanPoolAdaLN(nn.Module):
     """
-    时序注意力 (双向) + timestep conditioning
-    
-    测试假设: 显式建模帧间关系是否有帮助
-    
-    流程:
-        [B, T, H, W, D] → spatial_mean → [B, T, D]
-        → temporal self-attention (bidirectional)
-        → mean → [B, D]
-        + timestep → MLP → [B, 1]
+    Mean pooling with AdaLN timestep conditioning.
+
+    The timestep modulates the pooled features before classification,
+    allowing the classifier to interpret features differently based on noise level.
+
+    Pipeline:
+        [B, T, H, W, D] → mean(T, H, W) → [B, D]
+        timestep → TimestepEmbedder → [B, D]
+        AdaLN(features, t_emb) → MLP → [B, 1]
+
+    Parameters: ~1.5M
     """
-    
+
     def __init__(
-        self, 
-        hidden_dim: int = 1920, 
-        mlp_dim: int = 512, 
-        t_dim: int = 128,
-        num_heads: int = 8,
-        num_layers: int = 2
+        self,
+        hidden_dim: int = 1920,
+        mlp_dim: int = 512,
+        dropout: float = 0.1,
     ):
         super().__init__()
-        self.t_dim = t_dim
-        
-        # Project to smaller dim for attention
-        self.input_proj = nn.Linear(hidden_dim, mlp_dim)
-        
-        # Learnable temporal position embedding
-        self.pos_embed = nn.Parameter(torch.randn(1, 50, mlp_dim) * 0.02)
-        
-        # Temporal transformer (bidirectional)
-        encoder_layer = nn.TransformerEncoderLayer(
-            d_model=mlp_dim,
-            nhead=num_heads,
-            dim_feedforward=mlp_dim * 2,
-            dropout=0.1,
-            activation='gelu',
-            batch_first=True,
-            norm_first=True
-        )
-        self.temporal_attn = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
-        
-        # Timestep MLP
-        self.t_mlp = nn.Sequential(
-            nn.Linear(t_dim, t_dim),
-            nn.SiLU(),
-            nn.Linear(t_dim, t_dim)
-        )
-        
+        self.hidden_dim = hidden_dim
+
+        # Timestep embedding
+        self.t_embedder = TimestepEmbedder(hidden_dim)
+
+        # AdaLN for feature modulation
+        self.adaln = AdaLN(hidden_dim, hidden_dim)
+
         # Classifier
         self.classifier = nn.Sequential(
-            nn.Linear(mlp_dim + t_dim, mlp_dim),
+            nn.Linear(hidden_dim, mlp_dim),
             nn.GELU(),
-            nn.Linear(mlp_dim, 1)
+            nn.Dropout(dropout),
+            nn.Linear(mlp_dim, mlp_dim // 2),
+            nn.GELU(),
+            nn.Linear(mlp_dim // 2, 1),
         )
-    
-    def forward(self, features: torch.Tensor, timestep: torch.Tensor):
-        # Spatial pooling: [B, T, H, W, D] → [B, T, D]
+
+        _init_weights(self)
+
+    def forward(
+        self,
+        features: torch.Tensor,
+        timestep: torch.Tensor,
+    ) -> torch.Tensor:
+        """
+        Args:
+            features: [B, T, H, W, D] DiT features
+            timestep: [B] diffusion timesteps
+
+        Returns:
+            [B, 1] logits
+        """
+        # Global mean pooling: [B, T, H, W, D] → [B, D]
         if features.dim() == 5:
-            x = features.mean(dim=(2, 3))
+            x = features.mean(dim=(1, 2, 3))
+        elif features.dim() == 3:
+            x = features.mean(dim=1)
         else:
-            x = features  # assume already [B, T, D]
-        
-        B, T, D = x.shape
-        
-        # Project
-        x = self.input_proj(x)  # [B, T, mlp_dim]
-        
-        # Add position embedding
-        x = x + self.pos_embed[:, :T, :]
-        
-        # Temporal attention (bidirectional - no mask)
-        x = self.temporal_attn(x)  # [B, T, mlp_dim]
-        
-        # Temporal pooling
-        x = x.mean(dim=1)  # [B, mlp_dim]
-        
-        # Timestep
-        t_emb = get_timestep_embedding(timestep, self.t_dim)
-        t_emb = self.t_mlp(t_emb)
-        
-        # Classify
-        x = torch.cat([x, t_emb], dim=-1)
+            x = features
+
+        # Timestep embedding: [B] → [B, D]
+        t_emb = self.t_embedder(timestep)
+
+        # Apply AdaLN: modulate features based on timestep
+        x = self.adaln(x, t_emb)
+
         return self.classifier(x)
 
+    def get_num_params(self) -> int:
+        return sum(p.numel() for p in self.parameters() if p.requires_grad)
+
 
 # =============================================================================
-# 4. Causal Attention + Timestep: Causal temporal modeling
+# Head 3: TemporalAdaLN (Bidirectional Attention + AdaLN)
 # =============================================================================
 
-class CausalAttnHead(nn.Module):
+
+class TemporalAdaLN(nn.Module):
     """
-    因果时序注意力 + timestep conditioning
-    
-    测试假设: 物理因果性 (过去决定未来) 是否重要
-    
-    流程:
+    Bidirectional temporal attention with AdaLN timestep conditioning.
+
+    AdaLN is applied:
+        1. Before attention (modulates queries/keys/values)
+        2. Before FFN (modulates attention output)
+
+    This allows the attention mechanism to behave differently at different
+    noise levels, e.g., attending to different temporal patterns.
+
+    Pipeline:
         [B, T, H, W, D] → spatial_mean → [B, T, D]
-        → causal self-attention (每帧只能看过去)
-        → last_frame → [B, D]  (因果: 最后帧包含所有历史)
-        + timestep → MLP → [B, 1]
+        → proj → [B, T, d] + pos_embed
+        → AdaLN → Attention → AdaLN → FFN (× num_layers)
+        → mean(T) → [B, d] → classifier → [B, 1]
+
+    Parameters: ~3.0M
     """
-    
+
     def __init__(
-        self, 
-        hidden_dim: int = 1920, 
-        mlp_dim: int = 512, 
-        t_dim: int = 128,
+        self,
+        hidden_dim: int = 1920,
+        attn_dim: int = 512,
         num_heads: int = 8,
         num_layers: int = 2,
-        max_frames: int = 50
+        max_frames: int = 50,
+        dropout: float = 0.1,
     ):
         super().__init__()
-        self.t_dim = t_dim
-        
-        # Project
-        self.input_proj = nn.Linear(hidden_dim, mlp_dim)
-        
-        # Position embedding
-        self.pos_embed = nn.Parameter(torch.randn(1, max_frames, mlp_dim) * 0.02)
-        
-        # Causal self-attention
-        self.attn_layers = nn.ModuleList([
-            nn.MultiheadAttention(mlp_dim, num_heads, dropout=0.1, batch_first=True)
-            for _ in range(num_layers)
-        ])
-        self.ffn_layers = nn.ModuleList([
-            nn.Sequential(
-                nn.Linear(mlp_dim, mlp_dim * 2),
-                nn.GELU(),
-                nn.Dropout(0.1),
-                nn.Linear(mlp_dim * 2, mlp_dim),
-                nn.Dropout(0.1)
+        self.hidden_dim = hidden_dim
+        self.attn_dim = attn_dim
+        self.num_layers = num_layers
+
+        # Input projection
+        self.input_proj = nn.Linear(hidden_dim, attn_dim)
+
+        # Positional embedding
+        self.pos_embed = nn.Parameter(torch.randn(1, max_frames, attn_dim) * 0.02)
+
+        # Timestep embedding (projects to attn_dim for AdaLN)
+        self.t_embedder = TimestepEmbedder(attn_dim)
+
+        # Transformer layers with AdaLN
+        self.attn_layers = nn.ModuleList()
+        self.ffn_layers = nn.ModuleList()
+        self.adaln_attn = nn.ModuleList()  # AdaLN before attention
+        self.adaln_ffn = nn.ModuleList()  # AdaLN before FFN
+
+        for _ in range(num_layers):
+            # Multi-head attention
+            self.attn_layers.append(
+                nn.MultiheadAttention(
+                    embed_dim=attn_dim,
+                    num_heads=num_heads,
+                    dropout=dropout,
+                    batch_first=True,
+                )
             )
-            for _ in range(num_layers)
-        ])
-        self.norms1 = nn.ModuleList([nn.LayerNorm(mlp_dim) for _ in range(num_layers)])
-        self.norms2 = nn.ModuleList([nn.LayerNorm(mlp_dim) for _ in range(num_layers)])
-        
-        # Timestep
-        self.t_mlp = nn.Sequential(
-            nn.Linear(t_dim, t_dim),
-            nn.SiLU(),
-            nn.Linear(t_dim, t_dim)
-        )
-        
-        # Classifier
+
+            # Feed-forward network
+            self.ffn_layers.append(
+                nn.Sequential(
+                    nn.Linear(attn_dim, attn_dim * 4),
+                    nn.GELU(),
+                    nn.Dropout(dropout),
+                    nn.Linear(attn_dim * 4, attn_dim),
+                    nn.Dropout(dropout),
+                )
+            )
+
+            # AdaLN-Zero for gated residual connections
+            self.adaln_attn.append(AdaLNZero(attn_dim, attn_dim))
+            self.adaln_ffn.append(AdaLNZero(attn_dim, attn_dim))
+
+        # Final classifier
+        self.final_norm = nn.LayerNorm(attn_dim)
         self.classifier = nn.Sequential(
-            nn.Linear(mlp_dim + t_dim, mlp_dim),
+            nn.Linear(attn_dim, attn_dim // 2),
             nn.GELU(),
-            nn.Linear(mlp_dim, 1)
+            nn.Linear(attn_dim // 2, 1),
         )
-    
-    def _get_causal_mask(self, T: int, device: torch.device) -> torch.Tensor:
-        """下三角 mask: 每帧只能 attend 到过去 (包括自己)"""
-        mask = torch.triu(torch.ones(T, T, device=device), diagonal=1).bool()
-        return mask  # True = 不能看
-    
-    def forward(self, features: torch.Tensor, timestep: torch.Tensor):
-        # Spatial pooling
-        if features.dim() == 5:
-            x = features.mean(dim=(2, 3))  # [B, T, D]
-        else:
-            x = features
-        
-        B, T, D = x.shape
-        
-        # Project
-        x = self.input_proj(x)
-        
-        # Position
-        x = x + self.pos_embed[:, :T, :]
-        
-        # Causal mask
-        causal_mask = self._get_causal_mask(T, x.device)
-        
-        # Causal attention layers
-        for attn, ffn, norm1, norm2 in zip(
-            self.attn_layers, self.ffn_layers, self.norms1, self.norms2
-        ):
-            # Self-attention with causal mask
-            x_norm = norm1(x)
-            attn_out, _ = attn(x_norm, x_norm, x_norm, attn_mask=causal_mask)
-            x = x + attn_out
-            
-            # FFN
-            x = x + ffn(norm2(x))
-        
-        # Take last frame (contains all causal history)
-        x = x[:, -1, :]  # [B, mlp_dim]
-        
-        # Timestep
-        t_emb = get_timestep_embedding(timestep, self.t_dim)
-        t_emb = self.t_mlp(t_emb)
-        
-        # Classify
-        x = torch.cat([x, t_emb], dim=-1)
-        return self.classifier(x)
 
+        _init_weights(self)
 
-# =============================================================================
-# 5. MultiView + Timestep: Combine multiple pooling strategies
-# =============================================================================
+    def forward(
+        self,
+        features: torch.Tensor,
+        timestep: torch.Tensor,
+    ) -> torch.Tensor:
+        """
+        Args:
+            features: [B, T, H, W, D] DiT features
+            timestep: [B] diffusion timesteps
 
-class MultiViewHead(nn.Module):
-    """
-    多视角 pooling 组合 + timestep conditioning
-    
-    测试假设: 不同 pooling 捕捉互补信息
-    
-    组合:
-        - mean_pool: 全局统计
-        - max_pool: 最显著特征
-        - first_frame: 初始状态
-        - last_frame: 最终状态
-        - diff_pool: 动态变化 (帧间差分)
-        - causal_pool: 因果聚合
-    
-    流程:
-        [B, T, H, W, D] → spatial_mean → [B, T, D]
-        → 6 种 pooling → concat → [B, 6*D']
-        + timestep → MLP → [B, 1]
-    """
-    
-    def __init__(
-        self, 
-        hidden_dim: int = 1920, 
-        mlp_dim: int = 512, 
-        t_dim: int = 128,
-        num_heads: int = 8
-    ):
-        super().__init__()
-        self.t_dim = t_dim
-        self.mlp_dim = mlp_dim
-        
-        # Project each view to smaller dim
-        self.proj = nn.Linear(hidden_dim, mlp_dim)
-        
-        # Diff projection
-        self.diff_proj = nn.Linear(hidden_dim, mlp_dim)
-        
-        # Causal attention for causal pooling
-        self.causal_attn = nn.MultiheadAttention(
-            mlp_dim, num_heads, dropout=0.1, batch_first=True
-        )
-        self.causal_norm = nn.LayerNorm(mlp_dim)
-        
-        # Timestep
-        self.t_mlp = nn.Sequential(
-            nn.Linear(t_dim, t_dim),
-            nn.SiLU(),
-            nn.Linear(t_dim, t_dim)
-        )
-        
-        # 6 views * mlp_dim + t_dim
-        concat_dim = mlp_dim * 6 + t_dim
-        
-        # Classifier
-        self.classifier = nn.Sequential(
-            nn.Linear(concat_dim, mlp_dim),
-            nn.LayerNorm(mlp_dim),
-            nn.GELU(),
-            nn.Dropout(0.1),
-            nn.Linear(mlp_dim, mlp_dim // 2),
-            nn.GELU(),
-            nn.Linear(mlp_dim // 2, 1)
-        )
-    
-    def _get_causal_mask(self, T: int, device: torch.device) -> torch.Tensor:
-        return torch.triu(torch.ones(T, T, device=device), diagonal=1).bool()
-    
-    def forward(self, features: torch.Tensor, timestep: torch.Tensor):
+        Returns:
+            [B, 1] logits
+        """
         # Spatial pooling: [B, T, H, W, D] → [B, T, D]
         if features.dim() == 5:
             x = features.mean(dim=(2, 3))
         else:
             x = features
-        
+
         B, T, D = x.shape
-        
-        # ============================================
-        # 6 种 Pooling
-        # ============================================
-        
-        # 1. Mean pool: 全局统计
-        mean_pool = self.proj(x.mean(dim=1))  # [B, mlp_dim]
-        
-        # 2. Max pool: 最显著特征
-        max_pool = self.proj(x.max(dim=1)[0])  # [B, mlp_dim]
-        
-        # 3. First frame: 初始状态
-        first_frame = self.proj(x[:, 0, :])  # [B, mlp_dim]
-        
-        # 4. Last frame: 最终状态
-        last_frame = self.proj(x[:, -1, :])  # [B, mlp_dim]
-        
-        # 5. Diff pool: 动态变化
-        diff = x[:, 1:, :] - x[:, :-1, :]  # [B, T-1, D]
-        diff_pool = self.diff_proj(diff.mean(dim=1))  # [B, mlp_dim]
-        
-        # 6. Causal pool: 因果聚合
-        x_proj = self.proj(x)  # [B, T, mlp_dim]
+
+        # Project and add position: [B, T, D] → [B, T, attn_dim]
+        x = self.input_proj(x)
+        x = x + self.pos_embed[:, :T, :]
+
+        # Timestep embedding: [B] → [B, attn_dim]
+        t_emb = self.t_embedder(timestep)
+
+        # Apply transformer layers with AdaLN
+        for attn, ffn, adaln_a, adaln_f in zip(
+            self.attn_layers, self.ffn_layers, self.adaln_attn, self.adaln_ffn
+        ):
+            # AdaLN before attention
+            x_norm, gate_a = adaln_a(x, t_emb)
+            attn_out, _ = attn(x_norm, x_norm, x_norm)
+            x = x + gate_a * attn_out  # Gated residual
+
+            # AdaLN before FFN
+            x_norm, gate_f = adaln_f(x, t_emb)
+            ffn_out = ffn(x_norm)
+            x = x + gate_f * ffn_out  # Gated residual
+
+        # Temporal mean pooling: [B, T, d] → [B, d]
+        x = x.mean(dim=1)
+        x = self.final_norm(x)
+
+        return self.classifier(x)
+
+    def get_num_params(self) -> int:
+        return sum(p.numel() for p in self.parameters() if p.requires_grad)
+
+
+# =============================================================================
+# Head 4: CausalAdaLN (Causal Attention + AdaLN)
+# =============================================================================
+
+
+class CausalAdaLN(nn.Module):
+    """
+    Causal temporal attention with AdaLN timestep conditioning.
+
+    Each frame can only attend to itself and previous frames, respecting
+    physical causality (past determines future). AdaLN allows the attention
+    to interpret temporal patterns differently based on noise level.
+
+    Pipeline:
+        [B, T, H, W, D] → spatial_mean → [B, T, D]
+        → proj → [B, T, d] + pos_embed
+        → AdaLN → CausalAttention → AdaLN → FFN (× num_layers)
+        → take last frame → [B, d] → classifier → [B, 1]
+
+    Why last frame?
+        In causal attention, the last frame has attended to all previous frames,
+        so it contains a summary of the entire causal history.
+
+    Parameters: ~3.0M
+    """
+
+    def __init__(
+        self,
+        hidden_dim: int = 1920,
+        attn_dim: int = 512,
+        num_heads: int = 8,
+        num_layers: int = 2,
+        max_frames: int = 50,
+        dropout: float = 0.1,
+    ):
+        super().__init__()
+        self.hidden_dim = hidden_dim
+        self.attn_dim = attn_dim
+        self.num_layers = num_layers
+
+        # Input projection
+        self.input_proj = nn.Linear(hidden_dim, attn_dim)
+
+        # Positional embedding
+        self.pos_embed = nn.Parameter(torch.randn(1, max_frames, attn_dim) * 0.02)
+
+        # Timestep embedding
+        self.t_embedder = TimestepEmbedder(attn_dim)
+
+        # Transformer layers with AdaLN
+        self.attn_layers = nn.ModuleList()
+        self.ffn_layers = nn.ModuleList()
+        self.adaln_attn = nn.ModuleList()
+        self.adaln_ffn = nn.ModuleList()
+
+        for _ in range(num_layers):
+            self.attn_layers.append(
+                nn.MultiheadAttention(
+                    embed_dim=attn_dim,
+                    num_heads=num_heads,
+                    dropout=dropout,
+                    batch_first=True,
+                )
+            )
+
+            self.ffn_layers.append(
+                nn.Sequential(
+                    nn.Linear(attn_dim, attn_dim * 4),
+                    nn.GELU(),
+                    nn.Dropout(dropout),
+                    nn.Linear(attn_dim * 4, attn_dim),
+                    nn.Dropout(dropout),
+                )
+            )
+
+            self.adaln_attn.append(AdaLNZero(attn_dim, attn_dim))
+            self.adaln_ffn.append(AdaLNZero(attn_dim, attn_dim))
+
+        # Final layers
+        self.final_norm = nn.LayerNorm(attn_dim)
+        self.classifier = nn.Sequential(
+            nn.Linear(attn_dim, attn_dim // 2),
+            nn.GELU(),
+            nn.Linear(attn_dim // 2, 1),
+        )
+
+        _init_weights(self)
+
+    def _get_causal_mask(self, T: int, device: torch.device) -> torch.Tensor:
+        """
+        Create causal attention mask.
+
+        Returns:
+            [T, T] mask where True = cannot attend (upper triangular)
+        """
+        return torch.triu(torch.ones(T, T, device=device), diagonal=1).bool()
+
+    def forward(
+        self,
+        features: torch.Tensor,
+        timestep: torch.Tensor,
+    ) -> torch.Tensor:
+        """
+        Args:
+            features: [B, T, H, W, D] DiT features
+            timestep: [B] diffusion timesteps
+
+        Returns:
+            [B, 1] logits
+        """
+        # Spatial pooling: [B, T, H, W, D] → [B, T, D]
+        if features.dim() == 5:
+            x = features.mean(dim=(2, 3))
+        else:
+            x = features
+
+        B, T, D = x.shape
+
+        # Project and add position
+        x = self.input_proj(x)
+        x = x + self.pos_embed[:, :T, :]
+
+        # Timestep embedding
+        t_emb = self.t_embedder(timestep)
+
+        # Causal mask
         causal_mask = self._get_causal_mask(T, x.device)
-        causal_out, _ = self.causal_attn(x_proj, x_proj, x_proj, attn_mask=causal_mask)
-        causal_pool = self.causal_norm(causal_out[:, -1, :])  # [B, mlp_dim]
-        
-        # ============================================
-        # Timestep
-        # ============================================
-        t_emb = get_timestep_embedding(timestep, self.t_dim)
-        t_emb = self.t_mlp(t_emb)
-        
-        # ============================================
-        # Concat all views
-        # ============================================
-        combined = torch.cat([
-            mean_pool,      # 全局
-            max_pool,       # 显著
-            first_frame,    # 初始
-            last_frame,     # 最终
-            diff_pool,      # 动态
-            causal_pool,    # 因果
-            t_emb           # 噪声水平
-        ], dim=-1)  # [B, 6*mlp_dim + t_dim]
-        
+
+        # Apply transformer layers with AdaLN
+        for attn, ffn, adaln_a, adaln_f in zip(
+            self.attn_layers, self.ffn_layers, self.adaln_attn, self.adaln_ffn
+        ):
+            # AdaLN before causal attention
+            x_norm, gate_a = adaln_a(x, t_emb)
+            attn_out, _ = attn(x_norm, x_norm, x_norm, attn_mask=causal_mask)
+            x = x + gate_a * attn_out
+
+            # AdaLN before FFN
+            x_norm, gate_f = adaln_f(x, t_emb)
+            ffn_out = ffn(x_norm)
+            x = x + gate_f * ffn_out
+
+        # Take last frame (contains full causal history): [B, T, d] → [B, d]
+        x = x[:, -1, :]
+        x = self.final_norm(x)
+
+        return self.classifier(x)
+
+    def get_num_params(self) -> int:
+        return sum(p.numel() for p in self.parameters() if p.requires_grad)
+
+
+# =============================================================================
+# Head 5: MultiViewAdaLN (Multi-View Pooling + AdaLN)
+# =============================================================================
+
+
+class MultiViewAdaLN(nn.Module):
+    """
+    Multi-view pooling with AdaLN timestep conditioning.
+
+    Combines 6 complementary views of the video, each modulated by AdaLN
+    to interpret features appropriately for the current noise level.
+
+    Views:
+        1. mean_pool:   Global average (overall statistics)
+        2. max_pool:    Peak activations (salient features)
+        3. first_frame: Initial conditions
+        4. last_frame:  Final state
+        5. diff_pool:   Temporal dynamics (velocity/motion)
+        6. causal_pool: Causal aggregation (trajectory coherence)
+
+    Each view is processed with its own AdaLN, allowing timestep to affect
+    how each type of information is weighted.
+
+    Pipeline:
+        [B, T, H, W, D] → spatial_mean → [B, T, D]
+
+        ├── mean(T) → AdaLN → [B, d]
+        ├── max(T) → AdaLN → [B, d]
+        ├── first_frame → AdaLN → [B, d]
+        ├── last_frame → AdaLN → [B, d]
+        ├── diff_mean → AdaLN → [B, d]
+        └── causal_attn → AdaLN → [B, d]
+
+        concat → classifier → [B, 1]
+
+    Parameters: ~7.0M
+    """
+
+    def __init__(
+        self,
+        hidden_dim: int = 1920,
+        view_dim: int = 256,
+        attn_dim: int = 256,
+        num_heads: int = 4,
+        mlp_dim: int = 512,
+        max_frames: int = 50,
+        dropout: float = 0.1,
+    ):
+        super().__init__()
+        self.hidden_dim = hidden_dim
+        self.view_dim = view_dim
+        self.attn_dim = attn_dim
+
+        # Timestep embedding (shared across views)
+        self.t_embedder = TimestepEmbedder(view_dim)
+
+        # =============================================
+        # View projections (one for each pooling type)
+        # =============================================
+        self.mean_proj = nn.Linear(hidden_dim, view_dim)
+        self.max_proj = nn.Linear(hidden_dim, view_dim)
+        self.first_proj = nn.Linear(hidden_dim, view_dim)
+        self.last_proj = nn.Linear(hidden_dim, view_dim)
+        self.diff_proj = nn.Linear(hidden_dim, view_dim)
+
+        # =============================================
+        # AdaLN for each view (allows timestep-specific weighting)
+        # =============================================
+        self.adaln_mean = AdaLN(view_dim, view_dim)
+        self.adaln_max = AdaLN(view_dim, view_dim)
+        self.adaln_first = AdaLN(view_dim, view_dim)
+        self.adaln_last = AdaLN(view_dim, view_dim)
+        self.adaln_diff = AdaLN(view_dim, view_dim)
+        self.adaln_causal = AdaLN(attn_dim, view_dim)
+
+        # =============================================
+        # Causal attention branch
+        # =============================================
+        self.causal_proj = nn.Linear(hidden_dim, attn_dim)
+        self.pos_embed = nn.Parameter(torch.randn(1, max_frames, attn_dim) * 0.02)
+        self.causal_attn = nn.MultiheadAttention(
+            embed_dim=attn_dim,
+            num_heads=num_heads,
+            dropout=dropout,
+            batch_first=True,
+        )
+
+        # =============================================
+        # Final classifier
+        # =============================================
+        # 5 views (5 * view_dim) + causal (attn_dim)
+        total_dim = 5 * view_dim + attn_dim
+
+        self.classifier = nn.Sequential(
+            nn.LayerNorm(total_dim),
+            nn.Linear(total_dim, mlp_dim),
+            nn.GELU(),
+            nn.Dropout(dropout),
+            nn.Linear(mlp_dim, mlp_dim // 2),
+            nn.GELU(),
+            nn.Linear(mlp_dim // 2, 1),
+        )
+
+        _init_weights(self)
+
+    def _get_causal_mask(self, T: int, device: torch.device) -> torch.Tensor:
+        return torch.triu(torch.ones(T, T, device=device), diagonal=1).bool()
+
+    def forward(
+        self,
+        features: torch.Tensor,
+        timestep: torch.Tensor,
+    ) -> torch.Tensor:
+        """
+        Args:
+            features: [B, T, H, W, D] DiT features
+            timestep: [B] diffusion timesteps
+
+        Returns:
+            [B, 1] logits
+        """
+        # Spatial pooling: [B, T, H, W, D] → [B, T, D]
+        if features.dim() == 5:
+            x = features.mean(dim=(2, 3))
+        else:
+            x = features
+
+        B, T, D = x.shape
+
+        # Timestep embedding: [B] → [B, view_dim]
+        t_emb = self.t_embedder(timestep)
+
+        # =============================================
+        # Multi-view pooling with AdaLN
+        # =============================================
+
+        # View 1: Mean pool + AdaLN
+        mean_pool = self.mean_proj(x.mean(dim=1))  # [B, view_dim]
+        mean_pool = self.adaln_mean(mean_pool, t_emb)
+
+        # View 2: Max pool + AdaLN
+        max_pool = self.max_proj(x.max(dim=1)[0])  # [B, view_dim]
+        max_pool = self.adaln_max(max_pool, t_emb)
+
+        # View 3: First frame + AdaLN
+        first_pool = self.first_proj(x[:, 0, :])  # [B, view_dim]
+        first_pool = self.adaln_first(first_pool, t_emb)
+
+        # View 4: Last frame + AdaLN
+        last_pool = self.last_proj(x[:, -1, :])  # [B, view_dim]
+        last_pool = self.adaln_last(last_pool, t_emb)
+
+        # View 5: Temporal diff + AdaLN
+        diff = x[:, 1:, :] - x[:, :-1, :]  # [B, T-1, D]
+        diff_pool = self.diff_proj(diff.mean(dim=1))  # [B, view_dim]
+        diff_pool = self.adaln_diff(diff_pool, t_emb)
+
+        # View 6: Causal attention + AdaLN
+        causal_x = self.causal_proj(x)  # [B, T, attn_dim]
+        causal_x = causal_x + self.pos_embed[:, :T, :]
+        causal_mask = self._get_causal_mask(T, x.device)
+        causal_out, _ = self.causal_attn(
+            causal_x, causal_x, causal_x, attn_mask=causal_mask
+        )
+        causal_pool = causal_out[:, -1, :]  # [B, attn_dim]
+        causal_pool = self.adaln_causal(causal_pool, t_emb)
+
+        # =============================================
+        # Concatenate and classify
+        # =============================================
+        combined = torch.cat(
+            [
+                mean_pool,  # global statistics
+                max_pool,  # salient features
+                first_pool,  # initial state
+                last_pool,  # final state
+                diff_pool,  # dynamics
+                causal_pool,  # causal aggregation
+            ],
+            dim=-1,
+        )  # [B, 5*view_dim + attn_dim]
+
         return self.classifier(combined)
 
+    def get_num_params(self) -> int:
+        return sum(p.numel() for p in self.parameters() if p.requires_grad)
+
 
 # =============================================================================
-# Factory Function
+# Factory Functions
 # =============================================================================
 
-HEAD_REGISTRY = {
-    'mean': MeanPoolHead,
-    'mean_t': MeanPoolTimestepHead,
-    'temporal_t': TemporalAttnHead,
-    'causal_t': CausalAttnHead,
-    'multiview_t': MultiViewHead,
+HEAD_REGISTRY: Dict[str, type] = {
+    "mean": MeanPool,
+    "mean_adaln": MeanPoolAdaLN,
+    "temporal_adaln": TemporalAdaLN,
+    "causal_adaln": CausalAdaLN,
+    "multiview_adaln": MultiViewAdaLN,
 }
 
 
-def create_head(head_type: str, **kwargs) -> nn.Module:
-    """Create physics head by type."""
+def create_physics_head(
+    head_type: str = "multiview_adaln",
+    hidden_dim: int = 1920,
+    **kwargs,
+) -> nn.Module:
+    """
+    Factory function to create a physics discriminator head.
+
+    Args:
+        head_type: One of "mean", "mean_adaln", "temporal_adaln",
+                   "causal_adaln", "multiview_adaln"
+        hidden_dim: DiT hidden dimension (1920 for CogVideoX-2B)
+        **kwargs: Additional arguments for the head
+
+    Returns:
+        Physics head module
+
+    Example:
+        head = create_physics_head("causal_adaln", hidden_dim=1920)
+        logits = head(features, timestep)
+    """
     if head_type not in HEAD_REGISTRY:
-        raise ValueError(f"Unknown head: {head_type}. Choose from {list(HEAD_REGISTRY.keys())}")
-    return HEAD_REGISTRY[head_type](**kwargs)
+        raise ValueError(
+            f"Unknown head_type: '{head_type}'. Available: {list(HEAD_REGISTRY.keys())}"
+        )
+    return HEAD_REGISTRY[head_type](hidden_dim=hidden_dim, **kwargs)
 
 
-def get_num_params(model: nn.Module) -> int:
-    return sum(p.numel() for p in model.parameters() if p.requires_grad)
+def list_heads() -> List[str]:
+    """Return list of available head types."""
+    return list(HEAD_REGISTRY.keys())
+
+
+def get_head_info() -> Dict[str, Dict]:
+    """Return detailed information about each head."""
+    return {
+        "mean": {
+            "name": "MeanPool",
+            "description": "Global mean pooling baseline (no timestep)",
+            "timestep": "None",
+            "params": "~1.0M",
+            "expected_auc": "0.55-0.65",
+        },
+        "mean_adaln": {
+            "name": "MeanPoolAdaLN",
+            "description": "Mean pooling with AdaLN timestep modulation",
+            "timestep": "AdaLN",
+            "params": "~1.5M",
+            "expected_auc": "0.60-0.70",
+        },
+        "temporal_adaln": {
+            "name": "TemporalAdaLN",
+            "description": "Bidirectional attention with AdaLN",
+            "timestep": "AdaLN-Zero (every layer)",
+            "params": "~3.0M",
+            "expected_auc": "0.65-0.75",
+        },
+        "causal_adaln": {
+            "name": "CausalAdaLN",
+            "description": "Causal attention with AdaLN (physics-aware)",
+            "timestep": "AdaLN-Zero (every layer)",
+            "params": "~3.0M",
+            "expected_auc": "0.68-0.78",
+        },
+        "multiview_adaln": {
+            "name": "MultiViewAdaLN",
+            "description": "Multi-view pooling with AdaLN (most comprehensive)",
+            "timestep": "AdaLN (per view)",
+            "params": "~7.0M",
+            "expected_auc": "0.72-0.82",
+        },
+    }
 
 
 # =============================================================================
-# Test
+# Testing
 # =============================================================================
 
 if __name__ == "__main__":
-    print("=" * 70)
-    print("Physics Head Ablation Variants")
-    print("=" * 70)
-    
-    # Test input: [B, T, H, W, D]
+    print("=" * 80)
+    print("Physics Discriminator Heads with AdaLN Timestep Conditioning")
+    print("=" * 80)
+
+    # Test input
     B, T, H, W, D = 4, 13, 30, 45, 1920
     features = torch.randn(B, T, H, W, D)
-    timestep = torch.randint(200, 800, (B,))
-    
-    print(f"\nInput: features {features.shape}, timestep {timestep.shape}\n")
-    print(f"{'Head':<20} {'Params':>12} {'Output':>15} {'Needs timestep'}")
-    print("-" * 60)
-    
-    for name, HeadClass in HEAD_REGISTRY.items():
-        head = HeadClass()
-        
-        # Check if needs timestep
-        if name == 'mean':
-            out = head(features)
-        else:
-            out = head(features, timestep)
-        
-        needs_t = "No" if name == 'mean' else "Yes"
-        print(f"{name:<20} {get_num_params(head):>12,} {str(list(out.shape)):>15} {needs_t}")
-    
-    print("\n" + "=" * 70)
-    print("All heads tested successfully!")
-    print("=" * 70)
+    timestep = torch.tensor([200, 400, 600, 800])
 
+    print(f"\nTest Input:")
+    print(f"  Features: [{B}, {T}, {H}, {W}, {D}]")
+    print(f"  Timestep: {timestep.tolist()}")
+    print()
 
+    # Test each head
+    print(f"{'Head':<20} {'Params':>12} {'Timestep':>15} {'Output':>12}")
+    print("-" * 65)
+
+    for name in HEAD_REGISTRY:
+        head = create_physics_head(name, hidden_dim=D)
+        params = head.get_num_params()
+
+        with torch.no_grad():
+            if name == "mean":
+                out = head(features)
+                t_type = "None"
+            else:
+                out = head(features, timestep)
+                t_type = "AdaLN"
+
+        print(f"{name:<20} {params:>12,} {t_type:>15} {str(list(out.shape)):>12}")
+
+    print()
+    print("=" * 80)
+    print("AdaLN vs Concatenation Comparison:")
+    print("=" * 80)
+    print("""
+    Old (concat):
+        features ── attention ── concat([out, t_emb]) ── classifier
+                                        ↑
+        timestep ───────────────────────┘ (only at end)
+    
+    New (AdaLN):
+        features ── AdaLN(t) ── attention ── AdaLN(t) ── classifier
+                       ↑                        ↑
+        timestep ──────┴────────────────────────┘ (modulates every layer)
+    
+    Benefits of AdaLN:
+        1. Timestep affects entire computation, not just final decision
+        2. Different noise levels trigger different attention patterns
+        3. Matches DiT's design (our features come from DiT)
+        4. Gate mechanism (AdaLN-Zero) enables stable deep training
+    """)
+    print("=" * 80)
