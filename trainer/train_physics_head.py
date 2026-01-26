@@ -253,8 +253,14 @@ class PhysicsHeadTrainer:
             (logits, labels, timesteps) all as tensors
         """
         features = batch["features"].to(self.device)  # [B, T, D]
-        labels = batch["label"].to(self.device).float()  # [B]
-        timesteps = batch["timestep"].to(self.device)  # [B]
+        labels = batch["labels"].to(self.device).float()  # [B]
+        timesteps = batch["timesteps"]  # [B]
+        if isinstance(timesteps, list):
+            timesteps = torch.tensor(timesteps, device=self.device)
+        elif isinstance(timesteps, int):
+            timesteps = torch.tensor([timesteps], device=self.device)
+        else:
+            timesteps = timesteps.to(self.device)
 
         # Forward pass
         if self._requires_timestep():

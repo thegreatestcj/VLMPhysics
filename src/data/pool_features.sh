@@ -29,6 +29,8 @@ cd /users/$USER/repos/VLMPhysics
 INPUT_DIR="/users/$USER/scratch/physics/physion_features"
 OUTPUT_DIR="/users/$USER/scratch/physics/physion_features_pooled"
 
+mkdir -p "$OUTPUT_DIR"
+
 echo "Input: $INPUT_DIR"
 echo "Output: $OUTPUT_DIR"
 echo ""
@@ -48,7 +50,6 @@ echo ""
 python src/data/pool_features.py \
     --input_dir "$INPUT_DIR" \
     --output_dir "$OUTPUT_DIR" \
-    --num_frames 13
 
 echo ""
 echo "========================================"
