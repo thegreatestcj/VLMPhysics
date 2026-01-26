@@ -61,7 +61,7 @@ from tqdm import tqdm
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.data.feature_dataset import create_dataloaders
-from src.models.physics_head import create_head, list_heads
+from src.models.physics_head import create_physics_head, list_heads
 
 logging.basicConfig(
     level=logging.INFO,
@@ -470,7 +470,7 @@ def run_layer_ablation(
         hidden_dim = sample["features"].shape[-1]
 
         # Create model
-        model = create_head(head_type, hidden_dim=hidden_dim)
+        model = create_physics_head(head_type, hidden_dim=hidden_dim)
 
         # Train
         trainer = PhysicsHeadTrainer(
@@ -551,7 +551,7 @@ def run_head_ablation(
         hidden_dim = sample["features"].shape[-1]
 
         # Create model
-        model = create_head(head_type, hidden_dim=hidden_dim)
+        model = create_physics_head(head_type, hidden_dim=hidden_dim)
         logger.info(f"Model params: {sum(p.numel() for p in model.parameters()):,}")
 
         # Train
@@ -748,7 +748,7 @@ def main():
         logger.info(f"Hidden dim: {hidden_dim}")
 
         # Create model
-        model = create_head(args.head_type, hidden_dim=hidden_dim)
+        model = create_physics_head(args.head_type, hidden_dim=hidden_dim)
         num_params = sum(p.numel() for p in model.parameters())
         logger.info(f"Model params: {num_params:,}")
 

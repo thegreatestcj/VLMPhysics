@@ -164,19 +164,33 @@ class FeatureDataset(Dataset):
         # Ensure float32 for training
         features = features.float()
 
-        # Handle shape based on format
-        if self.is_pooled:
-            # Already pooled: [T, D] = [13, 1920]
-            # No additional processing needed
-            pass
-        else:
-            # Original format: [num_patches, D] = [17550, 1920]
-            # Need to pool spatial dimensions to get [T, D]
-            if features.dim() == 2:
+        # Pool features to [T, D] based on input shape
+        # Handles various formats: pooled, unpooled, or partially processed
+        ndim = features.dim()
+
+        if ndim == 2:
+            # Could be [T, D] (already pooled) or [num_patches, D] (unpooled)
+            if features.shape[0] == self.num_frames:
+                # Already pooled: [T, D]
+                pass
+            else:
+                # Unpooled: [num_patches, D] -> [T, D]
                 num_patches, hidden_dim = features.shape
                 spatial_patches = num_patches // self.num_frames
                 features = features.view(self.num_frames, spatial_patches, hidden_dim)
                 features = features.mean(dim=1)  # [T, D]
+
+        elif ndim == 3:
+            # [T, H*W, D] -> [T, D]
+            features = features.mean(dim=1)
+
+        elif ndim == 4:
+            # [T, H, W, D] -> [T, D]
+            features = features.mean(dim=(1, 2))
+
+        elif ndim == 5:
+            # [B, T, H, W, D] -> [T, D] (take first batch)
+            features = features[0].mean(dim=(1, 2))
 
         # Get label
         label = float(self.all_labels[video_id])
@@ -279,12 +293,23 @@ class FeatureDatasetRandomTimestep(Dataset):
         features = torch.load(feature_path, map_location="cpu", weights_only=True)
         features = features.float()
 
-        # Pool if needed
-        if not self.is_pooled and features.dim() == 2:
-            num_patches, hidden_dim = features.shape
-            spatial_patches = num_patches // self.num_frames
-            features = features.view(self.num_frames, spatial_patches, hidden_dim)
+        # Pool features to [T, D] based on input shape
+        ndim = features.dim()
+
+        if ndim == 2:
+            if features.shape[0] == self.num_frames:
+                pass  # Already pooled
+            else:
+                num_patches, hidden_dim = features.shape
+                spatial_patches = num_patches // self.num_frames
+                features = features.view(self.num_frames, spatial_patches, hidden_dim)
+                features = features.mean(dim=1)
+        elif ndim == 3:
             features = features.mean(dim=1)
+        elif ndim == 4:
+            features = features.mean(dim=(1, 2))
+        elif ndim == 5:
+            features = features[0].mean(dim=(1, 2))
 
         label = float(self.all_labels[video_id])
 

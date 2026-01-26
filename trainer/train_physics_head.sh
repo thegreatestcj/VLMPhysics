@@ -1,10 +1,9 @@
 #!/bin/bash
 #SBATCH --job-name=train_head
 #SBATCH --output=slurm/training/train_%j.out
-#SBATCH --time=03:00:00
+#SBATCH --time=10:00:00
 #SBATCH --partition=gpu
 #SBATCH --gres=gpu:1
-#SBATCH -C geforce3090
 #SBATCH --mem=32G
 #SBATCH --cpus-per-task=4
 
@@ -121,11 +120,11 @@ python -m trainer.train_physics_head \
     --num_epochs $NUM_EPOCHS \
     --lr $LR \
     --weight_decay $WEIGHT_DECAY \
-    --warmup_epochs $WARMUP_EPOCHS \
-    --val_ratio $VAL_RATIO \
+    # --warmup_epochs $WARMUP_EPOCHS \
+    # --val_ratio $VAL_RATIO \
     --early_stopping $EARLY_STOPPING \
     --num_workers $NUM_WORKERS \
-    --seed $SEED \
+    # --seed $SEED \
     --is_pooled \
     --output_dir ${OUTPUT_DIR}/head_ablation
 

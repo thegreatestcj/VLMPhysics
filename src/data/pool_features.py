@@ -1,134 +1,274 @@
 #!/usr/bin/env python3
 """
-Pool Features Script - Correctly pools spatial dimensions while preserving temporal.
+Pool Extracted DiT Features for Fast Training
 
-Input:  [17550, 1920] where 17550 = 13 × 30 × 45 (T × H × W)
-Output: [13, 1920] where we pool over H × W, keeping T
+Converts full spatial features [num_patches, D] to temporal-pooled [T, D].
+This reduces file size from ~67MB to ~100KB per file, making training 100x faster.
+
+The output directory structure mirrors the input structure exactly:
+    input:  physion_features/video_id/t200/layer_15.pt  (67MB, [17550, 1920])
+    output: physion_features_pooled/video_id/t200/layer_15.pt  (100KB, [13, 1920])
+
+This means minimal changes needed to feature_dataset.py - just point to the
+new directory.
+
+Usage:
+    python -m utils.pool_features \
+        --input_dir ~/scratch/physics/physion_features \
+        --output_dir ~/scratch/physics/physion_features_pooled
 """
 
-import torch
-from pathlib import Path
-from tqdm import tqdm
+import argparse
 import shutil
-import json
+import logging
+from pathlib import Path
+from typing import List, Optional
 
-# Constants from CogVideoX
-NUM_FRAMES = 13
-SPATIAL_H = 30
-SPATIAL_W = 45
-EXPECTED_SEQ = NUM_FRAMES * SPATIAL_H * SPATIAL_W  # 17550
+import torch
+from tqdm import tqdm
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+logger = logging.getLogger(__name__)
 
 
-def pool_features(input_dir: Path, output_dir: Path, layers: list = [15]):
-    """Pool spatial dimensions of extracted features."""
+def pool_spatial(features: torch.Tensor, num_frames: int = 13) -> torch.Tensor:
+    """
+    Pool spatial dimensions, keeping temporal dimension.
 
+    Args:
+        features: Full features with shape:
+            - [num_patches, D] where num_patches = T * H * W (2D)
+            - [T, H*W, D] (3D)
+            - [T, H, W, D] (4D)
+        num_frames: Number of frames (T), default 13 for CogVideoX
+
+    Returns:
+        Temporal features [T, D]
+    """
+    ndim = features.dim()
+
+    if ndim == 2:
+        # [num_patches, D] -> [T, spatial, D] -> [T, D]
+        num_patches, hidden_dim = features.shape
+        spatial_patches = num_patches // num_frames
+
+        # Reshape: [T*H*W, D] -> [T, H*W, D]
+        features = features.view(num_frames, spatial_patches, hidden_dim)
+
+        # Pool spatial: [T, H*W, D] -> [T, D]
+        pooled = features.mean(dim=1)
+
+    elif ndim == 3:
+        # [T, H*W, D] -> [T, D]
+        pooled = features.mean(dim=1)
+
+    elif ndim == 4:
+        # [T, H, W, D] -> [T, D]
+        # Pool over H and W dimensions (dim 1 and 2)
+        pooled = features.mean(dim=(1, 2))
+
+    elif ndim == 5:
+        # [B, T, H, W, D] -> [T, D] (take first batch)
+        # This shouldn't happen, but handle it gracefully
+        pooled = features[0].mean(dim=(1, 2))
+
+    else:
+        raise ValueError(f"Unexpected feature dim: {ndim}, shape: {features.shape}")
+
+    return pooled
+
+
+def process_single_file(
+    input_path: Path, output_path: Path, num_frames: int = 13, save_fp16: bool = True
+) -> bool:
+    """Process a single feature file."""
+    try:
+        # Load full features
+        features = torch.load(input_path, map_location="cpu", weights_only=True)
+
+        # Pool spatial dimensions
+        pooled = pool_spatial(features, num_frames=num_frames)
+
+        # Convert to fp16 to save space
+        if save_fp16:
+            pooled = pooled.half()
+
+        # Create output directory
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # Save pooled features
+        torch.save(pooled, output_path)
+
+        return True
+
+    except Exception as e:
+        logger.warning(f"Failed to process {input_path}: {e}")
+        return False
+
+
+def pool_features(
+    input_dir: str,
+    output_dir: str,
+    layers: Optional[List[int]] = None,
+    num_frames: int = 13,
+    save_fp16: bool = True,
+    skip_existing: bool = True,
+):
+    """
+    Pool all features in input directory.
+
+    Preserves the directory structure:
+        video_id/t{timestep}/layer_{layer}.pt
+    """
     input_dir = Path(input_dir)
     output_dir = Path(output_dir)
 
-    # Copy labels.json
-    if (input_dir / "labels.json").exists():
-        shutil.copy(input_dir / "labels.json", output_dir / "labels.json")
-        print(f"Copied labels.json")
+    logger.info(f"Input directory: {input_dir}")
+    logger.info(f"Output directory: {output_dir}")
+    logger.info(f"Layers to process: {layers if layers else 'all'}")
 
-    video_dirs = sorted([d for d in input_dir.iterdir() if d.is_dir()])
-    print(f"Found {len(video_dirs)} video directories")
+    # Copy labels.json if exists
+    for label_file in ["labels.json", "labels.csv"]:
+        src = input_dir / label_file
+        if src.exists():
+            dst = output_dir / label_file
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy(src, dst)
+            logger.info(f"Copied {label_file}")
 
-    success = 0
-    errors = []
+    # Find all video directories (folders directly under input_dir)
+    video_dirs = [
+        d
+        for d in sorted(input_dir.iterdir())
+        if d.is_dir() and not d.name.startswith(".")
+    ]
 
-    for video_dir in tqdm(video_dirs, desc="Pooling"):
+    logger.info(f"Found {len(video_dirs)} video directories")
+
+    # Counters
+    total_files = 0
+    processed_files = 0
+    skipped_files = 0
+    failed_files = 0
+
+    # Process each video
+    for video_dir in tqdm(video_dirs, desc="Processing videos"):
         video_id = video_dir.name
-        out_video_dir = output_dir / video_id
 
-        for t_dir in video_dir.iterdir():
-            if not t_dir.is_dir() or not t_dir.name.startswith("t"):
+        # Iterate over timestep directories (t200, t400, t600, t800)
+        for timestep_dir in sorted(video_dir.iterdir()):
+            if not timestep_dir.is_dir() or not timestep_dir.name.startswith("t"):
                 continue
 
-            out_t_dir = out_video_dir / t_dir.name
-            out_t_dir.mkdir(parents=True, exist_ok=True)
+            # Iterate over layer files
+            for layer_file in sorted(timestep_dir.glob("layer_*.pt")):
+                total_files += 1
 
-            for layer in layers:
-                in_file = t_dir / f"layer_{layer}.pt"
-                out_file = out_t_dir / f"layer_{layer}.pt"
+                # Extract layer number
+                layer_name = layer_file.stem  # "layer_15"
+                layer_num = int(layer_name.split("_")[1])
 
-                if not in_file.exists():
+                # Skip if not in requested layers
+                if layers and layer_num not in layers:
+                    skipped_files += 1
                     continue
 
-                try:
-                    feat = torch.load(in_file, map_location="cpu", weights_only=True)
+                # Construct output path (same structure)
+                rel_path = layer_file.relative_to(input_dir)
+                output_path = output_dir / rel_path
 
-                    # Handle batch dimension if present
-                    if feat.dim() == 3 and feat.shape[0] == 1:
-                        feat = feat.squeeze(0)  # [1, 17550, 1920] -> [17550, 1920]
+                # Skip if already exists
+                if skip_existing and output_path.exists():
+                    skipped_files += 1
+                    continue
 
-                    if feat.dim() != 2:
-                        errors.append(
-                            f"{video_id}/{t_dir.name}: unexpected dim {feat.dim()}"
-                        )
-                        continue
+                # Process file
+                success = process_single_file(
+                    input_path=layer_file,
+                    output_path=output_path,
+                    num_frames=num_frames,
+                    save_fp16=save_fp16,
+                )
 
-                    seq_len, hidden_dim = feat.shape
+                if success:
+                    processed_files += 1
+                else:
+                    failed_files += 1
 
-                    if seq_len != EXPECTED_SEQ:
-                        errors.append(
-                            f"{video_id}/{t_dir.name}: seq_len={seq_len}, expected {EXPECTED_SEQ}"
-                        )
-                        continue
+    # Summary
+    logger.info("=" * 50)
+    logger.info("Pooling complete!")
+    logger.info(f"  Total files found: {total_files}")
+    logger.info(f"  Processed: {processed_files}")
+    logger.info(f"  Skipped: {skipped_files}")
+    logger.info(f"  Failed: {failed_files}")
 
-                    # Reshape: [17550, 1920] -> [13, 30, 45, 1920]
-                    feat = feat.view(NUM_FRAMES, SPATIAL_H, SPATIAL_W, hidden_dim)
+    # Size comparison
+    if processed_files > 0:
+        sample_in = list(input_dir.glob("*/t200/layer_15.pt"))[:3]
+        sample_out = list(output_dir.glob("*/t200/layer_15.pt"))[:3]
 
-                    # Pool spatial only: [13, 30, 45, 1920] -> [13, 1920]
-                    pooled = feat.mean(dim=(1, 2))  # Mean over H and W
+        if sample_in and sample_out:
+            avg_in = sum(f.stat().st_size for f in sample_in) / len(sample_in)
+            avg_out = sum(f.stat().st_size for f in sample_out) / len(sample_out)
+            ratio = avg_in / avg_out if avg_out > 0 else 0
 
-                    # Verify shape
-                    assert pooled.shape == (NUM_FRAMES, hidden_dim), (
-                        f"Wrong shape: {pooled.shape}"
-                    )
+            logger.info(f"  Avg input size: {avg_in / 1024 / 1024:.1f} MB")
+            logger.info(f"  Avg output size: {avg_out / 1024:.1f} KB")
+            logger.info(f"  Compression: {ratio:.0f}x")
 
-                    # Save
-                    torch.save(pooled, out_file)
-                    success += 1
-
-                except Exception as e:
-                    errors.append(f"{video_id}/{t_dir.name}: {e}")
-
-    print(f"\n{'=' * 60}")
-    print(f"Pooling complete!")
-    print(f"  Success: {success}")
-    print(f"  Errors: {len(errors)}")
-
-    if errors[:10]:
-        print(f"\nSample errors:")
-        for e in errors[:10]:
-            print(f"  {e}")
-
-    # Save metadata
-    with open(output_dir / "metadata.json", "w") as f:
-        json.dump(
-            {
-                "source": str(input_dir),
-                "pooled_shape": [NUM_FRAMES, 1920],
-                "layers": layers,
-                "success_count": success,
-                "error_count": len(errors),
-            },
-            f,
-            indent=2,
-        )
+    logger.info("=" * 50)
 
 
-if __name__ == "__main__":
-    import argparse
+def main():
+    parser = argparse.ArgumentParser(
+        description="Pool DiT features for faster training"
+    )
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--input_dir", type=str, required=True)
-    parser.add_argument("--output_dir", type=str, required=True)
-    parser.add_argument("--layers", type=int, nargs="+", default=[5, 10, 15, 20, 25])
+    parser.add_argument(
+        "--input_dir",
+        type=str,
+        required=True,
+        help="Path to original features directory",
+    )
+    parser.add_argument(
+        "--output_dir", type=str, required=True, help="Path for pooled features output"
+    )
+    parser.add_argument(
+        "--layers",
+        type=int,
+        nargs="+",
+        default=None,
+        help="Layers to process (default: all)",
+    )
+    parser.add_argument(
+        "--num_frames",
+        type=int,
+        default=13,
+        help="Number of frames in video (default: 13)",
+    )
+    parser.add_argument(
+        "--fp32", action="store_true", help="Save as float32 instead of float16"
+    )
+    parser.add_argument(
+        "--overwrite", action="store_true", help="Overwrite existing files"
+    )
+
     args = parser.parse_args()
 
     pool_features(
-        Path(args.input_dir),
-        Path(args.output_dir),
-        args.layers,
+        input_dir=args.input_dir,
+        output_dir=args.output_dir,
+        layers=args.layers,
+        num_frames=args.num_frames,
+        save_fp16=not args.fp32,
+        skip_existing=not args.overwrite,
     )
+
+
+if __name__ == "__main__":
+    main()
