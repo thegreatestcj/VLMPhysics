@@ -65,7 +65,7 @@ DEFAULT_LAYER=15
 # Default head for layer ablation
 DEFAULT_HEAD="temporal_simple"
 
-HEAD_TYPE = "mean causal_simple temporal_simple multiview_simple"
+HEAD_TYPE="mean causal_simple temporal_simple multiview_simple"
 
 
 # ============================================================
@@ -158,19 +158,15 @@ python -m trainer.train_physics_head \
     --feature_dir $FEATURE_DIR \
     --label_file $LABEL_FILE \
     --ablation layers \
-    --layers 5 10 15 20 25 \
+    --layers 8 9 10 11 12 13 14 \
     --head_type $DEFAULT_HEAD \
     --batch_size $BATCH_SIZE \
     --num_epochs $NUM_EPOCHS \
     --lr $LR \
     --weight_decay $WEIGHT_DECAY \
-    # --warmup_epochs $WARMUP_EPOCHS \
-    # --val_ratio $VAL_RATIO \
     --early_stopping $EARLY_STOPPING \
     --num_workers $NUM_WORKERS \
-    --is_pooled \
-    # --seed $SEED \
-    --output_dir ${OUTPUT_DIR}/layer_ablation
+    --is_pooled
 
 echo ""
 echo "Layer ablation completed: $(date)"
@@ -178,8 +174,45 @@ echo ""
 
 
 # ============================================================
-# Ablation Study 3: Timestep Configuration (Optional)
-# 
+# Ablation Study 3: Seed Variance Test
+#
+# Tests model stability across different random seeds:
+#   - Seed 42:   Standard seed
+#   - Seed 123:  Alternative seed
+#   - Seed 456:  Alternative seed
+#   - Seed 789:  Alternative seed
+#   - Seed 1024: Alternative seed
+#
+# Expected time: ~15 minutes (5 seeds)
+# ============================================================
+
+# echo "========================================"
+# echo "Running SEED ABLATION..."
+# echo "========================================"
+
+# python -m trainer.train_physics_head \
+#     --feature_dir $FEATURE_DIR \
+#     --label_file $LABEL_FILE \
+#     --ablation seeds \
+#     --seeds 42 123 456 789 1024 \
+#     --layer $DEFAULT_LAYER \
+#     --head_type $DEFAULT_HEAD \
+#     --batch_size $BATCH_SIZE \
+#     --num_epochs $NUM_EPOCHS \
+#     --lr $LR \
+#     --weight_decay $WEIGHT_DECAY \
+#     --early_stopping $EARLY_STOPPING \
+#     --num_workers $NUM_WORKERS \
+#     --is_pooled
+
+# echo ""
+# echo "Seed ablation completed: $(date)"
+# echo ""
+
+
+# ============================================================
+# Ablation Study 4: Timestep Configuration (Optional)
+#
 # Compares training with different noise levels:
 #   - t=200: Low noise (clearer features)
 #   - t=400: Medium-low noise
@@ -241,7 +274,8 @@ du -sh ${OUTPUT_DIR}/*
 echo ""
 echo "========================================"
 echo "Next steps:"
-echo "  1. Check results: cat ${OUTPUT_DIR}/head_ablation/head_ablation_summary.json"
-echo "  2. Compare AUC scores in the summary tables above"
-echo "  3. Select best head and layer for final model"
+echo "  1. Check results: cat ${OUTPUT_DIR}/training/physics_head/*/summary.json"
+echo "  2. Check seed results: cat ${OUTPUT_DIR}/training/seed/*/summary.json"
+echo "  3. Compare AUC scores in the summary tables above"
+echo "  4. Select best head, layer, and verify seed stability"
 echo "========================================"

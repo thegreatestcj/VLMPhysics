@@ -75,6 +75,7 @@ EXP_TYPES = {
     "generation": "generation/phygenbench",
     "evaluation": "evaluation/phygenbench",
     "training": "training/physics_head",
+    "training_seed": "training/seed",
     "figures": "figures",
 }
 
@@ -304,6 +305,7 @@ class ResultsManager:
             "heads": "",
             "layers": "layer_",
             "timesteps": "t_",
+            "seeds": "seed_",
         }
 
         prefix = prefix_map.get(ablation_type, "")
@@ -551,7 +553,7 @@ def create_training_manager(
 
     Args:
         exp_name: Experiment name (e.g., "single_run")
-        ablation_type: Type of ablation ("heads", "layers", "timesteps")
+        ablation_type: Type of ablation ("heads", "layers", "timesteps", "seeds")
         results_base: Base results directory
         **kwargs: Additional config parameters (layer, head_type, lr, etc.)
 
@@ -564,8 +566,11 @@ def create_training_manager(
     else:
         full_name = exp_name
 
+    # Use separate directory for seed ablation
+    exp_type = "training_seed" if ablation_type == "seeds" else "training"
+
     return ResultsManager(
-        exp_type="training",
+        exp_type=exp_type,
         exp_name=full_name,
         results_base=results_base,
         ablation_type=ablation_type,

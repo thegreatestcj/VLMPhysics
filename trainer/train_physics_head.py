@@ -555,6 +555,98 @@ def run_head_ablation(
     return results
 
 
+def run_seed_ablation(
+    feature_dir: str,
+    layer: int,
+    output_dir: str,
+    seeds: List[int],
+    head_type: str = "mean",
+    is_pooled: bool = True,
+    **train_kwargs,
+) -> Dict[int, Dict]:
+    """Run ablation over different random seeds."""
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    results = {}
+
+    for seed in seeds:
+        logger.info(f"\n{'=' * 60}")
+        logger.info(f"Seed Ablation: seed={seed}")
+        logger.info(f"{'=' * 60}")
+
+        # Set seed for reproducibility
+        torch.manual_seed(seed)
+        np.random.seed(seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed(seed)
+            torch.cuda.manual_seed_all(seed)
+
+        seed_output = output_dir / f"seed_{seed}"
+
+        train_loader, val_loader = create_dataloaders(
+            feature_dir=feature_dir,
+            layer=layer,
+            is_pooled=is_pooled,
+            **{
+                k: v
+                for k, v in train_kwargs.items()
+                if k in ["batch_size", "num_workers", "timesteps"]
+            },
+        )
+
+        sample = next(iter(train_loader))
+        hidden_dim = sample["features"].shape[-1]
+
+        model = create_physics_head(head_type, hidden_dim=hidden_dim)
+
+        trainer = PhysicsHeadTrainer(
+            model=model,
+            train_loader=train_loader,
+            val_loader=val_loader,
+            output_dir=str(seed_output),
+            head_type=head_type,
+            **{
+                k: v
+                for k, v in train_kwargs.items()
+                if k not in ["batch_size", "num_workers", "timesteps"]
+            },
+        )
+
+        results[seed] = trainer.train()
+
+    # Summary
+    logger.info(f"\n{'=' * 60}")
+    logger.info("SEED ABLATION SUMMARY")
+    logger.info(f"{'=' * 60}")
+
+    aucs = [res["best_auc"] for res in results.values()]
+    mean_auc = np.mean(aucs)
+    std_auc = np.std(aucs)
+
+    for seed, res in sorted(results.items()):
+        logger.info(
+            f"Seed {seed:3d}: AUC={res['best_auc']:.4f} (epoch {res['best_epoch']})"
+        )
+    logger.info(f"{'=' * 60}")
+    logger.info(f"Mean AUC: {mean_auc:.4f} +/- {std_auc:.4f}")
+
+    # Save summary
+    summary = {
+        "per_seed": {
+            seed: {"best_auc": r["best_auc"], "best_epoch": r["best_epoch"]}
+            for seed, r in results.items()
+        },
+        "mean_auc": mean_auc,
+        "std_auc": std_auc,
+        "num_seeds": len(seeds),
+    }
+    with open(output_dir / "summary.json", "w") as f:
+        json.dump(summary, f, indent=2)
+
+    return results
+
+
 # =============================================================================
 # Main
 # =============================================================================
@@ -606,10 +698,11 @@ Output directory structure:
 
     # Ablation arguments
     parser.add_argument(
-        "--ablation", type=str, choices=["layers", "heads", None], default=None
+        "--ablation", type=str, choices=["layers", "heads", "seeds", None], default=None
     )
     parser.add_argument("--layers", type=int, nargs="+", default=[5, 10, 15, 20, 25])
     parser.add_argument("--heads", type=str, nargs="+", default=None)
+    parser.add_argument("--seeds", type=int, nargs="+", default=[42, 123, 456, 789, 1024])
 
     # Output (new structure)
     parser.add_argument("--exp-name", type=str, default="train", help="Experiment name")
@@ -690,6 +783,17 @@ Output directory structure:
             layer=args.layer,
             output_dir=output_dir,
             head_types=args.heads,
+            is_pooled=args.is_pooled,
+            **train_kwargs,
+        )
+
+    elif args.ablation == "seeds":
+        run_seed_ablation(
+            feature_dir=args.feature_dir,
+            layer=args.layer,
+            output_dir=output_dir,
+            seeds=args.seeds,
+            head_type=args.head_type,
             is_pooled=args.is_pooled,
             **train_kwargs,
         )

@@ -56,45 +56,45 @@ MAX_VIDEOS=9999
 # Run extraction
 # ============================================================
 
-echo ""
-echo "Configuration:"
-echo "  Data dir: $DATA_DIR"
-echo "  Output dir: $OUTPUT_DIR"
-echo "  Layers: $LAYERS"
-echo "  Timesteps: $TIMESTEPS"
-echo "  Max videos: $MAX_VIDEOS"
-echo ""
+# echo ""
+# echo "Configuration:"
+# echo "  Data dir: $DATA_DIR"
+# echo "  Output dir: $OUTPUT_DIR"
+# echo "  Layers: $LAYERS"
+# echo "  Timesteps: $TIMESTEPS"
+# echo "  Max videos: $MAX_VIDEOS"
+# echo ""
 
 
-echo "Extracting..."
-# Run extraction for shard 0
-python -m src.models.extract_features \
-    --data_dir data/Physion \
-    --output_dir /users/$USER/scratch/physics/physion_features \
-    --layers 5 10 15 20 25 \
-    --timesteps 200 400 600 800 \
-    --use-8bit \
-    --shard 0 \
-    --num_shards 2
-
-
-echo "=========================================="
-echo "Shard 0 completed: $(date)"
-echo "=========================================="
-
-# # Run extraction for shard 1
+# echo "Extracting..."
+# # Run extraction for shard 0
 # python -m src.models.extract_features \
 #     --data_dir data/Physion \
 #     --output_dir /users/$USER/scratch/physics/physion_features \
-#     --layers 5 10 15 20 25 \
+#     --layers 8 9 11 12 13 14 \
 #     --timesteps 200 400 600 800 \
 #     --use-8bit \
-#     --shard 1 \
+#     --shard 0 \
 #     --num_shards 2
 
+
 # echo "=========================================="
-# echo "Shard 1 completed: $(date)"
+# echo "Shard 0 completed: $(date)"
 # echo "=========================================="
+
+# Run extraction for shard 1
+python -m src.models.extract_features \
+    --data_dir data/Physion \
+    --output_dir /users/$USER/scratch/physics/physion_features \
+    --layers 8 9 11 12 13 14 \
+    --timesteps 200 400 600 800 \
+    --use-8bit \
+    --shard 1 \
+    --num_shards 2
+
+echo "=========================================="
+echo "Shard 1 completed: $(date)"
+echo "=========================================="
 
 echo ""
 echo "Output directory contents:"
