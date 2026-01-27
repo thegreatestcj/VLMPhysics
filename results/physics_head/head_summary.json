@@ -1,0 +1,26 @@
+{
+  "mean": {
+    "best_auc": 0.7613956766917293,
+    "best_epoch": 21
+  },
+  "mean_concat": {
+    "best_auc": 0.7317156527682842,
+    "best_epoch": 16
+  },
+  "mean_adaln_lite": {
+    "best_auc": 0.7604985475051265,
+    "best_epoch": 38
+  },
+  "causal_1layer": {
+    "best_auc": 0.7504912850307586,
+    "best_epoch": 22
+  },
+  "causal_concat": {
+    "best_auc": 0.7432074504442926,
+    "best_epoch": 21
+  },
+  "causal_simple": {
+    "best_auc": 0.7504485645933014,
+    "best_epoch": 30
+  }
+}

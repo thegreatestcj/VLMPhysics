@@ -242,8 +242,9 @@ class PhysicsHeadTrainer:
 
     def _requires_timestep(self) -> bool:
         """Check if head requires timestep input."""
-        # Heads with '_t' suffix need timestep
-        return self.head_type.endswith("_t") or "timestep" in self.head_type.lower()
+        # Only "mean" (MeanPool) doesn't require timestep
+        # All other heads use timestep in some form (AdaLN, concat, bias, etc.)
+        return self.head_type != "mean"
 
     def _forward(self, batch: Dict) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         """

@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=train_head
 #SBATCH --output=slurm/training/train_%j.out
-#SBATCH --time=10:00:00
+#SBATCH --time=1:00:00
 #SBATCH --partition=gpu
 #SBATCH --gres=gpu:1
 #SBATCH --mem=32G
@@ -42,7 +42,7 @@ cd ~/repos/VLMPhysics
 # ============================================================
 
 # Feature directory (from extract_features.py)
-FEATURE_DIR="/users/$USER/scratch/physics/physion_features"
+FEATURE_DIR="/users/$USER/scratch/physics/physion_features_pooled"
 LABEL_FILE="${FEATURE_DIR}/labels.json"
 
 # Output directory (small files, can be in project folder)
@@ -63,7 +63,7 @@ SEED=42
 DEFAULT_LAYER=15
 
 # Default head for layer ablation
-DEFAULT_HEAD="causal_adaln"
+DEFAULT_HEAD="mean"
 
 # ============================================================
 # Print configuration
@@ -115,6 +115,7 @@ python -m trainer.train_physics_head \
     --feature_dir $FEATURE_DIR \
     --label_file $LABEL_FILE \
     --ablation heads \
+    --heads mean mean_concat mean_adaln_lite causal_1layer causal_concat causal_simple \
     --layer $DEFAULT_LAYER \
     --batch_size $BATCH_SIZE \
     --num_epochs $NUM_EPOCHS \
@@ -160,12 +161,12 @@ echo ""
 #     --num_epochs $NUM_EPOCHS \
 #     --lr $LR \
 #     --weight_decay $WEIGHT_DECAY \
-#     --warmup_epochs $WARMUP_EPOCHS \
-#     --val_ratio $VAL_RATIO \
+#     # --warmup_epochs $WARMUP_EPOCHS \
+#     # --val_ratio $VAL_RATIO \
 #     --early_stopping $EARLY_STOPPING \
 #     --num_workers $NUM_WORKERS \
 #     --is_pooled \
-#     --seed $SEED \
+#     # --seed $SEED \
 #     --output_dir ${OUTPUT_DIR}/layer_ablation
 
 # echo ""

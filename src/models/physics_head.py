@@ -960,6 +960,674 @@ def get_head_info() -> Dict[str, Dict]:
             "expected_auc": "0.72-0.82",
         },
     }
+    
+# =============================================================================
+# SIMPLIFIED VARIANTS (append to physics_head.py)
+# =============================================================================
+#
+# These are lighter versions of the underperforming heads for ablation study.
+# Add these classes BEFORE the HEAD_REGISTRY definition.
+#
+# Results context:
+#   - mean:           AUC 0.749, epoch 28 (BEST - ignores timestep!)
+#   - mean_adaln:     AUC 0.610, epoch 1  (immediate overfit)
+#   - causal_adaln:   AUC 0.664, epoch 3  (early overfit)
+#
+# Key insight: MeanPool ignores timestep entirely and performs best,
+# suggesting DiT features already encode timestep information implicitly.
+# =============================================================================
+
+
+# =============================================================================
+# Simplified MeanPoolAdaLN Variants
+# =============================================================================
+
+
+class MeanPoolConcat(nn.Module):
+    """
+    MeanPool with timestep CONCATENATION instead of AdaLN.
+
+    Hypothesis: AdaLN's multiplicative modulation (scale * x + shift) may cause
+    training instability. Simple concat is more stable.
+
+    Changes from MeanPoolAdaLN:
+        - Remove AdaLN entirely
+        - Concat [features, t_emb] before classifier
+        - Smaller t_emb dimension (256 vs 1920)
+
+    Pipeline:
+        [B, T, H, W, D] → mean → [B, D]
+        timestep → embed → [B, 256]
+        concat → [B, D+256] → MLP → [B, 1]
+
+    Parameters: ~1.2M (vs ~1.5M original)
+    """
+
+    def __init__(
+        self,
+        hidden_dim: int = 1920,
+        t_dim: int = 256,
+        mlp_dim: int = 512,
+        dropout: float = 0.1,
+    ):
+        super().__init__()
+        self.hidden_dim = hidden_dim
+        self.t_dim = t_dim
+
+        # Timestep embedding (smaller dimension)
+        self.t_embedder = TimestepEmbedder(t_dim, t_dim)
+
+        # Classifier takes concatenated input
+        self.classifier = nn.Sequential(
+            nn.LayerNorm(hidden_dim + t_dim),
+            nn.Linear(hidden_dim + t_dim, mlp_dim),
+            nn.GELU(),
+            nn.Dropout(dropout),
+            nn.Linear(mlp_dim, mlp_dim // 2),
+            nn.GELU(),
+            nn.Linear(mlp_dim // 2, 1),
+        )
+
+        _init_weights(self)
+
+    def forward(
+        self,
+        features: torch.Tensor,
+        timestep: torch.Tensor,
+    ) -> torch.Tensor:
+        # Mean pool: [B, T, H, W, D] → [B, D]
+        if features.dim() == 5:
+            x = features.mean(dim=(1, 2, 3))
+        elif features.dim() == 3:
+            x = features.mean(dim=1)
+        else:
+            x = features
+
+        # Timestep embedding
+        t_emb = self.t_embedder(timestep)  # [B, t_dim]
+
+        # Simple concat (no multiplicative interaction)
+        x = torch.cat([x, t_emb], dim=-1)  # [B, D + t_dim]
+
+        return self.classifier(x)
+
+    def get_num_params(self) -> int:
+        return sum(p.numel() for p in self.parameters() if p.requires_grad)
+
+
+class MeanPoolBias(nn.Module):
+    """
+    MeanPool with timestep as BIAS only (no scale).
+
+    Hypothesis: The scale parameter in AdaLN may cause gradient instability.
+    Using only shift/bias is more stable.
+
+    Changes from MeanPoolAdaLN:
+        - Remove scale, keep only shift: x = norm(x) + bias(t_emb)
+        - This is additive, not multiplicative
+
+    Pipeline:
+        [B, T, H, W, D] → mean → [B, D]
+        timestep → embed → bias [B, D]
+        norm(x) + bias → MLP → [B, 1]
+
+    Parameters: ~1.0M
+    """
+
+    def __init__(
+        self,
+        hidden_dim: int = 1920,
+        mlp_dim: int = 512,
+        dropout: float = 0.1,
+    ):
+        super().__init__()
+        self.hidden_dim = hidden_dim
+
+        # Timestep → bias (same dim as features for addition)
+        self.t_embedder = TimestepEmbedder(256, hidden_dim)
+
+        # LayerNorm (no affine, we add bias from timestep)
+        self.norm = nn.LayerNorm(hidden_dim, elementwise_affine=False)
+
+        # Classifier
+        self.classifier = nn.Sequential(
+            nn.Linear(hidden_dim, mlp_dim),
+            nn.GELU(),
+            nn.Dropout(dropout),
+            nn.Linear(mlp_dim, mlp_dim // 2),
+            nn.GELU(),
+            nn.Linear(mlp_dim // 2, 1),
+        )
+
+        _init_weights(self)
+        # Initialize bias projection to near-zero for stable start
+        nn.init.zeros_(self.t_embedder.mlp[-1].weight)
+        nn.init.zeros_(self.t_embedder.mlp[-1].bias)
+
+    def forward(
+        self,
+        features: torch.Tensor,
+        timestep: torch.Tensor,
+    ) -> torch.Tensor:
+        # Mean pool
+        if features.dim() == 5:
+            x = features.mean(dim=(1, 2, 3))
+        elif features.dim() == 3:
+            x = features.mean(dim=1)
+        else:
+            x = features
+
+        # Timestep as bias only (additive, not multiplicative)
+        bias = self.t_embedder(timestep)  # [B, D]
+        x = self.norm(x) + bias  # No scale!
+
+        return self.classifier(x)
+
+    def get_num_params(self) -> int:
+        return sum(p.numel() for p in self.parameters() if p.requires_grad)
+
+
+class MeanPoolAdaLNLite(nn.Module):
+    """
+    MeanPoolAdaLN with REDUCED capacity.
+
+    Hypothesis: Original AdaLN has too many parameters for ~20k samples,
+    causing immediate overfitting at epoch 1.
+
+    Changes from MeanPoolAdaLN:
+        - Project to smaller dim first: 1920 → 256
+        - Smaller AdaLN parameters
+        - Simpler classifier
+
+    Parameters: ~0.5M (vs ~1.5M original)
+    """
+
+    def __init__(
+        self,
+        hidden_dim: int = 1920,
+        proj_dim: int = 256,
+        mlp_dim: int = 256,
+        dropout: float = 0.1,
+    ):
+        super().__init__()
+        self.hidden_dim = hidden_dim
+        self.proj_dim = proj_dim
+
+        # Project to smaller dimension first
+        self.input_proj = nn.Linear(hidden_dim, proj_dim)
+
+        # Timestep embedding (smaller)
+        self.t_embedder = TimestepEmbedder(proj_dim, proj_dim)
+
+        # Lightweight AdaLN
+        self.norm = nn.LayerNorm(proj_dim, elementwise_affine=False)
+        self.adaln_proj = nn.Linear(proj_dim, proj_dim * 2)  # scale + shift
+        nn.init.zeros_(self.adaln_proj.weight)
+        nn.init.zeros_(self.adaln_proj.bias)
+
+        # Simpler classifier
+        self.classifier = nn.Sequential(
+            nn.Linear(proj_dim, mlp_dim),
+            nn.GELU(),
+            nn.Dropout(dropout),
+            nn.Linear(mlp_dim, 1),
+        )
+
+        _init_weights(self)
+
+    def forward(
+        self,
+        features: torch.Tensor,
+        timestep: torch.Tensor,
+    ) -> torch.Tensor:
+        # Mean pool
+        if features.dim() == 5:
+            x = features.mean(dim=(1, 2, 3))
+        elif features.dim() == 3:
+            x = features.mean(dim=1)
+        else:
+            x = features
+
+        # Project to smaller dim
+        x = self.input_proj(x)  # [B, proj_dim]
+
+        # Timestep embedding
+        t_emb = self.t_embedder(timestep)
+
+        # Lightweight AdaLN
+        scale, shift = self.adaln_proj(t_emb).chunk(2, dim=-1)
+        x = self.norm(x) * (1 + scale) + shift
+
+        return self.classifier(x)
+
+    def get_num_params(self) -> int:
+        return sum(p.numel() for p in self.parameters() if p.requires_grad)
+
+
+# =============================================================================
+# Simplified CausalAdaLN Variants
+# =============================================================================
+
+
+class CausalAdaLN1Layer(nn.Module):
+    """
+    CausalAdaLN with SINGLE transformer layer.
+
+    Hypothesis: 2 layers with 4 AdaLN modules is too complex for limited data.
+
+    Changes from CausalAdaLN:
+        - num_layers: 2 → 1
+        - AdaLN modules: 4 → 2
+
+    Parameters: ~1.5M (vs ~3.0M original)
+    """
+
+    def __init__(
+        self,
+        hidden_dim: int = 1920,
+        attn_dim: int = 512,
+        num_heads: int = 8,
+        max_frames: int = 50,
+        dropout: float = 0.1,
+    ):
+        super().__init__()
+        self.hidden_dim = hidden_dim
+        self.attn_dim = attn_dim
+
+        # Input projection
+        self.input_proj = nn.Linear(hidden_dim, attn_dim)
+        self.pos_embed = nn.Parameter(torch.randn(1, max_frames, attn_dim) * 0.02)
+
+        # Timestep embedding
+        self.t_embedder = TimestepEmbedder(attn_dim, attn_dim)
+
+        # Single attention layer
+        self.attn = nn.MultiheadAttention(
+            embed_dim=attn_dim,
+            num_heads=num_heads,
+            dropout=dropout,
+            batch_first=True,
+        )
+
+        # Single FFN
+        self.ffn = nn.Sequential(
+            nn.Linear(attn_dim, attn_dim * 4),
+            nn.GELU(),
+            nn.Dropout(dropout),
+            nn.Linear(attn_dim * 4, attn_dim),
+            nn.Dropout(dropout),
+        )
+
+        # AdaLN-Zero for single layer (2 instead of 4)
+        self.adaln_attn = AdaLNZero(attn_dim, attn_dim)
+        self.adaln_ffn = AdaLNZero(attn_dim, attn_dim)
+
+        # Classifier
+        self.final_norm = nn.LayerNorm(attn_dim)
+        self.classifier = nn.Sequential(
+            nn.Linear(attn_dim, attn_dim // 2),
+            nn.GELU(),
+            nn.Linear(attn_dim // 2, 1),
+        )
+
+        _init_weights(self)
+
+    def _get_causal_mask(self, T: int, device: torch.device) -> torch.Tensor:
+        return torch.triu(torch.ones(T, T, device=device), diagonal=1).bool()
+
+    def forward(
+        self,
+        features: torch.Tensor,
+        timestep: torch.Tensor,
+    ) -> torch.Tensor:
+        # Spatial pool: [B, T, H, W, D] → [B, T, D]
+        if features.dim() == 5:
+            x = features.mean(dim=(2, 3))
+        else:
+            x = features
+
+        B, T, D = x.shape
+
+        # Project and add position
+        x = self.input_proj(x)
+        x = x + self.pos_embed[:, :T, :]
+
+        # Timestep embedding
+        t_emb = self.t_embedder(timestep)
+
+        # Causal mask
+        causal_mask = self._get_causal_mask(T, x.device)
+
+        # Single layer with AdaLN-Zero
+        x_norm, gate_a = self.adaln_attn(x, t_emb)
+        attn_out, _ = self.attn(x_norm, x_norm, x_norm, attn_mask=causal_mask)
+        x = x + gate_a * attn_out
+
+        x_norm, gate_f = self.adaln_ffn(x, t_emb)
+        x = x + gate_f * self.ffn(x_norm)
+
+        # Take last frame (contains causal history)
+        x = x[:, -1, :]
+        x = self.final_norm(x)
+
+        return self.classifier(x)
+
+    def get_num_params(self) -> int:
+        return sum(p.numel() for p in self.parameters() if p.requires_grad)
+
+
+class CausalConcat(nn.Module):
+    """
+    Causal attention WITHOUT AdaLN, timestep CONCAT at the end.
+
+    Hypothesis: AdaLN + causal mask combination is overly restrictive.
+    Separating them may help.
+
+    Changes from CausalAdaLN:
+        - Remove all AdaLN modules
+        - Use standard Pre-LN transformer
+        - Concat timestep only at the final classifier
+
+    Parameters: ~2.0M
+    """
+
+    def __init__(
+        self,
+        hidden_dim: int = 1920,
+        attn_dim: int = 512,
+        t_dim: int = 256,
+        num_heads: int = 8,
+        num_layers: int = 2,
+        max_frames: int = 50,
+        dropout: float = 0.1,
+    ):
+        super().__init__()
+        self.hidden_dim = hidden_dim
+        self.attn_dim = attn_dim
+        self.num_layers = num_layers
+
+        # Input projection
+        self.input_proj = nn.Linear(hidden_dim, attn_dim)
+        self.pos_embed = nn.Parameter(torch.randn(1, max_frames, attn_dim) * 0.02)
+
+        # Timestep embedding (for concat at end)
+        self.t_embedder = TimestepEmbedder(t_dim, t_dim)
+
+        # Standard transformer layers (NO AdaLN)
+        self.layers = nn.ModuleList()
+        for _ in range(num_layers):
+            self.layers.append(
+                nn.ModuleDict(
+                    {
+                        "norm1": nn.LayerNorm(attn_dim),
+                        "attn": nn.MultiheadAttention(
+                            embed_dim=attn_dim,
+                            num_heads=num_heads,
+                            dropout=dropout,
+                            batch_first=True,
+                        ),
+                        "norm2": nn.LayerNorm(attn_dim),
+                        "ffn": nn.Sequential(
+                            nn.Linear(attn_dim, attn_dim * 4),
+                            nn.GELU(),
+                            nn.Dropout(dropout),
+                            nn.Linear(attn_dim * 4, attn_dim),
+                            nn.Dropout(dropout),
+                        ),
+                    }
+                )
+            )
+
+        # Classifier (concat timestep here)
+        self.final_norm = nn.LayerNorm(attn_dim)
+        self.classifier = nn.Sequential(
+            nn.Linear(attn_dim + t_dim, attn_dim // 2),
+            nn.GELU(),
+            nn.Linear(attn_dim // 2, 1),
+        )
+
+        _init_weights(self)
+
+    def _get_causal_mask(self, T: int, device: torch.device) -> torch.Tensor:
+        return torch.triu(torch.ones(T, T, device=device), diagonal=1).bool()
+
+    def forward(
+        self,
+        features: torch.Tensor,
+        timestep: torch.Tensor,
+    ) -> torch.Tensor:
+        # Spatial pool
+        if features.dim() == 5:
+            x = features.mean(dim=(2, 3))
+        else:
+            x = features
+
+        B, T, D = x.shape
+
+        # Project and add position
+        x = self.input_proj(x)
+        x = x + self.pos_embed[:, :T, :]
+
+        # Causal mask
+        causal_mask = self._get_causal_mask(T, x.device)
+
+        # Standard Pre-LN transformer (no AdaLN)
+        for layer in self.layers:
+            # Attention
+            x_norm = layer["norm1"](x)
+            attn_out, _ = layer["attn"](x_norm, x_norm, x_norm, attn_mask=causal_mask)
+            x = x + attn_out
+
+            # FFN
+            x_norm = layer["norm2"](x)
+            x = x + layer["ffn"](x_norm)
+
+        # Take last frame
+        x = x[:, -1, :]
+        x = self.final_norm(x)
+
+        # Concat timestep at the end only
+        t_emb = self.t_embedder(timestep)
+        x = torch.cat([x, t_emb], dim=-1)
+
+        return self.classifier(x)
+
+    def get_num_params(self) -> int:
+        return sum(p.numel() for p in self.parameters() if p.requires_grad)
+
+
+class CausalSimple(nn.Module):
+    """
+    MINIMAL causal architecture: 1 layer, small dims, no AdaLN.
+
+    The simplest possible causal model to establish a baseline.
+
+    Parameters: ~0.8M (vs ~3.0M original)
+    """
+
+    def __init__(
+        self,
+        hidden_dim: int = 1920,
+        attn_dim: int = 256,
+        t_dim: int = 128,
+        num_heads: int = 4,
+        max_frames: int = 50,
+        dropout: float = 0.1,
+    ):
+        super().__init__()
+
+        # Input projection (to smaller dim)
+        self.input_proj = nn.Linear(hidden_dim, attn_dim)
+        self.pos_embed = nn.Parameter(torch.randn(1, max_frames, attn_dim) * 0.02)
+
+        # Single attention layer
+        self.norm = nn.LayerNorm(attn_dim)
+        self.attn = nn.MultiheadAttention(
+            embed_dim=attn_dim,
+            num_heads=num_heads,
+            dropout=dropout,
+            batch_first=True,
+        )
+
+        # Timestep embedding (small)
+        self.t_embedder = TimestepEmbedder(t_dim, t_dim)
+
+        # Simple classifier
+        self.classifier = nn.Sequential(
+            nn.LayerNorm(attn_dim + t_dim),
+            nn.Linear(attn_dim + t_dim, 128),
+            nn.GELU(),
+            nn.Linear(128, 1),
+        )
+
+        _init_weights(self)
+
+    def _get_causal_mask(self, T: int, device: torch.device) -> torch.Tensor:
+        return torch.triu(torch.ones(T, T, device=device), diagonal=1).bool()
+
+    def forward(
+        self,
+        features: torch.Tensor,
+        timestep: torch.Tensor,
+    ) -> torch.Tensor:
+        # Spatial pool
+        if features.dim() == 5:
+            x = features.mean(dim=(2, 3))
+        else:
+            x = features
+
+        B, T, D = x.shape
+
+        # Project to smaller dim
+        x = self.input_proj(x)
+        x = x + self.pos_embed[:, :T, :]
+
+        # Single causal attention
+        x_norm = self.norm(x)
+        causal_mask = self._get_causal_mask(T, x.device)
+        attn_out, _ = self.attn(x_norm, x_norm, x_norm, attn_mask=causal_mask)
+        x = x + attn_out
+
+        # Take last frame + concat timestep
+        x = x[:, -1, :]
+        t_emb = self.t_embedder(timestep)
+        x = torch.cat([x, t_emb], dim=-1)
+
+        return self.classifier(x)
+
+    def get_num_params(self) -> int:
+        return sum(p.numel() for p in self.parameters() if p.requires_grad)
+
+
+# =============================================================================
+# UPDATE HEAD_REGISTRY (replace the existing one)
+# =============================================================================
+
+HEAD_REGISTRY: Dict[str, type] = {
+    # Original heads
+    "mean": MeanPool,
+    "mean_adaln": MeanPoolAdaLN,
+    "temporal_adaln": TemporalAdaLN,
+    "causal_adaln": CausalAdaLN,
+    "multiview_adaln": MultiViewAdaLN,
+    # Simplified variants for ablation
+    "mean_concat": MeanPoolConcat,
+    "mean_bias": MeanPoolBias,
+    "mean_adaln_lite": MeanPoolAdaLNLite,
+    "causal_1layer": CausalAdaLN1Layer,
+    "causal_concat": CausalConcat,
+    "causal_simple": CausalSimple,
+}
+
+
+# =============================================================================
+# UPDATE get_head_info() (replace the existing one)
+# =============================================================================
+
+
+def get_head_info() -> Dict[str, Dict]:
+    """Return detailed information about each head."""
+    return {
+        # Original heads
+        "mean": {
+            "name": "MeanPool",
+            "description": "Global mean pooling (BEST - ignores timestep!)",
+            "timestep": "None",
+            "params": "~1.0M",
+            "auc": "0.749",
+        },
+        "mean_adaln": {
+            "name": "MeanPoolAdaLN",
+            "description": "Mean pooling with AdaLN timestep modulation",
+            "timestep": "AdaLN",
+            "params": "~1.5M",
+            "auc": "0.610 (epoch 1)",
+        },
+        "temporal_adaln": {
+            "name": "TemporalAdaLN",
+            "description": "Bidirectional attention with AdaLN",
+            "timestep": "AdaLN-Zero (every layer)",
+            "params": "~3.0M",
+            "auc": "0.725",
+        },
+        "causal_adaln": {
+            "name": "CausalAdaLN",
+            "description": "Causal attention with AdaLN",
+            "timestep": "AdaLN-Zero (every layer)",
+            "params": "~3.0M",
+            "auc": "0.664 (epoch 3)",
+        },
+        "multiview_adaln": {
+            "name": "MultiViewAdaLN",
+            "description": "Multi-view pooling with AdaLN",
+            "timestep": "AdaLN (per view)",
+            "params": "~7.0M",
+            "auc": "0.727",
+        },
+        # Simplified variants
+        "mean_concat": {
+            "name": "MeanPoolConcat",
+            "description": "Mean pooling + timestep CONCAT (no AdaLN)",
+            "timestep": "Concat",
+            "params": "~1.2M",
+            "base": "mean_adaln",
+        },
+        "mean_bias": {
+            "name": "MeanPoolBias",
+            "description": "Mean pooling + timestep as BIAS only (no scale)",
+            "timestep": "Bias only",
+            "params": "~1.0M",
+            "base": "mean_adaln",
+        },
+        "mean_adaln_lite": {
+            "name": "MeanPoolAdaLNLite",
+            "description": "MeanPoolAdaLN with reduced capacity",
+            "timestep": "AdaLN (lite)",
+            "params": "~0.5M",
+            "base": "mean_adaln",
+        },
+        "causal_1layer": {
+            "name": "CausalAdaLN1Layer",
+            "description": "CausalAdaLN with 1 layer instead of 2",
+            "timestep": "AdaLN-Zero",
+            "params": "~1.5M",
+            "base": "causal_adaln",
+        },
+        "causal_concat": {
+            "name": "CausalConcat",
+            "description": "Causal attention + timestep CONCAT (no AdaLN)",
+            "timestep": "Concat at end",
+            "params": "~2.0M",
+            "base": "causal_adaln",
+        },
+        "causal_simple": {
+            "name": "CausalSimple",
+            "description": "Minimal causal: 1 layer, small dims, no AdaLN",
+            "timestep": "Concat",
+            "params": "~0.8M",
+            "base": "causal_adaln",
+        },
+    }
 
 
 # =============================================================================
