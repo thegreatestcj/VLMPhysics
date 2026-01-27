@@ -1438,29 +1438,45 @@ class CausalConcat(nn.Module):
 
 class CausalSimple(nn.Module):
     """
-    MINIMAL causal architecture: 1 layer, small dims, no AdaLN.
+    MINIMAL causal temporal attention, NO timestep.
 
-    The simplest possible causal model to establish a baseline.
+    Key differences from CausalSimple:
+        - Completely removes timestep embedding and concat
+        - Even simpler classifier
 
-    Parameters: ~0.8M (vs ~3.0M original)
+    Design rationale:
+        - Causal mask enforces temporal ordering (physics causality)
+        - Last frame aggregates all previous frames
+        - No timestep needed if features already encode it
+
+    Pipeline:
+        [B, T, H, W, D] → spatial_mean → [B, T, D]
+        → proj → [B, T, 256] + pos_embed
+        → LayerNorm → Causal Attention (lower triangular mask)
+        → take last frame → [B, 256] → classifier → [B, 1]
+
+    Parameters: ~0.55M (vs ~0.8M CausalSimple with timestep)
     """
 
     def __init__(
         self,
         hidden_dim: int = 1920,
         attn_dim: int = 256,
-        t_dim: int = 128,
         num_heads: int = 4,
         max_frames: int = 50,
         dropout: float = 0.1,
     ):
         super().__init__()
+        self.hidden_dim = hidden_dim
+        self.attn_dim = attn_dim
 
-        # Input projection (to smaller dim)
+        # Input projection
         self.input_proj = nn.Linear(hidden_dim, attn_dim)
+
+        # Positional embedding
         self.pos_embed = nn.Parameter(torch.randn(1, max_frames, attn_dim) * 0.02)
 
-        # Single attention layer
+        # Single causal attention layer
         self.norm = nn.LayerNorm(attn_dim)
         self.attn = nn.MultiheadAttention(
             embed_dim=attn_dim,
@@ -1469,13 +1485,10 @@ class CausalSimple(nn.Module):
             batch_first=True,
         )
 
-        # Timestep embedding (small)
-        self.t_embedder = TimestepEmbedder(t_dim, t_dim)
-
-        # Simple classifier
+        # Simple classifier (NO timestep)
         self.classifier = nn.Sequential(
-            nn.LayerNorm(attn_dim + t_dim),
-            nn.Linear(attn_dim + t_dim, 128),
+            nn.LayerNorm(attn_dim),
+            nn.Linear(attn_dim, 128),
             nn.GELU(),
             nn.Linear(128, 1),
         )
@@ -1483,14 +1496,27 @@ class CausalSimple(nn.Module):
         _init_weights(self)
 
     def _get_causal_mask(self, T: int, device: torch.device) -> torch.Tensor:
+        """
+        Create causal attention mask (upper triangular = True = masked).
+
+        Frame i can only attend to frames 0..i (itself and past).
+        """
         return torch.triu(torch.ones(T, T, device=device), diagonal=1).bool()
 
     def forward(
         self,
         features: torch.Tensor,
-        timestep: torch.Tensor,
+        timestep: Optional[torch.Tensor] = None,  # ignored
     ) -> torch.Tensor:
-        # Spatial pool
+        """
+        Args:
+            features: [B, T, H, W, D] or [B, T, D] DiT features
+            timestep: ignored (kept for API compatibility)
+
+        Returns:
+            [B, 1] logits
+        """
+        # Spatial pooling
         if features.dim() == 5:
             x = features.mean(dim=(2, 3))
         else:
@@ -1498,84 +1524,271 @@ class CausalSimple(nn.Module):
 
         B, T, D = x.shape
 
-        # Project to smaller dim
+        # Project and add position
         x = self.input_proj(x)
         x = x + self.pos_embed[:, :T, :]
 
-        # Single causal attention
+        # Causal attention
         x_norm = self.norm(x)
         causal_mask = self._get_causal_mask(T, x.device)
         attn_out, _ = self.attn(x_norm, x_norm, x_norm, attn_mask=causal_mask)
         x = x + attn_out
 
-        # Take last frame + concat timestep
-        x = x[:, -1, :]
-        t_emb = self.t_embedder(timestep)
-        x = torch.cat([x, t_emb], dim=-1)
+        # Take LAST frame (contains causal aggregation of all frames)
+        x = x[:, -1, :]  # [B, attn_dim]
 
         return self.classifier(x)
 
     def get_num_params(self) -> int:
         return sum(p.numel() for p in self.parameters() if p.requires_grad)
-    
+
+
 class TemporalSimple(nn.Module):
     """
-    MINIMAL temporal architecture: 1 layer, small dims, no AdaLN.
+    MINIMAL bidirectional temporal attention, NO timestep.
 
-    vs TemporalAdaLN (~3.0M):
-        - layers: 2 -> 1
-        - attn_dim: 512 -> 256
-        - no FFN
-        - no AdaLN
+    Design rationale:
+        - Single attention layer (vs 2 in TemporalAdaLN)
+        - Small dimensions (256 vs 512)
+        - No FFN layer
+        - No timestep embedding at all
+        - Mean pooling over temporal dimension
 
-    Parameters: ~0.8M
+    Pipeline:
+        [B, T, H, W, D] → spatial_mean → [B, T, D]
+        → proj → [B, T, 256] + pos_embed
+        → LayerNorm → Bidirectional Attention
+        → mean(T) → [B, 256] → classifier → [B, 1]
+
+    Parameters: ~0.6M (vs ~3.0M TemporalAdaLN)
     """
 
     def __init__(
         self,
         hidden_dim: int = 1920,
         attn_dim: int = 256,
-        t_dim: int = 128,
         num_heads: int = 4,
         max_frames: int = 50,
         dropout: float = 0.1,
     ):
         super().__init__()
+        self.hidden_dim = hidden_dim
+        self.attn_dim = attn_dim
+
+        # Input projection to smaller dimension
         self.input_proj = nn.Linear(hidden_dim, attn_dim)
+
+        # Learnable positional embedding
         self.pos_embed = nn.Parameter(torch.randn(1, max_frames, attn_dim) * 0.02)
 
-        # Single bidirectional attention (NO causal mask)
+        # Single bidirectional attention layer
         self.norm = nn.LayerNorm(attn_dim)
         self.attn = nn.MultiheadAttention(
-            embed_dim=attn_dim, num_heads=num_heads, dropout=dropout, batch_first=True
+            embed_dim=attn_dim,
+            num_heads=num_heads,
+            dropout=dropout,
+            batch_first=True,
         )
 
-        self.t_embedder = TimestepEmbedder(t_dim, t_dim)
+        # Simple classifier (no timestep input)
         self.classifier = nn.Sequential(
-            nn.LayerNorm(attn_dim + t_dim),
-            nn.Linear(attn_dim + t_dim, 128),
+            nn.LayerNorm(attn_dim),
+            nn.Linear(attn_dim, 128),
             nn.GELU(),
             nn.Linear(128, 1),
         )
 
-    def forward(self, features, timestep):
+        _init_weights(self)
+
+    def forward(
+        self,
+        features: torch.Tensor,
+        timestep: Optional[torch.Tensor] = None,  # ignored
+    ) -> torch.Tensor:
+        """
+        Args:
+            features: [B, T, H, W, D] or [B, T, D] DiT features
+            timestep: ignored (kept for API compatibility)
+
+        Returns:
+            [B, 1] logits
+        """
+        # Spatial pooling: [B, T, H, W, D] → [B, T, D]
         if features.dim() == 5:
-            x = features.mean(dim=(2, 3))  # spatial pool
+            x = features.mean(dim=(2, 3))
         else:
             x = features
+
         B, T, D = x.shape
 
-        x = self.input_proj(x) + self.pos_embed[:, :T, :]
-        x_norm = self.norm(x)
-        attn_out, _ = self.attn(x_norm, x_norm, x_norm)  # bidirectional
-        x = x + attn_out
+        # Project to smaller dimension and add positional embedding
+        x = self.input_proj(x)  # [B, T, attn_dim]
+        x = x + self.pos_embed[:, :T, :]
 
-        # Temporal mean pooling (vs causal's last frame)
+        # Single bidirectional attention (NO causal mask)
+        x_norm = self.norm(x)
+        attn_out, _ = self.attn(x_norm, x_norm, x_norm)
+        x = x + attn_out  # residual connection
+
+        # Temporal mean pooling: [B, T, attn_dim] → [B, attn_dim]
         x = x.mean(dim=1)
-        t_emb = self.t_embedder(timestep)
-        x = torch.cat([x, t_emb], dim=-1)
 
         return self.classifier(x)
+
+    def get_num_params(self) -> int:
+        return sum(p.numel() for p in self.parameters() if p.requires_grad)
+    
+class MultiViewSimple(nn.Module):
+    """
+    Multi-view pooling WITHOUT timestep, combining:
+        1. Mean pooling (global statistics)
+        2. Temporal attention (bidirectional context)
+        3. Causal attention (physics-aware aggregation)
+
+    Design rationale:
+        - Each view captures different aspects of video features
+        - Mean: overall feature magnitude
+        - Temporal: frame interactions (bidirectional)
+        - Causal: temporal ordering (unidirectional, physics causality)
+        - No timestep: DiT features already encode noise level
+
+    Pipeline:
+        [B, T, H, W, D] → spatial_mean → [B, T, D]
+
+        View 1 (Mean):     mean(T) → proj → [B, d]
+        View 2 (Temporal): bidirectional_attn → mean(T) → [B, d]
+        View 3 (Causal):   causal_attn → last_frame → [B, d]
+
+        concat([v1, v2, v3]) → [B, 3d] → classifier → [B, 1]
+
+    Parameters: ~1.2M (vs ~7.0M MultiViewAdaLN)
+    """
+
+    def __init__(
+        self,
+        hidden_dim: int = 1920,
+        view_dim: int = 256,
+        num_heads: int = 4,
+        max_frames: int = 50,
+        dropout: float = 0.1,
+    ):
+        super().__init__()
+        self.hidden_dim = hidden_dim
+        self.view_dim = view_dim
+
+        # ===========================================
+        # View 1: Mean Pooling (simplest baseline)
+        # ===========================================
+        self.mean_proj = nn.Linear(hidden_dim, view_dim)
+
+        # ===========================================
+        # View 2: Temporal (Bidirectional) Attention
+        # ===========================================
+        self.temporal_proj = nn.Linear(hidden_dim, view_dim)
+        self.temporal_pos = nn.Parameter(torch.randn(1, max_frames, view_dim) * 0.02)
+        self.temporal_norm = nn.LayerNorm(view_dim)
+        self.temporal_attn = nn.MultiheadAttention(
+            embed_dim=view_dim,
+            num_heads=num_heads,
+            dropout=dropout,
+            batch_first=True,
+        )
+
+        # ===========================================
+        # View 3: Causal Attention
+        # ===========================================
+        self.causal_proj = nn.Linear(hidden_dim, view_dim)
+        self.causal_pos = nn.Parameter(torch.randn(1, max_frames, view_dim) * 0.02)
+        self.causal_norm = nn.LayerNorm(view_dim)
+        self.causal_attn = nn.MultiheadAttention(
+            embed_dim=view_dim,
+            num_heads=num_heads,
+            dropout=dropout,
+            batch_first=True,
+        )
+
+        # ===========================================
+        # Final Classifier (3 views concatenated)
+        # ===========================================
+        total_dim = view_dim * 3  # mean + temporal + causal
+        self.classifier = nn.Sequential(
+            nn.LayerNorm(total_dim),
+            nn.Linear(total_dim, 256),
+            nn.GELU(),
+            nn.Dropout(dropout),
+            nn.Linear(256, 128),
+            nn.GELU(),
+            nn.Linear(128, 1),
+        )
+
+        _init_weights(self)
+
+    def _get_causal_mask(self, T: int, device: torch.device) -> torch.Tensor:
+        """Create causal attention mask."""
+        return torch.triu(torch.ones(T, T, device=device), diagonal=1).bool()
+
+    def forward(
+        self,
+        features: torch.Tensor,
+        timestep: Optional[torch.Tensor] = None,  # ignored
+    ) -> torch.Tensor:
+        """
+        Args:
+            features: [B, T, H, W, D] or [B, T, D] DiT features
+            timestep: ignored (kept for API compatibility)
+
+        Returns:
+            [B, 1] logits
+        """
+        # Spatial pooling: [B, T, H, W, D] → [B, T, D]
+        if features.dim() == 5:
+            x = features.mean(dim=(2, 3))
+        else:
+            x = features
+
+        B, T, D = x.shape
+
+        # ===========================================
+        # View 1: Mean Pooling
+        # ===========================================
+        mean_pool = x.mean(dim=1)  # [B, D]
+        mean_pool = self.mean_proj(mean_pool)  # [B, view_dim]
+
+        # ===========================================
+        # View 2: Temporal (Bidirectional) Attention
+        # ===========================================
+        temporal_x = self.temporal_proj(x)  # [B, T, view_dim]
+        temporal_x = temporal_x + self.temporal_pos[:, :T, :]
+        temporal_norm = self.temporal_norm(temporal_x)
+        temporal_attn_out, _ = self.temporal_attn(
+            temporal_norm, temporal_norm, temporal_norm
+        )
+        temporal_x = temporal_x + temporal_attn_out
+        temporal_pool = temporal_x.mean(dim=1)  # [B, view_dim]
+
+        # ===========================================
+        # View 3: Causal Attention
+        # ===========================================
+        causal_x = self.causal_proj(x)  # [B, T, view_dim]
+        causal_x = causal_x + self.causal_pos[:, :T, :]
+        causal_norm = self.causal_norm(causal_x)
+        causal_mask = self._get_causal_mask(T, x.device)
+        causal_attn_out, _ = self.causal_attn(
+            causal_norm, causal_norm, causal_norm, attn_mask=causal_mask
+        )
+        causal_x = causal_x + causal_attn_out
+        causal_pool = causal_x[:, -1, :]  # [B, view_dim] (last frame)
+
+        # ===========================================
+        # Concatenate all views and classify
+        # ===========================================
+        combined = torch.cat([mean_pool, temporal_pool, causal_pool], dim=-1)
+        # [B, view_dim * 3]
+
+        return self.classifier(combined)
+
+    def get_num_params(self) -> int:
+        return sum(p.numel() for p in self.parameters() if p.requires_grad)
 
 
 # =============================================================================
@@ -1597,6 +1810,7 @@ HEAD_REGISTRY: Dict[str, type] = {
     "causal_concat": CausalConcat,
     "causal_simple": CausalSimple,
     "temporal_simple": TemporalSimple,
+    "multiview_simple": MultiViewSimple,
 }
 
 
@@ -1682,10 +1896,25 @@ def get_head_info() -> Dict[str, Dict]:
         },
         "causal_simple": {
             "name": "CausalSimple",
-            "description": "Minimal causal: 1 layer, small dims, no AdaLN",
-            "timestep": "Concat",
-            "params": "~0.8M",
-            "base": "causal_adaln",
+            "description": "Minimal causal: 1 layer, NO timestep",
+            "timestep": "None",
+            "params": "~0.55M",
+            "auc": "TBD",
+        },
+        # NEW: Simplified variants WITHOUT timestep
+        "temporal_simple": {
+            "name": "TemporalSimple",
+            "description": "Minimal bidirectional: 1 layer, no timestep",
+            "timestep": "None",
+            "params": "~0.6M",
+            "auc": "TBD",
+        },
+        "multiview_simple": {
+            "name": "MultiViewSimple",
+            "description": "Multi-view (mean+temporal+causal), NO timestep",
+            "timestep": "None",
+            "params": "~1.2M",
+            "auc": "TBD",
         },
     }
 

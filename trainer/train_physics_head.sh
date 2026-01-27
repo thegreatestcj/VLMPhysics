@@ -65,6 +65,9 @@ DEFAULT_LAYER=15
 # Default head for layer ablation
 DEFAULT_HEAD="mean"
 
+HEAD_TYPE = "mean causal_simple temporal_simple multiview_simple"
+
+
 # ============================================================
 # Print configuration
 # ============================================================
@@ -115,7 +118,7 @@ python -m trainer.train_physics_head \
     --feature_dir $FEATURE_DIR \
     --label_file $LABEL_FILE \
     --ablation heads \
-    --heads mean mean_concat mean_adaln_lite causal_1layer causal_concat causal_simple \
+    --heads mean causal_simple temporal_simple multiview_simple \
     --layer $DEFAULT_LAYER \
     --batch_size $BATCH_SIZE \
     --num_epochs $NUM_EPOCHS \

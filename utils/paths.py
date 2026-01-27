@@ -199,13 +199,27 @@ class ResultsManager:
         self.timestamp = timestamp or datetime.now().strftime("%Y%m%d_%H%M%S")
         self.results_base = Path(results_base or DEFAULT_RESULTS_BASE)
 
-        # Build config
+        # Build config - filter kwargs into known fields vs extra
+        known_config_fields = {
+            "description",
+            "ablation_type",
+            "layer",
+            "head_type",
+            "num_frames",
+            "num_steps",
+            "seed",
+            "stages",
+        }
+        config_kwargs = {k: v for k, v in kwargs.items() if k in known_config_fields}
+        extra_kwargs = {k: v for k, v in kwargs.items() if k not in known_config_fields}
+
         self.config = ExperimentConfig(
             exp_type=exp_type,
             exp_name=exp_name,
             timestamp=self.timestamp,
             model=model,
-            **kwargs,
+            extra=extra_kwargs,
+            **config_kwargs,
         )
 
         # Compute paths
