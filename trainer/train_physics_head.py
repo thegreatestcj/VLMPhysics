@@ -5,35 +5,36 @@ Training Script for Physics Discriminator Head
 Trains lightweight MLP heads on pre-extracted (and pooled) DiT features.
 Since features are pre-computed, training is extremely fast (~5 min for 100 epochs).
 
+Output Structure:
+    results/training/physics_head/{ablation}_{timestamp}/
+    ├── config.json         # Training configuration
+    ├── summary.json        # Ablation summary (best AUC per variant)
+    └── {variant}/          # Per-variant results (e.g., mean/, causal_adaln/)
+        ├── best.pt         # Best checkpoint
+        ├── latest.pt       # Latest checkpoint  
+        └── results.json    # Training history and metrics
+
 Usage:
-    # Basic training with pooled features (FAST!)
+    # Basic training with pooled features
     python -m trainer.train_physics_head \
         --feature_dir ~/scratch/physics/physion_features_pooled \
         --layer 15 \
         --is_pooled \
-        --output_dir results/physics_head
+        --exp-name single_run
 
-    # Training with original features (SLOW, not recommended)
-    python -m trainer.train_physics_head \
-        --feature_dir ~/scratch/physics/physion_features \
-        --layer 15 \
-        --output_dir results/physics_head
-
-    # Layer ablation
-    python -m trainer.train_physics_head \
-        --feature_dir ~/scratch/physics/physion_features_pooled \
-        --ablation layers \
-        --layers 5 10 15 20 25 \
-        --is_pooled \
-        --output_dir results/layer_ablation
-
-    # Head type ablation  
+    # Head type ablation
     python -m trainer.train_physics_head \
         --feature_dir ~/scratch/physics/physion_features_pooled \
         --ablation heads \
         --layer 15 \
-        --is_pooled \
-        --output_dir results/head_ablation
+        --is_pooled
+
+    # Layer ablation  
+    python -m trainer.train_physics_head \
+        --feature_dir ~/scratch/physics/physion_features_pooled \
+        --ablation layers \
+        --layers 5 10 15 20 25 \
+        --is_pooled
 """
 
 import os
@@ -60,8 +61,34 @@ from tqdm import tqdm
 # Add parent to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src.data.feature_dataset import create_dataloaders
-from src.models.physics_head import create_physics_head, list_heads
+from utils.paths import (
+    ResultsManager,
+    create_training_manager,
+)
+
+# Try to import project modules
+try:
+    from src.data.feature_dataset import create_dataloaders
+    from src.models.physics_head import create_physics_head, list_heads
+except ImportError:
+    print("Warning: Could not import project modules. Using stubs.")
+
+    # Stub functions for standalone testing
+    def create_dataloaders(*args, **kwargs):
+        raise NotImplementedError("Please install project dependencies")
+
+    def create_physics_head(*args, **kwargs):
+        raise NotImplementedError("Please install project dependencies")
+
+    def list_heads():
+        return [
+            "mean",
+            "mean_adaln",
+            "causal_adaln",
+            "temporal_adaln",
+            "multiview_adaln",
+        ]
+
 
 logging.basicConfig(
     level=logging.INFO,
@@ -100,18 +127,7 @@ def compute_metrics(
     all_timesteps: torch.Tensor,
     loss: float = 0.0,
 ) -> Metrics:
-    """
-    Compute evaluation metrics.
-
-    Args:
-        all_logits: [N] tensor of logits
-        all_labels: [N] tensor of labels (0 or 1)
-        all_timesteps: [N] tensor of timesteps
-        loss: Average loss value
-
-    Returns:
-        Metrics dataclass
-    """
+    """Compute evaluation metrics."""
     from sklearn.metrics import (
         accuracy_score,
         precision_score,
@@ -127,7 +143,7 @@ def compute_metrics(
     timesteps_np = all_timesteps.cpu().numpy()
 
     # Predictions
-    probs = 1 / (1 + np.exp(-logits_np))  # sigmoid
+    probs = 1 / (1 + np.exp(-logits_np))
     preds = (probs > 0.5).astype(int)
 
     # Basic metrics
@@ -175,11 +191,7 @@ def compute_metrics(
 
 
 class PhysicsHeadTrainer:
-    """
-    Trainer for physics discriminator head.
-
-    Features are loaded from disk (pre-extracted), making training very fast.
-    """
+    """Trainer for physics discriminator head."""
 
     def __init__(
         self,
@@ -192,38 +204,29 @@ class PhysicsHeadTrainer:
         lr: float = 1e-3,
         weight_decay: float = 0.01,
         num_epochs: int = 100,
-        warmup_ratio: float = 0.1,
         early_stopping_patience: int = 15,
     ):
         self.model = model.to(device)
         self.train_loader = train_loader
         self.val_loader = val_loader
         self.output_dir = Path(output_dir)
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+
         self.head_type = head_type
         self.device = device
         self.num_epochs = num_epochs
         self.early_stopping_patience = early_stopping_patience
 
-        # Create output directory
-        self.output_dir.mkdir(parents=True, exist_ok=True)
-
-        # Loss function
+        # Setup optimizer
         self.criterion = nn.BCEWithLogitsLoss()
+        self.optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
 
-        # Optimizer
-        self.optimizer = AdamW(
-            model.parameters(),
-            lr=lr,
-            weight_decay=weight_decay,
-        )
-
-        # Scheduler: OneCycleLR with warmup
         total_steps = len(train_loader) * num_epochs
         self.scheduler = OneCycleLR(
             self.optimizer,
             max_lr=lr,
             total_steps=total_steps,
-            pct_start=warmup_ratio,
+            pct_start=0.1,
             anneal_strategy="cos",
         )
 
@@ -242,20 +245,14 @@ class PhysicsHeadTrainer:
 
     def _requires_timestep(self) -> bool:
         """Check if head requires timestep input."""
-        # Only "mean" (MeanPool) doesn't require timestep
-        # All other heads use timestep in some form (AdaLN, concat, bias, etc.)
         return self.head_type != "mean"
 
     def _forward(self, batch: Dict) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
-        """
-        Forward pass handling different head types.
+        """Forward pass."""
+        features = batch["features"].to(self.device)
+        labels = batch["labels"].to(self.device).float()
+        timesteps = batch["timesteps"]
 
-        Returns:
-            (logits, labels, timesteps) all as tensors
-        """
-        features = batch["features"].to(self.device)  # [B, T, D]
-        labels = batch["labels"].to(self.device).float()  # [B]
-        timesteps = batch["timesteps"]  # [B]
         if isinstance(timesteps, list):
             timesteps = torch.tensor(timesteps, device=self.device)
         elif isinstance(timesteps, int):
@@ -263,14 +260,12 @@ class PhysicsHeadTrainer:
         else:
             timesteps = timesteps.to(self.device)
 
-        # Forward pass
         if self._requires_timestep():
-            logits = self.model(features, timesteps)  # [B, 1]
+            logits = self.model(features, timesteps)
         else:
-            logits = self.model(features)  # [B, 1]
+            logits = self.model(features)
 
-        logits = logits.squeeze(-1)  # [B]
-
+        logits = logits.squeeze(-1)
         return logits, labels, timesteps
 
     def train_epoch(self) -> float:
@@ -281,7 +276,6 @@ class PhysicsHeadTrainer:
 
         for batch in self.train_loader:
             logits, labels, _ = self._forward(batch)
-
             loss = self.criterion(logits, labels)
 
             self.optimizer.zero_grad()
@@ -300,16 +294,14 @@ class PhysicsHeadTrainer:
         """Evaluate on validation set."""
         self.model.eval()
 
-        all_logits = []
-        all_labels = []
-        all_timesteps = []
+        all_logits, all_labels, all_timesteps = [], [], []
         total_loss = 0.0
         num_batches = 0
 
         for batch in self.val_loader:
             logits, labels, timesteps = self._forward(batch)
-
             loss = self.criterion(logits, labels)
+
             total_loss += loss.item()
             num_batches += 1
 
@@ -317,16 +309,12 @@ class PhysicsHeadTrainer:
             all_labels.append(labels.cpu())
             all_timesteps.append(timesteps.cpu())
 
-        # Concatenate
         all_logits = torch.cat(all_logits)
         all_labels = torch.cat(all_labels)
         all_timesteps = torch.cat(all_timesteps)
 
-        # Compute metrics
         avg_loss = total_loss / max(num_batches, 1)
-        metrics = compute_metrics(all_logits, all_labels, all_timesteps, avg_loss)
-
-        return metrics
+        return compute_metrics(all_logits, all_labels, all_timesteps, avg_loss)
 
     def save_checkpoint(self, is_best: bool = False):
         """Save model checkpoint."""
@@ -338,20 +326,12 @@ class PhysicsHeadTrainer:
             "head_type": self.head_type,
         }
 
-        # Save latest
         torch.save(checkpoint, self.output_dir / "latest.pt")
-
-        # Save best
         if is_best:
             torch.save(checkpoint, self.output_dir / "best.pt")
 
     def train(self) -> Dict:
-        """
-        Full training loop.
-
-        Returns:
-            Dictionary with training results
-        """
+        """Full training loop."""
         logger.info(f"Starting training for {self.num_epochs} epochs...")
         logger.info(
             f"Train batches: {len(self.train_loader)}, Val batches: {len(self.val_loader)}"
@@ -360,10 +340,7 @@ class PhysicsHeadTrainer:
         start_time = time.time()
 
         for epoch in range(self.num_epochs):
-            # Train
             train_loss = self.train_epoch()
-
-            # Evaluate
             metrics = self.evaluate()
 
             # Track history
@@ -384,7 +361,6 @@ class PhysicsHeadTrainer:
             else:
                 self.no_improve_count += 1
 
-            # Save latest
             self.save_checkpoint(is_best=False)
 
             # Log progress
@@ -402,7 +378,6 @@ class PhysicsHeadTrainer:
                 logger.info(f"Early stopping at epoch {epoch}")
                 break
 
-        # Training time
         training_time = str(timedelta(seconds=int(time.time() - start_time)))
 
         # Final evaluation with best model
@@ -441,7 +416,6 @@ def run_layer_ablation(
     **train_kwargs,
 ) -> Dict[int, Dict]:
     """Run ablation over different DiT layers."""
-
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -454,7 +428,6 @@ def run_layer_ablation(
 
         layer_output = output_dir / f"layer_{layer}"
 
-        # Create dataloaders
         train_loader, val_loader = create_dataloaders(
             feature_dir=feature_dir,
             layer=layer,
@@ -466,14 +439,11 @@ def run_layer_ablation(
             },
         )
 
-        # Get hidden dim from first batch
         sample = next(iter(train_loader))
         hidden_dim = sample["features"].shape[-1]
 
-        # Create model
         model = create_physics_head(head_type, hidden_dim=hidden_dim)
 
-        # Train
         trainer = PhysicsHeadTrainer(
             model=model,
             train_loader=train_loader,
@@ -503,7 +473,7 @@ def run_layer_ablation(
         layer: {"best_auc": r["best_auc"], "best_epoch": r["best_epoch"]}
         for layer, r in results.items()
     }
-    with open(output_dir / "layer_summary.json", "w") as f:
+    with open(output_dir / "summary.json", "w") as f:
         json.dump(summary, f, indent=2)
 
     return results
@@ -518,11 +488,9 @@ def run_head_ablation(
     **train_kwargs,
 ) -> Dict[str, Dict]:
     """Run ablation over different head architectures."""
-
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Default head types
     if head_types is None:
         head_types = list_heads()
 
@@ -535,7 +503,6 @@ def run_head_ablation(
 
         head_output = output_dir / head_type
 
-        # Create dataloaders
         train_loader, val_loader = create_dataloaders(
             feature_dir=feature_dir,
             layer=layer,
@@ -547,15 +514,12 @@ def run_head_ablation(
             },
         )
 
-        # Get hidden dim
         sample = next(iter(train_loader))
         hidden_dim = sample["features"].shape[-1]
 
-        # Create model
         model = create_physics_head(head_type, hidden_dim=hidden_dim)
         logger.info(f"Model params: {sum(p.numel() for p in model.parameters()):,}")
 
-        # Train
         trainer = PhysicsHeadTrainer(
             model=model,
             train_loader=train_loader,
@@ -585,7 +549,7 @@ def run_head_ablation(
         ht: {"best_auc": r["best_auc"], "best_epoch": r["best_epoch"]}
         for ht, r in results.items()
     }
-    with open(output_dir / "head_summary.json", "w") as f:
+    with open(output_dir / "summary.json", "w") as f:
         json.dump(summary, f, indent=2)
 
     return results
@@ -600,36 +564,30 @@ def main():
     parser = argparse.ArgumentParser(
         description="Train Physics Discriminator Head",
         formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Output directory structure:
+    results/training/physics_head/{exp_name}_{timestamp}/
+    ├── config.json
+    ├── summary.json
+    └── {variant}/
+        ├── best.pt
+        ├── latest.pt
+        └── results.json
+        """,
     )
 
     # Data arguments
     parser.add_argument(
-        "--feature_dir", type=str, required=True, help="Path to features directory"
+        "--feature_dir", type=str, required=True, help="Features directory"
     )
+    parser.add_argument("--label_file", type=str, default=None, help="Labels file")
+    parser.add_argument("--layer", type=int, default=15, help="DiT layer (default: 15)")
     parser.add_argument(
-        "--label_file",
-        type=str,
-        default=None,
-        help="Path to labels.json (default: feature_dir/labels.json)",
-    )
-    parser.add_argument(
-        "--layer", type=int, default=15, help="DiT layer to use (default: 15)"
-    )
-    parser.add_argument(
-        "--timesteps",
-        type=int,
-        nargs="+",
-        default=None,
-        help="Timesteps to use (default: 200 400 600 800)",
+        "--timesteps", type=int, nargs="+", default=None, help="Timesteps"
     )
 
     # Model arguments
-    parser.add_argument(
-        "--head_type",
-        type=str,
-        default="mean",
-        help=f"Head architecture (choices: {list_heads()})",
-    )
+    parser.add_argument("--head_type", type=str, default="mean", help=f"Head type")
 
     # Training arguments
     parser.add_argument("--batch_size", type=int, default=32)
@@ -641,47 +599,27 @@ def main():
 
     # Feature format
     parser.add_argument(
-        "--is_pooled",
-        action="store_true",
-        help="Features are pre-pooled [T,D] (use with pooled features)",
+        "--is_pooled", action="store_true", help="Features are pre-pooled"
     )
-    parser.add_argument(
-        "--no_pooled",
-        dest="is_pooled",
-        action="store_false",
-        help="Features are original [num_patches,D]",
-    )
+    parser.add_argument("--no_pooled", dest="is_pooled", action="store_false")
     parser.set_defaults(is_pooled=True)
 
     # Ablation arguments
     parser.add_argument(
-        "--ablation",
-        type=str,
-        choices=["layers", "heads", None],
-        default=None,
-        help="Run ablation study",
+        "--ablation", type=str, choices=["layers", "heads", None], default=None
     )
+    parser.add_argument("--layers", type=int, nargs="+", default=[5, 10, 15, 20, 25])
+    parser.add_argument("--heads", type=str, nargs="+", default=None)
+
+    # Output (new structure)
+    parser.add_argument("--exp-name", type=str, default="train", help="Experiment name")
     parser.add_argument(
-        "--layers",
-        type=int,
-        nargs="+",
-        default=[5, 10, 15, 20, 25],
-        help="Layers for layer ablation",
-    )
-    parser.add_argument(
-        "--heads",
-        type=str,
-        nargs="+",
-        default=None,
-        help="Head types for head ablation",
+        "--results-base", type=str, default="results", help="Results base dir"
     )
 
-    # Output
+    # Legacy output (deprecated)
     parser.add_argument(
-        "--output_dir",
-        type=str,
-        default="results/physics_head",
-        help="Output directory",
+        "--output_dir", type=str, default=None, help="[DEPRECATED] Use --exp-name"
     )
 
     args = parser.parse_args()
@@ -702,12 +640,45 @@ def main():
         "device": device,
     }
 
+    # Setup output directory
+    if args.output_dir:
+        # Legacy mode
+        print("[WARNING] --output_dir is deprecated. Use --exp-name instead.")
+        output_dir = args.output_dir
+        rm = None
+    else:
+        # New unified structure
+        rm = create_training_manager(
+            exp_name=args.exp_name,
+            ablation_type=args.ablation,
+            results_base=args.results_base,
+            layer=args.layer,
+            head_type=args.head_type,
+            lr=args.lr,
+            batch_size=args.batch_size,
+        )
+        output_dir = str(rm.get_output_dir())
+        logger.info(f"Output directory: {output_dir}")
+
+    # Save config
+    if rm:
+        rm.save_config(
+            {
+                "feature_dir": args.feature_dir,
+                "layer": args.layer,
+                "head_type": args.head_type,
+                "ablation": args.ablation,
+                "is_pooled": args.is_pooled,
+                **train_kwargs,
+            }
+        )
+
     # Run ablation or single training
     if args.ablation == "layers":
         run_layer_ablation(
             feature_dir=args.feature_dir,
             layers=args.layers,
-            output_dir=args.output_dir,
+            output_dir=output_dir,
             head_type=args.head_type,
             is_pooled=args.is_pooled,
             **train_kwargs,
@@ -717,7 +688,7 @@ def main():
         run_head_ablation(
             feature_dir=args.feature_dir,
             layer=args.layer,
-            output_dir=args.output_dir,
+            output_dir=output_dir,
             head_types=args.heads,
             is_pooled=args.is_pooled,
             **train_kwargs,
@@ -730,7 +701,6 @@ def main():
         logger.info(f"Head type: {args.head_type}")
         logger.info(f"Is pooled: {args.is_pooled}")
 
-        # Create dataloaders
         train_loader, val_loader = create_dataloaders(
             feature_dir=args.feature_dir,
             label_file=args.label_file,
@@ -741,24 +711,28 @@ def main():
             is_pooled=args.is_pooled,
         )
 
-        # Get hidden dim
         sample = next(iter(train_loader))
         feature_shape = sample["features"].shape
         hidden_dim = feature_shape[-1]
         logger.info(f"Feature shape: {feature_shape}")
         logger.info(f"Hidden dim: {hidden_dim}")
 
-        # Create model
         model = create_physics_head(args.head_type, hidden_dim=hidden_dim)
         num_params = sum(p.numel() for p in model.parameters())
         logger.info(f"Model params: {num_params:,}")
 
-        # Train
+        # For single training, use a subdirectory
+        if rm:
+            single_output = rm.get_ablation_dir("heads", args.head_type)
+        else:
+            single_output = Path(output_dir) / args.head_type
+            single_output.mkdir(parents=True, exist_ok=True)
+
         trainer = PhysicsHeadTrainer(
             model=model,
             train_loader=train_loader,
             val_loader=val_loader,
-            output_dir=args.output_dir,
+            output_dir=str(single_output),
             head_type=args.head_type,
             device=device,
             lr=args.lr,

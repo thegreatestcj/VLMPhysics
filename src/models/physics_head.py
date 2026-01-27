@@ -1517,6 +1517,65 @@ class CausalSimple(nn.Module):
 
     def get_num_params(self) -> int:
         return sum(p.numel() for p in self.parameters() if p.requires_grad)
+    
+class TemporalSimple(nn.Module):
+    """
+    MINIMAL temporal architecture: 1 layer, small dims, no AdaLN.
+
+    vs TemporalAdaLN (~3.0M):
+        - layers: 2 -> 1
+        - attn_dim: 512 -> 256
+        - no FFN
+        - no AdaLN
+
+    Parameters: ~0.8M
+    """
+
+    def __init__(
+        self,
+        hidden_dim: int = 1920,
+        attn_dim: int = 256,
+        t_dim: int = 128,
+        num_heads: int = 4,
+        max_frames: int = 50,
+        dropout: float = 0.1,
+    ):
+        super().__init__()
+        self.input_proj = nn.Linear(hidden_dim, attn_dim)
+        self.pos_embed = nn.Parameter(torch.randn(1, max_frames, attn_dim) * 0.02)
+
+        # Single bidirectional attention (NO causal mask)
+        self.norm = nn.LayerNorm(attn_dim)
+        self.attn = nn.MultiheadAttention(
+            embed_dim=attn_dim, num_heads=num_heads, dropout=dropout, batch_first=True
+        )
+
+        self.t_embedder = TimestepEmbedder(t_dim, t_dim)
+        self.classifier = nn.Sequential(
+            nn.LayerNorm(attn_dim + t_dim),
+            nn.Linear(attn_dim + t_dim, 128),
+            nn.GELU(),
+            nn.Linear(128, 1),
+        )
+
+    def forward(self, features, timestep):
+        if features.dim() == 5:
+            x = features.mean(dim=(2, 3))  # spatial pool
+        else:
+            x = features
+        B, T, D = x.shape
+
+        x = self.input_proj(x) + self.pos_embed[:, :T, :]
+        x_norm = self.norm(x)
+        attn_out, _ = self.attn(x_norm, x_norm, x_norm)  # bidirectional
+        x = x + attn_out
+
+        # Temporal mean pooling (vs causal's last frame)
+        x = x.mean(dim=1)
+        t_emb = self.t_embedder(timestep)
+        x = torch.cat([x, t_emb], dim=-1)
+
+        return self.classifier(x)
 
 
 # =============================================================================
@@ -1537,6 +1596,7 @@ HEAD_REGISTRY: Dict[str, type] = {
     "causal_1layer": CausalAdaLN1Layer,
     "causal_concat": CausalConcat,
     "causal_simple": CausalSimple,
+    "temporal_simple": TemporalSimple,
 }
 
 
