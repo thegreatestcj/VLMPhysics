@@ -77,10 +77,10 @@ def encode_video(video: torch.Tensor, vae, device: str) -> torch.Tensor:
     Returns:
         latents: [1, C, T', H', W'] latent tensor
     """
-    # video: [T, C, H, W] -> [1, C, T, H, W]
+    # video: [T, C, H, W] -> [1, T, C, H, W]
     video = video.unsqueeze(0).to(device=device, dtype=torch.float16)
 
-    # Rearrange: [B, C, T, H, W] -> [B, T, C, H, W] for VAE
+    # Rearrange: [B, T, C, H, W] -> [B, C, T, H, W] for VAE
     video = video.permute(0, 2, 1, 3, 4)
 
     # Normalize from [0, 1] to [-1, 1]
@@ -90,7 +90,7 @@ def encode_video(video: torch.Tensor, vae, device: str) -> torch.Tensor:
         latents = vae.encode(video).latent_dist.sample()
         latents = latents * vae.config.scaling_factor
 
-    # latents shape: [1, T', C, H', W'] -> [1, C, T', H', W']
+    # latents shape: [1, C, T', H', W'] -> [1, T', C, H', W']
     latents = latents.permute(0, 2, 1, 3, 4)
 
     return latents

@@ -1,12 +1,11 @@
 #!/bin/bash
 #SBATCH --job-name=traj_dual
 #SBATCH --output=slurm/inference/dual_%j.out
-#SBATCH --error=slurm/inference/dual_%j.err
-#SBATCH --time=02:00:00
+#SBATCH --time=06:00:00
 #SBATCH --partition=gpu
 #SBATCH --gres=gpu:2
 #SBATCH --mem=96G
-#SBATCH --cpus-per-task=16
+#SBATCH --cpus-per-task=8
 
 # ============================================================
 # Dual-GPU Trajectory Pruning - Maximum Parallelism
@@ -56,12 +55,12 @@ cd ~/repos/VLMPhysics
 # ============================================================
 
 # Physics head (set to empty for test mode)
-PHYSICS_HEAD="results/training/physics_head/mean/best.pt"
-HEAD_TYPE="mean"
+PHYSICS_HEAD="results/inference/temporal_simple_layer10.pt"
+HEAD_TYPE="temporal_simple"
 
 # MAXIMIZED for dual-GPU
-NUM_TRAJECTORIES=16   # 8 per GPU
-BATCH_SIZE=4          # Mini-batch per GPU
+NUM_TRAJECTORIES=4   # 8 per GPU
+BATCH_SIZE=2          # Mini-batch per GPU
 
 # Checkpoints: 16 → 8 → 4 → 2 → 1
 CHECKPOINTS="800 600 400 200"
@@ -74,12 +73,11 @@ GUIDANCE=6.0
 
 # Test prompts
 PROMPTS=(
-    "A ball falls from the sky and bounces on the ground"
-    "A pendulum swings back and forth in a clock"
-    "Water pours from a bottle into a glass"
+    "A cup of water is slowly poured out in the space station, releasing the liquid into the surrounding area"
+    "A cup of oil is slowly poured out in the space station, releasing the liquid into the surrounding area"
 )
 
-OUTPUT_BASE="results/inference/trajectory_pruning"
+OUTPUT_BASE="results/inference/pruning"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 
 # ============================================================
@@ -126,7 +124,7 @@ for i in "${!PROMPTS[@]}"; do
         --frames $FRAMES \
         --guidance $GUIDANCE \
         --devices cuda:0 cuda:1 \
-        --exp_name "dual_gpu_video_$i" \
+        --exp_name "pruning_$i" \
         --output_dir "$OUTPUT_BASE" \
         --seed $((42 + i))
         

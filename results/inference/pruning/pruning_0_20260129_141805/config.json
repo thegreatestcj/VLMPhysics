@@ -1,0 +1,27 @@
+{
+  "model_id": "THUDM/CogVideoX-2b",
+  "physics_head_path": "results/inference/temporal_simple_layer10.pt",
+  "head_type": "temporal_simple",
+  "extract_layer": 10,
+  "num_trajectories": 4,
+  "batch_size": 2,
+  "checkpoints": [
+    800,
+    600,
+    400,
+    200
+  ],
+  "keep_ratio": 0.5,
+  "num_inference_steps": 50,
+  "num_frames": 49,
+  "guidance_scale": 6.0,
+  "height": 480,
+  "width": 720,
+  "devices": [
+    "cuda:0",
+    "cuda:1"
+  ],
+  "exp_name": "pruning_0",
+  "output_dir": "results/inference/pruning",
+  "seed": 42
+}
