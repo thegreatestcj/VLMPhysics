@@ -391,7 +391,7 @@ class GPUWorker:
         # video = video.permute(0, 2, 3, 4, 1)
         video = self.pipe.video_processor.postprocess_video(video, output_type="pt")[0]
         logger.info(f"[Decode] Official processor shape: {video.shape}")
-        video = video.permute(1, 0, 2, 3)
+        video = video.permute(0, 2, 3, 1)
         
         logger.info(f"[Decode] Final: {video.shape}")  # [1, 49, 480, 720, 3]
         
@@ -691,8 +691,8 @@ def main():
     from diffusers.utils import export_to_video
 
     video_path = out_dir / "output.mp4"
-    video_tensor = results["video"][0].float()
-    video_tensor = video_tensor.clamp(0, 1)
+    video_tensor = results["video"]
+    video_tensor = video_tensor.float().clamp(0, 1)
     video_frames = (video_tensor.numpy() * 255).round().astype("uint8")
     export_to_video(video_frames, str(video_path), fps=8)
     logger.info(f"Saved video: {video_path}")

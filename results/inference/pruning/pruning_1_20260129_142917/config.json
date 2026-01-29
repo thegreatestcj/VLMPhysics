@@ -21,7 +21,7 @@
     "cuda:0",
     "cuda:1"
   ],
-  "exp_name": "pruning_0",
+  "exp_name": "pruning_1",
   "output_dir": "results/inference/pruning",
-  "seed": 42
+  "seed": 43
 }
