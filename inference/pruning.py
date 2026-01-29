@@ -391,6 +391,7 @@ class GPUWorker:
         # video = video.permute(0, 2, 3, 4, 1)
         video = self.pipe.video_processor.postprocess_video(video, output_type="pt")[0]
         logger.info(f"[Decode] Official processor shape: {video.shape}")
+        video = video.permute(1, 0, 2, 3)
         
         logger.info(f"[Decode] Final: {video.shape}")  # [1, 49, 480, 720, 3]
         
