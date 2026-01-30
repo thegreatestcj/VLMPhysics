@@ -1,9 +1,10 @@
 #!/bin/bash
 #SBATCH -p gpu
 #SBATCH --gres=gpu:1
+#SBATCH -C geforce3090
 #SBATCH --mem=48G
 #SBATCH -n 4
-#SBATCH -t 01:00:00
+#SBATCH -t 14:00:00
 #SBATCH -N 1
 #SBATCH --output=slurm/phygenbench/physics/slurm-%j.out
 
@@ -98,8 +99,8 @@ python eval/generate_physics.py \
     --frames 49 \
     --guidance 6.0 \
     --seed 42 \
-    --start 0 \
-    --end 1 \
+    --start 80 \
+    --end 160 \
     --skip-existing
 
 # ============================================================

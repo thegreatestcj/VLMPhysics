@@ -1,17 +1,27 @@
 """
 Batch Feature Extraction Script with Sharding Support
 
-Extract DiT features from Physion videos and save to disk.
+Extract DiT features from Physion or VideoPhy videos and save to disk.
 Supports parallel extraction across multiple GPUs using sharding.
 
 Pipeline: Video → VAE encode → Latents → Add noise → DiT forward → Features
 
-Usage (single GPU):
+Usage (Physion - single GPU):
     python -m src.models.extract_features \
         --data_dir data/Physion \
-        --output_dir /users/$USER/scratch/physion_features \
-        --layers 5 10 15 20 25 \
+        --output_dir /users/$USER/scratch/physics/physion_features \
+        --dataset physion \
+        --layers 10 \
         --timesteps 200 400 600 800
+
+Usage (VideoPhy - single GPU):
+    python -m src.models.extract_features \
+        --data_dir ~/scratch/physics/videophy_data \
+        --output_dir ~/scratch/physics/videophy_features \
+        --dataset videophy \
+        --layers 10 \
+        --timesteps 200 400 600 800 \
+        --use-8bit
 
 Usage (parallel with 2 GPUs):
     # Terminal 1 / SLURM job 1:
@@ -184,6 +194,7 @@ def extract_dataset(
     data_dir: str,
     output_dir: str,
     model_id: str = "THUDM/CogVideoX-2b",
+    dataset_type: str = "physion",  # NEW: dataset type parameter
     layers: List[int] = [5, 10, 15, 20, 25],
     timesteps: List[int] = [400],
     use_8bit: bool = True,
@@ -197,6 +208,16 @@ def extract_dataset(
     Extract features for all videos in dataset.
 
     Args:
+        data_dir: Path to dataset directory
+        output_dir: Output directory for features
+        model_id: CogVideoX model ID
+        dataset_type: "physion" or "videophy"
+        layers: DiT layers to extract
+        timesteps: Diffusion timesteps
+        use_8bit: Use 8-bit quantization
+        device: Target device
+        max_videos: Limit number of videos (for debugging)
+        resume: Skip already extracted videos
         shard: Shard index (0-indexed) for parallel extraction
         num_shards: Total number of shards (set to 2 for 2-GPU parallel)
     """
@@ -207,15 +228,31 @@ def extract_dataset(
     # Load models (VAE + DiT + scheduler)
     vae, extractor, scheduler = setup_models(model_id, layers, use_8bit, device)
 
-    # Load Physion dataset (returns raw videos)
-    from src.data.physion_dataset import PhysionDataset
+    # =========================================================================
+    # Load dataset based on type (NEW: dataset selection logic)
+    # =========================================================================
+    if dataset_type == "physion":
+        from src.data.physion_dataset import PhysionDataset
 
-    logger.info("Loading Physion dataset...")
-    dataset = PhysionDataset(
-        data_root=str(data_dir),
-        split="all",
-        num_frames=49,
-    )
+        logger.info("Loading Physion dataset...")
+        dataset = PhysionDataset(
+            data_root=str(data_dir),
+            split="all",
+            num_frames=49,
+        )
+    elif dataset_type == "videophy":
+        from src.data.videophy_dataset import VideoPhyDataset
+
+        logger.info("Loading VideoPhy dataset...")
+        dataset = VideoPhyDataset(
+            data_root=str(data_dir),
+            split="all",
+            num_frames=49,
+        )
+    else:
+        raise ValueError(
+            f"Unknown dataset type: {dataset_type}. Use 'physion' or 'videophy'."
+        )
 
     # Apply sharding BEFORE any other filtering
     if num_shards > 1:
@@ -240,6 +277,7 @@ def extract_dataset(
             "layers": layers,
             "timesteps": timesteps,
             "model_id": model_id,
+            "dataset_type": dataset_type,  # NEW: save dataset type in metadata
             "shard": shard,
             "num_shards": num_shards,
         },
@@ -248,6 +286,7 @@ def extract_dataset(
     total_forward_time = 0.0
 
     logger.info(f"Extracting features for {len(dataset)} videos...")
+    logger.info(f"  Dataset: {dataset_type}")
     logger.info(f"  Layers: {layers}")
     logger.info(f"  Timesteps: {timesteps}")
     logger.info(f"  Output: {output_dir}")
@@ -329,19 +368,47 @@ def extract_dataset(
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Extract DiT features from Physion videos"
+        description="Extract DiT features from video datasets",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+    # Physion dataset
+    python -m src.models.extract_features \\
+        --data_dir data/Physion \\
+        --output_dir ~/scratch/physics/physion_features \\
+        --dataset physion
+
+    # VideoPhy dataset
+    python -m src.models.extract_features \\
+        --data_dir ~/scratch/physics/videophy_data \\
+        --output_dir ~/scratch/physics/videophy_features \\
+        --dataset videophy \\
+        --use-8bit
+
+    # Parallel extraction with 2 GPUs
+    python -m src.models.extract_features ... --shard 0 --num_shards 2
+    python -m src.models.extract_features ... --shard 1 --num_shards 2
+        """,
     )
     parser.add_argument(
         "--data_dir",
         type=str,
-        default="data/Physion",
-        help="Path to Physion data directory",
+        required=True,
+        help="Path to dataset directory",
     )
     parser.add_argument(
         "--output_dir",
         type=str,
         required=True,
         help="Output directory for extracted features",
+    )
+    # NEW: dataset type argument
+    parser.add_argument(
+        "--dataset",
+        type=str,
+        default="physion",
+        choices=["physion", "videophy"],
+        help="Dataset type: 'physion' or 'videophy' (default: physion)",
     )
     parser.add_argument(
         "--model_id",
@@ -398,6 +465,7 @@ def main():
         data_dir=args.data_dir,
         output_dir=args.output_dir,
         model_id=args.model_id,
+        dataset_type=args.dataset,  # NEW: pass dataset type
         layers=args.layers,
         timesteps=args.timesteps,
         use_8bit=args.use_8bit,
