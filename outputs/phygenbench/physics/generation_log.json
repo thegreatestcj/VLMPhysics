@@ -1,0 +1,19 @@
+[
+  {
+    "index": 0,
+    "category": "Gravity",
+    "prompt": "A cup of water is slowly poured out in the space station, releasing the liquid into the surrounding area",
+    "output": "outputs/phygenbench/physics/output_video_1.mp4",
+    "time": 488.15865111351013,
+    "time_breakdown": {
+      "generation": 487.35,
+      "save": 0.81,
+      "sampling": 466.61,
+      "decode": 20.46
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.9515933990478516,
+    "num_trajectories": 4
+  }
+]

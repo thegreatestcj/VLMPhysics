@@ -354,48 +354,45 @@ class GPUWorker:
         return best_idx, best_data["latents"], best_data["score"]
 
     def decode(self, latents: torch.Tensor) -> torch.Tensor:
-        """Decode latents to video."""
-        logger.info(f"[Decode] Input: {latents.shape}")  # [1, 13, 16, 60, 90]
+        """Decode latents to video on CPU (no tiling artifacts)."""
+        logger.info(f"[Decode] Input: {latents.shape}")
 
-        # 1. 释放显存
+        # 1. 释放 GPU 显存
         self.pipe.transformer.to("cpu")
         self.pipe.text_encoder.to("cpu")
+        self.pipe.vae.to("cpu")  # VAE 也放 CPU
+        
         import gc
         gc.collect()
         torch.cuda.empty_cache()
 
-        # 2. 准备 latents
-        latents = latents.float()
+        # 2. 准备 latents (CPU + FP32)
+        latents = latents.float().cpu()
         
         # 3. Permute: [B, T, C, H, W] -> [B, C, T, H, W]
         latents = latents.permute(0, 2, 1, 3, 4).contiguous()
-        logger.info(f"[Decode] After permute: {latents.shape}")  # [1, 16, 13, 60, 90]
+        logger.info(f"[Decode] After permute: {latents.shape}")
         
         # 4. Scale
         latents = latents / self.pipe.vae.config.scaling_factor
         
-        # 5. VAE decode (FP32 + tiling)
-        self.pipe.vae = self.pipe.vae.float()
-        self.pipe.vae.enable_tiling()
+        # 5. 关键：禁用 tiling，在 CPU 上 decode
+        self.pipe.vae.disable_tiling()
+        self.pipe.vae.disable_slicing()
         
+        logger.info("[Decode] Decoding on CPU (no tiling)...")
         with torch.no_grad():
             video = self.pipe.vae.decode(latents, return_dict=False)[0]
         
-        logger.info(f"[Decode] VAE output: {video.shape}")  # [1, 3, 49, 480, 720]
+        logger.info(f"[Decode] VAE output: {video.shape}")
         logger.info(f"[Decode] VAE range: [{video.min():.3f}, {video.max():.3f}]")
         
-        # 6. 手动后处理（不用 video_processor）
-        # video = (video / 2 + 0.5).clamp(0, 1)
+        # 6. 后处理
+        video = (video / 2 + 0.5).clamp(0, 1)
+        video = video[0].permute(1, 2, 3, 0)  # [T, H, W, C]
         
-        # 7. 转换维度: [B, C, T, H, W] -> [B, T, H, W, C]
-        # video = video.permute(0, 2, 3, 4, 1)
-        video = self.pipe.video_processor.postprocess_video(video, output_type="pt")[0]
-        logger.info(f"[Decode] Official processor shape: {video.shape}")
-        video = video.permute(0, 2, 3, 1)
-        
-        logger.info(f"[Decode] Final: {video.shape}")  # [1, 49, 480, 720, 3]
-        
-        return video.cpu()
+        logger.info(f"[Decode] Final: {video.shape}")
+        return video  # 已经在 CPU 上
 
 
 # =============================================================================
@@ -692,7 +689,10 @@ def main():
 
     video_path = out_dir / "output.mp4"
     video_tensor = results["video"]
-    video_tensor = video_tensor.float().clamp(0, 1)
+    logger.info(
+        f"[Export] video shape: {video_tensor.shape}, range: [{video_tensor.min():.3f}, {video_tensor.max():.3f}]"
+    )
+    # video_tensor = (video_tensor / 2 + 0.5).clamp(0, 1)
     video_frames = (video_tensor.numpy() * 255).round().astype("uint8")
     export_to_video(video_frames, str(video_path), fps=8)
     logger.info(f"Saved video: {video_path}")
