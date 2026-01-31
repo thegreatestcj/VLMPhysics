@@ -2,15 +2,12 @@
 """
 Pool Extracted DiT Features for Fast Training
 
-Converts full spatial features [num_patches, D] to temporal-pooled [T, D].
-This reduces file size from ~67MB to ~100KB per file, making training 100x faster.
+Converts full spatial features [1, num_patches, D] to temporal-pooled [T, D].
+This reduces file size from ~67MB to ~50KB per file, making training 100x faster.
 
 The output directory structure mirrors the input structure exactly:
-    input:  physion_features/video_id/t200/layer_15.pt  (67MB, [17550, 1920])
-    output: physion_features_pooled/video_id/t200/layer_15.pt  (100KB, [13, 1920])
-
-This means minimal changes needed to feature_dataset.py - just point to the
-new directory.
+    input:  physion_features/video_id/t200/layer_15.pt  (67MB, [1, 17550, 1920])
+    output: physion_features_pooled/video_id/t200/layer_15.pt  (50KB, [13, 1920])
 
 Usage:
     python -m utils.pool_features \
@@ -41,15 +38,22 @@ def pool_spatial(features: torch.Tensor, num_frames: int = 13) -> torch.Tensor:
 
     Args:
         features: Full features with shape:
+            - [1, num_patches, D] where num_patches = T * H * W (from DiT extractor)
             - [num_patches, D] where num_patches = T * H * W (2D)
-            - [T, H*W, D] (3D)
+            - [T, H*W, D] (3D without batch)
             - [T, H, W, D] (4D)
-        num_frames: Number of frames (T), default 13 for CogVideoX
+        num_frames: Number of frames (T), default 13 for CogVideoX latents
 
     Returns:
         Temporal features [T, D]
     """
     ndim = features.dim()
+
+    # Handle [1, num_patches, D] - most common case from DiT extractor
+    if ndim == 3 and features.shape[0] == 1:
+        # [1, num_patches, D] -> [num_patches, D]
+        features = features.squeeze(0)
+        ndim = 2
 
     if ndim == 2:
         # [num_patches, D] -> [T, spatial, D] -> [T, D]
@@ -68,12 +72,10 @@ def pool_spatial(features: torch.Tensor, num_frames: int = 13) -> torch.Tensor:
 
     elif ndim == 4:
         # [T, H, W, D] -> [T, D]
-        # Pool over H and W dimensions (dim 1 and 2)
         pooled = features.mean(dim=(1, 2))
 
     elif ndim == 5:
         # [B, T, H, W, D] -> [T, D] (take first batch)
-        # This shouldn't happen, but handle it gracefully
         pooled = features[0].mean(dim=(1, 2))
 
     else:
@@ -130,6 +132,7 @@ def pool_features(
     logger.info(f"Input directory: {input_dir}")
     logger.info(f"Output directory: {output_dir}")
     logger.info(f"Layers to process: {layers if layers else 'all'}")
+    logger.info(f"Num frames (T): {num_frames}")
 
     # Copy labels.json if exists
     for label_file in ["labels.json", "labels.csv"]:
@@ -209,8 +212,8 @@ def pool_features(
 
     # Size comparison
     if processed_files > 0:
-        sample_in = list(input_dir.glob("*/t200/layer_15.pt"))[:3]
-        sample_out = list(output_dir.glob("*/t200/layer_15.pt"))[:3]
+        sample_in = list(input_dir.glob("*/t*/layer_*.pt"))[:5]
+        sample_out = list(output_dir.glob("*/t*/layer_*.pt"))[:5]
 
         if sample_in and sample_out:
             avg_in = sum(f.stat().st_size for f in sample_in) / len(sample_in)
@@ -249,7 +252,7 @@ def main():
         "--num_frames",
         type=int,
         default=13,
-        help="Number of frames in video (default: 13)",
+        help="Number of frames in latent space (default: 13 for CogVideoX)",
     )
     parser.add_argument(
         "--fp32", action="store_true", help="Save as float32 instead of float16"

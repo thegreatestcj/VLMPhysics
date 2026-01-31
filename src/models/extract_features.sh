@@ -41,8 +41,8 @@ cd ~/repos/VLMPhysics
 # Configuration
 # ============================================================
 
-DATA_DIR="data/Physion"
-OUTPUT_DIR="/users/$USER/scratch/physics/physion_features"
+DATA_DIR="/users/$USER/scratch/physics/videophy_data"
+OUTPUT_DIR="/users/$USER/scratch/physics/videophy_features"
 
 # Layers to extract (for ablation study)
 LAYERS="5 10 15 20 25"

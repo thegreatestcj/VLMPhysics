@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=extract_feat
 #SBATCH --output=slurm/extraction/pool_%j.out
-#SBATCH --time=02:00:00
+#SBATCH --time=06:00:00
 #SBATCH --partition=gpu
 #SBATCH --gres=gpu:1
 #SBATCH --mem=64G
