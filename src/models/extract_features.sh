@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=extract_feat
 #SBATCH --output=slurm/extraction/extract_%j.out
-#SBATCH --time=06:00:00
+#SBATCH --time=12:00:00
 #SBATCH --partition=gpu
 #SBATCH --gres=gpu:1
 #SBATCH --mem=64G
@@ -69,10 +69,11 @@ MAX_VIDEOS=9999
 # echo "Extracting..."
 # # Run extraction for shard 0
 # python -m src.models.extract_features \
-#     --data_dir data/Physion \
-#     --output_dir /users/$USER/scratch/physics/physion_features \
-#     --layers 8 9 11 12 13 14 \
-#     --timesteps 200 400 600 800 \
+#     --data_dir /users/$USER/scratch/physics/videophy_data \
+#     --output_dir /users/$USER/scratch/physics/videophy_features \
+#     --layers 10 15 20 25 \
+#     --dataset videophy \
+#     --timesteps 200 400 600 \
 #     --use-8bit \
 #     --shard 0 \
 #     --num_shards 2
@@ -82,12 +83,13 @@ MAX_VIDEOS=9999
 # echo "Shard 0 completed: $(date)"
 # echo "=========================================="
 
-# Run extraction for shard 1
+Run extraction for shard 1
 python -m src.models.extract_features \
-    --data_dir data/Physion \
-    --output_dir /users/$USER/scratch/physics/physion_features \
-    --layers 8 9 11 12 13 14 \
-    --timesteps 200 400 600 800 \
+    --data_dir /users/$USER/scratch/physics/videophy_data \
+    --output_dir /users/$USER/scratch/physics/videophy_features \
+    --layers 10 15 20 25 \
+    --dataset videophy \
+    --timesteps 200 400 600 \
     --use-8bit \
     --shard 1 \
     --num_shards 2

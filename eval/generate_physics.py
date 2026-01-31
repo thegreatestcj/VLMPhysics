@@ -5,6 +5,8 @@ PhyGenBench Video Generation with Physics Head Trajectory Pruning
 Generates videos for PhyGenBench prompts using CogVideoX-2B with
 trajectory pruning guided by the trained physics discriminator head.
 
+FIXED: Supports resuming - loads existing log and appends without overwriting.
+
 Output Structure:
     outputs/phygenbench/physics/
     ├── generation_log.json
@@ -19,7 +21,7 @@ Usage:
     # Generate specific range
     python eval/generate_physics.py --start 0 --end 80
 
-    # Skip existing videos
+    # Skip existing videos (RECOMMENDED for resume)
     python eval/generate_physics.py --start 0 --end 160 --skip-existing
 """
 
@@ -478,6 +480,51 @@ def load_prompts(prompts_file: str) -> List[Dict]:
     return prompts
 
 
+def load_existing_log(log_path: Path) -> Tuple[List[Dict], set]:
+    """
+    Load existing generation log and extract completed indices.
+
+    Returns:
+        results: List of existing results
+        completed_indices: Set of indices that have been successfully generated
+    """
+    if not log_path.exists():
+        return [], set()
+
+    try:
+        with open(log_path, "r", encoding="utf-8") as f:
+            results = json.load(f)
+
+        # Extract indices of successful generations
+        completed_indices = {
+            r["index"]
+            for r in results
+            if r.get("status") == "success" or r.get("status", "").startswith("success")
+        }
+
+        logger.info(
+            f"Loaded existing log with {len(results)} entries, {len(completed_indices)} successful"
+        )
+        return results, completed_indices
+
+    except (json.JSONDecodeError, KeyError) as e:
+        logger.warning(f"Could not parse existing log: {e}")
+        # Backup corrupted log
+        backup_path = log_path.with_suffix(f".backup_{int(time.time())}.json")
+        log_path.rename(backup_path)
+        logger.warning(f"Backed up corrupted log to {backup_path}")
+        return [], set()
+
+
+def save_log_sorted(log_path: Path, results: List[Dict]) -> None:
+    """Save results to log, sorted by index."""
+    # Sort by index for clean output
+    sorted_results = sorted(results, key=lambda x: x.get("index", 0))
+
+    with open(log_path, "w", encoding="utf-8") as f:
+        json.dump(sorted_results, f, indent=2, ensure_ascii=False)
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Generate PhyGenBench videos with physics head pruning",
@@ -569,13 +616,20 @@ def main():
     with open(config_path, "w") as f:
         json.dump(asdict(config), f, indent=2)
 
+    # Load existing log (if any) to support resume
+    log_path = output_dir / "generation_log.json"
+    results, completed_indices = load_existing_log(log_path)
+
+    # Create index -> result mapping for updating existing entries
+    results_by_index = {r["index"]: r for r in results}
+
     # Setup generator
     generator = TrajectoryPruningGenerator(config)
     generator.load()
 
-    # Generation loop
-    results = []
-    log_path = output_dir / "generation_log.json"
+    # Count stats
+    skipped_count = 0
+    generated_count = 0
 
     for idx in tqdm(indices, desc="Generating"):
         prompt_data = prompts[idx]
@@ -587,9 +641,28 @@ def main():
         # Output path (1-indexed like baseline)
         video_path = output_dir / f"output_video_{idx + 1}.mp4"
 
-        # Skip if exists
-        if args.skip_existing and video_path.exists():
-            logger.info(f"[{idx}] Skipping (exists)")
+        # Skip if already completed (check both video file and log)
+        already_in_log = idx in completed_indices
+        video_exists = video_path.exists()
+
+        if args.skip_existing and (already_in_log or video_exists):
+            if not already_in_log and video_exists:
+                # Video exists but not in log - add a placeholder entry
+                logger.info(f"[{idx}] Video exists but not in log, adding entry")
+                results_by_index[idx] = {
+                    "index": idx,
+                    "category": category,
+                    "prompt": prompt_text,
+                    "output": str(video_path),
+                    "time": 0,
+                    "status": "success (pre-existing)",
+                }
+                # Save immediately
+                results = list(results_by_index.values())
+                save_log_sorted(log_path, results)
+            else:
+                logger.info(f"[{idx}] Skipping (already completed)")
+            skipped_count += 1
             continue
 
         logger.info(f"\n[{idx}] {category}: {prompt_text[:60]}...")
@@ -632,6 +705,7 @@ def main():
             logger.info(
                 f"  Done in {total_time:.1f}s (sample={info.get('sampling_time', 0):.1f}s, decode={info.get('decode_time', 0):.1f}s), score={info['best_score']:.3f}"
             )
+            generated_count += 1
 
         except Exception as e:
             import traceback
@@ -647,25 +721,34 @@ def main():
                 "status": f"error: {str(e)}",
             }
 
-        results.append(result)
+        # Update or add result
+        results_by_index[idx] = result
 
-        # Save log incrementally
-        with open(log_path, "w") as f:
-            json.dump(results, f, indent=2)
+        # Rebuild results list and save incrementally (sorted by index)
+        results = list(results_by_index.values())
+        save_log_sorted(log_path, results)
 
     # Cleanup
     generator.cleanup()
 
     # Final summary
-    successful = sum(1 for r in results if r["status"] == "success")
-    total_time = sum(r["time"] for r in results)
+    successful = sum(
+        1
+        for r in results_by_index.values()
+        if r.get("status", "").startswith("success")
+    )
+    total_time = sum(r.get("time", 0) for r in results_by_index.values())
 
     logger.info("\n" + "=" * 60)
     logger.info("GENERATION COMPLETE")
     logger.info("=" * 60)
-    logger.info(f"Successful: {successful}/{len(results)}")
-    logger.info(f"Total time: {total_time / 60:.1f} min")
-    logger.info(f"Avg time/video: {total_time / max(1, successful):.1f}s")
+    logger.info(f"Total in log: {len(results_by_index)}")
+    logger.info(f"Successful: {successful}")
+    logger.info(f"Skipped (existing): {skipped_count}")
+    logger.info(f"Generated this run: {generated_count}")
+    logger.info(f"Total time this run: {total_time / 60:.1f} min")
+    if generated_count > 0:
+        logger.info(f"Avg time/video: {total_time / generated_count:.1f}s")
     logger.info(f"Output: {output_dir}")
 
 

@@ -99,8 +99,8 @@ python eval/generate_physics.py \
     --frames 49 \
     --guidance 6.0 \
     --seed 42 \
-    --start 80 \
-    --end 160 \
+    --start 68 \
+    --end 80 \
     --skip-existing
 
 # ============================================================

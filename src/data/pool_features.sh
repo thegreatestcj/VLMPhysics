@@ -26,8 +26,8 @@ conda activate physics
 cd /users/$USER/repos/VLMPhysics
 
 # Paths
-INPUT_DIR="/users/$USER/scratch/physics/physion_features"
-OUTPUT_DIR="/users/$USER/scratch/physics/physion_features_pooled"
+INPUT_DIR="/users/$USER/scratch/physics/videophy_features"
+OUTPUT_DIR="/users/$USER/scratch/physics/videophy_features_pooled"
 
 mkdir -p "$OUTPUT_DIR"
 

@@ -1,0 +1,1086 @@
+{
+  "summary": {
+    "folder": "outputs/phygenbench/physics",
+    "total_videos": 134,
+    "evaluated": 134,
+    "errors": 0,
+    "physics_pass_rate": 0.6865671641791045,
+    "physics_pass_count": 92,
+    "avg_time_per_video": 2.720623615962356,
+    "total_time": 364.5635645389557
+  },
+  "results": [
+    {
+      "physics_score": 0,
+      "reason": "Water is shown pouring into space, which is unrealistic due to the lack of gravity to pull the water in a continuous stream.",
+      "raw_response": "```json\n{\"physics_score\": 0, \"reason\": \"Water is shown pouring into space, which is unrealistic due to the lack of gravity to pull the water in a continuous stream.\"}\n```",
+      "video_file": "output_video_1.mp4",
+      "index": 0,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The object appears to vanish when placed on the water surface, which violates conservation of mass and does not align with expected material behavior.",
+      "raw_response": "```json\n{\"physics_score\": 0, \"reason\": \"The object appears to vanish when placed on the water surface, which violates conservation of mass and does not align with expected material behavior.\"}\n```",
+      "video_file": "output_video_10.mp4",
+      "index": 9,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows a block of cheese with appropriate melting and smoking behavior, maintaining consistent mass and volume, with material properties matching expectations for cheese.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video shows a block of cheese with appropriate melting and smoking behavior, maintaining consistent mass and volume, with material properties matching expectations for cheese.\"}",
+      "video_file": "output_video_100.mp4",
+      "index": 99,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The video shows abstract shapes and colors without clear indication of physics-based movement or interaction.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The video shows abstract shapes and colors without clear indication of physics-based movement or interaction.\"}",
+      "video_file": "output_video_101.mp4",
+      "index": 100,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video lacks clear context or events to analyze for physical plausibility, but there are no obvious violations in the visible motion.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video lacks clear context or events to analyze for physical plausibility, but there are no obvious violations in the visible motion.\"}",
+      "video_file": "output_video_102.mp4",
+      "index": 101,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows steam rising from a pot, which is consistent with real-world physics and material properties.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video shows steam rising from a pot, which is consistent with real-world physics and material properties.\"}",
+      "video_file": "output_video_103.mp4",
+      "index": 102,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The water vapor or mist disperses naturally, consistent with real-world fluid dynamics. There are no visible violations of gravity, conservation principles, or material properties.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The water vapor or mist disperses naturally, consistent with real-world fluid dynamics. There are no visible violations of gravity, conservation principles, or material properties.\"}",
+      "video_file": "output_video_104.mp4",
+      "index": 103,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The turbulence and movement of the liquid and vapor do not follow realistic fluid dynamics, such as density and gravity effects, suggesting inconsistency with real-world physics.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The turbulence and movement of the liquid and vapor do not follow realistic fluid dynamics, such as density and gravity effects, suggesting inconsistency with real-world physics.\"}",
+      "video_file": "output_video_105.mp4",
+      "index": 104,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video likely depicts boiling water, which behaves consistently with real-world fluid dynamics and the effects of heat on liquid.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video likely depicts boiling water, which behaves consistently with real-world fluid dynamics and the effects of heat on liquid.\"}",
+      "video_file": "output_video_106.mp4",
+      "index": 105,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows a fluid pouring motion consistent with real-world physics, with natural gravity-driven flow and interaction with the container.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video shows a fluid pouring motion consistent with real-world physics, with natural gravity-driven flow and interaction with the container.\"}",
+      "video_file": "output_video_107.mp4",
+      "index": 106,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The fluid motion appears consistent with real-world fluid dynamics and gravity effects.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The fluid motion appears consistent with real-world fluid dynamics and gravity effects.\"}\n```",
+      "video_file": "output_video_108.mp4",
+      "index": 107,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows liquid being poured into a cup, and the movement follows physical laws such as gravity and fluid dynamics. There are no obvious physics violations.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The video shows liquid being poured into a cup, and the movement follows physical laws such as gravity and fluid dynamics. There are no obvious physics violations.\"}\n```",
+      "video_file": "output_video_109.mp4",
+      "index": 108,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The squeezing of the sponge shows consistent shape and material deformation according to pressure applied, with expected liquid expulsion, maintaining realism.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The squeezing of the sponge shows consistent shape and material deformation according to pressure applied, with expected liquid expulsion, maintaining realism.\"}",
+      "video_file": "output_video_11.mp4",
+      "index": 10,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The fluid shows natural motion and interaction consistent with a liquid under the influence of gravity and heat, with no obvious physical violations observable.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The fluid shows natural motion and interaction consistent with a liquid under the influence of gravity and heat, with no obvious physical violations observable.\"}",
+      "video_file": "output_video_110.mp4",
+      "index": 109,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows fluid movement that appears natural, with smooth flow and no obvious physics violations.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video shows fluid movement that appears natural, with smooth flow and no obvious physics violations.\"}",
+      "video_file": "output_video_111.mp4",
+      "index": 110,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows smoke or vapor movement, which appears to behave naturally with gravity and fluid dynamics; there are no obvious physics violations.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The video shows smoke or vapor movement, which appears to behave naturally with gravity and fluid dynamics; there are no obvious physics violations.\"}\n```",
+      "video_file": "output_video_112.mp4",
+      "index": 111,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The movement of the mist or fog in the video appears to follow natural fluid motion, consistent with real-world atmospheric conditions.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The movement of the mist or fog in the video appears to follow natural fluid motion, consistent with real-world atmospheric conditions.\"}",
+      "video_file": "output_video_113.mp4",
+      "index": 112,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows fog gradually covering the view, which is consistent with real-world fog behavior and doesn't violate any laws of physics.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video shows fog gradually covering the view, which is consistent with real-world fog behavior and doesn't violate any laws of physics.\"}",
+      "video_file": "output_video_114.mp4",
+      "index": 113,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The bottle on the left collapses in a manner inconsistent with real-world physics, suggesting a lack of internal pressure maintenance or unrealistic material properties.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The bottle on the left collapses in a manner inconsistent with real-world physics, suggesting a lack of internal pressure maintenance or unrealistic material properties.\"}",
+      "video_file": "output_video_115.mp4",
+      "index": 114,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows a substance resembling fog or mist moving naturally, with no obvious violations of physical laws regarding gravity, motion, or material properties.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video shows a substance resembling fog or mist moving naturally, with no obvious violations of physical laws regarding gravity, motion, or material properties.\"}",
+      "video_file": "output_video_116.mp4",
+      "index": 115,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The smoke or vapor appears to be moving upward without dispersing or changing shape as expected with natural air currents, which is not consistent with real-world physics.",
+      "raw_response": "```json\n{\"physics_score\": 0, \"reason\": \"The smoke or vapor appears to be moving upward without dispersing or changing shape as expected with natural air currents, which is not consistent with real-world physics.\"}\n```",
+      "video_file": "output_video_117.mp4",
+      "index": 116,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows static blue crystals with no apparent motion or interaction, maintaining their shape and mass.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video shows static blue crystals with no apparent motion or interaction, maintaining their shape and mass.\"}",
+      "video_file": "output_video_118.mp4",
+      "index": 117,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "There is no visible change in liquid volume in the bottle despite continuous pouring, suggesting a violation of conservation of mass.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"There is no visible change in liquid volume in the bottle despite continuous pouring, suggesting a violation of conservation of mass.\"}",
+      "video_file": "output_video_119.mp4",
+      "index": 118,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows hands interacting with a soft object in a realistic manner, adhering to principles of gravity and material properties.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video shows hands interacting with a soft object in a realistic manner, adhering to principles of gravity and material properties.\"}",
+      "video_file": "output_video_12.mp4",
+      "index": 11,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The object levitates or hovers mid-air, which violates real-world gravity and motion laws.",
+      "raw_response": "```json\n{\"physics_score\": 0, \"reason\": \"The object levitates or hovers mid-air, which violates real-world gravity and motion laws.\"}\n```",
+      "video_file": "output_video_120.mp4",
+      "index": 119,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows a viscous fluid being mixed, with realistic flow and consistency.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video shows a viscous fluid being mixed, with realistic flow and consistency.\"}",
+      "video_file": "output_video_121.mp4",
+      "index": 120,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video appears to depict liquid or paint mixing, which behaves as expected under fluid dynamics with realistic movement and blending.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The video appears to depict liquid or paint mixing, which behaves as expected under fluid dynamics with realistic movement and blending.\"}\n```",
+      "video_file": "output_video_122.mp4",
+      "index": 121,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video appears to show paint being mixed, which behaves as expected under real-world fluid dynamics and physics, following natural motion and conservation principles.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The video appears to show paint being mixed, which behaves as expected under real-world fluid dynamics and physics, following natural motion and conservation principles.\"}\n```",
+      "video_file": "output_video_123.mp4",
+      "index": 122,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows a fluid-like material mixing, with consistent color blending and motion that aligns with real-life behavior of mixing two substances.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The video shows a fluid-like material mixing, with consistent color blending and motion that aligns with real-life behavior of mixing two substances.\"}\n```",
+      "video_file": "output_video_124.mp4",
+      "index": 123,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows fluid motion with realistic swirling and mixing, consistent with real-world physics.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video shows fluid motion with realistic swirling and mixing, consistent with real-world physics.\"}",
+      "video_file": "output_video_125.mp4",
+      "index": 124,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video depicts a flame, which behaves consistently with real-world fire behavior, with plausible motion and shape due to fluid dynamics.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The video depicts a flame, which behaves consistently with real-world fire behavior, with plausible motion and shape due to fluid dynamics.\"}\n```",
+      "video_file": "output_video_126.mp4",
+      "index": 125,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The flame behaves as expected, with realistic flickering and shape changes due to air currents affecting the combustion process.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The flame behaves as expected, with realistic flickering and shape changes due to air currents affecting the combustion process.\"}",
+      "video_file": "output_video_127.mp4",
+      "index": 126,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The flame behaves realistically, adhering to known physical properties of fire.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The flame behaves realistically, adhering to known physical properties of fire.\"}",
+      "video_file": "output_video_128.mp4",
+      "index": 127,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video appears to show a flame, which behaves consistently with how flames move and flicker in real life. There are no obvious physics violations in terms of gravity, collisions, or material properties.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video appears to show a flame, which behaves consistently with how flames move and flicker in real life. There are no obvious physics violations in terms of gravity, collisions, or material properties.\"}",
+      "video_file": "output_video_129.mp4",
+      "index": 128,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The hands are deforming the ball in a way that suggests inconsistent volume and material properties, making the behavior unrealistic as if the ball was too fluid or not maintaining shape.",
+      "raw_response": "```json\n{\"physics_score\": 0, \"reason\": \"The hands are deforming the ball in a way that suggests inconsistent volume and material properties, making the behavior unrealistic as if the ball was too fluid or not maintaining shape.\"}\n```",
+      "video_file": "output_video_13.mp4",
+      "index": 12,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The flame flickers naturally, adhering to expected behavior under real-world physical laws.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The flame flickers naturally, adhering to expected behavior under real-world physical laws.\"}",
+      "video_file": "output_video_130.mp4",
+      "index": 129,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The small object moves off the rock and behaves consistently with gravity and expected motion.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The small object moves off the rock and behaves consistently with gravity and expected motion.\"}\n```",
+      "video_file": "output_video_131.mp4",
+      "index": 130,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "No visible changes or motion in the video to evaluate physics.",
+      "raw_response": "```json\n{\"physics_score\": 0, \"reason\": \"No visible changes or motion in the video to evaluate physics.\"}\n```",
+      "video_file": "output_video_132.mp4",
+      "index": 131,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The bottle disappears unrealistically and does not behave according to expected physical laws.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The bottle disappears unrealistically and does not behave according to expected physical laws.\"}",
+      "video_file": "output_video_133.mp4",
+      "index": 132,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The bowl's handle snaps back to its original position without any visible outside force, which is not consistent with real-world behavior.",
+      "raw_response": "```json\n{\"physics_score\": 0, \"reason\": \"The bowl's handle snaps back to its original position without any visible outside force, which is not consistent with real-world behavior.\"}\n```",
+      "video_file": "output_video_134.mp4",
+      "index": 133,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "No objects are present, making gravity, collisions, and other physical interactions impossible to evaluate.",
+      "raw_response": "```json\n{\"physics_score\": 0, \"reason\": \"No objects are present, making gravity, collisions, and other physical interactions impossible to evaluate.\"}\n```",
+      "video_file": "output_video_135.mp4",
+      "index": 134,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The liquid pours into the glass smoothly, with realistic motion and interaction.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The liquid pours into the glass smoothly, with realistic motion and interaction.\"}",
+      "video_file": "output_video_136.mp4",
+      "index": 135,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The liquid pours into the glass and behaves naturally, following gravity, conserving volume, and demonstrating fluid motion.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The liquid pours into the glass and behaves naturally, following gravity, conserving volume, and demonstrating fluid motion.\"}\n```",
+      "video_file": "output_video_137.mp4",
+      "index": 136,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The video shows a liquid being stretched in a way that violates normal fluid dynamics, as liquids do not naturally stretch and hold shape like a solid.",
+      "raw_response": "```json\n{\"physics_score\": 0, \"reason\": \"The video shows a liquid being stretched in a way that violates normal fluid dynamics, as liquids do not naturally stretch and hold shape like a solid.\"}\n```",
+      "video_file": "output_video_138.mp4",
+      "index": 137,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The liquid pours into the glass smoothly with realistic flow and interaction, consistent with gravity and material properties.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The liquid pours into the glass smoothly with realistic flow and interaction, consistent with gravity and material properties.\"}",
+      "video_file": "output_video_139.mp4",
+      "index": 138,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The object changes shape and appearance in an implausible manner, suggesting a violation of real-world physics conservation laws.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The object changes shape and appearance in an implausible manner, suggesting a violation of real-world physics conservation laws.\"}",
+      "video_file": "output_video_14.mp4",
+      "index": 13,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The glass seems to empty without any visible mechanism removing the liquid, which violates conservation of mass.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The glass seems to empty without any visible mechanism removing the liquid, which violates conservation of mass.\"}",
+      "video_file": "output_video_140.mp4",
+      "index": 139,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video depicts paper igniting and burning, which appears to follow real-world behavior. Flame movement and paper combustion seem consistent with physical laws.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video depicts paper igniting and burning, which appears to follow real-world behavior. Flame movement and paper combustion seem consistent with physical laws.\"}",
+      "video_file": "output_video_141.mp4",
+      "index": 140,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video depicts a small flame growing larger, igniting leaves, which behaves consistent with real-world fire propagation.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The video depicts a small flame growing larger, igniting leaves, which behaves consistent with real-world fire propagation.\"}\n```",
+      "video_file": "output_video_142.mp4",
+      "index": 141,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The fire and hay interactions appear consistent with real-world physical behavior, including gravity and material properties.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The fire and hay interactions appear consistent with real-world physical behavior, including gravity and material properties.\"}",
+      "video_file": "output_video_143.mp4",
+      "index": 142,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows a fire burning on grass, and the flame behavior appears consistent with real-world physics, including gravity and combustion.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video shows a fire burning on grass, and the flame behavior appears consistent with real-world physics, including gravity and combustion.\"}",
+      "video_file": "output_video_144.mp4",
+      "index": 143,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows fire burning paper and exhibits no obvious violations of physical laws such as gravity or material behavior.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video shows fire burning paper and exhibits no obvious violations of physical laws such as gravity or material behavior.\"}",
+      "video_file": "output_video_145.mp4",
+      "index": 144,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The liquid falls into the glass under the influence of gravity, and there is no obvious violation of physical laws in the motion or interaction of the liquid.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The liquid falls into the glass under the influence of gravity, and there is no obvious violation of physical laws in the motion or interaction of the liquid.\"}\n```",
+      "video_file": "output_video_146.mp4",
+      "index": 145,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The liquid appears to pour naturally, maintaining consistent volume and behavior typical of a fluid under gravity.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The liquid appears to pour naturally, maintaining consistent volume and behavior typical of a fluid under gravity.\"}",
+      "video_file": "output_video_147.mp4",
+      "index": 146,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The hands and soap interact naturally, maintaining consistent shape and mass, with realistic fluid and motion behavior.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The hands and soap interact naturally, maintaining consistent shape and mass, with realistic fluid and motion behavior.\"}",
+      "video_file": "output_video_15.mp4",
+      "index": 14,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The smoke/steam enters the bottle smoothly and follows a realistic motion consistent with fluid dynamics.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The smoke/steam enters the bottle smoothly and follows a realistic motion consistent with fluid dynamics.\"}",
+      "video_file": "output_video_16.mp4",
+      "index": 15,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The smoke plume behaves consistently with real-world physics, rising naturally and diffusing gradually as expected.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The smoke plume behaves consistently with real-world physics, rising naturally and diffusing gradually as expected.\"}\n```",
+      "video_file": "output_video_17.mp4",
+      "index": 16,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The video depicts a cloud floating in a room, which is not physically plausible as clouds are made of water vapor and cannot be contained or float within an indoor setting like a cohesive object.",
+      "raw_response": "```json\n{\"physics_score\": 0, \"reason\": \"The video depicts a cloud floating in a room, which is not physically plausible as clouds are made of water vapor and cannot be contained or float within an indoor setting like a cohesive object.\"}\n```",
+      "video_file": "output_video_18.mp4",
+      "index": 17,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows a fluid being poured into a metal container. The movement and flow of the liquid appear consistent with real-world physics under gravity, with appropriate velocity and motion.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The video shows a fluid being poured into a metal container. The movement and flow of the liquid appear consistent with real-world physics under gravity, with appropriate velocity and motion.\"}\n```",
+      "video_file": "output_video_19.mp4",
+      "index": 18,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The liquid appears to flow naturally in response to gravity, with realistic motion and continuous volume maintenance.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The liquid appears to flow naturally in response to gravity, with realistic motion and continuous volume maintenance.\"}",
+      "video_file": "output_video_2.mp4",
+      "index": 1,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The video depicts a funnel cloud or tornado-like effect that appears unnatural with the colors and transitions, suggesting it does not follow realistic fluid dynamics and atmospheric conditions.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The video depicts a funnel cloud or tornado-like effect that appears unnatural with the colors and transitions, suggesting it does not follow realistic fluid dynamics and atmospheric conditions.\"}",
+      "video_file": "output_video_20.mp4",
+      "index": 19,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The sequence shows a needle penetrating a balloon without it popping, which violates expected behavior of balloon material and pressure dynamics.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The sequence shows a needle penetrating a balloon without it popping, which violates expected behavior of balloon material and pressure dynamics.\"}",
+      "video_file": "output_video_21.mp4",
+      "index": 20,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The pencil interacts with the paper and draws a line in a manner consistent with real-world physics as it maintains consistent contact and pressure on the paper.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The pencil interacts with the paper and draws a line in a manner consistent with real-world physics as it maintains consistent contact and pressure on the paper.\"}",
+      "video_file": "output_video_22.mp4",
+      "index": 21,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The fork and plastic material interaction appears consistent with real-world physics, showing believable bending and deformation of the plastic.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The fork and plastic material interaction appears consistent with real-world physics, showing believable bending and deformation of the plastic.\"}",
+      "video_file": "output_video_23.mp4",
+      "index": 22,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The object's motion is consistent with real-world physics, showing plausible acceleration and behavior under gravity.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The object's motion is consistent with real-world physics, showing plausible acceleration and behavior under gravity.\"}\n```",
+      "video_file": "output_video_24.mp4",
+      "index": 23,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows the tip of a pencil moving slightly, which appears plausible with real-world physics. There are no evident physics violations; the pencil's motion and rigidity are consistent with its material properties.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The video shows the tip of a pencil moving slightly, which appears plausible with real-world physics. There are no evident physics violations; the pencil's motion and rigidity are consistent with its material properties.\"}\n```",
+      "video_file": "output_video_25.mp4",
+      "index": 24,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The object changes position and orientation abruptly without physical interaction, which is not consistent with real-world physics.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The object changes position and orientation abruptly without physical interaction, which is not consistent with real-world physics.\"}",
+      "video_file": "output_video_26.mp4",
+      "index": 25,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The basketball appears to move realistically, maintaining consistent shape and velocity, aligning with real-world physics.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The basketball appears to move realistically, maintaining consistent shape and velocity, aligning with real-world physics.\"}\n```",
+      "video_file": "output_video_27.mp4",
+      "index": 26,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The ball appears to move naturally under gravity, maintains consistent shape, and rolls with realistic velocity and acceleration.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The ball appears to move naturally under gravity, maintains consistent shape, and rolls with realistic velocity and acceleration.\"}\n```",
+      "video_file": "output_video_28.mp4",
+      "index": 27,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The ball appears to change shape inconsistently, not maintaining a consistent volume, and does not behave according to expected material properties.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The ball appears to change shape inconsistently, not maintaining a consistent volume, and does not behave according to expected material properties.\"}",
+      "video_file": "output_video_29.mp4",
+      "index": 28,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The liquid flows smoothly from the bottle, behaving according to gravity and fluid dynamics.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The liquid flows smoothly from the bottle, behaving according to gravity and fluid dynamics.\"}\n```",
+      "video_file": "output_video_3.mp4",
+      "index": 2,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The motion of the ball and its interactions with the ground appear consistent with real-world physics, including gravity and material properties.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The motion of the ball and its interactions with the ground appear consistent with real-world physics, including gravity and material properties.\"}",
+      "video_file": "output_video_30.mp4",
+      "index": 29,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The motion of the chalk pieces and hand appears consistent with real-world physics, including natural motion and realistic material behavior.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The motion of the chalk pieces and hand appears consistent with real-world physics, including natural motion and realistic material behavior.\"}",
+      "video_file": "output_video_31.mp4",
+      "index": 30,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows a pen-like object writing on a surface, with no apparent violations of physical laws in terms of gravity, collisions, or motion.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video shows a pen-like object writing on a surface, with no apparent violations of physical laws in terms of gravity, collisions, or motion.\"}",
+      "video_file": "output_video_32.mp4",
+      "index": 31,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows a red object interacting with a surface, which appears to be a crayon or similar drawing tool marking paper. The motion and interaction with the surface appear consistent with real-world physics.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video shows a red object interacting with a surface, which appears to be a crayon or similar drawing tool marking paper. The motion and interaction with the surface appear consistent with real-world physics.\"}",
+      "video_file": "output_video_33.mp4",
+      "index": 32,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows a highlighter interacting with a surface without any obvious violations of physical laws.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The video shows a highlighter interacting with a surface without any obvious violations of physical laws.\"}\n```",
+      "video_file": "output_video_34.mp4",
+      "index": 33,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The pen tip and paper interaction appears consistent with real-world physics without visible violations.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The pen tip and paper interaction appears consistent with real-world physics without visible violations.\"}",
+      "video_file": "output_video_35.mp4",
+      "index": 34,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The droplet behaves naturally on the leaf, adhering to its surface and maintaining a consistent shape typical of surface tension effects on water droplets. No obvious physics violations are observed in the interaction depicted.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The droplet behaves naturally on the leaf, adhering to its surface and maintaining a consistent shape typical of surface tension effects on water droplets. No obvious physics violations are observed in the interaction depicted.\"}\n```",
+      "video_file": "output_video_36.mp4",
+      "index": 35,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video depicts water droplets on a surface, which behave naturally according to physics.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video depicts water droplets on a surface, which behave naturally according to physics.\"}",
+      "video_file": "output_video_37.mp4",
+      "index": 36,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The droplet on the apple moves consistently with gravity and maintains its shape, behaving realistically as a fluid.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The droplet on the apple moves consistently with gravity and maintains its shape, behaving realistically as a fluid.\"}",
+      "video_file": "output_video_38.mp4",
+      "index": 37,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video appears to show a droplet in motion, behaving consistent with gravity and surface tension effects, with no obvious physics violations.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The video appears to show a droplet in motion, behaving consistent with gravity and surface tension effects, with no obvious physics violations.\"}\n```",
+      "video_file": "output_video_39.mp4",
+      "index": 38,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The fluid appears to flow naturally under gravity with consistent motion and volume.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The fluid appears to flow naturally under gravity with consistent motion and volume.\"}",
+      "video_file": "output_video_4.mp4",
+      "index": 3,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows a droplet moving across pages, adhering to the surface as expected, consistent with fluid behavior and gravity.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video shows a droplet moving across pages, adhering to the surface as expected, consistent with fluid behavior and gravity.\"}",
+      "video_file": "output_video_40.mp4",
+      "index": 39,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The object appears and disappears without explanation, violating conservation of mass.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The object appears and disappears without explanation, violating conservation of mass.\"}",
+      "video_file": "output_video_41.mp4",
+      "index": 40,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows a consistent and realistic depiction of an object under controlled lighting conditions, without any obvious violations of physical laws.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video shows a consistent and realistic depiction of an object under controlled lighting conditions, without any obvious violations of physical laws.\"}",
+      "video_file": "output_video_42.mp4",
+      "index": 41,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The water bottle appears progressively in the video without any apparent violation of physical laws related to gravity, collision, conservation, motion, or material properties.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The water bottle appears progressively in the video without any apparent violation of physical laws related to gravity, collision, conservation, motion, or material properties.\"}\n```",
+      "video_file": "output_video_43.mp4",
+      "index": 42,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The droplet does not appear to fall under gravity and hovers in place, which violates real-world physics.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The droplet does not appear to fall under gravity and hovers in place, which violates real-world physics.\"}",
+      "video_file": "output_video_44.mp4",
+      "index": 43,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The blocks move into view without apparent support, defying gravity.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The blocks move into view without apparent support, defying gravity.\"}",
+      "video_file": "output_video_45.mp4",
+      "index": 44,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The glowing effect and lack of context make it difficult to evaluate gravity, collisions, motion, and material properties in a realistic manner.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The glowing effect and lack of context make it difficult to evaluate gravity, collisions, motion, and material properties in a realistic manner.\"}",
+      "video_file": "output_video_46.mp4",
+      "index": 45,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows a light moving over a surface, likely fluid, which behaves consistently with real-world fluid dynamics and light interaction.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The video shows a light moving over a surface, likely fluid, which behaves consistently with real-world fluid dynamics and light interaction.\"}\n```",
+      "video_file": "output_video_47.mp4",
+      "index": 46,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows an unfocused light source with no discernible objects or motion that could violate physical laws.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The video shows an unfocused light source with no discernible objects or motion that could violate physical laws.\"}\n```",
+      "video_file": "output_video_48.mp4",
+      "index": 47,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The video plausibility is impossible to determine due to lack of context and clarity in the images provided.",
+      "raw_response": "```json\n{\"physics_score\": 0, \"reason\": \"The video plausibility is impossible to determine due to lack of context and clarity in the images provided.\"}\n```",
+      "video_file": "output_video_49.mp4",
+      "index": 48,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The liquid flows naturally downwards, consistent with gravity, and the Earth is depicted at a natural distance, suggesting an environment where gravity behaves normally.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The liquid flows naturally downwards, consistent with gravity, and the Earth is depicted at a natural distance, suggesting an environment where gravity behaves normally.\"}",
+      "video_file": "output_video_5.mp4",
+      "index": 4,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The video lacks clear content to assess physical plausibility.",
+      "raw_response": "```json\n{\"physics_score\": 0, \"reason\": \"The video lacks clear content to assess physical plausibility.\"}\n```",
+      "video_file": "output_video_50.mp4",
+      "index": 49,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video appears to show a light source obscured by fog, with no observable objects defying physical laws.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video appears to show a light source obscured by fog, with no observable objects defying physical laws.\"}",
+      "video_file": "output_video_51.mp4",
+      "index": 50,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The video lacks visible context for assessing physical plausibility, as it mainly shows points of light with no discernible objects or interactions to evaluate.",
+      "raw_response": "```json\n{\"physics_score\": 0, \"reason\": \"The video lacks visible context for assessing physical plausibility, as it mainly shows points of light with no discernible objects or interactions to evaluate.\"}\n```",
+      "video_file": "output_video_52.mp4",
+      "index": 51,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The video shows an object emitting light without any clear aerodynamic motion or environmental interaction, which doesn't align with real-world physics.",
+      "raw_response": "```json\n{\"physics_score\": 0, \"reason\": \"The video shows an object emitting light without any clear aerodynamic motion or environmental interaction, which doesn't align with real-world physics.\"}\n```",
+      "video_file": "output_video_53.mp4",
+      "index": 52,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The video lacks sufficient detail to assess physical plausibility.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The video lacks sufficient detail to assess physical plausibility.\"}",
+      "video_file": "output_video_54.mp4",
+      "index": 53,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The video is completely black, making it impossible to evaluate physical plausibility.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The video is completely black, making it impossible to evaluate physical plausibility.\"}",
+      "video_file": "output_video_55.mp4",
+      "index": 54,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The object in the video appears to be walking on water without any buoyant surface, which violates real-world physics.",
+      "raw_response": "```json\n{\"physics_score\": 0, \"reason\": \"The object in the video appears to be walking on water without any buoyant surface, which violates real-world physics.\"}\n```",
+      "video_file": "output_video_56.mp4",
+      "index": 55,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The object appears to move consistently and naturally through the sky without any obvious violations of physical laws.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The object appears to move consistently and naturally through the sky without any obvious violations of physical laws.\"}\n```",
+      "video_file": "output_video_57.mp4",
+      "index": 56,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The aircraft appears to skim over the water without any interaction, such as splashing or slowing down, which is unrealistic.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The aircraft appears to skim over the water without any interaction, such as splashing or slowing down, which is unrealistic.\"}",
+      "video_file": "output_video_58.mp4",
+      "index": 57,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "Drone hovering stably over water with no obvious physics violations.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"Drone hovering stably over water with no obvious physics violations.\"}\n```",
+      "video_file": "output_video_59.mp4",
+      "index": 58,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The object floats naturally on the liquid, maintaining its shape and volume, and motion appears consistent with real-world physics.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The object floats naturally on the liquid, maintaining its shape and volume, and motion appears consistent with real-world physics.\"}\n```",
+      "video_file": "output_video_6.mp4",
+      "index": 5,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The balloon appears to float naturally, with consistent motion and reflection, without violating real-world physics.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The balloon appears to float naturally, with consistent motion and reflection, without violating real-world physics.\"}\n```",
+      "video_file": "output_video_60.mp4",
+      "index": 59,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The reflection in the mirror appears, which suggests it is changing or morphing, contradicting consistent object reflection.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The reflection in the mirror appears, which suggests it is changing or morphing, contradicting consistent object reflection.\"}",
+      "video_file": "output_video_61.mp4",
+      "index": 60,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The video is mostly static with minimal motion, making it difficult to evaluate physical interactions or properties.",
+      "raw_response": "```json\n{\"physics_score\": 0, \"reason\": \"The video is mostly static with minimal motion, making it difficult to evaluate physical interactions or properties.\"}\n```",
+      "video_file": "output_video_62.mp4",
+      "index": 61,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The car's movement is inconsistent with realistic motion and lacks proper interaction with surfaces.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The car's movement is inconsistent with realistic motion and lacks proper interaction with surfaces.\"}",
+      "video_file": "output_video_63.mp4",
+      "index": 62,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The ball's movement and reflection appear consistent with real-world physics, with no visible violations in gravity, collision, or material behavior.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The ball's movement and reflection appear consistent with real-world physics, with no visible violations in gravity, collision, or material behavior.\"}",
+      "video_file": "output_video_64.mp4",
+      "index": 63,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The yellow object appears to be floating naturally on water, consistent with buoyancy and gravity. There are no obvious violations of physical laws.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The yellow object appears to be floating naturally on water, consistent with buoyancy and gravity. There are no obvious violations of physical laws.\"}\n```",
+      "video_file": "output_video_65.mp4",
+      "index": 64,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows a book and a magnifying glass, and there are no obvious physics violations in the motion or interaction of these objects.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The video shows a book and a magnifying glass, and there are no obvious physics violations in the motion or interaction of these objects.\"}\n```",
+      "video_file": "output_video_66.mp4",
+      "index": 65,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "There are no obvious physics violations; the video shows a watch face which typically adheres to real-world physics.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"There are no obvious physics violations; the video shows a watch face which typically adheres to real-world physics.\"}",
+      "video_file": "output_video_67.mp4",
+      "index": 66,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The rock is floating on the water surface, which is not consistent with its typical dense material properties that should cause it to sink.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The rock is floating on the water surface, which is not consistent with its typical dense material properties that should cause it to sink.\"}",
+      "video_file": "output_video_7.mp4",
+      "index": 6,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The tennis ball floats and behaves consistently with real-world physics in terms of shape and buoyancy.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The tennis ball floats and behaves consistently with real-world physics in terms of shape and buoyancy.\"}\n```",
+      "video_file": "output_video_8.mp4",
+      "index": 7,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video depicts a static sequence of images showing a road surface with visible texture and no apparent motion or physics violations.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video depicts a static sequence of images showing a road surface with visible texture and no apparent motion or physics violations.\"}",
+      "video_file": "output_video_81.mp4",
+      "index": 80,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The bubble moves naturally through the air, maintaining its shape and size, consistent with real-world physics.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The bubble moves naturally through the air, maintaining its shape and size, consistent with real-world physics.\"}",
+      "video_file": "output_video_82.mp4",
+      "index": 81,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The object on a stick appears to maintain its shape and mass, with no clear signs of unrealistic motion or behavior contrary to expected physical laws.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The object on a stick appears to maintain its shape and mass, with no clear signs of unrealistic motion or behavior contrary to expected physical laws.\"}",
+      "video_file": "output_video_83.mp4",
+      "index": 82,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video depicts a calm surface with what appears to be ice floes on water, with natural motion and interactions consistent with fluid dynamics and material properties of ice.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video depicts a calm surface with what appears to be ice floes on water, with natural motion and interactions consistent with fluid dynamics and material properties of ice.\"}",
+      "video_file": "output_video_84.mp4",
+      "index": 83,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video appears to depict fluid-like movement with consistent material properties and no obvious physics violations.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The video appears to depict fluid-like movement with consistent material properties and no obvious physics violations.\"}\n```",
+      "video_file": "output_video_85.mp4",
+      "index": 84,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The images appear to depict a sequence with consistent light and shadow interaction, suggesting plausible physical behavior. There's no clear indication of gravity, collision, or material properties violation from the visual evidence provided.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The images appear to depict a sequence with consistent light and shadow interaction, suggesting plausible physical behavior. There's no clear indication of gravity, collision, or material properties violation from the visual evidence provided.\"}\n```",
+      "video_file": "output_video_86.mp4",
+      "index": 85,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The object appears to remain stationary while emitting light beams downward, which is not consistent with free-falling objects or any visible support mechanisms in reality.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The object appears to remain stationary while emitting light beams downward, which is not consistent with free-falling objects or any visible support mechanisms in reality.\"}",
+      "video_file": "output_video_87.mp4",
+      "index": 86,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows a bright light with objects appearing and disappearing, which does not present obvious physics violations.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video shows a bright light with objects appearing and disappearing, which does not present obvious physics violations.\"}",
+      "video_file": "output_video_88.mp4",
+      "index": 87,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video contains only a bright light with no discernable objects or interactions affected by physical laws.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video contains only a bright light with no discernable objects or interactions affected by physical laws.\"}",
+      "video_file": "output_video_89.mp4",
+      "index": 88,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows a wooden block being dipped into a liquid, and the interactions appear to follow real-world physics, with realistic fluid displacement and no obvious violations.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The video shows a wooden block being dipped into a liquid, and the interactions appear to follow real-world physics, with realistic fluid displacement and no obvious violations.\"}\n```",
+      "video_file": "output_video_9.mp4",
+      "index": 8,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video appears to depict a bubble or sphere changing shape and colors, consistent with real-world behavior of soft/transparent objects under lighting.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video appears to depict a bubble or sphere changing shape and colors, consistent with real-world behavior of soft/transparent objects under lighting.\"}",
+      "video_file": "output_video_90.mp4",
+      "index": 89,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The video consists of a static image of an empty glass, repeated. No physical movement occurs to evaluate physics.",
+      "raw_response": "```json\n{\"physics_score\": 0, \"reason\": \"The video consists of a static image of an empty glass, repeated. No physical movement occurs to evaluate physics.\"}\n```",
+      "video_file": "output_video_91.mp4",
+      "index": 90,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The liquid fills the glass in a manner consistent with gravity and fluid dynamics, showing natural flow and surface tension.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The liquid fills the glass in a manner consistent with gravity and fluid dynamics, showing natural flow and surface tension.\"}",
+      "video_file": "output_video_92.mp4",
+      "index": 91,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows a glass being filled with liquid, which appears to follow real-world physics with natural motion and consistent volume.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The video shows a glass being filled with liquid, which appears to follow real-world physics with natural motion and consistent volume.\"}",
+      "video_file": "output_video_93.mp4",
+      "index": 92,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The liquid appears to move and settle plausibly under gravity, with no obvious violations of fluid dynamics or motion.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The liquid appears to move and settle plausibly under gravity, with no obvious violations of fluid dynamics or motion.\"}",
+      "video_file": "output_video_94.mp4",
+      "index": 93,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "Liquid in the glass changes shape in an unnatural manner, violating conservation of volume.",
+      "raw_response": "```json\n{\"physics_score\": 0, \"reason\": \"Liquid in the glass changes shape in an unnatural manner, violating conservation of volume.\"}\n```",
+      "video_file": "output_video_95.mp4",
+      "index": 94,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The video shows ice blocks without movement, collisions, or changes in shape, which is consistent with physical laws for a static scenario.",
+      "raw_response": "```json\n{\"physics_score\": 1, \"reason\": \"The video shows ice blocks without movement, collisions, or changes in shape, which is consistent with physical laws for a static scenario.\"}\n```",
+      "video_file": "output_video_96.mp4",
+      "index": 95,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The candle flame is moving erratically without any external influence like wind, and it changes shape and size in a way inconsistent with normal flame behavior, indicating physics violations.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The candle flame is moving erratically without any external influence like wind, and it changes shape and size in a way inconsistent with normal flame behavior, indicating physics violations.\"}",
+      "video_file": "output_video_97.mp4",
+      "index": 96,
+      "caption": ""
+    },
+    {
+      "physics_score": 1,
+      "reason": "The material behaves like a fluid, stretching and flowing naturally under gravity, maintaining consistent volume.",
+      "raw_response": "{\"physics_score\": 1, \"reason\": \"The material behaves like a fluid, stretching and flowing naturally under gravity, maintaining consistent volume.\"}",
+      "video_file": "output_video_98.mp4",
+      "index": 97,
+      "caption": ""
+    },
+    {
+      "physics_score": 0,
+      "reason": "The amount of ice cream being added consistently exceeds the glass's capacity without ever overflowing, which is not physically plausible.",
+      "raw_response": "{\"physics_score\": 0, \"reason\": \"The amount of ice cream being added consistently exceeds the glass's capacity without ever overflowing, which is not physically plausible.\"}",
+      "video_file": "output_video_99.mp4",
+      "index": 98,
+      "caption": ""
+    }
+  ]
+}

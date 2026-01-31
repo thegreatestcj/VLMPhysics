@@ -304,8 +304,9 @@ def extract_dataset(
             video_dir = output_dir / video_id
             if video_dir.exists():
                 all_done = all(
-                    (video_dir / f"t{t}" / f"layer_{layers[0]}.pt").exists()
+                    (video_dir / f"t{t}" / f"layer_{l}.pt").exists()
                     for t in timesteps
+                    for l in layers
                 )
                 if all_done:
                     skipped += 1
