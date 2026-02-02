@@ -1,0 +1,23 @@
+{
+  "exp_type": "training",
+  "exp_name": "heads_ablation",
+  "timestamp": "20260131_184635",
+  "ablation_type": "heads",
+  "layer": 10,
+  "head_type": "mean",
+  "extra": {
+    "lr": 0.001,
+    "batch_size": 32,
+    "feature_dir": "/users/ctang33/scratch/physics/videophy_features_pooled",
+    "layer": 10,
+    "head_type": "mean",
+    "ablation": "heads",
+    "is_pooled": true,
+    "num_workers": 4,
+    "timesteps": null,
+    "weight_decay": 0.01,
+    "num_epochs": 100,
+    "early_stopping_patience": 15,
+    "device": "cuda"
+  }
+}

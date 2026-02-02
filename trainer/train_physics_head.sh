@@ -42,7 +42,7 @@ cd ~/repos/VLMPhysics
 # ============================================================
 
 # Feature directory (from extract_features.py)
-FEATURE_DIR="/users/$USER/scratch/physics/physion_features_pooled"
+FEATURE_DIR="/users/$USER/scratch/physics/videophy_features_pooled"
 LABEL_FILE="${FEATURE_DIR}/labels.json"
 
 # Output directory (small files, can be in project folder)
@@ -63,7 +63,7 @@ SEED=42
 DEFAULT_LAYER=15
 
 # Default head for layer ablation
-DEFAULT_HEAD="temporal_simple"
+DEFAULT_HEAD="multiview_simple"
 
 HEAD_TYPE="mean causal_simple temporal_simple multiview_simple"
 
@@ -110,31 +110,31 @@ fi
 # Expected time: ~10 minutes
 # ============================================================
 
-# echo "========================================"
-# echo "Running HEAD ABLATION..."
-# echo "========================================"
+echo "========================================"
+echo "Running HEAD ABLATION..."
+echo "========================================"
 
-# python -m trainer.train_physics_head \
-#     --feature_dir $FEATURE_DIR \
-#     --label_file $LABEL_FILE \
-#     --ablation heads \
-#     --heads mean causal_simple temporal_simple multiview_simple \
-#     --layer $DEFAULT_LAYER \
-#     --batch_size $BATCH_SIZE \
-#     --num_epochs $NUM_EPOCHS \
-#     --lr $LR \
-#     --weight_decay $WEIGHT_DECAY \
-#     # --warmup_epochs $WARMUP_EPOCHS \
-#     # --val_ratio $VAL_RATIO \
-#     --early_stopping $EARLY_STOPPING \
-#     --num_workers $NUM_WORKERS \
-#     # --seed $SEED \
-#     --is_pooled \
-#     --output_dir ${OUTPUT_DIR}/head_ablation
+python -m trainer.train_physics_head \
+    --feature_dir $FEATURE_DIR \
+    --label_file $LABEL_FILE \
+    --ablation heads \
+    --heads mean causal_simple temporal_simple multiview_simple \
+    --layer $DEFAULT_LAYER \
+    --batch_size $BATCH_SIZE \
+    --num_epochs $NUM_EPOCHS \
+    --lr $LR \
+    --weight_decay $WEIGHT_DECAY \
+    # --warmup_epochs $WARMUP_EPOCHS \
+    # --val_ratio $VAL_RATIO \
+    --early_stopping $EARLY_STOPPING \
+    --num_workers $NUM_WORKERS \
+    # --seed $SEED \
+    --is_pooled \
+    --output_dir ${OUTPUT_DIR}/head_ablation
 
-# echo ""
-# echo "Head ablation completed: $(date)"
-# echo ""
+echo ""
+echo "Head ablation completed: $(date)"
+echo ""
 
 
 # ============================================================
@@ -150,27 +150,27 @@ fi
 # Expected time: ~10 minutes
 # ============================================================
 
-echo "========================================"
-echo "Running LAYER ABLATION..."
-echo "========================================"
+# echo "========================================"
+# echo "Running LAYER ABLATION..."
+# echo "========================================"
 
-python -m trainer.train_physics_head \
-    --feature_dir $FEATURE_DIR \
-    --label_file $LABEL_FILE \
-    --ablation layers \
-    --layers 8 9 10 11 12 13 14 \
-    --head_type $DEFAULT_HEAD \
-    --batch_size $BATCH_SIZE \
-    --num_epochs $NUM_EPOCHS \
-    --lr $LR \
-    --weight_decay $WEIGHT_DECAY \
-    --early_stopping $EARLY_STOPPING \
-    --num_workers $NUM_WORKERS \
-    --is_pooled
+# python -m trainer.train_physics_head \
+#     --feature_dir $FEATURE_DIR \
+#     --label_file $LABEL_FILE \
+#     --ablation layers \
+#     --layers 10 15 20 25 \
+#     --head_type $DEFAULT_HEAD \
+#     --batch_size $BATCH_SIZE \
+#     --num_epochs $NUM_EPOCHS \
+#     --lr $LR \
+#     --weight_decay $WEIGHT_DECAY \
+#     --early_stopping $EARLY_STOPPING \
+#     --num_workers $NUM_WORKERS \
+#     --is_pooled
 
-echo ""
-echo "Layer ablation completed: $(date)"
-echo ""
+# echo ""
+# echo "Layer ablation completed: $(date)"
+# echo ""
 
 
 # ============================================================

@@ -1,0 +1,18 @@
+{
+  "mean": {
+    "best_auc": 0.6879408266342237,
+    "best_epoch": 14
+  },
+  "causal_simple": {
+    "best_auc": 0.6819334571286092,
+    "best_epoch": 20
+  },
+  "temporal_simple": {
+    "best_auc": 0.674265135330745,
+    "best_epoch": 5
+  },
+  "multiview_simple": {
+    "best_auc": 0.6907524152691189,
+    "best_epoch": 17
+  }
+}

@@ -274,7 +274,7 @@ class MeanPool(nn.Module):
         self,
         hidden_dim: int = 1920,
         mlp_dim: int = 512,
-        dropout: float = 0.1,
+        dropout: float = 0.3,
     ):
         super().__init__()
         self.classifier = nn.Sequential(
@@ -1464,7 +1464,7 @@ class CausalSimple(nn.Module):
         attn_dim: int = 256,
         num_heads: int = 4,
         max_frames: int = 50,
-        dropout: float = 0.1,
+        dropout: float = 0.3,
     ):
         super().__init__()
         self.hidden_dim = hidden_dim
@@ -1569,7 +1569,7 @@ class TemporalSimple(nn.Module):
         attn_dim: int = 256,
         num_heads: int = 4,
         max_frames: int = 50,
-        dropout: float = 0.1,
+        dropout: float = 0.3,
     ):
         super().__init__()
         self.hidden_dim = hidden_dim
@@ -1670,7 +1670,7 @@ class MultiViewSimple(nn.Module):
         view_dim: int = 256,
         num_heads: int = 4,
         max_frames: int = 50,
-        dropout: float = 0.1,
+        dropout: float = 0.3,
     ):
         super().__init__()
         self.hidden_dim = hidden_dim
