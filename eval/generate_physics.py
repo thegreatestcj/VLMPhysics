@@ -114,12 +114,16 @@ class PhysicsHeadEvaluator:
         from src.models.physics_head import create_physics_head
 
         hidden_dim = 1920  # CogVideoX-2B
-        self.head = create_physics_head(head_type, hidden_dim)
 
+        # Read head_type from checkpoint if available, to prevent mismatch
         ckpt = torch.load(head_path, map_location="cpu", weights_only=False)
-        state = ckpt.get("model_state_dict", ckpt.get("state_dict", ckpt))
-        self.head.load_state_dict(state)
-        self.head = self.head.to(device).eval()
+        ckpt_head_type = ckpt.get("head_type", None)
+        if ckpt_head_type and ckpt_head_type != head_type:
+            logger.warning(
+                f"head_type mismatch: arg='{head_type}', checkpoint='{ckpt_head_type}'. "
+                f"Using checkpoint's '{ckpt_head_type}'."
+            )
+            head_type = ckpt_head_type
 
         logger.info(f"Physics head loaded from {head_path}")
 

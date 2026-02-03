@@ -91,7 +91,7 @@ python eval/generate_physics.py \
     --prompts-file data/phygenbench/prompts.json \
     --output-dir outputs/phygenbench/videophy \
     --physics-head "$PHYSICS_HEAD" \
-    --head-type temporal_simple \
+    --head-type causal_simple \
     --extract-layer 10 \
     --num-trajectories 4 \
     --checkpoints 600 400 \

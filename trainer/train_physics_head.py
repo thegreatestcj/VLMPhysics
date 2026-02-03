@@ -218,7 +218,23 @@ class PhysicsHeadTrainer:
         self.early_stopping_patience = early_stopping_patience
 
         # Setup optimizer
-        self.criterion = nn.BCEWithLogitsLoss()
+        # Setup optimizer
+        # Compute pos_weight from training data to handle class imbalance
+        # VideoPhy: ~35% positive, ~65% negative → pos_weight ≈ 1.83
+        train_labels = []
+        for batch in train_loader:
+            train_labels.append(batch["labels"])
+        train_labels = torch.cat(train_labels)
+        num_pos = train_labels.sum().item()
+        num_neg = len(train_labels) - num_pos
+        if num_pos > 0 and num_neg > 0:
+            pw = torch.tensor([num_neg / num_pos], device=device)
+            logger.info(
+                f"Class imbalance: {num_pos:.0f} pos / {num_neg:.0f} neg, pos_weight={pw.item():.3f}"
+            )
+        else:
+            pw = None
+        self.criterion = nn.BCEWithLogitsLoss(pos_weight=pw)
         self.optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
 
         total_steps = len(train_loader) * num_epochs
