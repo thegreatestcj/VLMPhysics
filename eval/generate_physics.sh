@@ -66,7 +66,7 @@ cd ~/repos/VLMPhysics
 # ============================================================
 
 # Physics head (layer 10 is best based on ablation)
-PHYSICS_HEAD="results/training/physics_head/layers_ablation_20260127_074539/layer_10/best.pt"
+PHYSICS_HEAD="results/training/physics_head/heads_ablation_20260131_184635/causal_simple/best.pt"
 
 # Check if physics head exists
 if [ ! -f "$PHYSICS_HEAD" ]; then
@@ -89,7 +89,7 @@ echo ""
 
 python eval/generate_physics.py \
     --prompts-file data/phygenbench/prompts.json \
-    --output-dir outputs/phygenbench/physics \
+    --output-dir outputs/phygenbench/videophy \
     --physics-head "$PHYSICS_HEAD" \
     --head-type temporal_simple \
     --extract-layer 10 \
@@ -99,8 +99,8 @@ python eval/generate_physics.py \
     --frames 49 \
     --guidance 6.0 \
     --seed 42 \
-    --start 68 \
-    --end 80 \
+    --start 80 \
+    --end 160 \
     --skip-existing
 
 # ============================================================

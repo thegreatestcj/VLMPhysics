@@ -1,5 +1,22 @@
 [
   {
+    "index": 68,
+    "category": "Refraction",
+    "prompt": "A magnifying glass is gradually moving closer to a coin, revealing the intricate details and textures of the embossed design as it approaches.",
+    "output": "outputs/phygenbench/physics/output_video_69.mp4",
+    "time": 490.1129322052002,
+    "time_breakdown": {
+      "generation": 489.03,
+      "save": 1.08,
+      "sampling": 467.7,
+      "decode": 20.81
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.9973745346069336,
+    "num_trajectories": 4
+  },
+  {
     "index": 80,
     "category": "Interference & Diffraction",
     "prompt": "A puddle of oil on the road under the sunlight.",
@@ -427,7 +444,7 @@
   {
     "index": 105,
     "category": "Boiling",
-    "prompt": "A timelapse captures the transformation of water in a pot as the temperature rapidly rises above 100\u00b0C.",
+    "prompt": "A timelapse captures the transformation of water in a pot as the temperature rapidly rises above 100°C.",
     "output": "outputs/phygenbench/physics/output_video_106.mp4",
     "time": 486.11414766311646,
     "time_breakdown": {
@@ -444,7 +461,7 @@
   {
     "index": 106,
     "category": "Boiling",
-    "prompt": "A timelapse captures the transformation of milk in a kettle as the temperature rapidly rises above 100\u00b0C.",
+    "prompt": "A timelapse captures the transformation of milk in a kettle as the temperature rapidly rises above 100°C.",
     "output": "outputs/phygenbench/physics/output_video_107.mp4",
     "time": 486.3688950538635,
     "time_breakdown": {
@@ -461,7 +478,7 @@
   {
     "index": 107,
     "category": "Boiling",
-    "prompt": "A timelapse captures the transformation of soup in a saucepan as the temperature rapidly rises above 100\u00b0C.",
+    "prompt": "A timelapse captures the transformation of soup in a saucepan as the temperature rapidly rises above 100°C.",
     "output": "outputs/phygenbench/physics/output_video_108.mp4",
     "time": 486.23086857795715,
     "time_breakdown": {
@@ -478,7 +495,7 @@
   {
     "index": 108,
     "category": "Boiling",
-    "prompt": "A timelapse captures the transformation of tea in a teapot as the temperature rapidly rises above 100\u00b0C.",
+    "prompt": "A timelapse captures the transformation of tea in a teapot as the temperature rapidly rises above 100°C.",
     "output": "outputs/phygenbench/physics/output_video_109.mp4",
     "time": 486.20556712150574,
     "time_breakdown": {
@@ -495,7 +512,7 @@
   {
     "index": 109,
     "category": "Boiling",
-    "prompt": "A timelapse captures the transformation of oil in a cauldron as the temperature rapidly rises above 100\u00b0C.",
+    "prompt": "A timelapse captures the transformation of oil in a cauldron as the temperature rapidly rises above 100°C.",
     "output": "outputs/phygenbench/physics/output_video_110.mp4",
     "time": 486.3082821369171,
     "time_breakdown": {
@@ -1170,6 +1187,193 @@
     "status": "success",
     "best_trajectory": 2,
     "best_score": 0.9999281167984009,
+    "num_trajectories": 4
+  },
+  {
+    "index": 149,
+    "category": "Acidity and Alkalinity",
+    "prompt": "A timelapse captures the transformation as orange juice is mixed with baking soda in a clear cup.",
+    "output": "outputs/phygenbench/physics/output_video_150.mp4",
+    "time": 493.6448435783386,
+    "time_breakdown": {
+      "generation": 492.79,
+      "save": 0.85,
+      "sampling": 471.94,
+      "decode": 20.61
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.9999474287033081,
+    "num_trajectories": 4
+  },
+  {
+    "index": 150,
+    "category": "Dehydration property",
+    "prompt": "A timelapse captures the reaction as concentrated sulfuric acid is poured onto a piece of bread.",
+    "output": "outputs/phygenbench/physics/output_video_151.mp4",
+    "time": 494.3176507949829,
+    "time_breakdown": {
+      "generation": 493.72,
+      "save": 0.6,
+      "sampling": 473.06,
+      "decode": 20.56
+    },
+    "status": "success",
+    "best_trajectory": 2,
+    "best_score": 0.9948245286941528,
+    "num_trajectories": 4
+  },
+  {
+    "index": 151,
+    "category": "Dehydration property",
+    "prompt": "A timelapse captures the reaction as concentrated sulfuric acid is poured onto a slice of apple.",
+    "output": "outputs/phygenbench/physics/output_video_152.mp4",
+    "time": 494.32057428359985,
+    "time_breakdown": {
+      "generation": 493.77,
+      "save": 0.55,
+      "sampling": 473.13,
+      "decode": 20.53
+    },
+    "status": "success",
+    "best_trajectory": 2,
+    "best_score": 0.9974911212921143,
+    "num_trajectories": 4
+  },
+  {
+    "index": 152,
+    "category": "Dehydration property",
+    "prompt": "A timelapse captures the reaction as concentrated sulfuric acid is poured onto a sheet of paper.",
+    "output": "outputs/phygenbench/physics/output_video_153.mp4",
+    "time": 494.7633078098297,
+    "time_breakdown": {
+      "generation": 494.1,
+      "save": 0.67,
+      "sampling": 472.98,
+      "decode": 21.01
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.9997352957725525,
+    "num_trajectories": 4
+  },
+  {
+    "index": 153,
+    "category": "Dehydration property",
+    "prompt": "A timelapse captures the reaction as concentrated sulfuric acid is poured onto a cotton ball.",
+    "output": "outputs/phygenbench/physics/output_video_154.mp4",
+    "time": 495.17719531059265,
+    "time_breakdown": {
+      "generation": 494.45,
+      "save": 0.72,
+      "sampling": 473.08,
+      "decode": 21.27
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.9980226755142212,
+    "num_trajectories": 4
+  },
+  {
+    "index": 154,
+    "category": "Dehydration property",
+    "prompt": "A timelapse captures the reaction as concentrated sulfuric acid is poured onto a sponge.",
+    "output": "outputs/phygenbench/physics/output_video_155.mp4",
+    "time": 495.10718750953674,
+    "time_breakdown": {
+      "generation": 494.37,
+      "save": 0.73,
+      "sampling": 473.07,
+      "decode": 21.21
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.9985631108283997,
+    "num_trajectories": 4
+  },
+  {
+    "index": 155,
+    "category": "Redox property",
+    "prompt": "A timelapse captures the transformation of a clean and smooth piece of iron in a humid environment over decades.",
+    "output": "outputs/phygenbench/physics/output_video_156.mp4",
+    "time": 497.50986218452454,
+    "time_breakdown": {
+      "generation": 496.76,
+      "save": 0.75,
+      "sampling": 473.04,
+      "decode": 23.62
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.9367866516113281,
+    "num_trajectories": 4
+  },
+  {
+    "index": 156,
+    "category": "Redox property",
+    "prompt": "A timelapse captures the transformation of a clean and smooth piece of steel in a humid environment over decades.",
+    "output": "outputs/phygenbench/physics/output_video_157.mp4",
+    "time": 495.01154351234436,
+    "time_breakdown": {
+      "generation": 494.32,
+      "save": 0.69,
+      "sampling": 472.89,
+      "decode": 21.32
+    },
+    "status": "success",
+    "best_trajectory": 2,
+    "best_score": 0.971115231513977,
+    "num_trajectories": 4
+  },
+  {
+    "index": 157,
+    "category": "Redox property",
+    "prompt": "A timelapse shows the changes in a shiny and new metal chair left outdoors in the rain over a long period.",
+    "output": "outputs/phygenbench/physics/output_video_158.mp4",
+    "time": 494.89822721481323,
+    "time_breakdown": {
+      "generation": 494.17,
+      "save": 0.73,
+      "sampling": 473.24,
+      "decode": 20.83
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.9727970361709595,
+    "num_trajectories": 4
+  },
+  {
+    "index": 158,
+    "category": "Redox property",
+    "prompt": "A timelapse video documents the gradual decay of a polished metal railing exposed to the elements over years.",
+    "output": "outputs/phygenbench/physics/output_video_159.mp4",
+    "time": 494.7259647846222,
+    "time_breakdown": {
+      "generation": 494.15,
+      "save": 0.58,
+      "sampling": 473.0,
+      "decode": 21.05
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.999234676361084,
+    "num_trajectories": 4
+  },
+  {
+    "index": 159,
+    "category": "Redox property",
+    "prompt": "A timelapse records the oxidation process of a bright and new metal bedframe kept in a damp location over several years.",
+    "output": "outputs/phygenbench/physics/output_video_160.mp4",
+    "time": 494.6563959121704,
+    "time_breakdown": {
+      "generation": 494.03,
+      "save": 0.63,
+      "sampling": 473.08,
+      "decode": 20.85
+    },
+    "status": "success",
+    "best_trajectory": 2,
+    "best_score": 0.9997326731681824,
     "num_trajectories": 4
   }
 ]

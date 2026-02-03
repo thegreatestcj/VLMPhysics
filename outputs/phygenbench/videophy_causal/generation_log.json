@@ -1,0 +1,1362 @@
+[
+  {
+    "index": 80,
+    "category": "Interference & Diffraction",
+    "prompt": "A puddle of oil on the road under the sunlight.",
+    "output": "outputs/phygenbench/videophy/output_video_81.mp4",
+    "time": 490.58324694633484,
+    "time_breakdown": {
+      "generation": 489.1,
+      "save": 1.48,
+      "sampling": 467.86,
+      "decode": 20.72
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.9546140432357788,
+    "num_trajectories": 4
+  },
+  {
+    "index": 81,
+    "category": "Interference & Diffraction",
+    "prompt": "A soap bubble floating in the air under the sunlight.",
+    "output": "outputs/phygenbench/videophy/output_video_82.mp4",
+    "time": 489.78311014175415,
+    "time_breakdown": {
+      "generation": 489.19,
+      "save": 0.6,
+      "sampling": 468.63,
+      "decode": 20.45
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.7105116248130798,
+    "num_trajectories": 4
+  },
+  {
+    "index": 82,
+    "category": "Interference & Diffraction",
+    "prompt": "A film of soap on a wand under the sunlight.",
+    "output": "outputs/phygenbench/videophy/output_video_83.mp4",
+    "time": 489.5547022819519,
+    "time_breakdown": {
+      "generation": 489.0,
+      "save": 0.56,
+      "sampling": 468.59,
+      "decode": 20.31
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.6855887174606323,
+    "num_trajectories": 4
+  },
+  {
+    "index": 83,
+    "category": "Interference & Diffraction",
+    "prompt": "A thin layer of gasoline on water under the sunlight.",
+    "output": "outputs/phygenbench/videophy/output_video_84.mp4",
+    "time": 489.50606894493103,
+    "time_breakdown": {
+      "generation": 488.86,
+      "save": 0.64,
+      "sampling": 468.47,
+      "decode": 20.29
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.6318390965461731,
+    "num_trajectories": 4
+  },
+  {
+    "index": 84,
+    "category": "Interference & Diffraction",
+    "prompt": "A layer of detergent on a wet surface under the sunlight.",
+    "output": "outputs/phygenbench/videophy/output_video_85.mp4",
+    "time": 489.938227891922,
+    "time_breakdown": {
+      "generation": 489.08,
+      "save": 0.86,
+      "sampling": 468.64,
+      "decode": 20.34
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.7954796552658081,
+    "num_trajectories": 4
+  },
+  {
+    "index": 85,
+    "category": "Dispersion",
+    "prompt": "A beam of light passes through a prism.",
+    "output": "outputs/phygenbench/videophy/output_video_86.mp4",
+    "time": 489.42035388946533,
+    "time_breakdown": {
+      "generation": 488.98,
+      "save": 0.44,
+      "sampling": 468.55,
+      "decode": 20.33
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.4797496199607849,
+    "num_trajectories": 4
+  },
+  {
+    "index": 86,
+    "category": "Dispersion",
+    "prompt": "A beam of light passes through a crystal chandelier.",
+    "output": "outputs/phygenbench/videophy/output_video_87.mp4",
+    "time": 489.5874502658844,
+    "time_breakdown": {
+      "generation": 488.99,
+      "save": 0.6,
+      "sampling": 468.6,
+      "decode": 20.29
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.8665026426315308,
+    "num_trajectories": 4
+  },
+  {
+    "index": 87,
+    "category": "Dispersion",
+    "prompt": "A beam of light passes through a droplet of water.",
+    "output": "outputs/phygenbench/videophy/output_video_88.mp4",
+    "time": 489.3993287086487,
+    "time_breakdown": {
+      "generation": 488.82,
+      "save": 0.58,
+      "sampling": 468.37,
+      "decode": 20.34
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.30488336086273193,
+    "num_trajectories": 4
+  },
+  {
+    "index": 88,
+    "category": "Dispersion",
+    "prompt": "A beam of light passes through a glass diamond.",
+    "output": "outputs/phygenbench/videophy/output_video_89.mp4",
+    "time": 489.45855236053467,
+    "time_breakdown": {
+      "generation": 488.93,
+      "save": 0.53,
+      "sampling": 468.49,
+      "decode": 20.34
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.590936541557312,
+    "num_trajectories": 4
+  },
+  {
+    "index": 89,
+    "category": "Dispersion",
+    "prompt": "A beam of light passes through a soap bubble.",
+    "output": "outputs/phygenbench/videophy/output_video_90.mp4",
+    "time": 489.4208483695984,
+    "time_breakdown": {
+      "generation": 488.89,
+      "save": 0.53,
+      "sampling": 468.41,
+      "decode": 20.38
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.3788928687572479,
+    "num_trajectories": 4
+  },
+  {
+    "index": 90,
+    "category": "Solidification",
+    "prompt": "A timelapse captures the transformation of a glass of water as the temperature significantly drops to very low levels.",
+    "output": "outputs/phygenbench/videophy/output_video_91.mp4",
+    "time": 489.3775405883789,
+    "time_breakdown": {
+      "generation": 488.83,
+      "save": 0.55,
+      "sampling": 468.42,
+      "decode": 20.31
+    },
+    "status": "success",
+    "best_trajectory": 2,
+    "best_score": 0.5532897114753723,
+    "num_trajectories": 4
+  },
+  {
+    "index": 91,
+    "category": "Solidification",
+    "prompt": "A timelapse captures the transformation of a glass of juice as the temperature significantly drops to very low levels.",
+    "output": "outputs/phygenbench/videophy/output_video_92.mp4",
+    "time": 489.28490567207336,
+    "time_breakdown": {
+      "generation": 488.77,
+      "save": 0.51,
+      "sampling": 468.39,
+      "decode": 20.29
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.7869312167167664,
+    "num_trajectories": 4
+  },
+  {
+    "index": 92,
+    "category": "Solidification",
+    "prompt": "A timelapse captures the transformation of a glass of milk as the temperature significantly drops to very low levels.",
+    "output": "outputs/phygenbench/videophy/output_video_93.mp4",
+    "time": 489.37396001815796,
+    "time_breakdown": {
+      "generation": 488.84,
+      "save": 0.54,
+      "sampling": 468.42,
+      "decode": 20.32
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.40122145414352417,
+    "num_trajectories": 4
+  },
+  {
+    "index": 93,
+    "category": "Solidification",
+    "prompt": "A timelapse captures the transformation of a glass of oil as the temperature significantly drops to very low levels.",
+    "output": "outputs/phygenbench/videophy/output_video_94.mp4",
+    "time": 489.43245220184326,
+    "time_breakdown": {
+      "generation": 488.83,
+      "save": 0.6,
+      "sampling": 468.4,
+      "decode": 20.33
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.43553626537323,
+    "num_trajectories": 4
+  },
+  {
+    "index": 94,
+    "category": "Solidification",
+    "prompt": "A timelapse captures the transformation of a glass of beer as the temperature significantly drops to very low levels.",
+    "output": "outputs/phygenbench/videophy/output_video_95.mp4",
+    "time": 489.2300567626953,
+    "time_breakdown": {
+      "generation": 488.73,
+      "save": 0.5,
+      "sampling": 468.33,
+      "decode": 20.3
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.32956358790397644,
+    "num_trajectories": 4
+  },
+  {
+    "index": 95,
+    "category": "Melting",
+    "prompt": "A timelapse captures the gradual transformation of a piece of ice as the temperature rises significantly.",
+    "output": "outputs/phygenbench/videophy/output_video_96.mp4",
+    "time": 489.2068226337433,
+    "time_breakdown": {
+      "generation": 488.65,
+      "save": 0.56,
+      "sampling": 468.21,
+      "decode": 20.33
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.7121363282203674,
+    "num_trajectories": 4
+  },
+  {
+    "index": 96,
+    "category": "Melting",
+    "prompt": "A timelapse captures the gradual transformation of a candle as the temperature rises significantly.",
+    "output": "outputs/phygenbench/videophy/output_video_97.mp4",
+    "time": 489.36989641189575,
+    "time_breakdown": {
+      "generation": 488.78,
+      "save": 0.59,
+      "sampling": 468.38,
+      "decode": 20.29
+    },
+    "status": "success",
+    "best_trajectory": 2,
+    "best_score": 0.3649933338165283,
+    "num_trajectories": 4
+  },
+  {
+    "index": 97,
+    "category": "Melting",
+    "prompt": "A timelapse captures the gradual transformation of butter as the temperature rises significantly.",
+    "output": "outputs/phygenbench/videophy/output_video_98.mp4",
+    "time": 489.1599872112274,
+    "time_breakdown": {
+      "generation": 488.54,
+      "save": 0.62,
+      "sampling": 468.17,
+      "decode": 20.26
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.5046469569206238,
+    "num_trajectories": 4
+  },
+  {
+    "index": 98,
+    "category": "Melting",
+    "prompt": "A timelapse captures the gradual transformation of ice cream as the temperature rises significantly.",
+    "output": "outputs/phygenbench/videophy/output_video_99.mp4",
+    "time": 488.72598457336426,
+    "time_breakdown": {
+      "generation": 488.28,
+      "save": 0.45,
+      "sampling": 467.92,
+      "decode": 20.25
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.31539395451545715,
+    "num_trajectories": 4
+  },
+  {
+    "index": 99,
+    "category": "Melting",
+    "prompt": "A timelapse captures the gradual transformation of wax as the temperature rises significantly.",
+    "output": "outputs/phygenbench/videophy/output_video_100.mp4",
+    "time": 489.0147759914398,
+    "time_breakdown": {
+      "generation": 488.53,
+      "save": 0.48,
+      "sampling": 468.12,
+      "decode": 20.31
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.4550004303455353,
+    "num_trajectories": 4
+  },
+  {
+    "index": 100,
+    "category": "Liquefaction",
+    "prompt": "A timelapse captures the transformation as water vapor in a humid environment comes into contact with a cool glass surface.",
+    "output": "outputs/phygenbench/videophy/output_video_101.mp4",
+    "time": 489.2350516319275,
+    "time_breakdown": {
+      "generation": 488.65,
+      "save": 0.59,
+      "sampling": 468.26,
+      "decode": 20.29
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.7607132792472839,
+    "num_trajectories": 4
+  },
+  {
+    "index": 101,
+    "category": "Liquefaction",
+    "prompt": "A timelapse captures the transformation as fog in a cold environment comes into contact with a warm car window.",
+    "output": "outputs/phygenbench/videophy/output_video_102.mp4",
+    "time": 489.3413531780243,
+    "time_breakdown": {
+      "generation": 488.75,
+      "save": 0.59,
+      "sampling": 468.35,
+      "decode": 20.3
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.4160013794898987,
+    "num_trajectories": 4
+  },
+  {
+    "index": 102,
+    "category": "Liquefaction",
+    "prompt": "A timelapse captures the transformation as steam in a kitchen environment comes into contact with a cool metal pot lid.",
+    "output": "outputs/phygenbench/videophy/output_video_103.mp4",
+    "time": 489.42965269088745,
+    "time_breakdown": {
+      "generation": 488.76,
+      "save": 0.67,
+      "sampling": 468.36,
+      "decode": 20.3
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.6792481541633606,
+    "num_trajectories": 4
+  },
+  {
+    "index": 103,
+    "category": "Liquefaction",
+    "prompt": "A timelapse captures the transformation as mist in a greenhouse environment comes into contact with a cool plastic sheet.",
+    "output": "outputs/phygenbench/videophy/output_video_104.mp4",
+    "time": 489.36098432540894,
+    "time_breakdown": {
+      "generation": 488.76,
+      "save": 0.6,
+      "sampling": 468.41,
+      "decode": 20.25
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.4537624418735504,
+    "num_trajectories": 4
+  },
+  {
+    "index": 104,
+    "category": "Liquefaction",
+    "prompt": "A timelapse captures the transformation as water vapor in a greenhouse environment comes into contact with a cool plastic sheet.",
+    "output": "outputs/phygenbench/videophy/output_video_105.mp4",
+    "time": 489.2892556190491,
+    "time_breakdown": {
+      "generation": 488.75,
+      "save": 0.54,
+      "sampling": 468.36,
+      "decode": 20.29
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.8481115698814392,
+    "num_trajectories": 4
+  },
+  {
+    "index": 105,
+    "category": "Boiling",
+    "prompt": "A timelapse captures the transformation of water in a pot as the temperature rapidly rises above 100°C.",
+    "output": "outputs/phygenbench/videophy/output_video_106.mp4",
+    "time": 489.42920207977295,
+    "time_breakdown": {
+      "generation": 488.77,
+      "save": 0.66,
+      "sampling": 468.39,
+      "decode": 20.28
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.5329791307449341,
+    "num_trajectories": 4
+  },
+  {
+    "index": 106,
+    "category": "Boiling",
+    "prompt": "A timelapse captures the transformation of milk in a kettle as the temperature rapidly rises above 100°C.",
+    "output": "outputs/phygenbench/videophy/output_video_107.mp4",
+    "time": 489.46058559417725,
+    "time_breakdown": {
+      "generation": 488.81,
+      "save": 0.65,
+      "sampling": 468.42,
+      "decode": 20.29
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.6263869404792786,
+    "num_trajectories": 4
+  },
+  {
+    "index": 107,
+    "category": "Boiling",
+    "prompt": "A timelapse captures the transformation of soup in a saucepan as the temperature rapidly rises above 100°C.",
+    "output": "outputs/phygenbench/videophy/output_video_108.mp4",
+    "time": 489.52303171157837,
+    "time_breakdown": {
+      "generation": 488.82,
+      "save": 0.7,
+      "sampling": 468.4,
+      "decode": 20.32
+    },
+    "status": "success",
+    "best_trajectory": 2,
+    "best_score": 0.660523533821106,
+    "num_trajectories": 4
+  },
+  {
+    "index": 108,
+    "category": "Boiling",
+    "prompt": "A timelapse captures the transformation of tea in a teapot as the temperature rapidly rises above 100°C.",
+    "output": "outputs/phygenbench/videophy/output_video_109.mp4",
+    "time": 489.1395161151886,
+    "time_breakdown": {
+      "generation": 488.7,
+      "save": 0.44,
+      "sampling": 468.31,
+      "decode": 20.29
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.3369794487953186,
+    "num_trajectories": 4
+  },
+  {
+    "index": 109,
+    "category": "Boiling",
+    "prompt": "A timelapse captures the transformation of oil in a cauldron as the temperature rapidly rises above 100°C.",
+    "output": "outputs/phygenbench/videophy/output_video_110.mp4",
+    "time": 489.6046950817108,
+    "time_breakdown": {
+      "generation": 488.88,
+      "save": 0.73,
+      "sampling": 468.47,
+      "decode": 20.31
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.782826840877533,
+    "num_trajectories": 4
+  },
+  {
+    "index": 110,
+    "category": "deposition",
+    "prompt": "A timelapse captures the transformation as water vapor in a humid environment comes into contact with a cold glass surface.",
+    "output": "outputs/phygenbench/videophy/output_video_111.mp4",
+    "time": 489.3901717662811,
+    "time_breakdown": {
+      "generation": 488.68,
+      "save": 0.71,
+      "sampling": 468.31,
+      "decode": 20.27
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.46946561336517334,
+    "num_trajectories": 4
+  },
+  {
+    "index": 111,
+    "category": "deposition",
+    "prompt": "A timelapse captures the transformation as steam in a kitchen comes into contact with a cold window.",
+    "output": "outputs/phygenbench/videophy/output_video_112.mp4",
+    "time": 489.2806143760681,
+    "time_breakdown": {
+      "generation": 488.65,
+      "save": 0.63,
+      "sampling": 468.27,
+      "decode": 20.28
+    },
+    "status": "success",
+    "best_trajectory": 2,
+    "best_score": 0.5982993841171265,
+    "num_trajectories": 4
+  },
+  {
+    "index": 112,
+    "category": "deposition",
+    "prompt": "A timelapse captures the transformation as mist in a rainforest comes into contact with a cold metal surface.",
+    "output": "outputs/phygenbench/videophy/output_video_113.mp4",
+    "time": 489.3051743507385,
+    "time_breakdown": {
+      "generation": 488.58,
+      "save": 0.73,
+      "sampling": 468.22,
+      "decode": 20.25
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.49625834822654724,
+    "num_trajectories": 4
+  },
+  {
+    "index": 113,
+    "category": "deposition",
+    "prompt": "A timelapse captures the transformation as fog in a mountainous region comes into contact with a cold car windshield.",
+    "output": "outputs/phygenbench/videophy/output_video_114.mp4",
+    "time": 488.8815186023712,
+    "time_breakdown": {
+      "generation": 488.3,
+      "save": 0.58,
+      "sampling": 467.81,
+      "decode": 20.39
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.5302910208702087,
+    "num_trajectories": 4
+  },
+  {
+    "index": 114,
+    "category": "deposition",
+    "prompt": "A timelapse captures the transformation as moisture in the air of a refrigerated room comes into contact with a cold plastic bottle.",
+    "output": "outputs/phygenbench/videophy/output_video_115.mp4",
+    "time": 488.99809527397156,
+    "time_breakdown": {
+      "generation": 488.38,
+      "save": 0.62,
+      "sampling": 468.02,
+      "decode": 20.26
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.49831295013427734,
+    "num_trajectories": 4
+  },
+  {
+    "index": 115,
+    "category": "Sublimation",
+    "prompt": "A timelapse captures the transformation of dry ice as it is exposed to a gradually increasing temperature at room temperature",
+    "output": "outputs/phygenbench/videophy/output_video_116.mp4",
+    "time": 488.9376266002655,
+    "time_breakdown": {
+      "generation": 488.36,
+      "save": 0.58,
+      "sampling": 468.0,
+      "decode": 20.25
+    },
+    "status": "success",
+    "best_trajectory": 2,
+    "best_score": 0.5067439675331116,
+    "num_trajectories": 4
+  },
+  {
+    "index": 116,
+    "category": "Sublimation",
+    "prompt": "A timelapse captures the transformation of naphthalene as it is exposed to gradually increasing temperature at room temperature",
+    "output": "outputs/phygenbench/videophy/output_video_117.mp4",
+    "time": 489.0934998989105,
+    "time_breakdown": {
+      "generation": 488.57,
+      "save": 0.52,
+      "sampling": 468.23,
+      "decode": 20.24
+    },
+    "status": "success",
+    "best_trajectory": 2,
+    "best_score": 0.3053206205368042,
+    "num_trajectories": 4
+  },
+  {
+    "index": 117,
+    "category": "Sublimation",
+    "prompt": "A timelapse captures the transformation of iodine crystals as they are exposed to gradually increasing temperature at room temperature",
+    "output": "outputs/phygenbench/videophy/output_video_118.mp4",
+    "time": 489.3912651538849,
+    "time_breakdown": {
+      "generation": 488.82,
+      "save": 0.57,
+      "sampling": 468.45,
+      "decode": 20.28
+    },
+    "status": "success",
+    "best_trajectory": 2,
+    "best_score": 0.21950514614582062,
+    "num_trajectories": 4
+  },
+  {
+    "index": 118,
+    "category": "Sublimation",
+    "prompt": "A timelapse captures the transformation of camphor as it is exposed to gradually increasing temperature at room temperature",
+    "output": "outputs/phygenbench/videophy/output_video_119.mp4",
+    "time": 489.33182072639465,
+    "time_breakdown": {
+      "generation": 488.85,
+      "save": 0.49,
+      "sampling": 468.46,
+      "decode": 20.28
+    },
+    "status": "success",
+    "best_trajectory": 2,
+    "best_score": 0.293533056974411,
+    "num_trajectories": 4
+  },
+  {
+    "index": 119,
+    "category": "Sublimation",
+    "prompt": "A timelapse captures the transformation of arsenic trioxide as it is exposed to gradually increasing temperature at room temperature",
+    "output": "outputs/phygenbench/videophy/output_video_120.mp4",
+    "time": 489.26526618003845,
+    "time_breakdown": {
+      "generation": 488.72,
+      "save": 0.54,
+      "sampling": 468.35,
+      "decode": 20.27
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.30452632904052734,
+    "num_trajectories": 4
+  },
+  {
+    "index": 120,
+    "category": "Color",
+    "prompt": "Equal amounts of red and blue paint are rapidly combined, with the mixture being vigorously stirred until fully blended.",
+    "output": "outputs/phygenbench/videophy/output_video_121.mp4",
+    "time": 489.5099444389343,
+    "time_breakdown": {
+      "generation": 488.8,
+      "save": 0.71,
+      "sampling": 468.45,
+      "decode": 20.26
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.24039646983146667,
+    "num_trajectories": 4
+  },
+  {
+    "index": 121,
+    "category": "Color",
+    "prompt": "Equal amounts of yellow and red paint are rapidly combined, with the mixture being vigorously stirred until fully blended.",
+    "output": "outputs/phygenbench/videophy/output_video_122.mp4",
+    "time": 489.59374260902405,
+    "time_breakdown": {
+      "generation": 488.85,
+      "save": 0.74,
+      "sampling": 468.4,
+      "decode": 20.35
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.8235963582992554,
+    "num_trajectories": 4
+  },
+  {
+    "index": 122,
+    "category": "Color",
+    "prompt": "Equal amounts of green and blue paint are rapidly combined, with the mixture being vigorously stirred until fully blended.",
+    "output": "outputs/phygenbench/videophy/output_video_123.mp4",
+    "time": 489.61485505104065,
+    "time_breakdown": {
+      "generation": 488.86,
+      "save": 0.76,
+      "sampling": 468.45,
+      "decode": 20.31
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.188012957572937,
+    "num_trajectories": 4
+  },
+  {
+    "index": 123,
+    "category": "Color",
+    "prompt": "Equal amounts of cyan and magenta paint are rapidly combined, with the mixture being vigorously stirred until fully blended.",
+    "output": "outputs/phygenbench/videophy/output_video_124.mp4",
+    "time": 489.59617161750793,
+    "time_breakdown": {
+      "generation": 488.8,
+      "save": 0.8,
+      "sampling": 468.42,
+      "decode": 20.27
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.2151695340871811,
+    "num_trajectories": 4
+  },
+  {
+    "index": 124,
+    "category": "Color",
+    "prompt": "Equal amounts of pink and white paint are rapidly combined, with the mixture being vigorously stirred until fully blended.",
+    "output": "outputs/phygenbench/videophy/output_video_125.mp4",
+    "time": 489.50163650512695,
+    "time_breakdown": {
+      "generation": 488.79,
+      "save": 0.72,
+      "sampling": 468.41,
+      "decode": 20.28
+    },
+    "status": "success",
+    "best_trajectory": 2,
+    "best_score": 0.4992857575416565,
+    "num_trajectories": 4
+  },
+  {
+    "index": 125,
+    "category": "Flame Reaction",
+    "prompt": "A piece of copper is ignited, emitting a vivid and unique flame as it burns steadily.",
+    "output": "outputs/phygenbench/videophy/output_video_126.mp4",
+    "time": 489.39060950279236,
+    "time_breakdown": {
+      "generation": 488.77,
+      "save": 0.62,
+      "sampling": 468.36,
+      "decode": 20.31
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.6188391447067261,
+    "num_trajectories": 4
+  },
+  {
+    "index": 126,
+    "category": "Flame Reaction",
+    "prompt": "A piece of magnesium is ignited, emitting a vivid and unique flame as it burns steadily.",
+    "output": "outputs/phygenbench/videophy/output_video_127.mp4",
+    "time": 489.2360875606537,
+    "time_breakdown": {
+      "generation": 488.73,
+      "save": 0.51,
+      "sampling": 468.33,
+      "decode": 20.3
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.4452303349971771,
+    "num_trajectories": 4
+  },
+  {
+    "index": 127,
+    "category": "Flame Reaction",
+    "prompt": "A piece of lithium is ignited, emitting a vivid and unique flame as it burns steadily.",
+    "output": "outputs/phygenbench/videophy/output_video_128.mp4",
+    "time": 489.3194091320038,
+    "time_breakdown": {
+      "generation": 488.77,
+      "save": 0.55,
+      "sampling": 468.3,
+      "decode": 20.37
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.6171160936355591,
+    "num_trajectories": 4
+  },
+  {
+    "index": 128,
+    "category": "Flame Reaction",
+    "prompt": "A piece of sodium is ignited, emitting a vivid and unique flame as it burns steadily.",
+    "output": "outputs/phygenbench/videophy/output_video_129.mp4",
+    "time": 489.1045198440552,
+    "time_breakdown": {
+      "generation": 488.64,
+      "save": 0.47,
+      "sampling": 468.26,
+      "decode": 20.28
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.5546345114707947,
+    "num_trajectories": 4
+  },
+  {
+    "index": 129,
+    "category": "Flame Reaction",
+    "prompt": "A piece of potassium is ignited, emitting a vivid and unique flame as it burns steadily.",
+    "output": "outputs/phygenbench/videophy/output_video_130.mp4",
+    "time": 489.072199344635,
+    "time_breakdown": {
+      "generation": 488.58,
+      "save": 0.49,
+      "sampling": 468.22,
+      "decode": 20.26
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.5680598020553589,
+    "num_trajectories": 4
+  },
+  {
+    "index": 130,
+    "category": "Hardness",
+    "prompt": "A delicate, fragile egg is hurled with significant force towards a rugged, solid rock surface, where it collides upon impact",
+    "output": "outputs/phygenbench/videophy/output_video_131.mp4",
+    "time": 488.9037034511566,
+    "time_breakdown": {
+      "generation": 488.55,
+      "save": 0.35,
+      "sampling": 468.19,
+      "decode": 20.26
+    },
+    "status": "success",
+    "best_trajectory": 2,
+    "best_score": 0.7720690369606018,
+    "num_trajectories": 4
+  },
+  {
+    "index": 131,
+    "category": "Hardness",
+    "prompt": "A lightweight, fragile vase is thrown with great force against a sturdy, concrete wall, where it collides upon impact",
+    "output": "outputs/phygenbench/videophy/output_video_132.mp4",
+    "time": 488.85604643821716,
+    "time_breakdown": {
+      "generation": 488.45,
+      "save": 0.4,
+      "sampling": 468.06,
+      "decode": 20.29
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.44683757424354553,
+    "num_trajectories": 4
+  },
+  {
+    "index": 132,
+    "category": "Hardness",
+    "prompt": "A delicate, fragile glass bottle is hurled with significant force towards a rugged, solid rock surface, where it collides upon impact",
+    "output": "outputs/phygenbench/videophy/output_video_133.mp4",
+    "time": 488.9831144809723,
+    "time_breakdown": {
+      "generation": 488.63,
+      "save": 0.35,
+      "sampling": 468.19,
+      "decode": 20.34
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.46781125664711,
+    "num_trajectories": 4
+  },
+  {
+    "index": 133,
+    "category": "Hardness",
+    "prompt": "A flimsy, brittle glass cup is propelled with force towards a solid, metallic surface, where it collides upon impact",
+    "output": "outputs/phygenbench/videophy/output_video_134.mp4",
+    "time": 489.0842442512512,
+    "time_breakdown": {
+      "generation": 488.7,
+      "save": 0.39,
+      "sampling": 468.33,
+      "decode": 20.27
+    },
+    "status": "success",
+    "best_trajectory": 2,
+    "best_score": 0.5402359962463379,
+    "num_trajectories": 4
+  },
+  {
+    "index": 134,
+    "category": "Hardness",
+    "prompt": "A weak, frail porcelain plate is flung with significant speed at a robust, wooden table, where it collides upon impact",
+    "output": "outputs/phygenbench/videophy/output_video_135.mp4",
+    "time": 488.9986433982849,
+    "time_breakdown": {
+      "generation": 488.62,
+      "save": 0.37,
+      "sampling": 468.24,
+      "decode": 20.28
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.4442266821861267,
+    "num_trajectories": 4
+  },
+  {
+    "index": 135,
+    "category": "Solubility",
+    "prompt": "A clear glass of oil is gently poured into a glass of water.",
+    "output": "outputs/phygenbench/videophy/output_video_136.mp4",
+    "time": 489.0233452320099,
+    "time_breakdown": {
+      "generation": 488.56,
+      "save": 0.47,
+      "sampling": 468.2,
+      "decode": 20.26
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.6145410537719727,
+    "num_trajectories": 4
+  },
+  {
+    "index": 136,
+    "category": "Solubility",
+    "prompt": "A clear glass of honey is gently poured into a glass of milk.",
+    "output": "outputs/phygenbench/videophy/output_video_137.mp4",
+    "time": 489.03888058662415,
+    "time_breakdown": {
+      "generation": 488.64,
+      "save": 0.4,
+      "sampling": 468.25,
+      "decode": 20.29
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.4892279803752899,
+    "num_trajectories": 4
+  },
+  {
+    "index": 137,
+    "category": "Solubility",
+    "prompt": "A clear glass of vinegar is gently poured into a glass of water.",
+    "output": "outputs/phygenbench/videophy/output_video_138.mp4",
+    "time": 489.12941551208496,
+    "time_breakdown": {
+      "generation": 488.63,
+      "save": 0.5,
+      "sampling": 468.25,
+      "decode": 20.28
+    },
+    "status": "success",
+    "best_trajectory": 2,
+    "best_score": 0.5025027394294739,
+    "num_trajectories": 4
+  },
+  {
+    "index": 138,
+    "category": "Solubility",
+    "prompt": "A clear glass of juice is gently poured into a glass of water.",
+    "output": "outputs/phygenbench/videophy/output_video_139.mp4",
+    "time": 489.26433515548706,
+    "time_breakdown": {
+      "generation": 488.79,
+      "save": 0.48,
+      "sampling": 468.37,
+      "decode": 20.32
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.4367353320121765,
+    "num_trajectories": 4
+  },
+  {
+    "index": 139,
+    "category": "Solubility",
+    "prompt": "A bottle of vinegar is gently poured into a glass of oil.",
+    "output": "outputs/phygenbench/videophy/output_video_140.mp4",
+    "time": 489.25419664382935,
+    "time_breakdown": {
+      "generation": 488.8,
+      "save": 0.45,
+      "sampling": 468.43,
+      "decode": 20.27
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.4266488254070282,
+    "num_trajectories": 4
+  },
+  {
+    "index": 140,
+    "category": "Combustibility",
+    "prompt": "A small burning ball of paper was thrown into a pile of dry paper.",
+    "output": "outputs/phygenbench/videophy/output_video_141.mp4",
+    "time": 489.3553922176361,
+    "time_breakdown": {
+      "generation": 488.92,
+      "save": 0.44,
+      "sampling": 468.47,
+      "decode": 20.34
+    },
+    "status": "success",
+    "best_trajectory": 2,
+    "best_score": 0.23035374283790588,
+    "num_trajectories": 4
+  },
+  {
+    "index": 141,
+    "category": "Combustibility",
+    "prompt": "A small burning match was thrown into a pile of dry leaves.",
+    "output": "outputs/phygenbench/videophy/output_video_142.mp4",
+    "time": 489.78867077827454,
+    "time_breakdown": {
+      "generation": 489.03,
+      "save": 0.75,
+      "sampling": 468.64,
+      "decode": 20.29
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.43619203567504883,
+    "num_trajectories": 4
+  },
+  {
+    "index": 142,
+    "category": "Combustibility",
+    "prompt": "A small burning stick was thrown into a pile of hay.",
+    "output": "outputs/phygenbench/videophy/output_video_143.mp4",
+    "time": 489.74117064476013,
+    "time_breakdown": {
+      "generation": 488.99,
+      "save": 0.75,
+      "sampling": 468.62,
+      "decode": 20.27
+    },
+    "status": "success",
+    "best_trajectory": 2,
+    "best_score": 0.6414182782173157,
+    "num_trajectories": 4
+  },
+  {
+    "index": 143,
+    "category": "Combustibility",
+    "prompt": "A small burning candle was thrown into a pile of dry grass.",
+    "output": "outputs/phygenbench/videophy/output_video_144.mp4",
+    "time": 489.66367650032043,
+    "time_breakdown": {
+      "generation": 488.9,
+      "save": 0.77,
+      "sampling": 468.52,
+      "decode": 20.27
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.8283743858337402,
+    "num_trajectories": 4
+  },
+  {
+    "index": 144,
+    "category": "Combustibility",
+    "prompt": "A small burning piece of cloth was thrown into a pile of old newspapers.",
+    "output": "outputs/phygenbench/videophy/output_video_145.mp4",
+    "time": 489.7154061794281,
+    "time_breakdown": {
+      "generation": 489.02,
+      "save": 0.7,
+      "sampling": 468.63,
+      "decode": 20.29
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.33952224254608154,
+    "num_trajectories": 4
+  },
+  {
+    "index": 145,
+    "category": "Acidity and Alkalinity",
+    "prompt": "A timelapse captures the transformation as colorless vinegar is poured into a glass of purple litmus solution.",
+    "output": "outputs/phygenbench/videophy/output_video_146.mp4",
+    "time": 489.3671283721924,
+    "time_breakdown": {
+      "generation": 488.87,
+      "save": 0.5,
+      "sampling": 468.51,
+      "decode": 20.26
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.471954882144928,
+    "num_trajectories": 4
+  },
+  {
+    "index": 146,
+    "category": "Acidity and Alkalinity",
+    "prompt": "A timelapse captures the transformation as hydrochloric acid is poured into a glass of purple litmus solution.",
+    "output": "outputs/phygenbench/videophy/output_video_147.mp4",
+    "time": 489.2424740791321,
+    "time_breakdown": {
+      "generation": 488.72,
+      "save": 0.52,
+      "sampling": 468.34,
+      "decode": 20.28
+    },
+    "status": "success",
+    "best_trajectory": 2,
+    "best_score": 0.42554646730422974,
+    "num_trajectories": 4
+  },
+  {
+    "index": 147,
+    "category": "Acidity and Alkalinity",
+    "prompt": "A timelapse captures the transformation as colorless soda water is added to a glass of blue litmus solution.",
+    "output": "outputs/phygenbench/videophy/output_video_148.mp4",
+    "time": 489.1811673641205,
+    "time_breakdown": {
+      "generation": 488.7,
+      "save": 0.48,
+      "sampling": 468.33,
+      "decode": 20.27
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.45042088627815247,
+    "num_trajectories": 4
+  },
+  {
+    "index": 148,
+    "category": "Acidity and Alkalinity",
+    "prompt": "A timelapse captures the transformation as lemon juice is poured into a glass of red cabbage juice.",
+    "output": "outputs/phygenbench/videophy/output_video_149.mp4",
+    "time": 489.2375736236572,
+    "time_breakdown": {
+      "generation": 488.74,
+      "save": 0.49,
+      "sampling": 468.4,
+      "decode": 20.24
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.38931018114089966,
+    "num_trajectories": 4
+  },
+  {
+    "index": 149,
+    "category": "Acidity and Alkalinity",
+    "prompt": "A timelapse captures the transformation as orange juice is mixed with baking soda in a clear cup.",
+    "output": "outputs/phygenbench/videophy/output_video_150.mp4",
+    "time": 488.93401312828064,
+    "time_breakdown": {
+      "generation": 488.43,
+      "save": 0.51,
+      "sampling": 468.06,
+      "decode": 20.26
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.3174367845058441,
+    "num_trajectories": 4
+  },
+  {
+    "index": 150,
+    "category": "Dehydration property",
+    "prompt": "A timelapse captures the reaction as concentrated sulfuric acid is poured onto a piece of bread.",
+    "output": "outputs/phygenbench/videophy/output_video_151.mp4",
+    "time": 488.90466690063477,
+    "time_breakdown": {
+      "generation": 488.36,
+      "save": 0.55,
+      "sampling": 467.96,
+      "decode": 20.29
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.2968253195285797,
+    "num_trajectories": 4
+  },
+  {
+    "index": 151,
+    "category": "Dehydration property",
+    "prompt": "A timelapse captures the reaction as concentrated sulfuric acid is poured onto a slice of apple.",
+    "output": "outputs/phygenbench/videophy/output_video_152.mp4",
+    "time": 489.07749795913696,
+    "time_breakdown": {
+      "generation": 488.44,
+      "save": 0.63,
+      "sampling": 468.05,
+      "decode": 20.29
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.3072047233581543,
+    "num_trajectories": 4
+  },
+  {
+    "index": 152,
+    "category": "Dehydration property",
+    "prompt": "A timelapse captures the reaction as concentrated sulfuric acid is poured onto a sheet of paper.",
+    "output": "outputs/phygenbench/videophy/output_video_153.mp4",
+    "time": 489.22524666786194,
+    "time_breakdown": {
+      "generation": 488.65,
+      "save": 0.58,
+      "sampling": 468.17,
+      "decode": 20.38
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.5457183122634888,
+    "num_trajectories": 4
+  },
+  {
+    "index": 153,
+    "category": "Dehydration property",
+    "prompt": "A timelapse captures the reaction as concentrated sulfuric acid is poured onto a cotton ball.",
+    "output": "outputs/phygenbench/videophy/output_video_154.mp4",
+    "time": 489.29931640625,
+    "time_breakdown": {
+      "generation": 488.64,
+      "save": 0.65,
+      "sampling": 468.27,
+      "decode": 20.28
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.4545469582080841,
+    "num_trajectories": 4
+  },
+  {
+    "index": 154,
+    "category": "Dehydration property",
+    "prompt": "A timelapse captures the reaction as concentrated sulfuric acid is poured onto a sponge.",
+    "output": "outputs/phygenbench/videophy/output_video_155.mp4",
+    "time": 489.2516944408417,
+    "time_breakdown": {
+      "generation": 488.62,
+      "save": 0.63,
+      "sampling": 468.25,
+      "decode": 20.28
+    },
+    "status": "success",
+    "best_trajectory": 0,
+    "best_score": 0.6242020726203918,
+    "num_trajectories": 4
+  },
+  {
+    "index": 155,
+    "category": "Redox property",
+    "prompt": "A timelapse captures the transformation of a clean and smooth piece of iron in a humid environment over decades.",
+    "output": "outputs/phygenbench/videophy/output_video_156.mp4",
+    "time": 489.239901304245,
+    "time_breakdown": {
+      "generation": 488.74,
+      "save": 0.5,
+      "sampling": 468.36,
+      "decode": 20.28
+    },
+    "status": "success",
+    "best_trajectory": 2,
+    "best_score": 0.5009803771972656,
+    "num_trajectories": 4
+  },
+  {
+    "index": 156,
+    "category": "Redox property",
+    "prompt": "A timelapse captures the transformation of a clean and smooth piece of steel in a humid environment over decades.",
+    "output": "outputs/phygenbench/videophy/output_video_157.mp4",
+    "time": 489.2742702960968,
+    "time_breakdown": {
+      "generation": 488.7,
+      "save": 0.57,
+      "sampling": 468.3,
+      "decode": 20.3
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.4176480770111084,
+    "num_trajectories": 4
+  },
+  {
+    "index": 157,
+    "category": "Redox property",
+    "prompt": "A timelapse shows the changes in a shiny and new metal chair left outdoors in the rain over a long period.",
+    "output": "outputs/phygenbench/videophy/output_video_158.mp4",
+    "time": 489.53753638267517,
+    "time_breakdown": {
+      "generation": 488.91,
+      "save": 0.63,
+      "sampling": 468.47,
+      "decode": 20.33
+    },
+    "status": "success",
+    "best_trajectory": 2,
+    "best_score": 0.322661817073822,
+    "num_trajectories": 4
+  },
+  {
+    "index": 158,
+    "category": "Redox property",
+    "prompt": "A timelapse video documents the gradual decay of a polished metal railing exposed to the elements over years.",
+    "output": "outputs/phygenbench/videophy/output_video_159.mp4",
+    "time": 489.2441620826721,
+    "time_breakdown": {
+      "generation": 488.72,
+      "save": 0.52,
+      "sampling": 468.33,
+      "decode": 20.29
+    },
+    "status": "success",
+    "best_trajectory": 3,
+    "best_score": 0.6357921361923218,
+    "num_trajectories": 4
+  },
+  {
+    "index": 159,
+    "category": "Redox property",
+    "prompt": "A timelapse records the oxidation process of a bright and new metal bedframe kept in a damp location over several years.",
+    "output": "outputs/phygenbench/videophy/output_video_160.mp4",
+    "time": 489.3252465724945,
+    "time_breakdown": {
+      "generation": 488.76,
+      "save": 0.56,
+      "sampling": 468.39,
+      "decode": 20.27
+    },
+    "status": "success",
+    "best_trajectory": 1,
+    "best_score": 0.32930389046669006,
+    "num_trajectories": 4
+  }
+]
