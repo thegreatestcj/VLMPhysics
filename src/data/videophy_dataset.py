@@ -206,8 +206,8 @@ class VideoPhyDataset(Dataset):
             "video": video,  # [T, C, H, W]
             "label": label,  # 0 or 1
             "video_name": meta["video_filename"],
-            "caption": meta["caption"],
-            "source": meta["source"],
+            "source": meta.get("source", "unknown"),
+            "caption": meta.get("caption", ""),
         }
 
 

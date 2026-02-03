@@ -69,7 +69,10 @@ def get_video_filename(url: str) -> str:
 def main():
     parser = argparse.ArgumentParser(description="Download VideoPhy Training Dataset")
     parser.add_argument(
-        "--output-dir", type=str, default="data/videophy", help="Output directory"
+        "--output-dir",
+        type=str,
+        default="/users/ctang33/scratch/physics/videophy_data/videos",
+        help="Output directory",
     )
     parser.add_argument(
         "--metadata-only",

@@ -90,6 +90,14 @@ class FeatureDataset(Dataset):
         # Load labels
         with open(label_file, "r") as f:
             self.all_labels = json.load(f)
+            
+        # Load enriched metadata if available (source, sa, states_of_matter)
+        self.enriched = {}
+        enriched_path = self.feature_dir / "enriched_labels.json"
+        if enriched_path.exists():
+            with open(enriched_path, "r") as f:
+                self.enriched = json.load(f)
+            logger.info(f"Loaded enriched labels: {len(self.enriched)} entries")
 
         # Find available videos by scanning directory
         self.video_ids = self._find_available_videos()
@@ -195,11 +203,15 @@ class FeatureDataset(Dataset):
         # Get label
         label = float(self.all_labels[video_id])
 
+        meta = self.enriched.get(video_id, {})
+        sa = float(meta.get("sa", -1))  # -1 = unknown (for masking in loss)
+
         return {
-            "features": features,  # [T, D] = [13, 1920]
-            "labels": torch.tensor(label),  # scalar
-            "timesteps": timestep,  # scalar (200, 400, 600, 800)
-            "video_id": video_id,  # string
+            "features": features,
+            "labels": torch.tensor(label),
+            "sa": torch.tensor(sa),
+            "timesteps": timestep,
+            "video_id": video_id,
         }
 
 
@@ -233,6 +245,14 @@ class FeatureDatasetRandomTimestep(Dataset):
         # Load labels
         with open(label_file, "r") as f:
             self.all_labels = json.load(f)
+            
+        # Load enriched metadata if available (source, sa, states_of_matter)
+        self.enriched = {}
+        enriched_path = self.feature_dir / "enriched_labels.json"
+        if enriched_path.exists():
+            with open(enriched_path, "r") as f:
+                self.enriched = json.load(f)
+            logger.info(f"Loaded enriched labels: {len(self.enriched)} entries")
 
         # Find available videos
         self.video_ids = self._find_available_videos()
@@ -313,9 +333,13 @@ class FeatureDatasetRandomTimestep(Dataset):
 
         label = float(self.all_labels[video_id])
 
+        meta = self.enriched.get(video_id, {})
+        sa = float(meta.get("sa", -1))  # -1 = unknown (for masking in loss)
+
         return {
             "features": features,
             "labels": torch.tensor(label),
+            "sa": torch.tensor(sa),
             "timesteps": timestep,
             "video_id": video_id,
         }

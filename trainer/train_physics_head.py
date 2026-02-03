@@ -205,7 +205,13 @@ class PhysicsHeadTrainer:
         weight_decay: float = 0.01,
         num_epochs: int = 100,
         early_stopping_patience: int = 15,
+        train_sa: bool = False,  # NEW
+        sa_weight: float = 0.3,
     ):
+        if train_sa and not isinstance(model, MultiTaskWrapper):
+            from src.models.physics_head import MultiTaskWrapper
+            model = MultiTaskWrapper(model)
+            logger.info(f"Auto-wrapped with MultiTaskWrapper (sa_weight={sa_weight})")
         self.model = model.to(device)
         self.train_loader = train_loader
         self.val_loader = val_loader
@@ -235,6 +241,12 @@ class PhysicsHeadTrainer:
         else:
             pw = None
         self.criterion = nn.BCEWithLogitsLoss(pos_weight=pw)
+        # Multi-task: SA prediction
+        self.train_sa = train_sa
+        self.sa_weight = sa_weight
+        if train_sa:
+            self.sa_criterion = nn.BCEWithLogitsLoss()
+            logger.info(f"Multi-task training enabled: SA weight={sa_weight}")
         self.optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
 
         total_steps = len(train_loader) * num_epochs
@@ -263,8 +275,8 @@ class PhysicsHeadTrainer:
         """Check if head requires timestep input."""
         return self.head_type != "mean"
 
-    def _forward(self, batch: Dict) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
-        """Forward pass."""
+    def _forward(self, batch: Dict) -> Dict[str, torch.Tensor]:
+        """Forward pass. Returns dict with logits, labels, timesteps, and optionally SA."""
         features = batch["features"].to(self.device)
         labels = batch["labels"].to(self.device).float()
         timesteps = batch["timesteps"]
@@ -277,12 +289,27 @@ class PhysicsHeadTrainer:
             timesteps = timesteps.to(self.device)
 
         if self._requires_timestep():
-            logits = self.model(features, timesteps)
+            output = self.model(features, timesteps)
         else:
-            logits = self.model(features)
+            output = self.model(features)
 
-        logits = logits.squeeze(-1)
-        return logits, labels, timesteps
+        result = {"timesteps": timesteps, "labels": labels}
+
+        if self.train_sa and isinstance(output, tuple):
+            # MultiTaskWrapper returns (physics_logits, sa_logits)
+            physics_logits, sa_logits = output
+            result["logits"] = physics_logits.squeeze(-1)
+            result["sa_logits"] = sa_logits.squeeze(-1)
+            # SA labels from batch (-1 means unknown, mask those)
+            if "sa" in batch:
+                result["sa_labels"] = batch["sa"].to(self.device).float()
+        else:
+            # Single-task: just physics
+            if isinstance(output, tuple):
+                output = output[0]  # safety: unwrap if tuple
+            result["logits"] = output.squeeze(-1)
+
+        return result
 
     def train_epoch(self) -> float:
         """Train for one epoch."""
@@ -291,8 +318,20 @@ class PhysicsHeadTrainer:
         num_batches = 0
 
         for batch in self.train_loader:
-            logits, labels, _ = self._forward(batch)
-            loss = self.criterion(logits, labels)
+            fwd = self._forward(batch)
+            loss = self.criterion(fwd["logits"], fwd["labels"])
+
+            # Multi-task: add SA loss
+            if self.train_sa and "sa_logits" in fwd and "sa_labels" in fwd:
+                sa_labels = fwd["sa_labels"]
+                sa_logits = fwd["sa_logits"]
+                # Mask unknown SA values (sa == -1)
+                sa_mask = sa_labels >= 0
+                if sa_mask.any():
+                    sa_loss = self.sa_criterion(
+                        sa_logits[sa_mask], sa_labels[sa_mask]
+                    )
+                    loss = loss + self.sa_weight * sa_loss
 
             self.optimizer.zero_grad()
             loss.backward()
@@ -315,22 +354,15 @@ class PhysicsHeadTrainer:
         num_batches = 0
 
         for batch in self.val_loader:
-            logits, labels, timesteps = self._forward(batch)
-            loss = self.criterion(logits, labels)
+            fwd = self._forward(batch)
+            loss = self.criterion(fwd["logits"], fwd["labels"])
 
             total_loss += loss.item()
             num_batches += 1
 
-            all_logits.append(logits.cpu())
-            all_labels.append(labels.cpu())
-            all_timesteps.append(timesteps.cpu())
-
-        all_logits = torch.cat(all_logits)
-        all_labels = torch.cat(all_labels)
-        all_timesteps = torch.cat(all_timesteps)
-
-        avg_loss = total_loss / max(num_batches, 1)
-        return compute_metrics(all_logits, all_labels, all_timesteps, avg_loss)
+            all_logits.append(fwd["logits"].cpu())
+            all_labels.append(fwd["labels"].cpu())
+            all_timesteps.append(fwd["timesteps"].cpu())
 
     def save_checkpoint(self, is_best: bool = False):
         """Save model checkpoint."""
@@ -704,6 +736,19 @@ Output directory structure:
     parser.add_argument("--weight_decay", type=float, default=0.01)
     parser.add_argument("--num_epochs", type=int, default=100)
     parser.add_argument("--early_stopping", type=int, default=15)
+    parser.add_argument(
+        "--train-sa",
+        action="store_true",
+        default=False,
+        help="Multi-task training: predict both physics and SA. "
+        "Requires enriched_labels.json in feature directory.",
+    )
+    parser.add_argument(
+        "--sa-weight",
+        type=float,
+        default=0.3,
+        help="Weight for SA loss in multi-task training (default: 0.3)",
+    )
 
     # Feature format
     parser.add_argument(

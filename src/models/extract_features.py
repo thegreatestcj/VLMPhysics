@@ -47,8 +47,14 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def setup_models(model_id: str, layers: List[int], use_8bit: bool, device: str):
-    """Load VAE, DiT extractor, and noise scheduler."""
+def setup_models(
+    model_id: str,
+    layers: List[int],
+    use_8bit: bool,
+    device: str,
+    use_text: bool = False,
+):
+    """Load VAE, DiT extractor, noise scheduler, and optionally T5 text encoder."""
     from src.models.dit_extractor import create_extractor
     from diffusers import AutoencoderKLCogVideoX, CogVideoXDDIMScheduler
 
@@ -72,7 +78,23 @@ def setup_models(model_id: str, layers: List[int], use_8bit: bool, device: str):
     logger.info("Loading noise scheduler...")
     scheduler = CogVideoXDDIMScheduler.from_pretrained(model_id, subfolder="scheduler")
 
-    return vae, extractor, scheduler
+    # Optionally load T5 text encoder for real caption embeddings
+    text_encoder = None
+    tokenizer = None
+    if use_text:
+        from transformers import T5EncoderModel, AutoTokenizer
+
+        logger.info("Loading T5 text encoder for caption embeddings...")
+        tokenizer = AutoTokenizer.from_pretrained(model_id, subfolder="tokenizer")
+        text_encoder = T5EncoderModel.from_pretrained(
+            model_id, subfolder="text_encoder", torch_dtype=torch.float16
+        )
+        text_encoder = text_encoder.to(device)
+        text_encoder.eval()
+        text_encoder.requires_grad_(False)
+        logger.info("T5 text encoder loaded successfully")
+
+    return vae, extractor, scheduler, text_encoder, tokenizer
 
 
 def encode_video(video: torch.Tensor, vae, device: str) -> torch.Tensor:
@@ -104,6 +126,40 @@ def encode_video(video: torch.Tensor, vae, device: str) -> torch.Tensor:
     latents = latents.permute(0, 2, 1, 3, 4)
 
     return latents
+
+def encode_caption(
+    caption: str,
+    tokenizer,
+    text_encoder,
+    device: str,
+    max_length: int = 226,
+) -> torch.Tensor:
+    """
+    Encode a caption string into T5 text embeddings for CogVideoX.
+
+    Args:
+        caption: Text caption string
+        tokenizer: T5 tokenizer
+        text_encoder: T5 encoder model
+        device: Target device
+        max_length: Max token length (CogVideoX uses 226)
+
+    Returns:
+        text_embeds: [1, max_length, 4096] tensor
+    """
+    inputs = tokenizer(
+        caption,
+        max_length=max_length,
+        padding="max_length",
+        truncation=True,
+        return_tensors="pt",
+    )
+    input_ids = inputs.input_ids.to(device)
+
+    with torch.no_grad():
+        text_embeds = text_encoder(input_ids)[0]  # [1, seq_len, 4096]
+
+    return text_embeds.to(torch.float16)
 
 
 def extract_single_video(
@@ -198,6 +254,7 @@ def extract_dataset(
     layers: List[int] = [5, 10, 15, 20, 25],
     timesteps: List[int] = [400],
     use_8bit: bool = True,
+    use_text: bool = False,
     device: str = "cuda",
     max_videos: Optional[int] = None,
     resume: bool = True,
@@ -226,7 +283,9 @@ def extract_dataset(
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # Load models (VAE + DiT + scheduler)
-    vae, extractor, scheduler = setup_models(model_id, layers, use_8bit, device)
+    vae, extractor, scheduler, text_encoder, tokenizer = setup_models(
+            model_id, layers, use_8bit, device, use_text=use_text
+        )
 
     # =========================================================================
     # Load dataset based on type (NEW: dataset selection logic)
@@ -267,9 +326,11 @@ def extract_dataset(
         dataset.samples = dataset.samples[:max_videos]
         logger.info(f"Limited to {max_videos} videos for debugging")
 
-    # Prepare dummy text embeddings
-    text_embeds = torch.zeros(1, 226, 4096, device=device, dtype=torch.float16)
 
+    # If use_text=False, use zeros (backward compatible)
+    # If use_text=True, encode per-video captions below
+    default_text_embeds = torch.zeros(1, 226, 4096, device=device, dtype=torch.float16)
+    
     # Track progress (per-shard metadata)
     metadata = {
         "videos": {},
@@ -277,6 +338,7 @@ def extract_dataset(
             "layers": layers,
             "timesteps": timesteps,
             "model_id": model_id,
+            "use_text": use_text,
             "dataset_type": dataset_type,  # NEW: save dataset type in metadata
             "shard": shard,
             "num_shards": num_shards,
@@ -313,6 +375,18 @@ def extract_dataset(
                     continue
 
         try:
+            # Encode caption if use_text is enabled
+            if use_text and text_encoder is not None:
+                caption = sample.get("caption", "")
+                if caption:
+                    text_embeds = encode_caption(
+                        caption, tokenizer, text_encoder, device
+                    )
+                else:
+                    text_embeds = default_text_embeds
+            else:
+                text_embeds = default_text_embeds
+
             info, fwd_time = extract_single_video(
                 video_id=video_id,
                 video=video,
@@ -326,6 +400,9 @@ def extract_dataset(
                 device=device,
             )
             metadata["videos"][video_id] = info
+            # Save caption for enriched labels reconstruction
+            if use_text:
+                metadata["videos"][video_id]["caption"] = sample.get("caption", "")
             total_forward_time += fwd_time
 
         except Exception as e:
@@ -353,6 +430,21 @@ def extract_dataset(
 
         with open(output_dir / "labels.json", "w") as f:
             json.dump(labels, f, indent=2)
+            
+        # Also save enriched labels if captions are available
+        if use_text:
+            enriched = {}
+            for meta_file in output_dir.glob("metadata*.json"):
+                with open(meta_file) as f:
+                    meta = json.load(f)
+                    for vid, info in meta.get("videos", {}).items():
+                        enriched[vid] = {
+                            "label": info.get("label", 0),
+                            "caption": info.get("caption", ""),
+                        }
+            with open(output_dir / "enriched_labels.json", "w") as f:
+                json.dump(enriched, f, indent=2)
+            logger.info(f"Saved enriched_labels.json with captions")
 
     logger.info(f"Extraction complete!")
     logger.info(f"  Shard: {shard}/{num_shards}")
@@ -437,6 +529,13 @@ Examples:
         help="Use 8-bit quantization for DiT (saves memory)",
     )
     parser.add_argument(
+        "--use-text",
+        action="store_true",
+        default=False,
+        help="Encode real captions with T5 instead of zero embeddings. "
+        "Produces text-conditioned DiT features (recommended for v2).",
+    )
+    parser.add_argument(
         "--max_videos",
         type=int,
         default=None,
@@ -470,6 +569,7 @@ Examples:
         layers=args.layers,
         timesteps=args.timesteps,
         use_8bit=args.use_8bit,
+        use_text=args.use_text,
         max_videos=args.max_videos,
         resume=not args.no_resume,
         shard=args.shard,

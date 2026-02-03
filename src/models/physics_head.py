@@ -1789,6 +1789,84 @@ class MultiViewSimple(nn.Module):
 
     def get_num_params(self) -> int:
         return sum(p.numel() for p in self.parameters() if p.requires_grad)
+    
+class MultiTaskWrapper(nn.Module):
+    """
+    Wraps any physics head to add an SA (semantic adherence) prediction head.
+
+    The base head produces physics logits as before.
+    A parallel SA head shares the same backbone features but has its own classifier.
+
+    Usage:
+        base = create_physics_head("causal_simple", hidden_dim=1920)
+        model = MultiTaskWrapper(base)
+        physics_logits, sa_logits = model(features, timestep)
+    """
+
+    def __init__(self, base_head: nn.Module, sa_classes: int = 1):
+        super().__init__()
+        self.base_head = base_head
+
+        # Detect classifier input dimension from base head
+        # Walk the base head's classifier to find input features
+        classifier = base_head.classifier
+        if isinstance(classifier, nn.Sequential):
+            # Find first Linear layer to get input dim
+            for module in classifier:
+                if isinstance(module, nn.Linear):
+                    classifier_in = module.in_features
+                    break
+        elif isinstance(classifier, nn.Linear):
+            classifier_in = classifier.in_features
+        else:
+            raise ValueError("Cannot detect classifier input dimension")
+
+        # SA classifier head (parallel to physics classifier)
+        self.sa_classifier = nn.Sequential(
+            nn.LayerNorm(classifier_in),
+            nn.Linear(classifier_in, 128),
+            nn.GELU(),
+            nn.Linear(128, sa_classes),
+        )
+
+        _init_weights(self.sa_classifier)
+
+    def forward(
+        self,
+        features: torch.Tensor,
+        timestep: Optional[torch.Tensor] = None,
+    ) -> Tuple[torch.Tensor, torch.Tensor]:
+        """
+        Returns:
+            physics_logits: [B, 1] physics prediction
+            sa_logits: [B, 1] SA prediction
+        """
+        # We need the pre-classifier features from the base head.
+        # Hook into the base head to get features before final classifier.
+        # Use a forward hook approach.
+        hook_output = {}
+
+        def hook_fn(module, input, output):
+            # input[0] is what goes into the classifier
+            hook_output["pre_classifier"] = input[0]
+
+        # Register hook on the base head's classifier
+        handle = self.base_head.classifier.register_forward_hook(hook_fn)
+
+        # Forward through base head (produces physics logits)
+        physics_logits = self.base_head(features, timestep)
+
+        # Remove hook
+        handle.remove()
+
+        # Get pre-classifier features and pass through SA head
+        pre_cls_features = hook_output["pre_classifier"]
+        sa_logits = self.sa_classifier(pre_cls_features)
+
+        return physics_logits, sa_logits
+
+    def get_num_params(self) -> int:
+        return sum(p.numel() for p in self.parameters() if p.requires_grad)
 
 
 # =============================================================================
