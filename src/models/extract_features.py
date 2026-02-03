@@ -173,6 +173,7 @@ def extract_single_video(
     layers: List[int],
     output_dir: Path,
     device: str,
+    text_embeds=None,
 ) -> tuple:
     """
     Extract features for a single video at multiple timesteps.
@@ -190,8 +191,8 @@ def extract_single_video(
     # Encode video to latents
     latents = encode_video(video, vae, device)
 
-    # Prepare dummy text embeddings (physics head doesn't need real text)
-    text_embeds = torch.zeros(1, 226, 4096, device=device, dtype=torch.float16)
+    if text_embeds is None:
+        text_embeds = torch.zeros(1, 226, 4096, device=device, dtype=torch.float16)
 
     for t in timesteps:
         t_dir = video_dir / f"t{t}"
@@ -398,6 +399,7 @@ def extract_dataset(
                 layers=layers,
                 output_dir=output_dir,
                 device=device,
+                text_embeds=text_embeds,
             )
             metadata["videos"][video_id] = info
             # Save caption for enriched labels reconstruction
