@@ -1,22 +1,24 @@
 #!/usr/bin/env python3
 """
-Download VideoPhy Training Dataset
+Download ALL VideoPhy + VideoPhy-2 Videos
 
-Downloads the VideoPhy training dataset with physics labels for training
-the physics discriminator head.
+Combines 4 splits into one unified metadata.json:
+  - videophysics/videophy_train_public   (~4587, binary labels)
+  - videophysics/videophy_test_public    (~3360, binary labels)
+  - videophysics/videophy2_train         (~3340, 1-5 scale → binarize)
+  - videophysics/videophy2_test          (~3400, 1-5 scale → binarize)
 
-Dataset: https://huggingface.co/datasets/videophysics/videophy_train_public
-Videos: https://huggingface.co/videophysics/videophy-train-videos
+Binarization for v2: physics = (pc >= 4), sa = (sa >= 4)
+
+Output:
+    videophy_data/
+    ├── metadata.json   ← single source of truth
+    └── videos/         ← all mp4 files
 
 Usage:
-    # Download metadata only (quick)
-    python download_videophy.py --metadata-only --output-dir data/videophy
-
-    # Download videos (takes longer, ~10-20GB)
-    python download_videophy.py --output-dir data/videophy --max-videos 500
-
-    # Download all videos
-    python download_videophy.py --output-dir data/videophy
+    python utils/download_videophy_all.py --metadata-only
+    python utils/download_videophy_all.py
+    python utils/download_videophy_all.py --max-videos 50
 """
 
 import os
@@ -27,6 +29,7 @@ from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 from urllib.parse import urlparse
+from collections import Counter
 
 try:
     from datasets import load_dataset
@@ -34,257 +37,261 @@ try:
     HAS_DATASETS = True
 except ImportError:
     HAS_DATASETS = False
-    print(
-        "Warning: 'datasets' library not installed. Install with: pip install datasets"
-    )
+    print("Warning: 'datasets' not installed. pip install datasets")
 
 
 def download_video(url: str, output_path: Path, timeout: int = 60) -> bool:
     """Download a single video file."""
     try:
         if output_path.exists():
-            return True  # Skip if already downloaded
-
+            return True
         response = requests.get(url, timeout=timeout, stream=True)
         response.raise_for_status()
-
         output_path.parent.mkdir(parents=True, exist_ok=True)
-
         with open(output_path, "wb") as f:
             for chunk in response.iter_content(chunk_size=8192):
                 f.write(chunk)
-
         return True
     except Exception as e:
-        print(f"Failed to download {url}: {e}")
+        print(f"Failed: {url}: {e}")
         return False
 
 
 def get_video_filename(url: str) -> str:
-    """Extract filename from URL."""
-    parsed = urlparse(url)
-    return os.path.basename(parsed.path)
+    return os.path.basename(urlparse(url).path)
+
+
+# =========================================================================
+# VideoPhy v1 loaders (binary labels)
+# =========================================================================
+
+
+def load_v1_train():
+    print("  Loading videophysics/videophy_train_public ...")
+    raw = [
+        dict(x)
+        for x in load_dataset("videophysics/videophy_train_public", split="train")
+    ]
+    entries = []
+    for d in raw:
+        entries.append(
+            {
+                "video_url": d.get("video_url", ""),
+                "caption": d.get("caption", ""),
+                "physics": int(d.get("physics", 0)),
+                "sa": int(d.get("sa", 0)),
+                "source": d.get("source", "unknown"),
+                "states_of_matter": d.get("states_of_matter", ""),
+                "complexity": int(d.get("complexity", 0)),
+                "dataset_split": "v1_train",
+            }
+        )
+    print(f"  -> {len(entries)} entries")
+    return entries
+
+
+def load_v1_test():
+    print("  Loading videophysics/videophy_test_public ...")
+    raw = [
+        dict(x) for x in load_dataset("videophysics/videophy_test_public", split="test")
+    ]
+    entries = []
+    for d in raw:
+        entries.append(
+            {
+                "video_url": d.get("video_url", ""),
+                "caption": d.get("caption", ""),
+                "physics": int(d.get("majority_pc", 0)),  # majority_pc -> physics
+                "sa": int(d.get("majority_sa", 0)),  # majority_sa -> sa
+                "source": d.get("source", "unknown"),
+                "states_of_matter": d.get("states_of_matter", ""),
+                "complexity": int(d.get("complexity", 0)),
+                "dataset_split": "v1_test",
+            }
+        )
+    print(f"  -> {len(entries)} entries")
+    return entries
+
+
+# =========================================================================
+# VideoPhy-2 loaders (1-5 scale → binarize: >= 4 means positive)
+# =========================================================================
+
+
+def _extract_model_from_url(url: str) -> str:
+    """Try to extract model name from v2 video URL path."""
+    # e.g. .../cogvideoX5b_hard_train_upsampled/video.mp4
+    parts = urlparse(url).path.split("/")
+    for p in parts:
+        for prefix in [
+            "cogvideo",
+            "hunyuan",
+            "wan",
+            "ray2",
+            "dream_machine",
+            "pika",
+            "kling",
+            "veo",
+            "sora",
+            "mochi",
+            "ltx",
+        ]:
+            if prefix in p.lower():
+                return p.split("_")[0] if "_" in p else p
+    return "unknown"
+
+
+def load_v2_train():
+    print("  Loading videophysics/videophy2_train ...")
+    raw = [dict(x) for x in load_dataset("videophysics/videophy2_train", split="train")]
+    entries = []
+    for d in raw:
+        pc = int(d.get("pc", 0))
+        sa = int(d.get("sa", 0))
+        source = _extract_model_from_url(d.get("video_url", ""))
+        entries.append(
+            {
+                "video_url": d.get("video_url", ""),
+                "caption": d.get("caption", ""),
+                "physics": int(pc >= 4),  # binarize
+                "sa": int(sa >= 4),  # binarize
+                "source": source,
+                "states_of_matter": "",
+                "complexity": 0,
+                "dataset_split": "v2_train",
+            }
+        )
+    print(f"  -> {len(entries)} entries")
+    return entries
+
+
+def load_v2_test():
+    print("  Loading videophysics/videophy2_test ...")
+    raw = [dict(x) for x in load_dataset("videophysics/videophy2_test", split="test")]
+    entries = []
+    for d in raw:
+        pc = int(d.get("pc", 0))
+        sa = int(d.get("sa", 0))
+        source = d.get("model_name", "unknown")
+        entries.append(
+            {
+                "video_url": d.get("video_url", ""),
+                "caption": d.get("caption", ""),
+                "physics": int(pc >= 4),  # binarize
+                "sa": int(sa >= 4),  # binarize
+                "source": source,
+                "states_of_matter": "",
+                "complexity": 0,
+                "dataset_split": "v2_test",
+            }
+        )
+    print(f"  -> {len(entries)} entries")
+    return entries
+
+
+# =========================================================================
+# Main
+# =========================================================================
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Download VideoPhy Training Dataset")
+    parser = argparse.ArgumentParser(description="Download ALL VideoPhy v1+v2 data")
     parser.add_argument(
-        "--output-dir",
-        type=str,
-        default="/users/ctang33/scratch/physics/videophy_data/videos",
-        help="Output directory",
+        "--data-dir", type=str, default="/users/ctang33/scratch/physics/videophy_data"
     )
-    parser.add_argument(
-        "--metadata-only",
-        action="store_true",
-        help="Download metadata only, skip videos",
-    )
-    parser.add_argument(
-        "--max-videos",
-        type=int,
-        default=None,
-        help="Maximum number of videos to download",
-    )
-    parser.add_argument(
-        "--workers", type=int, default=8, help="Number of parallel download workers"
-    )
-    parser.add_argument(
-        "--source-filter",
-        type=str,
-        default=None,
-        help="Filter by source (e.g., 'lavie', 'pika', 'videocrafter2')",
-    )
+    parser.add_argument("--metadata-only", action="store_true")
+    parser.add_argument("--max-videos", type=int, default=None)
+    parser.add_argument("--workers", type=int, default=8)
+    parser.add_argument("--v1-only", action="store_true", help="Skip VideoPhy-2")
+    parser.add_argument("--v2-only", action="store_true", help="Skip VideoPhy v1")
     args = parser.parse_args()
 
-    output_dir = Path(args.output_dir)
-    output_dir.mkdir(parents=True, exist_ok=True)
-
-    videos_dir = output_dir / "videos"
+    data_dir = Path(args.data_dir)
+    videos_dir = data_dir / "videos"
     videos_dir.mkdir(parents=True, exist_ok=True)
 
-    # =========================================================================
-    # Step 1: Load dataset metadata from HuggingFace
-    # =========================================================================
+    # Load splits
     print("=" * 60)
-    print("Step 1: Loading dataset metadata from HuggingFace...")
+    print("Loading metadata from HuggingFace")
     print("=" * 60)
 
-    if HAS_DATASETS:
-        dataset = load_dataset("videophysics/videophy_train_public", split="train")
-        data = [dict(item) for item in dataset]
-    else:
-        # Fallback: download CSV directly
-        print("Using fallback method (downloading CSV)...")
-        import pandas as pd
+    all_entries = []
+    if not args.v2_only:
+        all_entries += load_v1_train()
+        all_entries += load_v1_test()
+    if not args.v1_only:
+        all_entries += load_v2_train()
+        all_entries += load_v2_test()
 
-        url = "https://huggingface.co/datasets/videophysics/videophy_train_public/resolve/main/videophy_train.csv"
-        df = pd.read_csv(url)
-        data = df.to_dict("records")
-
-    print(f"Loaded {len(data)} samples")
-
-    # =========================================================================
-    # Step 2: Filter and analyze data
-    # =========================================================================
-    print("\n" + "=" * 60)
-    print("Step 2: Analyzing dataset...")
-    print("=" * 60)
-
-    # Apply source filter if specified
-    if args.source_filter:
-        data = [d for d in data if d.get("source") == args.source_filter]
-        print(f"Filtered to source '{args.source_filter}': {len(data)} samples")
-
-    # Analyze distribution
-    physics_pos = sum(1 for d in data if d.get("physics", 0) == 1)
-    physics_neg = len(data) - physics_pos
-
-    sources = {}
-    for d in data:
-        src = d.get("source", "unknown")
-        sources[src] = sources.get(src, 0) + 1
-
-    print(f"\nPhysics label distribution:")
-    print(
-        f"  Positive (physics=1): {physics_pos} ({physics_pos / len(data) * 100:.1f}%)"
-    )
-    print(
-        f"  Negative (physics=0): {physics_neg} ({physics_neg / len(data) * 100:.1f}%)"
-    )
-
-    print(f"\nSource distribution:")
-    for src, count in sorted(sources.items(), key=lambda x: -x[1]):
-        print(f"  {src}: {count}")
-
-    # =========================================================================
-    # Step 3: Save metadata
-    # =========================================================================
-    print("\n" + "=" * 60)
-    print("Step 3: Saving metadata...")
-    print("=" * 60)
-
-    # Create clean metadata with local paths
+    # Deduplicate by video filename (earlier entries have priority)
+    seen = set()
     metadata = []
-    for i, d in enumerate(data):
-        video_url = d.get("video_url", "")
-        video_filename = get_video_filename(video_url)
-        local_path = str(videos_dir / video_filename)
+    for d in all_entries:
+        fn = get_video_filename(d["video_url"])
+        if not fn or fn in seen:
+            continue
+        seen.add(fn)
+        d["video_filename"] = fn
+        d["video_path"] = str(videos_dir / fn)
+        d["index"] = len(metadata)
+        metadata.append(d)
 
-        metadata.append(
-            {
-                "index": i,
-                "video_url": video_url,
-                "video_path": local_path,
-                "video_filename": video_filename,
-                "caption": d.get("caption", ""),
-                "physics": d.get("physics", 0),  # This is the label we need!
-                "sa": d.get("sa", 0),
-                "source": d.get("source", "unknown"),
-                "states_of_matter": d.get("states_of_matter", ""),
-                "complexity": d.get("complexity", 0),
-            }
-        )
+    # Stats
+    total = len(metadata)
+    pos = sum(1 for m in metadata if m["physics"] == 1)
+    neg = total - pos
+    sa_pos = sum(1 for m in metadata if m["sa"] == 1)
+    sources = Counter(m["source"] for m in metadata)
+    splits = Counter(m["dataset_split"] for m in metadata)
 
-    # Save metadata
-    metadata_path = output_dir / "metadata.json"
-    with open(metadata_path, "w") as f:
+    print(f"\n{'=' * 60}")
+    print(f"Total:   {total} unique videos")
+    print(f"Splits:  {dict(sorted(splits.items()))}")
+    print(f"Physics: {pos} pos / {neg} neg  (pos_weight ~ {neg / max(pos, 1):.3f})")
+    print(f"SA:      {sa_pos} pos / {total - sa_pos} neg")
+    print(f"Sources: {dict(sorted(sources.items(), key=lambda x: -x[1]))}")
+    print(f"{'=' * 60}")
+
+    # Save metadata.json
+    with open(data_dir / "metadata.json", "w") as f:
         json.dump(metadata, f, indent=2)
-    print(f"Saved metadata to {metadata_path}")
-
-    # Also save as CSV for easy viewing
-    try:
-        import pandas as pd
-
-        df = pd.DataFrame(metadata)
-        csv_path = output_dir / "metadata.csv"
-        df.to_csv(csv_path, index=False)
-        print(f"Saved CSV to {csv_path}")
-    except ImportError:
-        pass
-
-    # Save labels separately (for training)
-    labels = {m["video_filename"]: m["physics"] for m in metadata}
-    labels_path = output_dir / "labels.json"
-    with open(labels_path, "w") as f:
-        json.dump(labels, f, indent=2)
-    print(f"Saved labels to {labels_path}")
+    print(f"\nSaved metadata.json ({total} entries)")
 
     if args.metadata_only:
-        print("\n--metadata-only specified, skipping video download.")
-        print(f"\nDone! Metadata saved to {output_dir}")
+        print("--metadata-only set. Done.")
         return
 
-    # =========================================================================
-    # Step 4: Download videos
-    # =========================================================================
-    print("\n" + "=" * 60)
-    print("Step 4: Downloading videos...")
-    print("=" * 60)
+    # Download videos
+    dl_list = metadata[: args.max_videos] if args.max_videos else metadata
+    existing = sum(1 for m in dl_list if Path(m["video_path"]).exists())
+    to_dl = len(dl_list) - existing
+    print(f"\nDownloading: {to_dl} videos ({existing} already exist)")
 
-    # Limit number of videos if specified
-    download_list = metadata[: args.max_videos] if args.max_videos else metadata
-    print(f"Downloading {len(download_list)} videos...")
+    if to_dl > 0:
+        failed = []
+        with ThreadPoolExecutor(max_workers=args.workers) as ex:
+            futs = {}
+            for m in dl_list:
+                if not Path(m["video_path"]).exists():
+                    futs[
+                        ex.submit(download_video, m["video_url"], Path(m["video_path"]))
+                    ] = m["video_filename"]
+            for f in tqdm(as_completed(futs), total=len(futs), desc="Downloading"):
+                if not f.result():
+                    failed.append(futs[f])
+        ok = sum(1 for m in dl_list if Path(m["video_path"]).exists())
+        print(f"\nAvailable: {ok}/{len(dl_list)}")
+        if failed:
+            print(f"Failed: {len(failed)}")
+            (data_dir / "failed_downloads.txt").write_text("\n".join(failed))
 
-    # Check existing
-    existing = sum(1 for m in download_list if Path(m["video_path"]).exists())
-    print(f"Already downloaded: {existing}")
-    print(f"Remaining: {len(download_list) - existing}")
-
-    # Download with progress bar
-    failed = []
-    with ThreadPoolExecutor(max_workers=args.workers) as executor:
-        futures = {}
-        for m in download_list:
-            if not Path(m["video_path"]).exists():
-                future = executor.submit(
-                    download_video, m["video_url"], Path(m["video_path"])
-                )
-                futures[future] = m["video_filename"]
-
-        if futures:
-            for future in tqdm(
-                as_completed(futures), total=len(futures), desc="Downloading"
-            ):
-                filename = futures[future]
-                try:
-                    success = future.result()
-                    if not success:
-                        failed.append(filename)
-                except Exception as e:
-                    failed.append(filename)
-                    print(f"Error downloading {filename}: {e}")
-
-    # Summary
-    print("\n" + "=" * 60)
-    print("Download Summary")
-    print("=" * 60)
-
-    downloaded = sum(1 for m in download_list if Path(m["video_path"]).exists())
-    print(f"Successfully downloaded: {downloaded}/{len(download_list)}")
-
-    if failed:
-        print(f"Failed: {len(failed)}")
-        failed_path = output_dir / "failed_downloads.txt"
-        with open(failed_path, "w") as f:
-            f.write("\n".join(failed))
-        print(f"Failed list saved to {failed_path}")
-
-    # Calculate disk usage
-    total_size = sum(
+    total_bytes = sum(
         Path(m["video_path"]).stat().st_size
-        for m in download_list
+        for m in dl_list
         if Path(m["video_path"]).exists()
     )
-    print(f"Total disk usage: {total_size / 1e9:.2f} GB")
-
-    print(f"\nDone! Dataset saved to {output_dir}")
-    print(f"\nNext steps:")
-    print(
-        f"  1. Extract DiT features: python -m src.models.extract_features --data_dir {output_dir}"
-    )
-    print(
-        f"  2. Train physics head: python -m trainer.train_physics_head --feature_dir ..."
-    )
+    print(f"Disk: {total_bytes / 1e9:.2f} GB")
+    print("Done.")
 
 
 if __name__ == "__main__":

@@ -1,34 +1,29 @@
 """
 Feature Dataset for Loading Pre-extracted (and Pooled) DiT Features
 
+Reads metadata.json directly as the single source of truth for labels,
+SA annotations, captions, and source info. No labels.json or
+enriched_labels.json needed.
+
 Supports two feature formats:
 1. Original: [num_patches, D] = [17550, 1920] (~67MB per file)
 2. Pooled:   [T, D] = [13, 1920] (~100KB per file) <- RECOMMENDED
 
-Directory structure (same for both formats):
+Directory structure:
     feature_dir/
     ├── video_id_1/
     │   ├── t200/
-    │   │   ├── layer_5.pt
-    │   │   ├── layer_10.pt
     │   │   └── layer_15.pt
     │   ├── t400/
     │   └── ...
-    ├── video_id_2/
-    └── labels.json
+    └── video_id_2/
+
+    metadata lives separately (e.g. videophy_data/metadata.json)
 
 Usage:
-    # For pooled features (fast training)
-    dataset = FeatureDataset(
-        feature_dir="~/scratch/physics/physion_features_pooled",
-        label_file="~/scratch/physics/physion_features_pooled/labels.json",
-        layer=15,
-        is_pooled=True  # Set this to True for pooled features
-    )
-
-    # Create dataloaders
     train_loader, val_loader = create_dataloaders(
-        feature_dir="~/scratch/physics/physion_features_pooled",
+        feature_dir="~/scratch/physics/videophy_features_pooled",
+        metadata_file="~/scratch/physics/videophy_data/metadata.json",
         layer=15,
         batch_size=32,
         is_pooled=True
@@ -48,6 +43,72 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
+def _load_metadata(metadata_file: str) -> Tuple[Dict[str, int], Dict[str, dict]]:
+    """
+    Build label and enriched lookups from a single metadata file.
+
+    Supports two formats:
+      - list-of-dicts  (new metadata.json from download_videophy_all.py)
+      - dict {video_id: label}  (legacy labels.json, backward compatible)
+
+    Returns:
+        all_labels: {video_filename: 0/1}
+        enriched:   {video_filename: {label, sa, caption, source, ...}}
+    """
+    with open(metadata_file, "r") as f:
+        data = json.load(f)
+
+    if isinstance(data, list):
+        # New unified metadata.json format
+        all_labels = {}
+        enriched = {}
+        for m in data:
+            vid = m["video_filename"]
+            all_labels[vid] = m["physics"]
+            enriched[vid] = {
+                "label": m["physics"],
+                "sa": m.get("sa", -1),
+                "caption": m.get("caption", ""),
+                "source": m.get("source", "unknown"),
+                "states_of_matter": m.get("states_of_matter", ""),
+                "dataset_split": m.get("dataset_split", "unknown"),
+            }
+        logger.info(f"Loaded metadata.json: {len(all_labels)} entries")
+    else:
+        # Legacy labels.json: {video_id: 0/1}
+        all_labels = {k: int(v) for k, v in data.items()}
+        enriched = {}
+        logger.info(f"Loaded legacy labels: {len(all_labels)} entries")
+
+    return all_labels, enriched
+
+
+def _find_metadata_file(feature_dir: Path, metadata_file: Optional[str]) -> str:
+    """
+    Resolve metadata file path with fallback chain:
+      1. Explicit metadata_file argument
+      2. feature_dir/metadata.json
+      3. feature_dir/labels.json  (legacy)
+    """
+    if metadata_file is not None:
+        p = Path(metadata_file)
+        if p.exists():
+            return str(p)
+        raise FileNotFoundError(f"Metadata file not found: {metadata_file}")
+
+    # Auto-detect in feature_dir
+    for name in ["metadata.json", "labels.json"]:
+        p = feature_dir / name
+        if p.exists():
+            logger.info(f"Auto-detected: {p}")
+            return str(p)
+
+    raise FileNotFoundError(
+        f"No metadata.json or labels.json found in {feature_dir}. "
+        f"Pass --metadata_file explicitly."
+    )
+
+
 class FeatureDataset(Dataset):
     """
     Dataset for loading pre-extracted DiT features.
@@ -59,7 +120,7 @@ class FeatureDataset(Dataset):
     def __init__(
         self,
         feature_dir: str,
-        label_file: str,
+        metadata_file: str,
         layer: int = 15,
         timesteps: Optional[List[int]] = None,
         split: str = "train",
@@ -71,13 +132,13 @@ class FeatureDataset(Dataset):
         """
         Args:
             feature_dir: Path to features directory
-            label_file: Path to labels.json
+            metadata_file: Path to metadata.json (single source of truth)
             layer: DiT layer to use (5, 10, 15, 20, 25)
             timesteps: List of timesteps to use (default: [200, 400, 600, 800])
             split: "train" or "val"
             train_ratio: Ratio of data for training (default: 0.85)
-            is_pooled: True if features are pre-pooled [T, D], False for original [num_patches, D]
-            num_frames: Number of frames T (default: 13, only used if is_pooled=False)
+            is_pooled: True if features are pre-pooled [T, D]
+            num_frames: Number of frames T (default: 13)
             seed: Random seed for train/val split
         """
         self.feature_dir = Path(feature_dir)
@@ -87,17 +148,8 @@ class FeatureDataset(Dataset):
         self.is_pooled = is_pooled
         self.num_frames = num_frames
 
-        # Load labels
-        with open(label_file, "r") as f:
-            self.all_labels = json.load(f)
-            
-        # Load enriched metadata if available (source, sa, states_of_matter)
-        self.enriched = {}
-        enriched_path = self.feature_dir / "enriched_labels.json"
-        if enriched_path.exists():
-            with open(enriched_path, "r") as f:
-                self.enriched = json.load(f)
-            logger.info(f"Loaded enriched labels: {len(self.enriched)} entries")
+        # Load metadata — single source of truth
+        self.all_labels, self.enriched = _load_metadata(metadata_file)
 
         # Find available videos by scanning directory
         self.video_ids = self._find_available_videos()
@@ -117,14 +169,13 @@ class FeatureDataset(Dataset):
         self.samples = []
         for video_id in self.video_ids:
             for t in self.timesteps:
-                # Check if feature file exists
                 feature_path = self._get_feature_path(video_id, t)
                 if feature_path.exists():
                     self.samples.append((video_id, t))
 
         logger.info(
             f"FeatureDataset [{split}]: {len(self.samples)} samples "
-            f"({len(self.video_ids)} videos × {len(self.timesteps)} timesteps), "
+            f"({len(self.video_ids)} videos x {len(self.timesteps)} timesteps), "
             f"layer={layer}, is_pooled={is_pooled}"
         )
 
@@ -173,32 +224,23 @@ class FeatureDataset(Dataset):
         features = features.float()
 
         # Pool features to [T, D] based on input shape
-        # Handles various formats: pooled, unpooled, or partially processed
         ndim = features.dim()
 
         if ndim == 2:
-            # Could be [T, D] (already pooled) or [num_patches, D] (unpooled)
             if features.shape[0] == self.num_frames:
-                # Already pooled: [T, D]
-                pass
+                pass  # Already pooled: [T, D]
             else:
                 # Unpooled: [num_patches, D] -> [T, D]
                 num_patches, hidden_dim = features.shape
                 spatial_patches = num_patches // self.num_frames
                 features = features.view(self.num_frames, spatial_patches, hidden_dim)
-                features = features.mean(dim=1)  # [T, D]
-
+                features = features.mean(dim=1)
         elif ndim == 3:
-            # [T, H*W, D] -> [T, D]
-            features = features.mean(dim=1)
-
+            features = features.mean(dim=1)  # [T, H*W, D] -> [T, D]
         elif ndim == 4:
-            # [T, H, W, D] -> [T, D]
-            features = features.mean(dim=(1, 2))
-
+            features = features.mean(dim=(1, 2))  # [T, H, W, D] -> [T, D]
         elif ndim == 5:
-            # [B, T, H, W, D] -> [T, D] (take first batch)
-            features = features[0].mean(dim=(1, 2))
+            features = features[0].mean(dim=(1, 2))  # [B, T, H, W, D] -> [T, D]
 
         # Get label
         label = float(self.all_labels[video_id])
@@ -226,7 +268,7 @@ class FeatureDatasetRandomTimestep(Dataset):
     def __init__(
         self,
         feature_dir: str,
-        label_file: str,
+        metadata_file: str,
         layer: int = 15,
         timesteps: Optional[List[int]] = None,
         split: str = "train",
@@ -242,17 +284,8 @@ class FeatureDatasetRandomTimestep(Dataset):
         self.is_pooled = is_pooled
         self.num_frames = num_frames
 
-        # Load labels
-        with open(label_file, "r") as f:
-            self.all_labels = json.load(f)
-            
-        # Load enriched metadata if available (source, sa, states_of_matter)
-        self.enriched = {}
-        enriched_path = self.feature_dir / "enriched_labels.json"
-        if enriched_path.exists():
-            with open(enriched_path, "r") as f:
-                self.enriched = json.load(f)
-            logger.info(f"Loaded enriched labels: {len(self.enriched)} entries")
+        # Load metadata — single source of truth
+        self.all_labels, self.enriched = _load_metadata(metadata_file)
 
         # Find available videos
         self.video_ids = self._find_available_videos()
@@ -318,7 +351,7 @@ class FeatureDatasetRandomTimestep(Dataset):
 
         if ndim == 2:
             if features.shape[0] == self.num_frames:
-                pass  # Already pooled
+                pass
             else:
                 num_patches, hidden_dim = features.shape
                 spatial_patches = num_patches // self.num_frames
@@ -334,7 +367,7 @@ class FeatureDatasetRandomTimestep(Dataset):
         label = float(self.all_labels[video_id])
 
         meta = self.enriched.get(video_id, {})
-        sa = float(meta.get("sa", -1))  # -1 = unknown (for masking in loss)
+        sa = float(meta.get("sa", -1))
 
         return {
             "features": features,
@@ -347,7 +380,7 @@ class FeatureDatasetRandomTimestep(Dataset):
 
 def create_dataloaders(
     feature_dir: str,
-    label_file: Optional[str] = None,
+    metadata_file: Optional[str] = None,
     layer: int = 15,
     timesteps: Optional[List[int]] = None,
     batch_size: int = 32,
@@ -362,7 +395,8 @@ def create_dataloaders(
 
     Args:
         feature_dir: Path to features directory
-        label_file: Path to labels.json (default: feature_dir/labels.json)
+        metadata_file: Path to metadata.json.
+            If None, auto-detects metadata.json or labels.json in feature_dir.
         layer: DiT layer to use
         timesteps: List of timesteps
         batch_size: Batch size
@@ -375,19 +409,16 @@ def create_dataloaders(
     Returns:
         (train_loader, val_loader)
     """
-    feature_dir = Path(feature_dir)
+    feature_dir_path = Path(feature_dir)
 
-    # Find labels file
-    if label_file is None:
-        label_file = feature_dir / "labels.json"
+    # Resolve metadata file with fallback chain
+    resolved = _find_metadata_file(feature_dir_path, metadata_file)
 
-    # Choose dataset class
     DatasetClass = FeatureDatasetRandomTimestep if random_timestep else FeatureDataset
 
-    # Create datasets
     train_dataset = DatasetClass(
         feature_dir=str(feature_dir),
-        label_file=str(label_file),
+        metadata_file=resolved,
         layer=layer,
         timesteps=timesteps,
         split="train",
@@ -398,7 +429,7 @@ def create_dataloaders(
 
     val_dataset = DatasetClass(
         feature_dir=str(feature_dir),
-        label_file=str(label_file),
+        metadata_file=resolved,
         layer=layer,
         timesteps=timesteps,
         split="val",
@@ -407,7 +438,6 @@ def create_dataloaders(
         seed=seed,
     )
 
-    # Create dataloaders
     train_loader = DataLoader(
         train_dataset,
         batch_size=batch_size,
@@ -436,22 +466,25 @@ if __name__ == "__main__":
     import sys
 
     if len(sys.argv) < 2:
-        print("Usage: python -m src.data.feature_dataset <feature_dir>")
+        print("Usage: python -m src.data.feature_dataset <feature_dir> [metadata_file]")
         print(
-            "Example: python -m src.data.feature_dataset ~/scratch/physics/physion_features_pooled"
+            "Example: python -m src.data.feature_dataset "
+            "~/scratch/physics/videophy_features_pooled "
+            "~/scratch/physics/videophy_data/metadata.json"
         )
         sys.exit(1)
 
     feature_dir = sys.argv[1]
-    label_file = Path(feature_dir) / "labels.json"
+    metadata_file = sys.argv[2] if len(sys.argv) > 2 else None
 
     print(f"Testing with feature_dir: {feature_dir}")
+    if metadata_file:
+        print(f"  metadata_file: {metadata_file}")
     print()
 
-    # Test FeatureDataset
     train_loader, val_loader = create_dataloaders(
         feature_dir=feature_dir,
-        label_file=str(label_file),
+        metadata_file=metadata_file,
         layer=15,
         batch_size=4,
         num_workers=0,
@@ -462,10 +495,10 @@ if __name__ == "__main__":
     print(f"Val batches: {len(val_loader)}")
     print()
 
-    # Get a sample batch
     batch = next(iter(train_loader))
     print("Sample batch:")
     print(f"  features shape: {batch['features'].shape}")
-    print(f"  labels: {batch['label']}")
-    print(f"  timesteps: {batch['timestep']}")
+    print(f"  labels: {batch['labels']}")
+    print(f"  sa: {batch['sa']}")
+    print(f"  timesteps: {batch['timesteps']}")
     print(f"  video_ids: {batch['video_id']}")

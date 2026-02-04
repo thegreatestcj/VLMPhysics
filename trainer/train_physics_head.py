@@ -720,7 +720,7 @@ Output directory structure:
     parser.add_argument(
         "--feature_dir", type=str, required=True, help="Features directory"
     )
-    parser.add_argument("--label_file", type=str, default=None, help="Labels file")
+    parser.add_argument("--metadata_file", type=str, default=None, help="Metadata file")
     parser.add_argument("--layer", type=int, default=15, help="DiT layer (default: 15)")
     parser.add_argument(
         "--timesteps", type=int, nargs="+", default=None, help="Timesteps"
@@ -868,7 +868,7 @@ Output directory structure:
 
         train_loader, val_loader = create_dataloaders(
             feature_dir=args.feature_dir,
-            label_file=args.label_file,
+            metadata_file=args.metadata_file,
             layer=args.layer,
             timesteps=args.timesteps,
             batch_size=args.batch_size,
