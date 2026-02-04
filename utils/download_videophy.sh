@@ -6,8 +6,12 @@
 #SBATCH --output=slurm/utils/download_videophy_%j.out
 #SBATCH --partition=batch
 
-source ~/miniconda3/etc/profile.d/conda.sh   # 或你的 conda 路径
+# Proper conda activation for SLURM
+source ~/miniconda3/etc/profile.d/conda.sh
 conda activate physics
+
+cd /oscar/home/ctang33/repos/VLMPhysics
+mkdir -p slurm/utils
 
 DATA_DIR=~/scratch/physics/videophy_data
 

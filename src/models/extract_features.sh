@@ -42,7 +42,7 @@ cd ~/repos/VLMPhysics
 # ============================================================
 
 DATA_DIR="/users/$USER/scratch/physics/videophy_data"
-OUTPUT_DIR="/users/$USER/scratch/physics/videophy_features"
+OUTPUT_DIR="/users/$USER/scratch/physics/videophy_features_2"
 
 # Layers to extract (for ablation study)
 LAYERS="5 10 15 20 25"
@@ -69,8 +69,8 @@ MAX_VIDEOS=9999
 # echo "Extracting..."
 # # Run extraction for shard 0
 # python -m src.models.extract_features \
-#     --data_dir /users/$USER/scratch/physics/videophy_data \
-#     --output_dir /users/$USER/scratch/physics/videophy_features \
+#     --data_dir $DATA_DIR \
+#     --output_dir $OUTPUT_DIR \
 #     --layers 10 15 20 25 \
 #     --dataset videophy \
 #     --timesteps 200 400 600 \
@@ -85,8 +85,8 @@ MAX_VIDEOS=9999
 
 Run extraction for shard 1
 python -m src.models.extract_features \
-    --data_dir /users/$USER/scratch/physics/videophy_data \
-    --output_dir /users/$USER/scratch/physics/videophy_features \
+    --data_dir $DATA_DIR \
+    --output_dir $OUTPUT_DIR \
     --layers 10 15 20 25 \
     --dataset videophy \
     --timesteps 200 400 600 \

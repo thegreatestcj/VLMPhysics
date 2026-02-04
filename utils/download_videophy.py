@@ -5,20 +5,20 @@ Download ALL VideoPhy + VideoPhy-2 Videos
 Combines 4 splits into one unified metadata.json:
   - videophysics/videophy_train_public   (~4587, binary labels)
   - videophysics/videophy_test_public    (~3360, binary labels)
-  - videophysics/videophy2_train         (~3340, 1-5 scale → binarize)
-  - videophysics/videophy2_test          (~3400, 1-5 scale → binarize)
+  - videophysics/videophy2_train         (~3340, 1-5 scale -> binarize)
+  - videophysics/videophy2_test          (~3400, 1-5 scale -> binarize)
 
 Binarization for v2: physics = (pc >= 4), sa = (sa >= 4)
 
 Output:
     videophy_data/
-    ├── metadata.json   ← single source of truth
-    └── videos/         ← all mp4 files
+    ├── metadata.json   <- single source of truth
+    └── videos/         <- all mp4 files (named {source}_{basename})
 
 Usage:
-    python utils/download_videophy_all.py --metadata-only
-    python utils/download_videophy_all.py
-    python utils/download_videophy_all.py --max-videos 50
+    python utils/download_videophy.py --metadata-only
+    python utils/download_videophy.py
+    python utils/download_videophy.py --max-videos 50
 """
 
 import os
@@ -57,8 +57,34 @@ def download_video(url: str, output_path: Path, timeout: int = 60) -> bool:
         return False
 
 
-def get_video_filename(url: str) -> str:
+def get_video_basename(url: str) -> str:
+    """Extract raw filename from URL (without source prefix)."""
     return os.path.basename(urlparse(url).path)
+
+
+def make_video_filename(source: str, url: str) -> str:
+    """
+    Create a unique video filename by prefixing source model name.
+
+    Without this, different models generating the same prompt share
+    identical filenames (e.g. ball_rolls.mp4), causing ~6000 videos
+    to be lost during deduplication.
+
+    Examples:
+        lavie_ball_rolls.mp4
+        pika_ball_rolls.mp4
+        cogvideoX5b_ball_rolls.mp4
+    """
+    basename = get_video_basename(url)
+    # Sanitize source name: lowercase, replace spaces/slashes
+    safe_source = (
+        source.lower()
+        .replace(" ", "_")
+        .replace("/", "_")
+        .replace("(", "")
+        .replace(")", "")
+    )
+    return f"{safe_source}_{basename}"
 
 
 # =========================================================================
@@ -114,7 +140,7 @@ def load_v1_test():
 
 
 # =========================================================================
-# VideoPhy-2 loaders (1-5 scale → binarize: >= 4 means positive)
+# VideoPhy-2 loaders (1-5 scale -> binarize: >= 4 means positive)
 # =========================================================================
 
 
@@ -135,6 +161,7 @@ def _extract_model_from_url(url: str) -> str:
             "sora",
             "mochi",
             "ltx",
+            "cosmos",
         ]:
             if prefix in p.lower():
                 return p.split("_")[0] if "_" in p else p
@@ -223,14 +250,21 @@ def main():
         all_entries += load_v2_train()
         all_entries += load_v2_test()
 
-    # Deduplicate by video filename (earlier entries have priority)
+    # Build unified metadata with source-prefixed filenames
+    # This prevents filename collisions across different models
     seen = set()
     metadata = []
+    collision_count = 0
+
     for d in all_entries:
-        fn = get_video_filename(d["video_url"])
-        if not fn or fn in seen:
+        # Use source-prefixed filename to avoid collisions
+        fn = make_video_filename(d["source"], d["video_url"])
+
+        if fn in seen:
+            collision_count += 1
             continue
         seen.add(fn)
+
         d["video_filename"] = fn
         d["video_path"] = str(videos_dir / fn)
         d["index"] = len(metadata)
@@ -245,11 +279,13 @@ def main():
     splits = Counter(m["dataset_split"] for m in metadata)
 
     print(f"\n{'=' * 60}")
-    print(f"Total:   {total} unique videos")
-    print(f"Splits:  {dict(sorted(splits.items()))}")
-    print(f"Physics: {pos} pos / {neg} neg  (pos_weight ~ {neg / max(pos, 1):.3f})")
-    print(f"SA:      {sa_pos} pos / {total - sa_pos} neg")
-    print(f"Sources: {dict(sorted(sources.items(), key=lambda x: -x[1]))}")
+    print(f"Total:      {total} unique videos (collisions skipped: {collision_count})")
+    print(f"Splits:     {dict(sorted(splits.items()))}")
+    print(f"Physics:    {pos} pos / {neg} neg  (pos_weight ~ {neg / max(pos, 1):.3f})")
+    print(f"SA:         {sa_pos} pos / {total - sa_pos} neg")
+    print(f"Sources ({len(sources)} models):")
+    for src, count in sorted(sources.items(), key=lambda x: -x[1]):
+        print(f"  {src:25s}: {count}")
     print(f"{'=' * 60}")
 
     # Save metadata.json

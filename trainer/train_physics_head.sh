@@ -43,7 +43,7 @@ cd ~/repos/VLMPhysics
 
 # Feature directory (from extract_features.py)
 FEATURE_DIR="/users/$USER/scratch/physics/videophy_features_pooled"
-LABEL_FILE="${FEATURE_DIR}/labels.json"
+METADATA_FILE="${FEATURE_DIR}/metadata.json"
 
 # Output directory (small files, can be in project folder)
 OUTPUT_DIR="results"
@@ -116,7 +116,7 @@ echo "========================================"
 
 python -m trainer.train_physics_head \
     --feature_dir $FEATURE_DIR \
-    --label_file $LABEL_FILE \
+    --metadata $METADATA_FILE \
     --ablation heads \
     --heads mean causal_simple temporal_simple multiview_simple \
     --layer $DEFAULT_LAYER \
