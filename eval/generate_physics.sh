@@ -65,6 +65,9 @@ PHYSICS_HEAD="results/training/final_head/mean_l15.pt"
 HEAD_TYPE="mean"
 EXTRACT_LAYER=15
 
+# Mode: "prune" (ours), "best_of_n" (baseline), "random" (ablation)
+MODE="prune"
+
 OUTPUT_DIR="outputs/phygenbench/videophy_mean_full"
 
 # Check if physics head exists
@@ -84,8 +87,8 @@ echo "Configuration:"
 echo "  Physics head:   $PHYSICS_HEAD"
 echo "  Head type:      $HEAD_TYPE"
 echo "  Extract layer:  $EXTRACT_LAYER"
-echo "  Trajectories:   4 -> 2 -> 1"
-echo "  Checkpoints:    t=600, 400"
+echo "  Mode:           $MODE"
+echo "  Trajectories:   4"
 echo "  Output:         $OUTPUT_DIR"
 echo ""
 
@@ -96,41 +99,46 @@ mkdir -p "$OUTPUT_DIR"
 #
 # Comment/uncomment ONE of the two blocks below, then:
 #   sbatch eval/generate_physics.sh   (submit twice, one per block)
+#
+# To run best_of_n baseline:
+#   Change MODE="best_of_n" above and OUTPUT_DIR accordingly
 # ============================================================
 
-# --- Block A: prompts 0-79 (~11 hours) ---
-# python eval/generate_physics.py \
-#     --prompts-file data/phygenbench/prompts.json \
-#     --output-dir "$OUTPUT_DIR" \
-#     --physics-head "$PHYSICS_HEAD" \
-#     --head-type "$HEAD_TYPE" \
-#     --extract-layer $EXTRACT_LAYER \
-#     --num-trajectories 4 \
-#     --checkpoints 600 400 \
-#     --steps 50 \
-#     --frames 49 \
-#     --guidance 6.0 \
-#     --seed 42 \
-#     --start 0 \
-#     --end 80 \
-#     --skip-existing
-
-# --- Block B: prompts 80-159 (~11 hours) ---
+# --- Block A: prompts 0-79 (~11 hours for prune, ~22 hours for best_of_n) ---
 python eval/generate_physics.py \
     --prompts-file data/phygenbench/prompts.json \
     --output-dir "$OUTPUT_DIR" \
     --physics-head "$PHYSICS_HEAD" \
     --head-type "$HEAD_TYPE" \
     --extract-layer $EXTRACT_LAYER \
+    --mode "$MODE" \
     --num-trajectories 4 \
     --checkpoints 600 400 \
     --steps 50 \
     --frames 49 \
     --guidance 6.0 \
     --seed 42 \
-    --start 80 \
-    --end 160 \
+    --start 0 \
+    --end 80 \
     --skip-existing
+
+# --- Block B: prompts 80-159 ---
+# python eval/generate_physics.py \
+#     --prompts-file data/phygenbench/prompts.json \
+#     --output-dir "$OUTPUT_DIR" \
+#     --physics-head "$PHYSICS_HEAD" \
+#     --head-type "$HEAD_TYPE" \
+#     --extract-layer $EXTRACT_LAYER \
+#     --mode "$MODE" \
+#     --num-trajectories 4 \
+#     --checkpoints 600 400 \
+#     --steps 50 \
+#     --frames 49 \
+#     --guidance 6.0 \
+#     --seed 42 \
+#     --start 80 \
+#     --end 160 \
+#     --skip-existing
 
 # ============================================================
 # Summary

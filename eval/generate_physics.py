@@ -70,12 +70,29 @@ class PhysicsGenConfig:
     head_type: str = "mean"
     extract_layer: int = 15
 
-    # Trajectory pruning
+    # Mode: "prune" = progressive trajectory pruning (ours)
+    #        "best_of_n" = generate all N, score at end, pick best (baseline)
+    #        "random" = prune with random scores (ablation)
+    mode: str = "prune"
+
+    # Mode: "prune" = progressive trajectory pruning (ours)
+    #        "best_of_n" = run all N to completion, score at scoring_timestep, pick best
+    #        "random" = prune with random scores (ablation baseline)
+    mode: str = "prune"
+
+    # Trajectory pruning (used in "prune" and "random" modes)
     # 4 trajectories: 4 -> 2 -> 1 (faster, ~2.5x baseline time)
     # 8 trajectories: 8 -> 4 -> 2 -> 1 (slower, ~5x baseline time)
     num_trajectories: int = 4
     checkpoints: List[int] = field(default_factory=lambda: [600, 400])  # 2 prune points
     keep_ratio: float = 0.5
+
+    # Best-of-N scoring timestep (should match training data; t=200 is cleanest)
+    scoring_timestep: int = 200
+
+    # Best-of-N: timestep at which to score (should match training data)
+    # t=200 is the cleanest timestep the physics head was trained on
+    scoring_timestep: int = 200
 
     # Generation
     num_inference_steps: int = 50
@@ -305,15 +322,45 @@ class TrajectoryPruningGenerator:
             steps.append(idx)
         return sorted(set(steps))
 
+    def _get_scoring_step(self, timesteps: torch.Tensor) -> int:
+        """Find step index closest to scoring_timestep (for best_of_n mode)."""
+        ts_list = timesteps.tolist()
+        return min(
+            range(len(ts_list)),
+            key=lambda i: abs(ts_list[i] - self.config.scoring_timestep),
+        )
+
+    def _score_trajectory(self, tr, t, prompt_embeds) -> float:
+        """Score a single trajectory using physics head (extra forward pass)."""
+        if not self.evaluator:
+            return torch.rand(1).item()
+
+        latent_input = self.pipe.scheduler.scale_model_input(tr["latents"], t)
+        t_input = t.expand(latent_input.shape[0])
+        _ = self.pipe.transformer(
+            hidden_states=latent_input,
+            timestep=t_input,
+            encoder_hidden_states=prompt_embeds[:1],  # No CFG for scoring
+            return_dict=False,
+        )
+        t_val = int(t.item()) if hasattr(t, "item") else int(t)
+        return self.evaluator.score(t_val, self.config.num_frames)
+
     @torch.no_grad()
     def generate(self, prompt: str, seed: int) -> Tuple[torch.Tensor, Dict]:
         """
-        Generate video with trajectory pruning.
+        Generate video using the configured mode.
+
+        Modes:
+            prune:     Progressive trajectory pruning at checkpoints (ours)
+            best_of_n: Run all N trajectories to completion, score at t=200, pick best
+            random:    Same as prune but with random scores (ablation baseline)
 
         Returns:
             video: Generated video (list of numpy arrays)
-            info: Dictionary with pruning history and timing
+            info: Dictionary with scoring/pruning history and timing
         """
+        mode = self.config.mode
         timing = {"encode": 0, "sampling": 0, "decode": 0}
 
         # Encode prompt once
@@ -370,6 +417,7 @@ class TrajectoryPruningGenerator:
                     "latents": latents,
                     "active": True,
                     "score": 0.5,
+                    "scores_history": {},  # timestep -> score
                     "seed": seed + i,
                 }
             )
@@ -377,20 +425,29 @@ class TrajectoryPruningGenerator:
         # Setup scheduler
         self.pipe.scheduler.set_timesteps(self.config.num_inference_steps)
         timesteps = self.pipe.scheduler.timesteps
-        checkpoint_steps = self._get_checkpoint_steps(timesteps)
 
-        # Move timesteps to device
+        # Determine which steps need scoring
+        if mode == "prune" or mode == "random":
+            checkpoint_steps = self._get_checkpoint_steps(timesteps)
+        elif mode == "best_of_n":
+            # Score at the designated timestep, no pruning
+            scoring_step = self._get_scoring_step(timesteps)
+            checkpoint_steps = [scoring_step]
+        else:
+            raise ValueError(f"Unknown mode: {mode}")
+
         timesteps = timesteps.to(self.device)
 
         logger.info(
-            f"Trajectories: {num_traj}, Checkpoints at steps: {checkpoint_steps}"
+            f"Mode: {mode}, Trajectories: {num_traj}, "
+            f"Checkpoint steps: {checkpoint_steps}"
         )
         logger.info(
             f"Latent shape: {latent_shape}, timesteps device: {timesteps.device}"
         )
 
         # Sampling loop
-        pruning_history = []
+        scoring_history = []
         sampling_start = time.time()
 
         for step, t in enumerate(tqdm(timesteps, desc="Sampling", leave=False)):
@@ -439,61 +496,69 @@ class TrajectoryPruningGenerator:
                     noise_pred, t, tr["latents"], return_dict=False
                 )[0]
 
-            # Checkpoint: evaluate and prune
+            # Checkpoint: score (and optionally prune)
             if step in checkpoint_steps and num_active > 1:
                 t_val = int(t.item()) if hasattr(t, "item") else int(t)
 
-                # Score each trajectory
+                # Score each active trajectory
                 for tr in active_trajs:
-                    if self.evaluator:
-                        # Run an extra forward pass (without CFG) to capture features
-                        latent_input = self.pipe.scheduler.scale_model_input(
-                            tr["latents"], t
-                        )
-                        t_input = t.expand(latent_input.shape[0])  # [1]
-                        _ = self.pipe.transformer(
-                            hidden_states=latent_input,
-                            timestep=t_input,
-                            encoder_hidden_states=prompt_embeds[
-                                :1
-                            ],  # No CFG for scoring
-                            return_dict=False,
-                        )
-                        tr["score"] = self.evaluator.score(
-                            t_val, self.config.num_frames
-                        )
-                    else:
+                    if mode == "random":
                         tr["score"] = torch.rand(1).item()
-
-                # Sort by score and keep top fraction
-                active_trajs.sort(key=lambda x: x["score"], reverse=True)
-                num_keep = max(1, int(num_active * self.config.keep_ratio))
-
-                kept = []
-                pruned = []
-                for i, tr in enumerate(active_trajs):
-                    if i < num_keep:
-                        kept.append((tr["idx"], f"{tr['score']:.3f}"))
                     else:
-                        tr["active"] = False
-                        tr["latents"] = None  # Free memory
-                        pruned.append((tr["idx"], f"{tr['score']:.3f}"))
+                        tr["score"] = self._score_trajectory(tr, t, prompt_embeds)
+                    tr["scores_history"][t_val] = tr["score"]
 
-                logger.info(f"  Step {step} (t={t_val}): Keep {kept}, Prune {pruned}")
-                pruning_history.append(
-                    {
-                        "step": step,
-                        "timestep": t_val,
-                        "kept": kept,
-                        "pruned": pruned,
-                    }
-                )
+                # Sort by score
+                active_trajs.sort(key=lambda x: x["score"], reverse=True)
+                scores_summary = [
+                    (tr["idx"], f"{tr['score']:.3f}") for tr in active_trajs
+                ]
 
-                # Clear memory
-                gc.collect()
-                torch.cuda.empty_cache()
+                if mode == "best_of_n":
+                    # Score only, NO pruning — all trajectories keep running
+                    logger.info(
+                        f"  Step {step} (t={t_val}) [best_of_n]: Scores {scores_summary}"
+                    )
+                    scoring_history.append(
+                        {
+                            "step": step,
+                            "timestep": t_val,
+                            "scores": scores_summary,
+                            "action": "score_only",
+                        }
+                    )
+                else:
+                    # Prune mode (or random): keep top fraction
+                    num_keep = max(1, int(num_active * self.config.keep_ratio))
 
-        # Get best trajectory
+                    kept = []
+                    pruned = []
+                    for i, tr in enumerate(active_trajs):
+                        if i < num_keep:
+                            kept.append((tr["idx"], f"{tr['score']:.3f}"))
+                        else:
+                            tr["active"] = False
+                            tr["latents"] = None  # Free memory
+                            pruned.append((tr["idx"], f"{tr['score']:.3f}"))
+
+                    logger.info(
+                        f"  Step {step} (t={t_val}): Keep {kept}, Prune {pruned}"
+                    )
+                    scoring_history.append(
+                        {
+                            "step": step,
+                            "timestep": t_val,
+                            "kept": kept,
+                            "pruned": pruned,
+                            "action": "prune",
+                        }
+                    )
+
+                    # Clear memory from pruned trajectories
+                    gc.collect()
+                    torch.cuda.empty_cache()
+
+        # Select best trajectory
         active_trajs = [tr for tr in trajectories if tr["active"]]
         best = max(active_trajs, key=lambda x: x["score"])
 
@@ -503,15 +568,17 @@ class TrajectoryPruningGenerator:
             f"sampling_time={timing['sampling']:.1f}s"
         )
 
-        # Decode to video
+        # Decode only the best trajectory
         decode_start = time.time()
         video = self._decode(best["latents"])
         timing["decode"] = time.time() - decode_start
 
         info = {
+            "mode": mode,
             "best_trajectory": best["idx"],
             "best_score": best["score"],
-            "pruning_history": pruning_history,
+            "all_scores": {tr["idx"]: tr["scores_history"] for tr in trajectories},
+            "scoring_history": scoring_history,
             "sampling_time": timing["sampling"],
             "decode_time": timing["decode"],
             "encode_time": timing["encode"],
@@ -638,6 +705,13 @@ def main():
 
     # Trajectory pruning
     parser.add_argument(
+        "--mode",
+        type=str,
+        default="prune",
+        choices=["prune", "best_of_n", "random"],
+        help="Generation mode: prune (ours), best_of_n (baseline), random (ablation)",
+    )
+    parser.add_argument(
         "--num-trajectories", type=int, default=4, help="Initial trajectories (4 or 8)"
     )
     parser.add_argument(
@@ -680,6 +754,7 @@ def main():
         physics_head_path=args.physics_head,
         head_type=args.head_type,
         extract_layer=args.extract_layer,
+        mode=args.mode,
         num_trajectories=args.num_trajectories,
         checkpoints=args.checkpoints,
         num_inference_steps=args.steps,
@@ -773,8 +848,11 @@ def main():
                     "decode": round(info.get("decode_time", 0), 2),
                 },
                 "status": "success",
+                "mode": info["mode"],
                 "best_trajectory": info["best_trajectory"],
                 "best_score": info["best_score"],
+                "all_scores": info["all_scores"],
+                "scoring_history": info["scoring_history"],
                 "num_trajectories": args.num_trajectories,
             }
 
