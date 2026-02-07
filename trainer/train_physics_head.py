@@ -115,6 +115,10 @@ class Metrics:
     recall: float = 0.0
     f1: float = 0.0
     auc_per_timestep: Dict[int, float] = None
+    # SA metrics (multi-task)
+    sa_auc_roc: float = 0.0
+    sa_accuracy: float = 0.0
+    sa_loss: float = 0.0
 
     def __post_init__(self):
         if self.auc_per_timestep is None:
@@ -126,6 +130,9 @@ def compute_metrics(
     all_labels: torch.Tensor,
     all_timesteps: torch.Tensor,
     loss: float = 0.0,
+    sa_logits: torch.Tensor = None,
+    sa_labels: torch.Tensor = None,
+    sa_loss: float = 0.0,
 ) -> Metrics:
     """Compute evaluation metrics."""
     from sklearn.metrics import (
@@ -173,6 +180,25 @@ def compute_metrics(
             except ValueError:
                 auc_per_timestep[int(t)] = 0.5
 
+    # SA metrics (if provided)
+    sa_auc_roc_val = 0.0
+    sa_acc_val = 0.0
+    if sa_logits is not None and sa_labels is not None:
+        sa_logits_np = sa_logits.cpu().numpy()
+        sa_labels_np = sa_labels.cpu().numpy()
+        # Filter valid samples (sa >= 0)
+        sa_valid = sa_labels_np >= 0
+        if sa_valid.sum() > 10:
+            sl = sa_logits_np[sa_valid]
+            slab = sa_labels_np[sa_valid]
+            sa_probs = 1 / (1 + np.exp(-sl))
+            sa_preds = (sa_probs > 0.5).astype(int)
+            sa_acc_val = accuracy_score(slab, sa_preds)
+            try:
+                sa_auc_roc_val = roc_auc_score(slab, sa_probs)
+            except ValueError:
+                sa_auc_roc_val = 0.5
+
     return Metrics(
         loss=loss,
         accuracy=accuracy,
@@ -182,6 +208,9 @@ def compute_metrics(
         recall=recall,
         f1=f1,
         auc_per_timestep=auc_per_timestep,
+        sa_auc_roc=sa_auc_roc_val,
+        sa_accuracy=sa_acc_val,
+        sa_loss=sa_loss,
     )
 
 
@@ -208,10 +237,11 @@ class PhysicsHeadTrainer:
         train_sa: bool = False,  # NEW
         sa_weight: float = 0.3,
     ):
-        if train_sa and not isinstance(model, MultiTaskWrapper):
+        if train_sa:
             from src.models.physics_head import MultiTaskWrapper
-            model = MultiTaskWrapper(model)
-            logger.info(f"Auto-wrapped with MultiTaskWrapper (sa_weight={sa_weight})")
+            if not isinstance(model, MultiTaskWrapper):
+                model = MultiTaskWrapper(model)
+                logger.info(f"Auto-wrapped with MultiTaskWrapper (sa_weight={sa_weight})")
         self.model = model.to(device)
         self.train_loader = train_loader
         self.val_loader = val_loader
@@ -245,7 +275,27 @@ class PhysicsHeadTrainer:
         self.train_sa = train_sa
         self.sa_weight = sa_weight
         if train_sa:
-            self.sa_criterion = nn.BCEWithLogitsLoss()
+            # Compute SA pos_weight from training data
+            sa_labels_all = []
+            for batch in train_loader:
+                if "sa" in batch:
+                    sa_labels_all.append(batch["sa"])
+            if sa_labels_all:
+                sa_labels_all = torch.cat(sa_labels_all)
+                sa_valid = sa_labels_all[sa_labels_all >= 0]
+                sa_num_pos = sa_valid.sum().item()
+                sa_num_neg = len(sa_valid) - sa_num_pos
+                if sa_num_pos > 0 and sa_num_neg > 0:
+                    sa_pw = torch.tensor([sa_num_neg / sa_num_pos], device=device)
+                    logger.info(
+                        f"SA class imbalance: {sa_num_pos:.0f} pos / {sa_num_neg:.0f} neg, "
+                        f"pos_weight={sa_pw.item():.3f}"
+                    )
+                else:
+                    sa_pw = None
+            else:
+                sa_pw = None
+            self.sa_criterion = nn.BCEWithLogitsLoss(pos_weight=sa_pw)
             logger.info(f"Multi-task training enabled: SA weight={sa_weight}")
         self.optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
 
@@ -262,6 +312,7 @@ class PhysicsHeadTrainer:
         self.best_auc = 0.0
         self.best_epoch = 0
         self.no_improve_count = 0
+        self.best_combined = 0.0
         self.history = {
             "train_loss": [],
             "val_loss": [],
@@ -269,6 +320,8 @@ class PhysicsHeadTrainer:
             "val_accuracy": [],
             "val_f1": [],
             "lr": [],
+            "val_sa_auc": [],
+            "val_sa_accuracy": [],
         }
 
     def _requires_timestep(self) -> bool:
@@ -350,8 +403,11 @@ class PhysicsHeadTrainer:
         self.model.eval()
 
         all_logits, all_labels, all_timesteps = [], [], []
+        all_sa_logits, all_sa_labels = [], []
         total_loss = 0.0
+        total_sa_loss = 0.0
         num_batches = 0
+        sa_batches = 0
 
         for batch in self.val_loader:
             fwd = self._forward(batch)
@@ -364,14 +420,49 @@ class PhysicsHeadTrainer:
             all_labels.append(fwd["labels"].cpu())
             all_timesteps.append(fwd["timesteps"].cpu())
 
+            # Collect SA predictions
+            if self.train_sa and "sa_logits" in fwd and "sa_labels" in fwd:
+                all_sa_logits.append(fwd["sa_logits"].cpu())
+                all_sa_labels.append(fwd["sa_labels"].cpu())
+                sa_mask = fwd["sa_labels"] >= 0
+                if sa_mask.any():
+                    sa_loss = self.sa_criterion(
+                        fwd["sa_logits"][sa_mask], fwd["sa_labels"][sa_mask]
+                    )
+                    total_sa_loss += sa_loss.item()
+                    sa_batches += 1
+                    
+        # Aggregate and compute metrics
+        all_logits = torch.cat(all_logits)
+        all_labels = torch.cat(all_labels)
+        all_timesteps = torch.cat(all_timesteps)
+        avg_loss = total_loss / max(num_batches, 1)
+
+        # SA tensors (may be empty if not multi-task)
+        sa_logits_cat = torch.cat(all_sa_logits) if all_sa_logits else None
+        sa_labels_cat = torch.cat(all_sa_labels) if all_sa_labels else None
+        avg_sa_loss = total_sa_loss / max(sa_batches, 1) if sa_batches > 0 else 0.0
+
+        return compute_metrics(
+            all_logits,
+            all_labels,
+            all_timesteps,
+            loss=avg_loss,
+            sa_logits=sa_logits_cat,
+            sa_labels=sa_labels_cat,
+            sa_loss=avg_sa_loss,
+        )
+
     def save_checkpoint(self, is_best: bool = False):
         """Save model checkpoint."""
         checkpoint = {
             "model_state_dict": self.model.state_dict(),
             "optimizer_state_dict": self.optimizer.state_dict(),
             "best_auc": self.best_auc,
+            "best_combined": self.best_combined,
             "best_epoch": self.best_epoch,
             "head_type": self.head_type,
+            "train_sa": self.train_sa,
         }
 
         torch.save(checkpoint, self.output_dir / "latest.pt")
@@ -399,10 +490,22 @@ class PhysicsHeadTrainer:
             self.history["val_accuracy"].append(metrics.accuracy)
             self.history["val_f1"].append(metrics.f1)
             self.history["lr"].append(current_lr)
+            self.history["val_sa_auc"].append(metrics.sa_auc_roc)
+            self.history["val_sa_accuracy"].append(metrics.sa_accuracy)
 
-            # Check for improvement
-            if metrics.auc_roc > self.best_auc:
+            # Check for improvement (combined metric if multi-task)
+            if self.train_sa:
+                combined = (
+                    1 - self.sa_weight
+                ) * metrics.auc_roc + self.sa_weight * metrics.sa_auc_roc
+                improved = combined > self.best_combined
+            else:
+                combined = metrics.auc_roc
+                improved = metrics.auc_roc > self.best_auc
+
+            if improved:
                 self.best_auc = metrics.auc_roc
+                self.best_combined = combined
                 self.best_epoch = epoch
                 self.no_improve_count = 0
                 self.save_checkpoint(is_best=True)
@@ -412,12 +515,14 @@ class PhysicsHeadTrainer:
             self.save_checkpoint(is_best=False)
 
             # Log progress
+            sa_str = f" | SA AUC: {metrics.sa_auc_roc:.4f}" if self.train_sa else ""
             logger.info(
                 f"Epoch {epoch:3d} | "
                 f"Train Loss: {train_loss:.4f} | "
                 f"Val Loss: {metrics.loss:.4f} | "
                 f"Val AUC: {metrics.auc_roc:.4f} | "
-                f"Val Acc: {metrics.accuracy:.4f} | "
+                f"Val Acc: {metrics.accuracy:.4f}"
+                f"{sa_str} | "
                 f"Best: {self.best_auc:.4f} (ep {self.best_epoch})"
             )
 
@@ -437,7 +542,10 @@ class PhysicsHeadTrainer:
         results = {
             "head_type": self.head_type,
             "best_auc": self.best_auc,
+            "best_combined": self.best_combined,
             "best_epoch": self.best_epoch,
+            "train_sa": self.train_sa,
+            "sa_weight": self.sa_weight if self.train_sa else None,
             "final_metrics": asdict(final_metrics),
             "history": self.history,
             "training_time": training_time,
@@ -483,7 +591,7 @@ def run_layer_ablation(
             **{
                 k: v
                 for k, v in train_kwargs.items()
-                if k in ["batch_size", "num_workers", "timesteps"]
+                if k in ["batch_size", "num_workers", "timesteps", "metadata_file"]
             },
         )
 
@@ -501,7 +609,7 @@ def run_layer_ablation(
             **{
                 k: v
                 for k, v in train_kwargs.items()
-                if k not in ["batch_size", "num_workers", "timesteps"]
+                if k not in ["batch_size", "num_workers", "timesteps", "metadata_file"]
             },
         )
 
@@ -558,7 +666,7 @@ def run_head_ablation(
             **{
                 k: v
                 for k, v in train_kwargs.items()
-                if k in ["batch_size", "num_workers", "timesteps"]
+                if k in ["batch_size", "num_workers", "timesteps", "metadata_file"]
             },
         )
 
@@ -577,7 +685,7 @@ def run_head_ablation(
             **{
                 k: v
                 for k, v in train_kwargs.items()
-                if k not in ["batch_size", "num_workers", "timesteps"]
+                if k not in ["batch_size", "num_workers", "timesteps", "metadata_file"]
             },
         )
 
@@ -639,7 +747,7 @@ def run_seed_ablation(
             **{
                 k: v
                 for k, v in train_kwargs.items()
-                if k in ["batch_size", "num_workers", "timesteps"]
+                if k in ["batch_size", "num_workers", "timesteps", "metadata_file"]
             },
         )
 
@@ -657,7 +765,7 @@ def run_seed_ablation(
             **{
                 k: v
                 for k, v in train_kwargs.items()
-                if k not in ["batch_size", "num_workers", "timesteps"]
+                if k not in ["batch_size", "num_workers", "timesteps", "metadata_file"]
             },
         )
 
@@ -792,6 +900,9 @@ Output directory structure:
         "num_epochs": args.num_epochs,
         "early_stopping_patience": args.early_stopping,
         "device": device,
+        "train_sa": args.train_sa,
+        "sa_weight": args.sa_weight,
+        "metadata_file": args.metadata_file,
     }
 
     # Setup output directory

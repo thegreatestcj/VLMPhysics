@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=phygenbench_eval
-#SBATCH --output=slurm/eval/phygenbench_%j.out
+#SBATCH --output=slurm/eval/phygen_full_%j.out
 #SBATCH --partition=gpu
 #SBATCH --gres=gpu:1
 #SBATCH --mem=64G
@@ -91,7 +91,7 @@ PROJECT_ROOT="${PROJECT_ROOT:-$HOME/repos/VLMPhysics}"
 cd "$PROJECT_ROOT"
 
 # Input/Output paths
-VIDEOS_DIR="outputs/phygenbench/videophy"
+VIDEOS_DIR="outputs/phygenbench/videophy_mean_full"
 OUTPUT_DIR="results/eval/phygenbench"
 
 # Stages to run (1=VQAScore, 2=MultiFrame GPT-4o, 3=Video GPT-4o)

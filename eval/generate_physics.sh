@@ -11,7 +11,7 @@
 # ============================================================
 # PhyGenBench Generation with Physics Head Trajectory Pruning
 #
-# Uses trajectory pruning guided by trained physics head.
+# Uses mean head (layer 15) with trajectory pruning.
 #
 # Time estimate (based on baseline ~204s/video):
 #   - 4 trajectories (4->2->1): ~500s/video (~2.5x baseline)
@@ -21,32 +21,26 @@
 #   80 prompts @ 4 traj:  ~11 hours (split job)
 #
 # Usage:
-#   # Full run (all 160 prompts) - ~22 hours
+#   # Full run (all 160 prompts)
 #   sbatch eval/generate_physics.sh
 #
-#   # Split into 2 jobs (run both) - ~11 hours each
+#   # Split into 2 jobs (run both)
 #   sbatch eval/generate_physics.sh 0 80
 #   sbatch eval/generate_physics.sh 80 160
 #
 # ============================================================
-
-# Parse arguments (optional start/end)
-START_IDX=${1:-0}
-END_IDX=${2:-160}
 
 echo "========================================"
 echo "PhyGenBench Physics Head Generation"
 echo "========================================"
 echo "Job ID: $SLURM_JOB_ID"
 echo "Node: $SLURMD_NODENAME"
-echo "Range: $START_IDX - $END_IDX"
 nvidia-smi -L
 echo "Start: $(date)"
 echo "========================================"
 
 # Create directories
 mkdir -p slurm/phygenbench/physics
-mkdir -p outputs/phygenbench/physics
 
 # Environment
 module purge
@@ -65,34 +59,69 @@ cd ~/repos/VLMPhysics
 # Configuration
 # ============================================================
 
-# Physics head (layer 10 is best based on ablation)
-PHYSICS_HEAD="results/training/physics_head/heads_ablation_20260131_184635/causal_simple/best.pt"
+# Best config from ablation: mean head, layer 15, with SA multi-task
+# UPDATE this path to your actual best checkpoint
+PHYSICS_HEAD="results/training/final_head/mean_l15.pt"
+HEAD_TYPE="mean"
+EXTRACT_LAYER=15
+
+OUTPUT_DIR="outputs/phygenbench/videophy_mean_full"
 
 # Check if physics head exists
 if [ ! -f "$PHYSICS_HEAD" ]; then
     echo "ERROR: Physics head not found: $PHYSICS_HEAD"
-    echo "Please train physics head first or update path."
+    echo ""
+    echo "Please copy your best checkpoint:"
+    echo "  mkdir -p results/training/final_head"
+    echo "  cp results/training/physics_head/<your_run>/mean/best.pt $PHYSICS_HEAD"
+    echo ""
+    echo "Or update PHYSICS_HEAD path in this script."
     exit 1
 fi
 
 echo ""
 echo "Configuration:"
-echo "  Physics head: $PHYSICS_HEAD"
-echo "  Trajectories: 4 -> 2 -> 1"
-echo "  Checkpoints: t=600, 400"
-echo "  Output: outputs/phygenbench/physics/"
+echo "  Physics head:   $PHYSICS_HEAD"
+echo "  Head type:      $HEAD_TYPE"
+echo "  Extract layer:  $EXTRACT_LAYER"
+echo "  Trajectories:   4 -> 2 -> 1"
+echo "  Checkpoints:    t=600, 400"
+echo "  Output:         $OUTPUT_DIR"
 echo ""
+
+mkdir -p "$OUTPUT_DIR"
 
 # ============================================================
 # Run generation
+#
+# Comment/uncomment ONE of the two blocks below, then:
+#   sbatch eval/generate_physics.sh   (submit twice, one per block)
 # ============================================================
 
+# --- Block A: prompts 0-79 (~11 hours) ---
+# python eval/generate_physics.py \
+#     --prompts-file data/phygenbench/prompts.json \
+#     --output-dir "$OUTPUT_DIR" \
+#     --physics-head "$PHYSICS_HEAD" \
+#     --head-type "$HEAD_TYPE" \
+#     --extract-layer $EXTRACT_LAYER \
+#     --num-trajectories 4 \
+#     --checkpoints 600 400 \
+#     --steps 50 \
+#     --frames 49 \
+#     --guidance 6.0 \
+#     --seed 42 \
+#     --start 0 \
+#     --end 80 \
+#     --skip-existing
+
+# --- Block B: prompts 80-159 (~11 hours) ---
 python eval/generate_physics.py \
     --prompts-file data/phygenbench/prompts.json \
-    --output-dir outputs/phygenbench/videophy \
+    --output-dir "$OUTPUT_DIR" \
     --physics-head "$PHYSICS_HEAD" \
-    --head-type causal_simple \
-    --extract-layer 10 \
+    --head-type "$HEAD_TYPE" \
+    --extract-layer $EXTRACT_LAYER \
     --num-trajectories 4 \
     --checkpoints 600 400 \
     --steps 50 \
@@ -114,19 +143,25 @@ echo "========================================"
 echo "End: $(date)"
 echo ""
 echo "Output directory:"
-ls -la outputs/phygenbench/physics/ | head -20
+ls -la "$OUTPUT_DIR"/ | head -20
 echo ""
 echo "Video count:"
-ls outputs/phygenbench/physics/*.mp4 2>/dev/null | wc -l
+ls "$OUTPUT_DIR"/*.mp4 2>/dev/null | wc -l
 echo ""
-echo "Log file:"
-cat outputs/phygenbench/physics/generation_log.json | python -c "
+
+LOG_FILE="$OUTPUT_DIR/generation_log.json"
+if [ -f "$LOG_FILE" ]; then
+    echo "Log summary:"
+    cat "$LOG_FILE" | python -c "
 import json, sys
 data = json.load(sys.stdin)
-success = sum(1 for r in data if r.get('status') == 'success')
+success = sum(1 for r in data if r.get('status', '').startswith('success'))
 total_time = sum(r.get('time', 0) for r in data)
 print(f'  Successful: {success}/{len(data)}')
 print(f'  Total time: {total_time/60:.1f} min')
 if success > 0:
     print(f'  Avg time/video: {total_time/success:.1f}s')
 "
+else
+    echo "No log file found yet."
+fi

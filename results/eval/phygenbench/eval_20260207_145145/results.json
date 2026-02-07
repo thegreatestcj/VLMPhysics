@@ -1,0 +1,623 @@
+{
+  "config": {
+    "videos_dir": "outputs/phygenbench/videophy_mean_full",
+    "prompts_file": "data/phygenbench/prompts.json",
+    "single_question_file": "data/phygenbench/single_question.json",
+    "multi_question_file": "data/phygenbench/multi_question.json",
+    "video_question_file": "data/phygenbench/video_question.json",
+    "output_dir": "results/eval/phygenbench",
+    "stages": [
+      1,
+      2,
+      3
+    ],
+    "num_frames_stage1": 8,
+    "num_frames_stage2": 4,
+    "num_frames_stage3": 8,
+    "vqascore_model": "clip-flant5-xxl",
+    "gpt_model": "gpt-4o",
+    "gpt_max_tokens": 200,
+    "resume": true,
+    "max_videos": null,
+    "dry_run": false
+  },
+  "timestamp": "2026-02-07T14:53:08.795914",
+  "per_video": [
+    {
+      "index": 0,
+      "video_path": "outputs/phygenbench/videophy_mean_full/output_video_1.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 1,
+      "stage3_score": 0.67,
+      "overall_score": 0.335,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The water floats out of the cup",
+            "score_pos": 0.4489777684211731,
+            "score_neg": 0.20475509762763977,
+            "binary": 1
+          },
+          {
+            "statement": "The water forms spherical droplets",
+            "score_pos": 0.41686153411865234,
+            "score_neg": 0.6381258964538574,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The water forms droplets in mid-air.",
+        "desc2": "The water forms droplets in mid-air."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 1,
+      "video_path": "outputs/phygenbench/videophy_mean_full/output_video_2.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The oil forms spherical droplets",
+            "score_pos": 0.6609578132629395,
+            "score_neg": 0.6609584093093872,
+            "binary": 0
+          },
+          {
+            "statement": "The oil does not fall to the ground",
+            "score_pos": 0.5653472542762756,
+            "score_neg": 0.6609585285186768,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The oil is starting to float away from the cup.",
+        "desc2": "The oil is floating in small droplets away from the cup."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 2,
+      "video_path": "outputs/phygenbench/videophy_mean_full/output_video_3.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The liquid forms floating globules",
+            "score_pos": 0.7174637913703918,
+            "score_neg": 0.45962461829185486,
+            "binary": 1
+          },
+          {
+            "statement": "The liquid does not move in straight lines",
+            "score_pos": 0.8756279349327087,
+            "score_neg": 0.541569709777832,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The juice starts to leave the bottle and forms small floating droplets.",
+        "desc2": "The droplets continue to spread out, and more juice exits the bottle."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 3,
+      "video_path": "outputs/phygenbench/videophy_mean_full/output_video_4.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The honey forms globules",
+            "score_pos": 0.7063398957252502,
+            "score_neg": 0.5901694297790527,
+            "binary": 1
+          },
+          {
+            "statement": "The honey is floating",
+            "score_pos": 0.7795603275299072,
+            "score_neg": 0.16581542789936066,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "Honey starts spreading outwards.",
+        "desc2": "The honey continues to spread in the surrounding area."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 4,
+      "video_path": "outputs/phygenbench/videophy_mean_full/output_video_5.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The liquid forms floating blobs",
+            "score_pos": 0.56534743309021,
+            "score_neg": 0.6381255388259888,
+            "binary": 0
+          },
+          {
+            "statement": "The liquid does not fall to the ground",
+            "score_pos": 0.717463493347168,
+            "score_neg": 0.5187917947769165,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The soda is starting to float out of the can.",
+        "desc2": "The soda is continuously spreading out, forming droplets floating in the air."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 5,
+      "video_path": "outputs/phygenbench/videophy_mean_full/output_video_6.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The iron piece sinks immediately",
+            "score_pos": 0.44897761940956116,
+            "score_neg": 0.7697267532348633,
+            "binary": 0
+          },
+          {
+            "statement": "The iron piece is underwater",
+            "score_pos": 0.6381258964538574,
+            "score_neg": 0.9038646817207336,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The iron piece starts to sink.",
+        "desc2": "The iron piece continues to sink."
+      },
+      "stage3_details": {
+        "stage3_score": 0,
+        "level": 1,
+        "answer": "1"
+      }
+    },
+    {
+      "index": 6,
+      "video_path": "outputs/phygenbench/videophy_mean_full/output_video_7.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 1,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The stone sinks to the bottom of the pool",
+            "score_pos": 0.1821131557226181,
+            "score_neg": 0.33495670557022095,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The stone is partially submerged, causing ripples on the water surface.",
+        "desc2": "The stone continues to sink, with more ripples on the water surface."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 7,
+      "video_path": "outputs/phygenbench/videophy_mean_full/output_video_8.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 1.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 1,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The tennis ball floats on the water",
+            "score_pos": 0.8241842985153198,
+            "score_neg": 0.49503469467163086,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The tennis ball is halfway submerged in the water.",
+        "desc2": "The tennis ball is floating on the water surface."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 8,
+      "video_path": "outputs/phygenbench/videophy_mean_full/output_video_9.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The wood block floats on the surface of the water",
+            "score_pos": 0.8066633939743042,
+            "score_neg": 0.2910153567790985,
+            "binary": 1
+          },
+          {
+            "statement": "The wood block remains above the water surface",
+            "score_pos": 0.8066648840904236,
+            "score_neg": 0.34558913111686707,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The wood block is unmoved, floating on the water surface.",
+        "desc2": "The wood block is still floating on the water surface."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 9,
+      "video_path": "outputs/phygenbench/videophy_mean_full/output_video_10.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The glass ball begins to sink",
+            "score_pos": 0.09901335835456848,
+            "score_neg": 0.10874491184949875,
+            "binary": 0
+          },
+          {
+            "statement": "The glass ball is completely submerged",
+            "score_pos": 0.30025336146354675,
+            "score_neg": 0.7592740058898926,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The glass ball is being submerged.",
+        "desc2": "The glass ball is sinking deeper."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 10,
+      "video_path": "outputs/phygenbench/videophy_mean_full/output_video_11.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The sponge shrinks significantly",
+            "score_pos": 0.5310947895050049,
+            "score_neg": 0.6609587669372559,
+            "binary": 0
+          },
+          {
+            "statement": "Water is visibly squeezed out of the sponge",
+            "score_pos": 0.8816213011741638,
+            "score_neg": 0.37513431906700134,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The sponge is getting smaller and water is beginning to be expelled.",
+        "desc2": "The sponge is smaller and more water has been expelled."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 11,
+      "video_path": "outputs/phygenbench/videophy_mean_full/output_video_12.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 0.5,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "Water gets squeezed out from the towel",
+            "score_pos": 0.44897711277008057,
+            "score_neg": 0.5067746043205261,
+            "binary": 0
+          },
+          {
+            "statement": "The towel appears shrunken",
+            "score_pos": 0.7174636721611023,
+            "score_neg": 0.5787547826766968,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The towel is shrinking and water droplets are starting to appear.",
+        "desc2": "The towel continues to shrink and more water is being squeezed out."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 12,
+      "video_path": "outputs/phygenbench/videophy_mean_full/output_video_13.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 1.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The balloon is visibly distorted",
+            "score_pos": 0.684606671333313,
+            "score_neg": 0.3097846806049347,
+            "binary": 1
+          },
+          {
+            "statement": "The balloon appears significantly smaller than at the start",
+            "score_pos": 0.6136779189109802,
+            "score_neg": 0.6018097996711731,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The balloon is shrinking.",
+        "desc2": "The balloon is deforming."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 13,
+      "video_path": "outputs/phygenbench/videophy_mean_full/output_video_14.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The toothpaste comes out of the tube",
+            "score_pos": 0.5787525177001953,
+            "score_neg": 0.6609573364257812,
+            "binary": 0
+          },
+          {
+            "statement": "The tube is visibly deformed",
+            "score_pos": 0.6494390368461609,
+            "score_neg": 0.7174637913703918,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The tube is slightly deformed and a small amount of toothpaste is being squeezed out.",
+        "desc2": "The tube is noticeably more deformed and more toothpaste is squeezed out."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 14,
+      "video_path": "outputs/phygenbench/videophy_mean_full/output_video_15.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "Water drips out of the cloth",
+            "score_pos": 0.4723649322986603,
+            "score_neg": 0.5310951471328735,
+            "binary": 0
+          },
+          {
+            "statement": "The cloth is visibly shrunk",
+            "score_pos": 0.5787543058395386,
+            "score_neg": 0.6257833242416382,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The cloth appears slightly smaller and damp, with some water droplets starting to form.",
+        "desc2": "The cloth is noticeably smaller and wetter, with more water droplets visible."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 15,
+      "video_path": "outputs/phygenbench/videophy_mean_full/output_video_16.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The plastic bottle is shrinking as air is extracted",
+            "score_pos": 0.6136763691902161,
+            "score_neg": 0.7980442643165588,
+            "binary": 0
+          },
+          {
+            "statement": "The plastic bottle appears deformed or collapsed due to air extraction",
+            "score_pos": 0.6726781129837036,
+            "score_neg": 0.5187914967536926,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The bottle is shrinking.",
+        "desc2": "The bottle is shrinking."
+      },
+      "stage3_details": {
+        "stage3_score": 0,
+        "level": 1,
+        "answer": "1"
+      }
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=train_head
-#SBATCH --output=slurm/training/train_%j.out
+#SBATCH --output=slurm/training/train_full_%j.out
 #SBATCH --time=1:00:00
 #SBATCH --partition=gpu
 #SBATCH --gres=gpu:1
@@ -9,11 +9,9 @@
 
 # ============================================================
 # Physics Head Training & Ablation Studies
-# 
-# This script trains physics discriminator heads on pre-extracted
-# DiT features. Training is very fast (~10 min for full ablation).
 #
-#
+# Trains physics discriminator heads on pre-extracted DiT features.
+# Training is very fast (~10 min for full ablation).
 # ============================================================
 
 echo "========================================"
@@ -31,7 +29,7 @@ module purge
 module load cuda/12.1 python/3.10
 source /users/ctang33/.conda/envs/physics/bin/activate
 
-# Set cache directories (in case any HF models needed)
+# Set cache directories
 export HF_HOME=/users/$USER/scratch/hf_cache
 export TRANSFORMERS_CACHE=$HF_HOME
 
@@ -41,11 +39,8 @@ cd ~/repos/VLMPhysics
 # Configuration
 # ============================================================
 
-# Feature directory (from extract_features.py)
-FEATURE_DIR="/users/$USER/scratch/physics/videophy_features_pooled"
-METADATA_FILE="${FEATURE_DIR}/metadata.json"
-
-# Output directory (small files, can be in project folder)
+FEATURE_DIR="/users/$USER/scratch/physics/videophy_features_2"
+METADATA_FILE="/users/$USER/scratch/physics/videophy_data/metadata.json"
 OUTPUT_DIR="results"
 
 # Training hyperparameters
@@ -53,20 +48,14 @@ BATCH_SIZE=32
 NUM_EPOCHS=100
 LR=0.001
 WEIGHT_DECAY=0.01
-WARMUP_EPOCHS=5
-VAL_RATIO=0.15
 EARLY_STOPPING=20
 NUM_WORKERS=4
-SEED=42
 
-# Default layer for head ablation
+# Best layer from previous ablation
 DEFAULT_LAYER=15
 
-# Default head for layer ablation
-DEFAULT_HEAD="multiview_simple"
-
-HEAD_TYPE="mean causal_simple temporal_simple multiview_simple"
-
+# Multi-task SA training
+SA_WEIGHT=0.3
 
 # ============================================================
 # Print configuration
@@ -74,115 +63,97 @@ HEAD_TYPE="mean causal_simple temporal_simple multiview_simple"
 
 echo ""
 echo "Configuration:"
-echo "  Feature dir: $FEATURE_DIR"
-echo "  Label file: $LABEL_FILE"
-echo "  Output dir: $OUTPUT_DIR"
-echo "  Batch size: $BATCH_SIZE"
-echo "  Epochs: $NUM_EPOCHS"
-echo "  Learning rate: $LR"
-echo "  Val ratio: $VAL_RATIO"
+echo "  Feature dir:    $FEATURE_DIR"
+echo "  Metadata file:  $METADATA_FILE"
+echo "  Output dir:     $OUTPUT_DIR"
+echo "  Batch size:     $BATCH_SIZE"
+echo "  Epochs:         $NUM_EPOCHS"
+echo "  Learning rate:  $LR"
 echo "  Early stopping: $EARLY_STOPPING epochs"
+echo "  SA weight:      $SA_WEIGHT"
 echo ""
 
-# Check if feature directory exists
+# Validate paths
 if [ ! -d "$FEATURE_DIR" ]; then
     echo "ERROR: Feature directory not found: $FEATURE_DIR"
-    echo "Please run extract_features.py first!"
     exit 1
 fi
 
-# Check if label file exists
-if [ ! -f "$LABEL_FILE" ]; then
-    echo "ERROR: Label file not found: $LABEL_FILE"
+if [ ! -f "$METADATA_FILE" ]; then
+    echo "ERROR: Metadata file not found: $METADATA_FILE"
     exit 1
 fi
 
 # ============================================================
-# Ablation Study 1: Head Architecture Comparison
-# 
-# Compares 5 head types:
-#   - mean:           Baseline (no timestep)
-#   - mean_adaln:     Mean pooling + AdaLN
-#   - temporal_adaln: Bidirectional attention + AdaLN
-#   - causal_adaln:   Causal attention + AdaLN (recommended)
-#   - multiview_adaln: Multi-view pooling + AdaLN
-#
-# Expected time: ~10 minutes
-# ============================================================
-
-echo "========================================"
-echo "Running HEAD ABLATION..."
-echo "========================================"
-
-python -m trainer.train_physics_head \
-    --feature_dir $FEATURE_DIR \
-    --metadata $METADATA_FILE \
-    --ablation heads \
-    --heads mean causal_simple temporal_simple multiview_simple \
-    --layer $DEFAULT_LAYER \
-    --batch_size $BATCH_SIZE \
-    --num_epochs $NUM_EPOCHS \
-    --lr $LR \
-    --weight_decay $WEIGHT_DECAY \
-    # --warmup_epochs $WARMUP_EPOCHS \
-    # --val_ratio $VAL_RATIO \
-    --early_stopping $EARLY_STOPPING \
-    --num_workers $NUM_WORKERS \
-    # --seed $SEED \
-    --is_pooled \
-    --output_dir ${OUTPUT_DIR}/head_ablation
-
-echo ""
-echo "Head ablation completed: $(date)"
-echo ""
-
-
-# ============================================================
-# Ablation Study 2: DiT Layer Comparison
-# 
-# Compares features from different DiT layers:
-#   - Layer 5:  Early features (low-level)
-#   - Layer 10: Mid-early features
-#   - Layer 15: Middle features (usually best)
-#   - Layer 20: Mid-late features
-#   - Layer 25: Late features (high-level)
-#
-# Expected time: ~10 minutes
+# Head Architecture Ablation (with multi-task SA)
 # ============================================================
 
 # echo "========================================"
-# echo "Running LAYER ABLATION..."
+# echo "Running HEAD ABLATION (PC + SA)..."
 # echo "========================================"
 
 # python -m trainer.train_physics_head \
 #     --feature_dir $FEATURE_DIR \
-#     --label_file $LABEL_FILE \
-#     --ablation layers \
-#     --layers 10 15 20 25 \
-#     --head_type $DEFAULT_HEAD \
+#     --metadata_file $METADATA_FILE \
+#     --ablation heads \
+#     --heads mean causal_simple temporal_simple multiview_simple \
+#     --layer $DEFAULT_LAYER \
 #     --batch_size $BATCH_SIZE \
 #     --num_epochs $NUM_EPOCHS \
 #     --lr $LR \
 #     --weight_decay $WEIGHT_DECAY \
 #     --early_stopping $EARLY_STOPPING \
 #     --num_workers $NUM_WORKERS \
-#     --is_pooled
+#     --is_pooled \
+#     --train-sa \
+#     --sa-weight $SA_WEIGHT \
+#     --exp-name heads_sa
 
 # echo ""
-# echo "Layer ablation completed: $(date)"
+# echo "Head ablation completed: $(date)"
 # echo ""
-
 
 # ============================================================
-# Ablation Study 3: Seed Variance Test
+# Layer Ablation
 #
-# Tests model stability across different random seeds:
-#   - Seed 42:   Standard seed
-#   - Seed 123:  Alternative seed
-#   - Seed 456:  Alternative seed
-#   - Seed 789:  Alternative seed
-#   - Seed 1024: Alternative seed
+# Compares features from different DiT layers:
+#   - Layer 5:  Early features (low-level)
+#   - Layer 10: Mid-early features (previous best)
+#   - Layer 15: Middle features
+#   - Layer 20: Mid-late features
+#   - Layer 25: Late features (high-level)
 #
+# Uses best head from head ablation. Expected time: ~10 minutes
+# ============================================================
+
+echo "========================================"
+echo "Running LAYER ABLATION (PC + SA)..."
+echo "========================================"
+
+python -m trainer.train_physics_head \
+    --feature_dir $FEATURE_DIR \
+    --metadata_file $METADATA_FILE \
+    --ablation layers \
+    --layers 10 15 20 25 \
+    --head_type mean \
+    --batch_size $BATCH_SIZE \
+    --num_epochs $NUM_EPOCHS \
+    --lr $LR \
+    --weight_decay $WEIGHT_DECAY \
+    --early_stopping $EARLY_STOPPING \
+    --num_workers $NUM_WORKERS \
+    --is_pooled \
+    --train-sa \
+    --sa-weight $SA_WEIGHT
+
+echo ""
+echo "Layer ablation completed: $(date)"
+echo ""
+
+# ============================================================
+# Seed Ablation
+#
+# Tests model stability across different random seeds.
 # Expected time: ~15 minutes (5 seeds)
 # ============================================================
 
@@ -192,63 +163,24 @@ echo ""
 
 # python -m trainer.train_physics_head \
 #     --feature_dir $FEATURE_DIR \
-#     --label_file $LABEL_FILE \
+#     --metadata_file $METADATA_FILE \
 #     --ablation seeds \
 #     --seeds 42 123 456 789 1024 \
 #     --layer $DEFAULT_LAYER \
-#     --head_type $DEFAULT_HEAD \
+#     --head_type multiview_simple \
 #     --batch_size $BATCH_SIZE \
 #     --num_epochs $NUM_EPOCHS \
 #     --lr $LR \
 #     --weight_decay $WEIGHT_DECAY \
 #     --early_stopping $EARLY_STOPPING \
 #     --num_workers $NUM_WORKERS \
-#     --is_pooled
+#     --is_pooled \
+#     --train-sa \
+#     --sa-weight $SA_WEIGHT
 
 # echo ""
 # echo "Seed ablation completed: $(date)"
 # echo ""
-
-
-# ============================================================
-# Ablation Study 4: Timestep Configuration (Optional)
-#
-# Compares training with different noise levels:
-#   - t=200: Low noise (clearer features)
-#   - t=400: Medium-low noise
-#   - t=600: Medium-high noise
-#   - t=800: High noise (noisier features)
-#   - All: Combined training
-#
-# Expected time: ~10 minutes
-# ============================================================
-
-# echo "========================================"
-# echo "Running TIMESTEP ABLATION..."
-# echo "========================================"
-
-# python -m trainer.train_physics_head \
-#     --feature_dir $FEATURE_DIR \
-#     --label_file $LABEL_FILE \
-#     --ablation timesteps \
-#     --layer $DEFAULT_LAYER \
-#     --head_type $DEFAULT_HEAD \
-#     --batch_size $BATCH_SIZE \
-#     --num_epochs $NUM_EPOCHS \
-#     --lr $LR \
-#     --weight_decay $WEIGHT_DECAY \
-#     --warmup_epochs $WARMUP_EPOCHS \
-#     --val_ratio $VAL_RATIO \
-#     --early_stopping $EARLY_STOPPING \
-#     --num_workers $NUM_WORKERS \
-#     --is_pooled \
-#     --seed $SEED \
-#     --output_dir ${OUTPUT_DIR}/timestep_ablation
-
-# echo ""
-# echo "Timestep ablation completed: $(date)"
-# echo ""
-
 
 # ============================================================
 # Summary
@@ -260,22 +192,9 @@ echo "End: $(date)"
 echo "========================================"
 
 echo ""
-echo "Output directory structure:"
-find ${OUTPUT_DIR} -name "*.json" -o -name "*.pt" | head -30
-
-echo ""
 echo "Results summary files:"
 ls -la ${OUTPUT_DIR}/*/summary.json 2>/dev/null || echo "  (check individual result folders)"
 
 echo ""
 echo "Disk usage:"
-du -sh ${OUTPUT_DIR}/*
-
-echo ""
-echo "========================================"
-echo "Next steps:"
-echo "  1. Check results: cat ${OUTPUT_DIR}/training/physics_head/*/summary.json"
-echo "  2. Check seed results: cat ${OUTPUT_DIR}/training/seed/*/summary.json"
-echo "  3. Compare AUC scores in the summary tables above"
-echo "  4. Select best head, layer, and verify seed stability"
-echo "========================================"
+du -sh ${OUTPUT_DIR}/* 2>/dev/null

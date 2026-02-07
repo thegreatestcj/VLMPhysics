@@ -5,10 +5,11 @@ PhyGenBench Video Generation with Physics Head Trajectory Pruning
 Generates videos for PhyGenBench prompts using CogVideoX-2B with
 trajectory pruning guided by the trained physics discriminator head.
 
-FIXED: Supports resuming - loads existing log and appends without overwriting.
+Supports resuming - loads existing log and appends without overwriting.
 
 Output Structure:
-    outputs/phygenbench/physics/
+    outputs/phygenbench/{run_name}/
+    ├── config.json
     ├── generation_log.json
     ├── output_video_1.mp4
     ├── output_video_2.mp4
@@ -65,11 +66,9 @@ class PhysicsGenConfig:
     model_id: str = "THUDM/CogVideoX-2b"
 
     # Physics head
-    physics_head_path: str = (
-        "results/training/physics_head/layers_ablation_20260127_074539/layer_10/best.pt"
-    )
-    head_type: str = "temporal_simple"
-    extract_layer: int = 10
+    physics_head_path: str = "results/training/final_head/mean_l15.pt"
+    head_type: str = "mean"
+    extract_layer: int = 15
 
     # Trajectory pruning
     # 4 trajectories: 4 -> 2 -> 1 (faster, ~2.5x baseline time)
@@ -91,6 +90,15 @@ class PhysicsGenConfig:
 
 
 # =============================================================================
+# Constants
+# =============================================================================
+
+# CogVideoX-2B architecture constants
+TEXT_SEQ_LEN = 226  # T5 text token sequence length
+HIDDEN_DIM = 1920  # DiT hidden dimension
+
+
+# =============================================================================
 # Physics Head Wrapper
 # =============================================================================
 
@@ -107,13 +115,12 @@ class PhysicsHeadEvaluator:
     ):
         self.device = device
         self.extract_layer = extract_layer
+        self.head_type = head_type
         self.captured_features = None
         self._hook_handle = None
 
         # Load physics head
         from src.models.physics_head import create_physics_head
-
-        hidden_dim = 1920  # CogVideoX-2B
 
         # Read head_type from checkpoint if available, to prevent mismatch
         ckpt = torch.load(head_path, map_location="cpu", weights_only=False)
@@ -124,11 +131,32 @@ class PhysicsHeadEvaluator:
                 f"Using checkpoint's '{ckpt_head_type}'."
             )
             head_type = ckpt_head_type
+            self.head_type = head_type
 
-        logger.info(f"Physics head loaded from {head_path}")
+        # Create model
+        self.head = create_physics_head(head_type, hidden_dim=HIDDEN_DIM)
+
+        # Wrap with MultiTaskWrapper if checkpoint was trained with SA
+        has_sa = any("sa_classifier" in k for k in ckpt["model_state_dict"].keys())
+        if has_sa:
+            from src.models.physics_head import MultiTaskWrapper
+
+            self.head = MultiTaskWrapper(self.head)
+            logger.info("Checkpoint has SA head, wrapped with MultiTaskWrapper")
+        self.has_sa = has_sa
+
+        # Load weights
+        self.head.load_state_dict(ckpt["model_state_dict"])
+        self.head = self.head.to(device).eval()
+
+        num_params = sum(p.numel() for p in self.head.parameters())
+        logger.info(
+            f"Physics head loaded: {head_path} "
+            f"(type={head_type}, layer={extract_layer}, params={num_params:,}, sa={has_sa})"
+        )
 
     def setup_hook(self, transformer) -> None:
-        """Register feature extraction hook."""
+        """Register feature extraction hook on the target DiT layer."""
 
         def hook_fn(module, input, output):
             out = output[0] if isinstance(output, tuple) else output
@@ -136,6 +164,7 @@ class PhysicsHeadEvaluator:
 
         block = transformer.transformer_blocks[self.extract_layer]
         self._hook_handle = block.register_forward_hook(hook_fn)
+        logger.info(f"Hook registered on transformer_blocks[{self.extract_layer}]")
 
     def remove_hook(self) -> None:
         """Remove hook."""
@@ -145,23 +174,73 @@ class PhysicsHeadEvaluator:
 
     @torch.no_grad()
     def score(self, timestep: int, num_frames: int = 49) -> float:
-        """Score current captured features."""
+        """
+        Score current captured features.
+
+        The hook captures raw DiT intermediate features [B, text+video, D].
+        We need to:
+          1. Strip text tokens (first 226 tokens)
+          2. Reshape video tokens and pool spatial dims -> [B, T, D]
+          3. Run through physics head
+        """
         if self.captured_features is None:
-            return 0.5  # Neutral score if no features
+            logger.warning("No captured features, returning neutral score")
+            return 0.5
 
         feat = self.captured_features
-
-        # Pool spatial dimensions
-        num_latent_frames = (num_frames - 1) // 4 + 1  # 13 for 49 frames
         B, seq_len, D = feat.shape
-        spatial_size = seq_len // num_latent_frames
-        feat = feat.view(B, num_latent_frames, spatial_size, D).mean(dim=2)
 
-        # Get score
-        t = torch.tensor([timestep], device=self.device, dtype=torch.long)
-        logits = self.head(feat.float(), t.float())
+        # Step 1: Strip text tokens if present
+        # CogVideoX intermediate layers output [B, 226 + T*H*W, D]
+        num_latent_frames = (num_frames - 1) // 4 + 1  # 13 for 49 frames
+        video_seq_len = num_latent_frames * 30 * 45  # 13 * 30 * 45 = 17550
+
+        if seq_len == TEXT_SEQ_LEN + video_seq_len:
+            # Has text tokens, strip them
+            feat = feat[:, TEXT_SEQ_LEN:, :]
+        elif seq_len == video_seq_len:
+            # Video only, no stripping needed
+            pass
+        else:
+            logger.warning(
+                f"Unexpected seq_len={seq_len} "
+                f"(expected {video_seq_len} or {TEXT_SEQ_LEN + video_seq_len}). "
+                f"Attempting to strip first {TEXT_SEQ_LEN} tokens."
+            )
+            feat = feat[:, TEXT_SEQ_LEN:, :]
+
+        # Step 2: Reshape and pool spatial dims
+        # [B, T*H*W, D] -> [B, T, H*W, D] -> mean over H*W -> [B, T, D]
+        B_new, remaining, D = feat.shape
+        spatial_size = remaining // num_latent_frames
+        feat = feat.view(B_new, num_latent_frames, spatial_size, D).mean(dim=2)
+
+        # Step 3: Run through physics head
+        # mean head: forward(features) — no timestep
+        # other heads: forward(features, timestep)
+        feat = feat.float()
+
+        if self.has_sa:
+            # MultiTaskWrapper.forward(features, timestep=None)
+            # It internally calls base_head with appropriate args
+            if self.head_type == "mean":
+                output = self.head(feat, None)
+            else:
+                t = torch.tensor([timestep], device=self.device, dtype=torch.float)
+                output = self.head(feat, t)
+            # MultiTaskWrapper returns (physics_logits, sa_logits)
+            logits = output[0]
+        else:
+            # Raw head without wrapper
+            if self.head_type == "mean":
+                logits = self.head(feat)
+            else:
+                t = torch.tensor([timestep], device=self.device, dtype=torch.float)
+                logits = self.head(feat, t)
+
         score = torch.sigmoid(logits).item()
 
+        # Clear captured features
         self.captured_features = None
         return score
 
@@ -176,10 +255,10 @@ class TrajectoryPruningGenerator:
     Generates videos using trajectory pruning with physics head guidance.
 
     Strategy:
-    - Maintain multiple trajectories (e.g., 8)
+    - Maintain multiple trajectories (e.g., 4)
     - At checkpoints, evaluate all with physics head
-    - Keep top half based on physics scores
-    - Final: 8 -> 4 -> 2 -> 1
+    - Keep top fraction based on physics scores
+    - Final: 4 -> 2 -> 1
     """
 
     def __init__(self, config: PhysicsGenConfig, device: str = "cuda"):
@@ -232,7 +311,7 @@ class TrajectoryPruningGenerator:
         Generate video with trajectory pruning.
 
         Returns:
-            video: Generated video tensor
+            video: Generated video (list of numpy arrays)
             info: Dictionary with pruning history and timing
         """
         timing = {"encode": 0, "sampling": 0, "decode": 0}
@@ -275,7 +354,6 @@ class TrajectoryPruningGenerator:
         for i in range(num_traj):
             generator = torch.Generator(device=self.device).manual_seed(seed + i)
 
-            # Initialize latents manually (like pruning.py)
             latents = (
                 torch.randn(
                     latent_shape,
@@ -356,7 +434,7 @@ class TrajectoryPruningGenerator:
                         noise_pred_text - noise_pred_uncond
                     )
 
-                # Scheduler step - t needs to be on the right device
+                # Scheduler step
                 tr["latents"] = self.pipe.scheduler.step(
                     noise_pred, t, tr["latents"], return_dict=False
                 )[0]
@@ -365,14 +443,14 @@ class TrajectoryPruningGenerator:
             if step in checkpoint_steps and num_active > 1:
                 t_val = int(t.item()) if hasattr(t, "item") else int(t)
 
-                # Score each trajectory (run one more forward to get features)
+                # Score each trajectory
                 for tr in active_trajs:
                     if self.evaluator:
-                        # Quick forward to capture features
+                        # Run an extra forward pass (without CFG) to capture features
                         latent_input = self.pipe.scheduler.scale_model_input(
                             tr["latents"], t
                         )
-                        t_input = t.expand(latent_input.shape[0])  # 1D array
+                        t_input = t.expand(latent_input.shape[0])  # [1]
                         _ = self.pipe.transformer(
                             hidden_states=latent_input,
                             timestep=t_input,
@@ -387,7 +465,7 @@ class TrajectoryPruningGenerator:
                     else:
                         tr["score"] = torch.rand(1).item()
 
-                # Sort by score and keep top half
+                # Sort by score and keep top fraction
                 active_trajs.sort(key=lambda x: x["score"], reverse=True)
                 num_keep = max(1, int(num_active * self.config.keep_ratio))
 
@@ -421,7 +499,8 @@ class TrajectoryPruningGenerator:
 
         timing["sampling"] = time.time() - sampling_start
         logger.info(
-            f"Best trajectory: idx={best['idx']}, score={best['score']:.3f}, sampling_time={timing['sampling']:.1f}s"
+            f"Best trajectory: idx={best['idx']}, score={best['score']:.3f}, "
+            f"sampling_time={timing['sampling']:.1f}s"
         )
 
         # Decode to video
@@ -442,7 +521,7 @@ class TrajectoryPruningGenerator:
 
     def _decode(self, latents: torch.Tensor) -> torch.Tensor:
         """Decode latents to video."""
-        # Move transformer to CPU to free memory
+        # Move transformer to CPU to free memory for VAE
         self.pipe.transformer.to("cpu")
         gc.collect()
         torch.cuda.empty_cache()
@@ -457,11 +536,10 @@ class TrajectoryPruningGenerator:
         with torch.no_grad():
             video = self.pipe.vae.decode(latents, return_dict=False)[0]
 
-        # Post-process to numpy for export_to_video
-        # output_type="np" returns list of [H, W, C] numpy arrays
+        # Post-process to numpy
         video = self.pipe.video_processor.postprocess_video(video, output_type="np")[0]
 
-        # Move transformer back
+        # Move transformer back for next generation
         self.pipe.transformer.to(self.device)
 
         return video  # List of numpy arrays
@@ -507,13 +585,13 @@ def load_existing_log(log_path: Path) -> Tuple[List[Dict], set]:
         }
 
         logger.info(
-            f"Loaded existing log with {len(results)} entries, {len(completed_indices)} successful"
+            f"Loaded existing log with {len(results)} entries, "
+            f"{len(completed_indices)} successful"
         )
         return results, completed_indices
 
     except (json.JSONDecodeError, KeyError) as e:
         logger.warning(f"Could not parse existing log: {e}")
-        # Backup corrupted log
         backup_path = log_path.with_suffix(f".backup_{int(time.time())}.json")
         log_path.rename(backup_path)
         logger.warning(f"Backed up corrupted log to {backup_path}")
@@ -522,9 +600,7 @@ def load_existing_log(log_path: Path) -> Tuple[List[Dict], set]:
 
 def save_log_sorted(log_path: Path, results: List[Dict]) -> None:
     """Save results to log, sorted by index."""
-    # Sort by index for clean output
     sorted_results = sorted(results, key=lambda x: x.get("index", 0))
-
     with open(log_path, "w", encoding="utf-8") as f:
         json.dump(sorted_results, f, indent=2, ensure_ascii=False)
 
@@ -554,15 +630,13 @@ def main():
     parser.add_argument(
         "--physics-head",
         type=str,
-        default="results/training/physics_head/layers_ablation_20260127_074539/layer_10/best.pt",
+        default="results/training/final_head/mean_l15.pt",
         help="Path to physics head checkpoint",
     )
-    parser.add_argument("--head-type", type=str, default="temporal_simple")
-    parser.add_argument("--extract-layer", type=int, default=10)
+    parser.add_argument("--head-type", type=str, default="mean")
+    parser.add_argument("--extract-layer", type=int, default=15)
 
     # Trajectory pruning
-    # 4 traj: ~2.5x baseline time (~500s/video)
-    # 8 traj: ~5x baseline time (~1000s/video)
     parser.add_argument(
         "--num-trajectories", type=int, default=4, help="Initial trajectories (4 or 8)"
     )
@@ -645,13 +719,12 @@ def main():
         # Output path (1-indexed like baseline)
         video_path = output_dir / f"output_video_{idx + 1}.mp4"
 
-        # Skip if already completed (check both video file and log)
+        # Skip if already completed
         already_in_log = idx in completed_indices
         video_exists = video_path.exists()
 
         if args.skip_existing and (already_in_log or video_exists):
             if not already_in_log and video_exists:
-                # Video exists but not in log - add a placeholder entry
                 logger.info(f"[{idx}] Video exists but not in log, adding entry")
                 results_by_index[idx] = {
                     "index": idx,
@@ -661,7 +734,6 @@ def main():
                     "time": 0,
                     "status": "success (pre-existing)",
                 }
-                # Save immediately
                 results = list(results_by_index.values())
                 save_log_sorted(log_path, results)
             else:
@@ -707,7 +779,10 @@ def main():
             }
 
             logger.info(
-                f"  Done in {total_time:.1f}s (sample={info.get('sampling_time', 0):.1f}s, decode={info.get('decode_time', 0):.1f}s), score={info['best_score']:.3f}"
+                f"  Done in {total_time:.1f}s "
+                f"(sample={info.get('sampling_time', 0):.1f}s, "
+                f"decode={info.get('decode_time', 0):.1f}s), "
+                f"score={info['best_score']:.3f}"
             )
             generated_count += 1
 
@@ -728,7 +803,7 @@ def main():
         # Update or add result
         results_by_index[idx] = result
 
-        # Rebuild results list and save incrementally (sorted by index)
+        # Save incrementally (sorted by index)
         results = list(results_by_index.values())
         save_log_sorted(log_path, results)
 

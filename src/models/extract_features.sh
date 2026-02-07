@@ -1,10 +1,10 @@
 #!/bin/bash
-#SBATCH --job-name=extract_feat
-#SBATCH --output=slurm/extraction/extract_%j.out
-#SBATCH --time=12:00:00
+#SBATCH --job-name=extract_feat_full
+#SBATCH --output=slurm/extraction/extract_full_%j.out
+#SBATCH --time=24:00:00
 #SBATCH --partition=gpu
 #SBATCH --gres=gpu:1
-#SBATCH --mem=64G
+#SBATCH --mem=48G
 #SBATCH --cpus-per-task=4
 
 # ============================================================
@@ -45,45 +45,39 @@ DATA_DIR="/users/$USER/scratch/physics/videophy_data"
 OUTPUT_DIR="/users/$USER/scratch/physics/videophy_features_2"
 
 # Layers to extract (for ablation study)
-LAYERS="5 10 15 20 25"
+LAYERS="10 15 20 25"
 
 # Timesteps (for trajectory pruning checkpoints)
-TIMESTEPS="400"
+TIMESTEPS="200 400 600"
 
-MAX_VIDEOS=9999
+MAX_VIDEOS=99999
 
 # ============================================================
 # Run extraction
 # ============================================================
 
-# echo ""
-# echo "Configuration:"
-# echo "  Data dir: $DATA_DIR"
-# echo "  Output dir: $OUTPUT_DIR"
-# echo "  Layers: $LAYERS"
-# echo "  Timesteps: $TIMESTEPS"
-# echo "  Max videos: $MAX_VIDEOS"
-# echo ""
+if [ ! -f "$DATA_DIR/metadata.json" ]; then
+    echo "ERROR: metadata.json not found!"
+    exit 1
+fi
+
+TOTAL=$(python3 -c "import json; print(len(json.load(open('$DATA_DIR/metadata.json'))))")
+MP4S=$(find $DATA_DIR/videos -name '*.mp4' 2>/dev/null | wc -l)
+echo "Metadata: $TOTAL entries  |  mp4 on disk: $MP4S"
+echo ""
+
+echo ""
+echo "Configuration:"
+echo "  Data dir: $DATA_DIR"
+echo "  Output dir: $OUTPUT_DIR"
+echo "  Layers: $LAYERS"
+echo "  Timesteps: $TIMESTEPS"
+echo "  Max videos: $MAX_VIDEOS"
+echo ""
 
 
-# echo "Extracting..."
-# # Run extraction for shard 0
-# python -m src.models.extract_features \
-#     --data_dir $DATA_DIR \
-#     --output_dir $OUTPUT_DIR \
-#     --layers 10 15 20 25 \
-#     --dataset videophy \
-#     --timesteps 200 400 600 \
-#     --use-8bit \
-#     --shard 0 \
-#     --num_shards 2
-
-
-# echo "=========================================="
-# echo "Shard 0 completed: $(date)"
-# echo "=========================================="
-
-Run extraction for shard 1
+echo "Extracting..."
+Run extraction for shard 0
 python -m src.models.extract_features \
     --data_dir $DATA_DIR \
     --output_dir $OUTPUT_DIR \
@@ -91,12 +85,32 @@ python -m src.models.extract_features \
     --dataset videophy \
     --timesteps 200 400 600 \
     --use-8bit \
-    --shard 1 \
+    --use-text \
+    --pool \
+    --shard 0 \
     --num_shards 2
 
+
 echo "=========================================="
-echo "Shard 1 completed: $(date)"
+echo "Shard 0 completed: $(date)"
 echo "=========================================="
+
+# Run extraction for shard 1
+# python -m src.models.extract_features \
+#     --data_dir $DATA_DIR \
+#     --output_dir $OUTPUT_DIR \
+#     --layers 10 15 20 25 \
+#     --dataset videophy \
+#     --timesteps 200 400 600 \
+#     --use-8bit \
+#     --use-text \
+#     --pool \
+#     --shard 1 \
+#     --num_shards 2
+
+# echo "=========================================="
+# echo "Shard 1 completed: $(date)"
+# echo "=========================================="
 
 echo ""
 echo "Output directory contents:"
@@ -105,3 +119,4 @@ ls -la $OUTPUT_DIR
 echo ""
 echo "Disk usage:"
 du -sh $OUTPUT_DIR
+

@@ -162,6 +162,35 @@ def encode_caption(
     return text_embeds.to(torch.float16)
 
 
+def pool_spatial_inline(features: torch.Tensor, num_frames: int = 13) -> torch.Tensor:
+    """
+    Pool spatial dims inline during extraction.
+
+    CogVideoX-2B layer 15 shapes:
+        Input:  [1, 17550, 1920]   (batch=1, patches=13*30*45, hidden=1920)
+        Output: [13, 1920]         (T=13 latent frames, D=1920)
+
+    Args:
+        features: Raw DiT hidden states [1, T*H*W, D]
+        num_frames: Temporal frames in latent space (13 for CogVideoX)
+
+    Returns:
+        [T, D] pooled tensor
+    """
+    if features.dim() == 3 and features.shape[0] == 1:
+        features = features.squeeze(0)  # [1, 17550, 1920] -> [17550, 1920]
+
+    if features.dim() == 2:
+        num_patches, hidden_dim = features.shape
+        spatial = num_patches // num_frames
+        # [T*H*W, D] -> [T, H*W, D] -> mean(H*W) -> [T, D]
+        return features.view(num_frames, spatial, hidden_dim).mean(dim=1)
+    elif features.dim() == 3:
+        return features.mean(dim=1)  # [T, H*W, D] -> [T, D]
+    else:
+        raise ValueError(f"pool_spatial_inline: unexpected shape {features.shape}")
+
+
 def extract_single_video(
     video_id: str,
     video: torch.Tensor,
@@ -174,6 +203,7 @@ def extract_single_video(
     output_dir: Path,
     device: str,
     text_embeds=None,
+    pool: bool = False,
 ) -> tuple:
     """
     Extract features for a single video at multiple timesteps.
@@ -221,12 +251,29 @@ def extract_single_video(
         torch.cuda.synchronize()
         forward_time += time.perf_counter() - forward_start
 
-        # Save features for each layer
+        # Save features for each layer (with optional inline pooling)
         layer_shapes = {}
         for layer_idx, feat in features.items():
             feat_path = t_dir / f"layer_{layer_idx}.pt"
-            torch.save(feat.cpu(), feat_path)
+            raw_shape = list(feat.shape)
+            if pool:
+                feat = pool_spatial_inline(feat.cpu(), num_frames=13).half()
+            else:
+                feat = feat.cpu()
+            torch.save(feat, feat_path)
             layer_shapes[layer_idx] = list(feat.shape)
+
+        # Debug: log shapes for the very first timestep of this video
+        if not info["timesteps"]:
+            for layer_idx in layer_shapes:
+                raw = features[layer_idx].shape
+                saved = layer_shapes[layer_idx]
+                size_kb = (t_dir / f"layer_{layer_idx}.pt").stat().st_size / 1024
+                logger.debug(
+                    f"  [{video_id}] layer {layer_idx}: "
+                    f"{list(raw)} -> {saved} "
+                    f"({'pooled fp16' if pool else 'raw'}, {size_kb:.0f} KB)"
+                )
 
         info["timesteps"][t] = {"layer_shapes": layer_shapes}
 
@@ -261,6 +308,7 @@ def extract_dataset(
     resume: bool = True,
     shard: int = 0,
     num_shards: int = 1,
+    pool: bool = False,
 ):
     """
     Extract features for all videos in dataset.
@@ -353,6 +401,7 @@ def extract_dataset(
     logger.info(f"  Layers: {layers}")
     logger.info(f"  Timesteps: {timesteps}")
     logger.info(f"  Output: {output_dir}")
+    logger.info(f"  Pool inline: {pool}  (will save [13, 1920] fp16 ~100KB/file)")
     if num_shards > 1:
         logger.info(f"  Shard: {shard}/{num_shards}")
 
@@ -400,6 +449,7 @@ def extract_dataset(
                 output_dir=output_dir,
                 device=device,
                 text_embeds=text_embeds,
+                pool=pool,
             )
             metadata["videos"][video_id] = info
             # Save caption for enriched labels reconstruction
@@ -561,6 +611,16 @@ Examples:
         help="Total number of shards. Set to 2 for 2-GPU parallel extraction.",
     )
 
+    parser.add_argument(
+        "--pool",
+        action="store_true",
+        default=False,
+        help="Pool features inline during extraction. "
+        "Saves [13, 1920] fp16 (~100KB) instead of "
+        "[1, 17550, 1920] fp32 (~67MB). "
+        "Output is directly usable with --is_pooled in training.",
+    )
+
     args = parser.parse_args()
 
     extract_dataset(
@@ -576,6 +636,7 @@ Examples:
         resume=not args.no_resume,
         shard=args.shard,
         num_shards=args.num_shards,
+        pool=args.pool,
     )
 
 
