@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=train_head
-#SBATCH --output=slurm/training/train_full_%j.out
+#SBATCH --output=slurm/training/train_partial_%j.out
 #SBATCH --time=1:00:00
 #SBATCH --partition=gpu
 #SBATCH --gres=gpu:1
@@ -39,7 +39,7 @@ cd ~/repos/VLMPhysics
 # Configuration
 # ============================================================
 
-FEATURE_DIR="/users/$USER/scratch/physics/videophy_features_2"
+FEATURE_DIR="/users/$USER/scratch/physics/videophy_features_pooled"
 METADATA_FILE="/users/$USER/scratch/physics/videophy_data/metadata.json"
 OUTPUT_DIR="results"
 
@@ -52,7 +52,7 @@ EARLY_STOPPING=20
 NUM_WORKERS=4
 
 # Best layer from previous ablation
-DEFAULT_LAYER=15
+DEFAULT_LAYER=10
 
 # Multi-task SA training
 SA_WEIGHT=0.3
@@ -94,7 +94,6 @@ fi
 
 # python -m trainer.train_physics_head \
 #     --feature_dir $FEATURE_DIR \
-#     --metadata_file $METADATA_FILE \
 #     --ablation heads \
 #     --heads mean causal_simple temporal_simple multiview_simple \
 #     --layer $DEFAULT_LAYER \
@@ -105,9 +104,10 @@ fi
 #     --early_stopping $EARLY_STOPPING \
 #     --num_workers $NUM_WORKERS \
 #     --is_pooled \
-#     --train-sa \
-#     --sa-weight $SA_WEIGHT \
-#     --exp-name heads_sa
+#     # --exp-name heads_sa \
+#     # --train-sa \
+#     # --sa-weight $SA_WEIGHT \
+#     # --metadata_file $METADATA_FILE \
 
 # echo ""
 # echo "Head ablation completed: $(date)"
@@ -132,10 +132,9 @@ echo "========================================"
 
 python -m trainer.train_physics_head \
     --feature_dir $FEATURE_DIR \
-    --metadata_file $METADATA_FILE \
     --ablation layers \
     --layers 10 15 20 25 \
-    --head_type mean \
+    --head_type causal_simple \
     --batch_size $BATCH_SIZE \
     --num_epochs $NUM_EPOCHS \
     --lr $LR \
@@ -143,8 +142,9 @@ python -m trainer.train_physics_head \
     --early_stopping $EARLY_STOPPING \
     --num_workers $NUM_WORKERS \
     --is_pooled \
-    --train-sa \
-    --sa-weight $SA_WEIGHT
+    # --train-sa \
+    # --sa-weight $SA_WEIGHT \
+    # --metadata_file $METADATA_FILE \
 
 echo ""
 echo "Layer ablation completed: $(date)"

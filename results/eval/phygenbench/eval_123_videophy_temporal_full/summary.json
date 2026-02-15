@@ -1,0 +1,20 @@
+{
+  "total_videos": 160,
+  "valid_videos": 160,
+  "stages_evaluated": [
+    1,
+    2,
+    3
+  ],
+  "stage1_avg": 0.540625,
+  "stage2_avg": 0.2375,
+  "stage3_avg": 0.7982500000000001,
+  "overall_avg": 0.1229375,
+  "per_category": {
+    "Force": 0.08325,
+    "Light": 0.1,
+    "Heat": 0.15566666666666668,
+    "Physical Properties": 0.2134,
+    "Chemical Properties": 0.089
+  }
+}

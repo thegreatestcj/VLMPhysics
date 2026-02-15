@@ -1,0 +1,22 @@
+{
+  "model_id": "THUDM/CogVideoX-2b",
+  "physics_head_path": "results/training/final_head/causal_l10_full.pt",
+  "head_type": "temporal_simple",
+  "extract_layer": 10,
+  "force_head_type": true,
+  "mode": "prune",
+  "num_trajectories": 4,
+  "checkpoints": [
+    600,
+    400
+  ],
+  "keep_ratio": 0.5,
+  "scoring_timestep": 200,
+  "num_inference_steps": 50,
+  "num_frames": 49,
+  "guidance_scale": 6.0,
+  "height": 480,
+  "width": 720,
+  "output_dir": "outputs/phygenbench/videophy_temporal_causal_l10_full",
+  "seed": 42
+}

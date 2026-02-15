@@ -69,15 +69,11 @@ class PhysicsGenConfig:
     physics_head_path: str = "results/training/final_head/mean_l15.pt"
     head_type: str = "mean"
     extract_layer: int = 15
+    force_head_type: bool = False
 
     # Mode: "prune" = progressive trajectory pruning (ours)
     #        "best_of_n" = generate all N, score at end, pick best (baseline)
     #        "random" = prune with random scores (ablation)
-    mode: str = "prune"
-
-    # Mode: "prune" = progressive trajectory pruning (ours)
-    #        "best_of_n" = run all N to completion, score at scoring_timestep, pick best
-    #        "random" = prune with random scores (ablation baseline)
     mode: str = "prune"
 
     # Trajectory pruning (used in "prune" and "random" modes)
@@ -86,9 +82,6 @@ class PhysicsGenConfig:
     num_trajectories: int = 4
     checkpoints: List[int] = field(default_factory=lambda: [600, 400])  # 2 prune points
     keep_ratio: float = 0.5
-
-    # Best-of-N scoring timestep (should match training data; t=200 is cleanest)
-    scoring_timestep: int = 200
 
     # Best-of-N: timestep at which to score (should match training data)
     # t=200 is the cleanest timestep the physics head was trained on
@@ -129,6 +122,7 @@ class PhysicsHeadEvaluator:
         head_type: str,
         extract_layer: int,
         device: str,
+        force_head_type: bool = False,
     ):
         self.device = device
         self.extract_layer = extract_layer
@@ -143,11 +137,16 @@ class PhysicsHeadEvaluator:
         ckpt = torch.load(head_path, map_location="cpu", weights_only=False)
         ckpt_head_type = ckpt.get("head_type", None)
         if ckpt_head_type and ckpt_head_type != head_type:
-            logger.warning(
-                f"head_type mismatch: arg='{head_type}', checkpoint='{ckpt_head_type}'. "
-                f"Using checkpoint's '{ckpt_head_type}'."
-            )
-            head_type = ckpt_head_type
+            if force_head_type:
+                logger.warning(
+                    f"FORCING head_type='{head_type}' (checkpoint has '{ckpt_head_type}')"
+                )
+            else:
+                logger.warning(
+                    f"head_type mismatch: arg='{head_type}', checkpoint='{ckpt_head_type}'. "
+                    f"Using checkpoint's '{ckpt_head_type}'."
+                )
+                head_type = ckpt_head_type
             self.head_type = head_type
 
         # Create model
@@ -305,6 +304,7 @@ class TrajectoryPruningGenerator:
                 head_type=self.config.head_type,
                 extract_layer=self.config.extract_layer,
                 device=self.device,
+                force_head_type=self.config.force_head_type,
             )
             self.evaluator.setup_hook(self.pipe.transformer)
         else:
@@ -702,6 +702,12 @@ def main():
     )
     parser.add_argument("--head-type", type=str, default="mean")
     parser.add_argument("--extract-layer", type=int, default=15)
+    parser.add_argument(
+        "--force-head-type",
+        action="store_true",
+        default=False,
+        help="Force using --head-type instead of checkpoint's head_type",
+    )
 
     # Trajectory pruning
     parser.add_argument(
@@ -754,6 +760,7 @@ def main():
         physics_head_path=args.physics_head,
         head_type=args.head_type,
         extract_layer=args.extract_layer,
+        force_head_type=args.force_head_type,
         mode=args.mode,
         num_trajectories=args.num_trajectories,
         checkpoints=args.checkpoints,

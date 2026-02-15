@@ -1,0 +1,6242 @@
+[
+  {
+    "index": 0,
+    "category": "Gravity",
+    "prompt": "A cup of water is slowly poured out in the space station, releasing the liquid into the surrounding area",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_1.mp4",
+    "time": 504.0678286552429,
+    "time_breakdown": {
+      "generation": 503.49,
+      "save": 0.58,
+      "sampling": 482.18,
+      "decode": 21.06
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.6962766051292419,
+    "all_scores": {
+      "0": {
+        "599": 0.7378928661346436,
+        "399": 0.6962766051292419
+      },
+      "1": {
+        "599": 0.6729505062103271
+      },
+      "2": {
+        "599": 0.6773314476013184,
+        "399": 0.6388919949531555
+      },
+      "3": {
+        "599": 0.540116012096405
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.738"
+          ],
+          [
+            2,
+            "0.677"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.673"
+          ],
+          [
+            3,
+            "0.540"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.696"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.639"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 1,
+    "category": "Gravity",
+    "prompt": "A cup of oil is slowly poured out in the space station, releasing the liquid into the surrounding area",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_2.mp4",
+    "time": 505.430034160614,
+    "time_breakdown": {
+      "generation": 504.87,
+      "save": 0.56,
+      "sampling": 483.9,
+      "decode": 20.87
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.6393696665763855,
+    "all_scores": {
+      "0": {
+        "599": 0.4084746539592743
+      },
+      "1": {
+        "599": 0.6678544878959656,
+        "399": 0.6393696665763855
+      },
+      "2": {
+        "599": 0.285877525806427
+      },
+      "3": {
+        "599": 0.46348726749420166,
+        "399": 0.5026340484619141
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.668"
+          ],
+          [
+            3,
+            "0.463"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.408"
+          ],
+          [
+            2,
+            "0.286"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.639"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.503"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 2,
+    "category": "Gravity",
+    "prompt": "A bottle of juice is slowly poured out in the space station, releasing the liquid into the surrounding area",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_3.mp4",
+    "time": 505.0690851211548,
+    "time_breakdown": {
+      "generation": 504.5,
+      "save": 0.57,
+      "sampling": 483.62,
+      "decode": 20.78
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.8055421113967896,
+    "all_scores": {
+      "0": {
+        "599": 0.5815988779067993
+      },
+      "1": {
+        "599": 0.5663998126983643
+      },
+      "2": {
+        "599": 0.7907903790473938,
+        "399": 0.8055421113967896
+      },
+      "3": {
+        "599": 0.6693849563598633,
+        "399": 0.6139895915985107
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.791"
+          ],
+          [
+            3,
+            "0.669"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.582"
+          ],
+          [
+            1,
+            "0.566"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.806"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.614"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 3,
+    "category": "Gravity",
+    "prompt": "A squeeze of honey is slowly released in the space station, spreading the liquid into the surrounding area",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_4.mp4",
+    "time": 504.96769285202026,
+    "time_breakdown": {
+      "generation": 504.47,
+      "save": 0.5,
+      "sampling": 483.62,
+      "decode": 20.75
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.7437209486961365,
+    "all_scores": {
+      "0": {
+        "599": 0.603875458240509
+      },
+      "1": {
+        "599": 0.49048304557800293
+      },
+      "2": {
+        "599": 0.7796151638031006,
+        "399": 0.7437209486961365
+      },
+      "3": {
+        "599": 0.6308701038360596,
+        "399": 0.6359004974365234
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.780"
+          ],
+          [
+            3,
+            "0.631"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.604"
+          ],
+          [
+            1,
+            "0.490"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.744"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.636"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 4,
+    "category": "Gravity",
+    "prompt": "A can of soda is slowly poured out in the space station, releasing the liquid into the surrounding area",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_5.mp4",
+    "time": 505.1769425868988,
+    "time_breakdown": {
+      "generation": 504.63,
+      "save": 0.55,
+      "sampling": 483.68,
+      "decode": 20.85
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.8105144500732422,
+    "all_scores": {
+      "0": {
+        "599": 0.6694629788398743
+      },
+      "1": {
+        "599": 0.8367054462432861,
+        "399": 0.8105144500732422
+      },
+      "2": {
+        "599": 0.724243700504303
+      },
+      "3": {
+        "599": 0.7413646578788757,
+        "399": 0.698728084564209
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.837"
+          ],
+          [
+            3,
+            "0.741"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.724"
+          ],
+          [
+            0,
+            "0.669"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.811"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.699"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 5,
+    "category": "Buoyancy",
+    "prompt": "A piece of iron is gently placed on the surface of the water in a tank filled with water.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_6.mp4",
+    "time": 504.9501678943634,
+    "time_breakdown": {
+      "generation": 504.29,
+      "save": 0.66,
+      "sampling": 483.36,
+      "decode": 20.82
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.7400797009468079,
+    "all_scores": {
+      "0": {
+        "599": 0.6989397406578064,
+        "399": 0.58376145362854
+      },
+      "1": {
+        "599": 0.7510457038879395,
+        "399": 0.7400797009468079
+      },
+      "2": {
+        "599": 0.42942139506340027
+      },
+      "3": {
+        "599": 0.667165994644165
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.751"
+          ],
+          [
+            0,
+            "0.699"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.667"
+          ],
+          [
+            2,
+            "0.429"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.740"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.584"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 6,
+    "category": "Buoyancy",
+    "prompt": "A stone is gently placed on the surface of a pool filled with water.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_7.mp4",
+    "time": 504.8027455806732,
+    "time_breakdown": {
+      "generation": 504.06,
+      "save": 0.74,
+      "sampling": 483.22,
+      "decode": 20.74
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.827547550201416,
+    "all_scores": {
+      "0": {
+        "599": 0.8497987985610962,
+        "399": 0.827547550201416
+      },
+      "1": {
+        "599": 0.741057813167572
+      },
+      "2": {
+        "599": 0.6347941756248474
+      },
+      "3": {
+        "599": 0.8284283876419067,
+        "399": 0.7976271510124207
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.850"
+          ],
+          [
+            3,
+            "0.828"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.741"
+          ],
+          [
+            2,
+            "0.635"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.828"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.798"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 7,
+    "category": "Buoyancy",
+    "prompt": "A tennis ball is gently placed on the surface of a bucket filled with water.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_8.mp4",
+    "time": 504.81471943855286,
+    "time_breakdown": {
+      "generation": 504.14,
+      "save": 0.68,
+      "sampling": 483.32,
+      "decode": 20.71
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.8327853083610535,
+    "all_scores": {
+      "0": {
+        "599": 0.6177436709403992
+      },
+      "1": {
+        "599": 0.756109893321991,
+        "399": 0.8327853083610535
+      },
+      "2": {
+        "599": 0.5757598876953125
+      },
+      "3": {
+        "599": 0.6274925470352173,
+        "399": 0.6370578408241272
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.756"
+          ],
+          [
+            3,
+            "0.627"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.618"
+          ],
+          [
+            2,
+            "0.576"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.833"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.637"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 8,
+    "category": "Buoyancy",
+    "prompt": "A piece of wood block is gently placed on the surface of a bowl filled with water.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_9.mp4",
+    "time": 504.67004656791687,
+    "time_breakdown": {
+      "generation": 504.23,
+      "save": 0.44,
+      "sampling": 483.29,
+      "decode": 20.84
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.6792126297950745,
+    "all_scores": {
+      "0": {
+        "599": 0.7737371325492859,
+        "399": 0.6792126297950745
+      },
+      "1": {
+        "599": 0.42650213837623596
+      },
+      "2": {
+        "599": 0.7728497982025146,
+        "399": 0.5928134918212891
+      },
+      "3": {
+        "599": 0.7254128456115723
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.774"
+          ],
+          [
+            2,
+            "0.773"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.725"
+          ],
+          [
+            1,
+            "0.427"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.679"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.593"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 9,
+    "category": "Buoyancy",
+    "prompt": "A glass ball is gently placed on the surface of a bathtub filled with water.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_10.mp4",
+    "time": 504.8726649284363,
+    "time_breakdown": {
+      "generation": 504.22,
+      "save": 0.65,
+      "sampling": 483.28,
+      "decode": 20.84
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.5827226042747498,
+    "all_scores": {
+      "0": {
+        "599": 0.13780945539474487
+      },
+      "1": {
+        "599": 0.19053420424461365,
+        "399": 0.22454459965229034
+      },
+      "2": {
+        "599": 0.16039173305034637
+      },
+      "3": {
+        "599": 0.5214201211929321,
+        "399": 0.5827226042747498
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.521"
+          ],
+          [
+            1,
+            "0.191"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.160"
+          ],
+          [
+            0,
+            "0.138"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.583"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.225"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 10,
+    "category": "Stress",
+    "prompt": "A timelapse of a water-filled sponge being forcefully squeezed by hand, with the pressure intensifying rapidly over time.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_11.mp4",
+    "time": 504.55107975006104,
+    "time_breakdown": {
+      "generation": 504.03,
+      "save": 0.53,
+      "sampling": 483.19,
+      "decode": 20.73
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.42122820019721985,
+    "all_scores": {
+      "0": {
+        "599": 0.2825191915035248
+      },
+      "1": {
+        "599": 0.31158995628356934,
+        "399": 0.37338927388191223
+      },
+      "2": {
+        "599": 0.21968425810337067
+      },
+      "3": {
+        "599": 0.351327121257782,
+        "399": 0.42122820019721985
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.351"
+          ],
+          [
+            1,
+            "0.312"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.283"
+          ],
+          [
+            2,
+            "0.220"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.421"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.373"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 11,
+    "category": "Stress",
+    "prompt": "A timelapse of a water-filled soft towel being forcefully squeezed by hand, with the pressure intensifying rapidly over time.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_12.mp4",
+    "time": 504.859317779541,
+    "time_breakdown": {
+      "generation": 504.29,
+      "save": 0.57,
+      "sampling": 483.38,
+      "decode": 20.8
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.49843451380729675,
+    "all_scores": {
+      "0": {
+        "599": 0.2958293557167053,
+        "399": 0.34205642342567444
+      },
+      "1": {
+        "599": 0.2858676612377167
+      },
+      "2": {
+        "599": 0.4866217076778412,
+        "399": 0.49843451380729675
+      },
+      "3": {
+        "599": 0.09356723725795746
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.487"
+          ],
+          [
+            0,
+            "0.296"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.286"
+          ],
+          [
+            3,
+            "0.094"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.498"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.342"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 12,
+    "category": "Stress",
+    "prompt": "A timelapse of a balloon filled with air being pressed down by hand, with the pressure intensifying rapidly over time.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_13.mp4",
+    "time": 504.78029203414917,
+    "time_breakdown": {
+      "generation": 504.17,
+      "save": 0.61,
+      "sampling": 483.29,
+      "decode": 20.77
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.46807730197906494,
+    "all_scores": {
+      "0": {
+        "599": 0.11099986732006073
+      },
+      "1": {
+        "599": 0.29823991656303406,
+        "399": 0.29091376066207886
+      },
+      "2": {
+        "599": 0.21204176545143127
+      },
+      "3": {
+        "599": 0.5520076751708984,
+        "399": 0.46807730197906494
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.552"
+          ],
+          [
+            1,
+            "0.298"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.212"
+          ],
+          [
+            0,
+            "0.111"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.468"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.291"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 13,
+    "category": "Stress",
+    "prompt": "A timelapse of a open toothpaste tube being squeezed by hand, with the pressure intensifying rapidly over time.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_14.mp4",
+    "time": 504.5934360027313,
+    "time_breakdown": {
+      "generation": 504.04,
+      "save": 0.56,
+      "sampling": 483.22,
+      "decode": 20.71
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.5338193774223328,
+    "all_scores": {
+      "0": {
+        "599": 0.4095701575279236,
+        "399": 0.4164552092552185
+      },
+      "1": {
+        "599": 0.41374436020851135,
+        "399": 0.5338193774223328
+      },
+      "2": {
+        "599": 0.2324528992176056
+      },
+      "3": {
+        "599": 0.28044602274894714
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.414"
+          ],
+          [
+            0,
+            "0.410"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.280"
+          ],
+          [
+            2,
+            "0.232"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.534"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.416"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 14,
+    "category": "Stress",
+    "prompt": "A timelapse of a water-filled soft cloth being forcefully squeezed by hand, with the pressure intensifying rapidly over time.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_15.mp4",
+    "time": 504.86571502685547,
+    "time_breakdown": {
+      "generation": 504.3,
+      "save": 0.56,
+      "sampling": 483.34,
+      "decode": 20.86
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.6472850441932678,
+    "all_scores": {
+      "0": {
+        "599": 0.17720593512058258
+      },
+      "1": {
+        "599": 0.384337842464447
+      },
+      "2": {
+        "599": 0.6032905578613281,
+        "399": 0.6472850441932678
+      },
+      "3": {
+        "599": 0.5179840922355652,
+        "399": 0.49871110916137695
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.603"
+          ],
+          [
+            3,
+            "0.518"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.384"
+          ],
+          [
+            0,
+            "0.177"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.647"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.499"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 15,
+    "category": "Atmosphere Pressure",
+    "prompt": "A timelapse of air being gradually and forcefully extracted from the mouth of an empty, thin, sealed plastic bottle.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_16.mp4",
+    "time": 504.6700954437256,
+    "time_breakdown": {
+      "generation": 504.22,
+      "save": 0.45,
+      "sampling": 483.31,
+      "decode": 20.8
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.4588443636894226,
+    "all_scores": {
+      "0": {
+        "599": 0.28667834401130676
+      },
+      "1": {
+        "599": 0.34293025732040405
+      },
+      "2": {
+        "599": 0.4574498236179352,
+        "399": 0.4374973475933075
+      },
+      "3": {
+        "599": 0.37180423736572266,
+        "399": 0.4588443636894226
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.457"
+          ],
+          [
+            3,
+            "0.372"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.343"
+          ],
+          [
+            0,
+            "0.287"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.459"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.437"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 16,
+    "category": "Atmospheric Pressure",
+    "prompt": "A timelapse of air being gradually and forcefully extracted from a sealed, empty aluminum can.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_17.mp4",
+    "time": 504.79178500175476,
+    "time_breakdown": {
+      "generation": 504.27,
+      "save": 0.52,
+      "sampling": 483.3,
+      "decode": 20.86
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.7363433241844177,
+    "all_scores": {
+      "0": {
+        "599": 0.5342093110084534
+      },
+      "1": {
+        "599": 0.6782298684120178,
+        "399": 0.7363433241844177
+      },
+      "2": {
+        "599": 0.7339451313018799,
+        "399": 0.7251420021057129
+      },
+      "3": {
+        "599": 0.4955180883407593
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.734"
+          ],
+          [
+            1,
+            "0.678"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.534"
+          ],
+          [
+            3,
+            "0.496"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.736"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.725"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 17,
+    "category": "Atmospheric Pressure",
+    "prompt": "A timelapse of air being gradually and forcefully extracted from a sealed, empty plastic ball.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_18.mp4",
+    "time": 504.7160756587982,
+    "time_breakdown": {
+      "generation": 504.24,
+      "save": 0.48,
+      "sampling": 483.28,
+      "decode": 20.85
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.6907775402069092,
+    "all_scores": {
+      "0": {
+        "599": 0.4863143861293793
+      },
+      "1": {
+        "599": 0.6538677215576172,
+        "399": 0.6907775402069092
+      },
+      "2": {
+        "599": 0.5198886394500732,
+        "399": 0.54576575756073
+      },
+      "3": {
+        "599": 0.3251522183418274
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.654"
+          ],
+          [
+            2,
+            "0.520"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.486"
+          ],
+          [
+            3,
+            "0.325"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.691"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.546"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 18,
+    "category": "Atmosphere Pressure",
+    "prompt": "A timelapse of air being gradually and forcefully pulled out of an empty, thin, sealed aluminium can.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_19.mp4",
+    "time": 504.804500579834,
+    "time_breakdown": {
+      "generation": 504.26,
+      "save": 0.54,
+      "sampling": 483.33,
+      "decode": 20.83
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.4340702295303345,
+    "all_scores": {
+      "0": {
+        "599": 0.35289010405540466,
+        "399": 0.3203505575656891
+      },
+      "1": {
+        "599": 0.3873026967048645,
+        "399": 0.4340702295303345
+      },
+      "2": {
+        "599": 0.1660570502281189
+      },
+      "3": {
+        "599": 0.0793684720993042
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.387"
+          ],
+          [
+            0,
+            "0.353"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.166"
+          ],
+          [
+            3,
+            "0.079"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.434"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.320"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 19,
+    "category": "Atmosphere Pressure",
+    "prompt": "A timelapse of air being gradually and forcefully extracted from the interior of a thin, sealed balloon.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_20.mp4",
+    "time": 504.7001762390137,
+    "time_breakdown": {
+      "generation": 504.16,
+      "save": 0.54,
+      "sampling": 483.26,
+      "decode": 20.8
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.6233511567115784,
+    "all_scores": {
+      "0": {
+        "599": 0.580035924911499,
+        "399": 0.4159553349018097
+      },
+      "1": {
+        "599": 0.584023118019104,
+        "399": 0.6233511567115784
+      },
+      "2": {
+        "599": 0.3012000024318695
+      },
+      "3": {
+        "599": 0.46355172991752625
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.584"
+          ],
+          [
+            0,
+            "0.580"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.464"
+          ],
+          [
+            2,
+            "0.301"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.623"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.416"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 20,
+    "category": "Solid Pressure",
+    "prompt": "A hand slowly presses a needle into the surface of a fully inflated balloon, with the tip gradually penetrating the outer layer.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_21.mp4",
+    "time": 504.65404415130615,
+    "time_breakdown": {
+      "generation": 504.14,
+      "save": 0.52,
+      "sampling": 483.3,
+      "decode": 20.73
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.5280879735946655,
+    "all_scores": {
+      "0": {
+        "599": 0.26075518131256104
+      },
+      "1": {
+        "599": 0.444550484418869,
+        "399": 0.5280879735946655
+      },
+      "2": {
+        "599": 0.3673889935016632
+      },
+      "3": {
+        "599": 0.5326776504516602,
+        "399": 0.5186268091201782
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.533"
+          ],
+          [
+            1,
+            "0.445"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.367"
+          ],
+          [
+            0,
+            "0.261"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.528"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.519"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 21,
+    "category": "Solid Pressure",
+    "prompt": "A pencil slowly presses into the surface of a tightly stretched rubber sheet, with the tip gradually penetrating the outer layer.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_22.mp4",
+    "time": 504.648313999176,
+    "time_breakdown": {
+      "generation": 504.13,
+      "save": 0.52,
+      "sampling": 483.32,
+      "decode": 20.7
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.5683578252792358,
+    "all_scores": {
+      "0": {
+        "599": 0.5020725131034851
+      },
+      "1": {
+        "599": 0.2585531771183014
+      },
+      "2": {
+        "599": 0.6235126256942749,
+        "399": 0.5683578252792358
+      },
+      "3": {
+        "599": 0.5390921831130981,
+        "399": 0.38230136036872864
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.624"
+          ],
+          [
+            3,
+            "0.539"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.502"
+          ],
+          [
+            1,
+            "0.259"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.568"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.382"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 22,
+    "category": "Solid Pressure",
+    "prompt": "A fork slowly presses a tensed piece of plastic wrap, with the tines gradually penetrating the outer layer.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_23.mp4",
+    "time": 504.7784869670868,
+    "time_breakdown": {
+      "generation": 504.16,
+      "save": 0.61,
+      "sampling": 483.2,
+      "decode": 20.85
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.9309295415878296,
+    "all_scores": {
+      "0": {
+        "599": 0.9227301478385925,
+        "399": 0.9309295415878296
+      },
+      "1": {
+        "599": 0.213199645280838
+      },
+      "2": {
+        "599": 0.3327654302120209,
+        "399": 0.2901928424835205
+      },
+      "3": {
+        "599": 0.1831856071949005
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.923"
+          ],
+          [
+            2,
+            "0.333"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.213"
+          ],
+          [
+            3,
+            "0.183"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.931"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.290"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 23,
+    "category": "Solid Pressure",
+    "prompt": "A pin slowly presses into the surface of a water-filled balloon, with the tip gradually penetrating the outer layer.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_24.mp4",
+    "time": 504.4145083427429,
+    "time_breakdown": {
+      "generation": 504.04,
+      "save": 0.38,
+      "sampling": 483.12,
+      "decode": 20.81
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.2812293767929077,
+    "all_scores": {
+      "0": {
+        "599": 0.2872127592563629,
+        "399": 0.2745816111564636
+      },
+      "1": {
+        "599": 0.24646373093128204
+      },
+      "2": {
+        "599": 0.2247069776058197
+      },
+      "3": {
+        "599": 0.27130600810050964,
+        "399": 0.2812293767929077
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.287"
+          ],
+          [
+            3,
+            "0.271"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.246"
+          ],
+          [
+            2,
+            "0.225"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.281"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.275"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 24,
+    "category": "Solid Pressure",
+    "prompt": "A pencil slowly presses into the surface of a fully inflated balloon, with the tip gradually penetrating the outer layer.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_25.mp4",
+    "time": 504.6790580749512,
+    "time_breakdown": {
+      "generation": 504.12,
+      "save": 0.56,
+      "sampling": 483.28,
+      "decode": 20.74
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.6489819288253784,
+    "all_scores": {
+      "0": {
+        "599": 0.23225858807563782
+      },
+      "1": {
+        "599": 0.22222782671451569
+      },
+      "2": {
+        "599": 0.3869404196739197,
+        "399": 0.34833553433418274
+      },
+      "3": {
+        "599": 0.613334596157074,
+        "399": 0.6489819288253784
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.613"
+          ],
+          [
+            2,
+            "0.387"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.232"
+          ],
+          [
+            1,
+            "0.222"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.649"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.348"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 25,
+    "category": "Elasticity",
+    "prompt": "A vibrant, elastic rubber ball is thrown forcefully towards the ground, capturing its dynamic interaction with the surface upon impact.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_26.mp4",
+    "time": 504.53941106796265,
+    "time_breakdown": {
+      "generation": 504.08,
+      "save": 0.46,
+      "sampling": 483.16,
+      "decode": 20.81
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.6981865167617798,
+    "all_scores": {
+      "0": {
+        "599": 0.2703516185283661,
+        "399": 0.32197868824005127
+      },
+      "1": {
+        "599": 0.2603669762611389
+      },
+      "2": {
+        "599": 0.1248743012547493
+      },
+      "3": {
+        "599": 0.7577117085456848,
+        "399": 0.6981865167617798
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.758"
+          ],
+          [
+            0,
+            "0.270"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.260"
+          ],
+          [
+            2,
+            "0.125"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.698"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.322"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 26,
+    "category": "Elasticity",
+    "prompt": "A vibrant, elastic basketball is thrown forcefully towards the ground, capturing its dynamic interaction with the surface upon impact.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_27.mp4",
+    "time": 504.3597412109375,
+    "time_breakdown": {
+      "generation": 503.94,
+      "save": 0.42,
+      "sampling": 483.11,
+      "decode": 20.73
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.5211120843887329,
+    "all_scores": {
+      "0": {
+        "599": 0.3394942581653595
+      },
+      "1": {
+        "599": 0.25834861397743225
+      },
+      "2": {
+        "599": 0.4655538499355316,
+        "399": 0.3751392662525177
+      },
+      "3": {
+        "599": 0.6139580607414246,
+        "399": 0.5211120843887329
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.614"
+          ],
+          [
+            2,
+            "0.466"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.339"
+          ],
+          [
+            1,
+            "0.258"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.521"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.375"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 27,
+    "category": "Elasticity",
+    "prompt": "A vibrant, elastic tennis ball is thrown forcefully towards the ground, capturing its dynamic interaction with the surface upon impact.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_28.mp4",
+    "time": 504.6086025238037,
+    "time_breakdown": {
+      "generation": 504.22,
+      "save": 0.39,
+      "sampling": 483.25,
+      "decode": 20.86
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.7827573418617249,
+    "all_scores": {
+      "0": {
+        "599": 0.17667263746261597
+      },
+      "1": {
+        "599": 0.34399357438087463
+      },
+      "2": {
+        "599": 0.8363058567047119,
+        "399": 0.7827573418617249
+      },
+      "3": {
+        "599": 0.40151435136795044,
+        "399": 0.30133935809135437
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.836"
+          ],
+          [
+            3,
+            "0.402"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.344"
+          ],
+          [
+            0,
+            "0.177"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.783"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.301"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 28,
+    "category": "Elasticity",
+    "prompt": "A vibrant, elastic football is thrown forcefully towards the ground, capturing its dynamic interaction with the surface upon impact.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_29.mp4",
+    "time": 504.5577394962311,
+    "time_breakdown": {
+      "generation": 504.18,
+      "save": 0.38,
+      "sampling": 483.23,
+      "decode": 20.84
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.6238941550254822,
+    "all_scores": {
+      "0": {
+        "599": 0.6232270002365112,
+        "399": 0.5629861950874329
+      },
+      "1": {
+        "599": 0.6958026885986328,
+        "399": 0.6238941550254822
+      },
+      "2": {
+        "599": 0.14526362717151642
+      },
+      "3": {
+        "599": 0.5340352058410645
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.696"
+          ],
+          [
+            0,
+            "0.623"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.534"
+          ],
+          [
+            2,
+            "0.145"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.624"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.563"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 29,
+    "category": "Elasticity",
+    "prompt": "A vibrant, elastic beach ball is thrown forcefully towards the ground, capturing its dynamic interaction with the surface upon impact.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_30.mp4",
+    "time": 504.51749062538147,
+    "time_breakdown": {
+      "generation": 504.09,
+      "save": 0.43,
+      "sampling": 483.2,
+      "decode": 20.79
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.6738173365592957,
+    "all_scores": {
+      "0": {
+        "599": 0.6092986464500427,
+        "399": 0.6738173365592957
+      },
+      "1": {
+        "599": 0.4612444341182709,
+        "399": 0.498108834028244
+      },
+      "2": {
+        "599": 0.3973657488822937
+      },
+      "3": {
+        "599": 0.3520142734050751
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.609"
+          ],
+          [
+            1,
+            "0.461"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.397"
+          ],
+          [
+            3,
+            "0.352"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.674"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.498"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 30,
+    "category": "Friction",
+    "prompt": "A piece of white chalk is used to write on the rough, dark surface of a blackboard,showcasing the interaction between the chalk and the blackboard surface.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_31.mp4",
+    "time": 504.8737347126007,
+    "time_breakdown": {
+      "generation": 504.3,
+      "save": 0.57,
+      "sampling": 483.34,
+      "decode": 20.86
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.719036877155304,
+    "all_scores": {
+      "0": {
+        "599": 0.21639136970043182
+      },
+      "1": {
+        "599": 0.7919010519981384,
+        "399": 0.719036877155304
+      },
+      "2": {
+        "599": 0.7801715135574341,
+        "399": 0.7085618376731873
+      },
+      "3": {
+        "599": 0.5722770690917969
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.792"
+          ],
+          [
+            2,
+            "0.780"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.572"
+          ],
+          [
+            0,
+            "0.216"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.719"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.709"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 31,
+    "category": "Friction",
+    "prompt": "A blue marker is used to write on the smooth, white surface of a whiteboard, showcasing the interaction between the marker and the whiteboard surface.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_32.mp4",
+    "time": 504.5564160346985,
+    "time_breakdown": {
+      "generation": 504.11,
+      "save": 0.44,
+      "sampling": 483.21,
+      "decode": 20.8
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.44870710372924805,
+    "all_scores": {
+      "0": {
+        "599": 0.33221665024757385
+      },
+      "1": {
+        "599": 0.3017243444919586
+      },
+      "2": {
+        "599": 0.4493477940559387,
+        "399": 0.42280393838882446
+      },
+      "3": {
+        "599": 0.4809482991695404,
+        "399": 0.44870710372924805
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.481"
+          ],
+          [
+            2,
+            "0.449"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.332"
+          ],
+          [
+            1,
+            "0.302"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.449"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.423"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 32,
+    "category": "Friction",
+    "prompt": "A piece of red crayon is used to draw on the rough, white surface of a paper, showcasing the interaction between the crayon and the paper surface.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_33.mp4",
+    "time": 504.67833161354065,
+    "time_breakdown": {
+      "generation": 504.18,
+      "save": 0.5,
+      "sampling": 483.3,
+      "decode": 20.78
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.768326461315155,
+    "all_scores": {
+      "0": {
+        "599": 0.6904034614562988,
+        "399": 0.768326461315155
+      },
+      "1": {
+        "599": 0.4559447765350342
+      },
+      "2": {
+        "599": 0.5402570962905884
+      },
+      "3": {
+        "599": 0.6281194686889648,
+        "399": 0.6635023951530457
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.690"
+          ],
+          [
+            3,
+            "0.628"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.540"
+          ],
+          [
+            1,
+            "0.456"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.768"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.664"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 33,
+    "category": "Friction",
+    "prompt": "A yellow highlighter is used to mark on the rough, brown surface of a cardboard, showcasing the interaction between the highlighter and the cardboard surface.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_34.mp4",
+    "time": 504.5889413356781,
+    "time_breakdown": {
+      "generation": 504.08,
+      "save": 0.51,
+      "sampling": 483.18,
+      "decode": 20.79
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.8161276578903198,
+    "all_scores": {
+      "0": {
+        "599": 0.096732497215271
+      },
+      "1": {
+        "599": 0.5810639262199402
+      },
+      "2": {
+        "599": 0.5823287963867188,
+        "399": 0.4144924581050873
+      },
+      "3": {
+        "599": 0.7129949331283569,
+        "399": 0.8161276578903198
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.713"
+          ],
+          [
+            2,
+            "0.582"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.581"
+          ],
+          [
+            0,
+            "0.097"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.816"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.414"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 34,
+    "category": "Friction",
+    "prompt": "A black pen is used to write on the smooth, white surface of a notebook, showcasing the interaction between the pen and the notebook surface.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_35.mp4",
+    "time": 504.46064257621765,
+    "time_breakdown": {
+      "generation": 504.02,
+      "save": 0.45,
+      "sampling": 483.15,
+      "decode": 20.76
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.39423567056655884,
+    "all_scores": {
+      "0": {
+        "599": 0.4453958570957184,
+        "399": 0.3328176736831665
+      },
+      "1": {
+        "599": 0.39255931973457336
+      },
+      "2": {
+        "599": 0.38481539487838745
+      },
+      "3": {
+        "599": 0.39546865224838257,
+        "399": 0.39423567056655884
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.445"
+          ],
+          [
+            3,
+            "0.395"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.393"
+          ],
+          [
+            2,
+            "0.385"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.394"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.333"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 35,
+    "category": "Surface Tension",
+    "prompt": "A glistening dewdrop is sliding gracefully across the textured surface of a lotus leaf, accentuating its shape as it moves",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_36.mp4",
+    "time": 504.8533687591553,
+    "time_breakdown": {
+      "generation": 504.24,
+      "save": 0.61,
+      "sampling": 483.41,
+      "decode": 20.72
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.8256860971450806,
+    "all_scores": {
+      "0": {
+        "599": 0.6372250914573669
+      },
+      "1": {
+        "599": 0.7348913550376892
+      },
+      "2": {
+        "599": 0.7811851501464844,
+        "399": 0.8256860971450806
+      },
+      "3": {
+        "599": 0.8740907907485962,
+        "399": 0.7920397520065308
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.874"
+          ],
+          [
+            2,
+            "0.781"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.735"
+          ],
+          [
+            0,
+            "0.637"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.826"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.792"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 36,
+    "category": "Surface Tension",
+    "prompt": "A glistening dewdrop is sliding gracefully across the smooth surface of a glass, accentuating its shape as it moves",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_37.mp4",
+    "time": 504.65005350112915,
+    "time_breakdown": {
+      "generation": 504.17,
+      "save": 0.48,
+      "sampling": 483.31,
+      "decode": 20.75
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.8605772852897644,
+    "all_scores": {
+      "0": {
+        "599": 0.8798290491104126,
+        "399": 0.8605772852897644
+      },
+      "1": {
+        "599": 0.5933523774147034,
+        "399": 0.5914974212646484
+      },
+      "2": {
+        "599": 0.44701525568962097
+      },
+      "3": {
+        "599": 0.5538880825042725
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.880"
+          ],
+          [
+            1,
+            "0.593"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.554"
+          ],
+          [
+            2,
+            "0.447"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.861"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.591"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 37,
+    "category": "Surface Tension",
+    "prompt": "A glistening dewdrop is sliding gracefully across the smooth surface of a waxed apple, accentuating its shape as it moves",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_38.mp4",
+    "time": 504.5327093601227,
+    "time_breakdown": {
+      "generation": 503.99,
+      "save": 0.55,
+      "sampling": 483.22,
+      "decode": 20.66
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.7915708422660828,
+    "all_scores": {
+      "0": {
+        "599": 0.8288807272911072,
+        "399": 0.7915708422660828
+      },
+      "1": {
+        "599": 0.6564699411392212
+      },
+      "2": {
+        "599": 0.6573268175125122,
+        "399": 0.716932475566864
+      },
+      "3": {
+        "599": 0.48690807819366455
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.829"
+          ],
+          [
+            2,
+            "0.657"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.656"
+          ],
+          [
+            3,
+            "0.487"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.792"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.717"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 38,
+    "category": "Surface Tension",
+    "prompt": "A glistening dewdrop is sliding gracefully across the smooth surface of a ceramic vase, accentuating its shape as it moves",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_39.mp4",
+    "time": 504.3479034900665,
+    "time_breakdown": {
+      "generation": 503.88,
+      "save": 0.47,
+      "sampling": 483.06,
+      "decode": 20.71
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.8268605470657349,
+    "all_scores": {
+      "0": {
+        "599": 0.8516516089439392,
+        "399": 0.8268605470657349
+      },
+      "1": {
+        "599": 0.27532967925071716
+      },
+      "2": {
+        "599": 0.6945001482963562,
+        "399": 0.6662629842758179
+      },
+      "3": {
+        "599": 0.68856281042099
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.852"
+          ],
+          [
+            2,
+            "0.695"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.689"
+          ],
+          [
+            1,
+            "0.275"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.827"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.666"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 39,
+    "category": "Surface Tension",
+    "prompt": "A glistening dewdrop is sliding gracefully across the textured surface of a book, accentuating its shape as it moves",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_40.mp4",
+    "time": 504.4953291416168,
+    "time_breakdown": {
+      "generation": 503.97,
+      "save": 0.53,
+      "sampling": 483.17,
+      "decode": 20.69
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.9101649522781372,
+    "all_scores": {
+      "0": {
+        "599": 0.7419692873954773
+      },
+      "1": {
+        "599": 0.8333374261856079,
+        "399": 0.7065077424049377
+      },
+      "2": {
+        "599": 0.7277076244354248
+      },
+      "3": {
+        "599": 0.9079499840736389,
+        "399": 0.9101649522781372
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.908"
+          ],
+          [
+            1,
+            "0.833"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.742"
+          ],
+          [
+            2,
+            "0.728"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.910"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.707"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 40,
+    "category": "Direct Radiation",
+    "prompt": "A ray of light is shining diagonally on a wooden block in the dark, with the shadow of the wooden block appearing at the bottom.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_41.mp4",
+    "time": 504.06734132766724,
+    "time_breakdown": {
+      "generation": 503.78,
+      "save": 0.28,
+      "sampling": 482.95,
+      "decode": 20.73
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.34837961196899414,
+    "all_scores": {
+      "0": {
+        "599": 0.28005141019821167
+      },
+      "1": {
+        "599": 0.3293558955192566,
+        "399": 0.3294468820095062
+      },
+      "2": {
+        "599": 0.3528895676136017,
+        "399": 0.34837961196899414
+      },
+      "3": {
+        "599": 0.23102036118507385
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.353"
+          ],
+          [
+            1,
+            "0.329"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.280"
+          ],
+          [
+            3,
+            "0.231"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.348"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.329"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 41,
+    "category": "Direct Radiation",
+    "prompt": "A ray of light is shining diagonally on a metal can in the dark, with the shadow of the metal can appearing at the bottom.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_42.mp4",
+    "time": 504.1474828720093,
+    "time_breakdown": {
+      "generation": 503.87,
+      "save": 0.27,
+      "sampling": 482.94,
+      "decode": 20.83
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.31056147813796997,
+    "all_scores": {
+      "0": {
+        "599": 0.29661959409713745
+      },
+      "1": {
+        "599": 0.31639862060546875,
+        "399": 0.31056147813796997
+      },
+      "2": {
+        "599": 0.265148401260376
+      },
+      "3": {
+        "599": 0.311226487159729,
+        "399": 0.310202956199646
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.316"
+          ],
+          [
+            3,
+            "0.311"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.297"
+          ],
+          [
+            2,
+            "0.265"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.311"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.310"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 42,
+    "category": "Direct Radiation",
+    "prompt": "A ray of light is shining diagonally on a glass bottle in the dark, with the shadow of the glass bottle appearing at the bottom.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_43.mp4",
+    "time": 503.926340341568,
+    "time_breakdown": {
+      "generation": 503.66,
+      "save": 0.27,
+      "sampling": 482.74,
+      "decode": 20.82
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.3212200403213501,
+    "all_scores": {
+      "0": {
+        "599": 0.32530272006988525,
+        "399": 0.3212200403213501
+      },
+      "1": {
+        "599": 0.24622616171836853
+      },
+      "2": {
+        "599": 0.2679869830608368,
+        "399": 0.286721795797348
+      },
+      "3": {
+        "599": 0.2579154372215271
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.325"
+          ],
+          [
+            2,
+            "0.268"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.258"
+          ],
+          [
+            1,
+            "0.246"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.321"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.287"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 43,
+    "category": "Direct Radiation",
+    "prompt": "A ray of light is shining diagonally on a plastic cup in the dark, with the shadow of the plastic cup appearing at the bottom.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_44.mp4",
+    "time": 503.86006259918213,
+    "time_breakdown": {
+      "generation": 503.58,
+      "save": 0.28,
+      "sampling": 482.75,
+      "decode": 20.73
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.3922405540943146,
+    "all_scores": {
+      "0": {
+        "599": 0.29189547896385193
+      },
+      "1": {
+        "599": 0.305422306060791,
+        "399": 0.3055090308189392
+      },
+      "2": {
+        "599": 0.26501843333244324
+      },
+      "3": {
+        "599": 0.4035903513431549,
+        "399": 0.3922405540943146
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.404"
+          ],
+          [
+            1,
+            "0.305"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.292"
+          ],
+          [
+            2,
+            "0.265"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.392"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.306"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 44,
+    "category": "Direct Radiation",
+    "prompt": "A ray of light is shining diagonally on a cardboard box in the dark, with the shadow of the cardboard box appearing at the bottom.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_45.mp4",
+    "time": 503.7597744464874,
+    "time_breakdown": {
+      "generation": 503.48,
+      "save": 0.28,
+      "sampling": 482.58,
+      "decode": 20.8
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.40467584133148193,
+    "all_scores": {
+      "0": {
+        "599": 0.24904805421829224
+      },
+      "1": {
+        "599": 0.2683258056640625
+      },
+      "2": {
+        "599": 0.41206854581832886,
+        "399": 0.40467584133148193
+      },
+      "3": {
+        "599": 0.29710718989372253,
+        "399": 0.3027198016643524
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.412"
+          ],
+          [
+            3,
+            "0.297"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.268"
+          ],
+          [
+            0,
+            "0.249"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.405"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.303"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 45,
+    "category": "Tyndall Effect",
+    "prompt": "A concentrated, bright beam of light generated by a laser pointer is passing through a glass of thick whole milk, creating a mesmerizing display as the light interacts with the milk's particles, casting intricate patterns and subtle hues within the fluid. ",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_46.mp4",
+    "time": 504.7833824157715,
+    "time_breakdown": {
+      "generation": 504.06,
+      "save": 0.72,
+      "sampling": 483.14,
+      "decode": 20.82
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.9324772357940674,
+    "all_scores": {
+      "0": {
+        "599": 0.8802832961082458,
+        "399": 0.7621023654937744
+      },
+      "1": {
+        "599": 0.7965911030769348
+      },
+      "2": {
+        "599": 0.9660564064979553,
+        "399": 0.9324772357940674
+      },
+      "3": {
+        "599": 0.4559880495071411
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.966"
+          ],
+          [
+            0,
+            "0.880"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.797"
+          ],
+          [
+            3,
+            "0.456"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.932"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.762"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 46,
+    "category": "Tyndall Effect",
+    "prompt": "A concentrated, bright beam of light generated by a flashlight is passing through a bowl of murky water, creating a mesmerizing display as the light interacts with the water's particles, casting intricate patterns and subtle hues within the fluid.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_47.mp4",
+    "time": 504.6787383556366,
+    "time_breakdown": {
+      "generation": 504.02,
+      "save": 0.66,
+      "sampling": 483.21,
+      "decode": 20.71
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.9579018354415894,
+    "all_scores": {
+      "0": {
+        "599": 0.2634909749031067
+      },
+      "1": {
+        "599": 0.9243992567062378,
+        "399": 0.9579018354415894
+      },
+      "2": {
+        "599": 0.48686736822128296
+      },
+      "3": {
+        "599": 0.7689366340637207,
+        "399": 0.7423989772796631
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.924"
+          ],
+          [
+            3,
+            "0.769"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.487"
+          ],
+          [
+            0,
+            "0.263"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.958"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.742"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 47,
+    "category": "Tyndall Effect",
+    "prompt": "A focused, bright beam of light generated by a car headlight is passing through a jar of dusty air, creating a mesmerizing display as the light interacts with the dust particles, casting intricate patterns and subtle hues within the air.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_48.mp4",
+    "time": 504.59378242492676,
+    "time_breakdown": {
+      "generation": 503.92,
+      "save": 0.67,
+      "sampling": 483.11,
+      "decode": 20.7
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.9703189134597778,
+    "all_scores": {
+      "0": {
+        "599": 0.9455797672271729,
+        "399": 0.9703189134597778
+      },
+      "1": {
+        "599": 0.7771064639091492
+      },
+      "2": {
+        "599": 0.8981404304504395
+      },
+      "3": {
+        "599": 0.9277632236480713,
+        "399": 0.9033710956573486
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.946"
+          ],
+          [
+            3,
+            "0.928"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.898"
+          ],
+          [
+            1,
+            "0.777"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.970"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.903"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 48,
+    "category": "Tyndall Effect",
+    "prompt": "A directed, bright beam of light generated by a phone flashlight is passing through a container of stirred muddy water, creating a mesmerizing display as the light interacts with the mud particles, casting intricate patterns and subtle hues within the fluid.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_49.mp4",
+    "time": 504.6298506259918,
+    "time_breakdown": {
+      "generation": 503.88,
+      "save": 0.75,
+      "sampling": 482.98,
+      "decode": 20.8
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.8037067651748657,
+    "all_scores": {
+      "0": {
+        "599": 0.27117568254470825
+      },
+      "1": {
+        "599": 0.448923796415329,
+        "399": 0.4072016477584839
+      },
+      "2": {
+        "599": 0.8777598738670349,
+        "399": 0.8037067651748657
+      },
+      "3": {
+        "599": 0.2285209745168686
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.878"
+          ],
+          [
+            1,
+            "0.449"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.271"
+          ],
+          [
+            3,
+            "0.229"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.804"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.407"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 49,
+    "category": "Tyndall Effect",
+    "prompt": "A narrow, bright beam of light generated by a reading lamp is passing through a bottle of mixed orange juice, creating a mesmerizing display as the light interacts with the juice particles, casting intricate patterns and subtle hues within the liquid.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_50.mp4",
+    "time": 504.593656539917,
+    "time_breakdown": {
+      "generation": 503.86,
+      "save": 0.73,
+      "sampling": 483.08,
+      "decode": 20.67
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.6048172116279602,
+    "all_scores": {
+      "0": {
+        "599": 0.5881369709968567,
+        "399": 0.6048172116279602
+      },
+      "1": {
+        "599": 0.3886817395687103,
+        "399": 0.41399988532066345
+      },
+      "2": {
+        "599": 0.31229496002197266
+      },
+      "3": {
+        "599": 0.20005181431770325
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.588"
+          ],
+          [
+            1,
+            "0.389"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.312"
+          ],
+          [
+            3,
+            "0.200"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.605"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.414"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 50,
+    "category": "Tyndall Effect",
+    "prompt": "A ray of light generated by headlights is passing through heavy fog",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_51.mp4",
+    "time": 504.49116110801697,
+    "time_breakdown": {
+      "generation": 503.82,
+      "save": 0.67,
+      "sampling": 483.01,
+      "decode": 20.7
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.8813297152519226,
+    "all_scores": {
+      "0": {
+        "599": 0.7713565230369568,
+        "399": 0.6992459893226624
+      },
+      "1": {
+        "599": 0.42242199182510376
+      },
+      "2": {
+        "599": 0.9067990779876709,
+        "399": 0.8813297152519226
+      },
+      "3": {
+        "599": 0.3354388177394867
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.907"
+          ],
+          [
+            0,
+            "0.771"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.422"
+          ],
+          [
+            3,
+            "0.335"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.881"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.699"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 51,
+    "category": "Tyndall Effect",
+    "prompt": "A ray of light generated by a flashlight is passing through a dusty room.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_52.mp4",
+    "time": 504.26262378692627,
+    "time_breakdown": {
+      "generation": 503.77,
+      "save": 0.49,
+      "sampling": 482.97,
+      "decode": 20.7
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.8559859991073608,
+    "all_scores": {
+      "0": {
+        "599": 0.5426391959190369
+      },
+      "1": {
+        "599": 0.5808208584785461,
+        "399": 0.5672397613525391
+      },
+      "2": {
+        "599": 0.19571669399738312
+      },
+      "3": {
+        "599": 0.898225724697113,
+        "399": 0.8559859991073608
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.898"
+          ],
+          [
+            1,
+            "0.581"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.543"
+          ],
+          [
+            2,
+            "0.196"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.856"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.567"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 52,
+    "category": "Tyndall Effect",
+    "prompt": "A ray of light generated by a laser pointer is passing through smoke.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_53.mp4",
+    "time": 504.4755346775055,
+    "time_breakdown": {
+      "generation": 503.94,
+      "save": 0.54,
+      "sampling": 483.0,
+      "decode": 20.83
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.8049957752227783,
+    "all_scores": {
+      "0": {
+        "599": 0.6467694640159607,
+        "399": 0.5347884893417358
+      },
+      "1": {
+        "599": 0.5572893619537354
+      },
+      "2": {
+        "599": 0.9299820065498352,
+        "399": 0.8049957752227783
+      },
+      "3": {
+        "599": 0.5789137482643127
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.930"
+          ],
+          [
+            0,
+            "0.647"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.579"
+          ],
+          [
+            1,
+            "0.557"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.805"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.535"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 53,
+    "category": "Tyndall Effect",
+    "prompt": "A ray of light generated by a flashligh is passing through thick mist.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_54.mp4",
+    "time": 504.68391489982605,
+    "time_breakdown": {
+      "generation": 503.93,
+      "save": 0.76,
+      "sampling": 483.01,
+      "decode": 20.81
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.9699253439903259,
+    "all_scores": {
+      "0": {
+        "599": 0.8048977255821228
+      },
+      "1": {
+        "599": 0.9606657028198242,
+        "399": 0.9603865742683411
+      },
+      "2": {
+        "599": 0.9593368172645569,
+        "399": 0.9699253439903259
+      },
+      "3": {
+        "599": 0.7110761404037476
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.961"
+          ],
+          [
+            2,
+            "0.959"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.805"
+          ],
+          [
+            3,
+            "0.711"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.970"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.960"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 54,
+    "category": "Tyndall Effect",
+    "prompt": "A ray of light generated by a projector is passing through a dark room with fine dust particles.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_55.mp4",
+    "time": 504.51726746559143,
+    "time_breakdown": {
+      "generation": 504.02,
+      "save": 0.49,
+      "sampling": 483.11,
+      "decode": 20.81
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.49333587288856506,
+    "all_scores": {
+      "0": {
+        "599": 0.3134807050228119
+      },
+      "1": {
+        "599": 0.43467020988464355,
+        "399": 0.49333587288856506
+      },
+      "2": {
+        "599": 0.23565179109573364
+      },
+      "3": {
+        "599": 0.4422886371612549,
+        "399": 0.4360882341861725
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.442"
+          ],
+          [
+            1,
+            "0.435"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.313"
+          ],
+          [
+            2,
+            "0.236"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.493"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.436"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 55,
+    "category": "Reflection",
+    "prompt": "A bird is flying over a calm and clear lake surface, with the reflection of the bird appearing on the water surface.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_56.mp4",
+    "time": 504.4298360347748,
+    "time_breakdown": {
+      "generation": 503.81,
+      "save": 0.62,
+      "sampling": 483.0,
+      "decode": 20.71
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.9019029140472412,
+    "all_scores": {
+      "0": {
+        "599": 0.8657214641571045,
+        "399": 0.9019029140472412
+      },
+      "1": {
+        "599": 0.8873215317726135,
+        "399": 0.8896420001983643
+      },
+      "2": {
+        "599": 0.7940821051597595
+      },
+      "3": {
+        "599": 0.83971107006073
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.887"
+          ],
+          [
+            0,
+            "0.866"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.840"
+          ],
+          [
+            2,
+            "0.794"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.902"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.890"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 56,
+    "category": "Reflection",
+    "prompt": "A kite is soaring above a smooth and tranquil pond, with the reflection of the kite appearing on the water surface.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_57.mp4",
+    "time": 504.29444766044617,
+    "time_breakdown": {
+      "generation": 503.74,
+      "save": 0.55,
+      "sampling": 482.96,
+      "decode": 20.68
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.9543703198432922,
+    "all_scores": {
+      "0": {
+        "599": 0.7537245750427246
+      },
+      "1": {
+        "599": 0.9726514220237732,
+        "399": 0.9543703198432922
+      },
+      "2": {
+        "599": 0.8957934975624084,
+        "399": 0.8967154622077942
+      },
+      "3": {
+        "599": 0.8498896360397339
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.973"
+          ],
+          [
+            2,
+            "0.896"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.850"
+          ],
+          [
+            0,
+            "0.754"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.954"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.897"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 57,
+    "category": "Reflection",
+    "prompt": "A plane is gliding over a still and crystal-clear river, with the reflection of the plane appearing on the water surface.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_58.mp4",
+    "time": 503.8805854320526,
+    "time_breakdown": {
+      "generation": 503.43,
+      "save": 0.45,
+      "sampling": 482.64,
+      "decode": 20.69
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.9433224201202393,
+    "all_scores": {
+      "0": {
+        "599": 0.7744570970535278,
+        "399": 0.8296123743057251
+      },
+      "1": {
+        "599": 0.5750521421432495
+      },
+      "2": {
+        "599": 0.6816560626029968
+      },
+      "3": {
+        "599": 0.9404522180557251,
+        "399": 0.9433224201202393
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.940"
+          ],
+          [
+            0,
+            "0.774"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.682"
+          ],
+          [
+            1,
+            "0.575"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.943"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.830"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 58,
+    "category": "Reflection",
+    "prompt": "A drone is hovering above a quiet and glassy swimming pool, with the reflection of the drone appearing on the water surface.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_59.mp4",
+    "time": 504.1357207298279,
+    "time_breakdown": {
+      "generation": 503.59,
+      "save": 0.55,
+      "sampling": 482.75,
+      "decode": 20.73
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.7270785570144653,
+    "all_scores": {
+      "0": {
+        "599": 0.5719668865203857,
+        "399": 0.619599461555481
+      },
+      "1": {
+        "599": 0.3973371088504791
+      },
+      "2": {
+        "599": 0.6361525654792786,
+        "399": 0.7270785570144653
+      },
+      "3": {
+        "599": 0.3982430398464203
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.636"
+          ],
+          [
+            0,
+            "0.572"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.398"
+          ],
+          [
+            1,
+            "0.397"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.727"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.620"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 59,
+    "category": "Reflection",
+    "prompt": "A balloon is floating over a serene and mirror-like ocean, with the reflection of the balloon appearing on the water surface.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_60.mp4",
+    "time": 503.6804292201996,
+    "time_breakdown": {
+      "generation": 503.2,
+      "save": 0.48,
+      "sampling": 482.46,
+      "decode": 20.64
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.9496704339981079,
+    "all_scores": {
+      "0": {
+        "599": 0.8696898221969604,
+        "399": 0.842183530330658
+      },
+      "1": {
+        "599": 0.954814612865448,
+        "399": 0.9496704339981079
+      },
+      "2": {
+        "599": 0.8366829752922058
+      },
+      "3": {
+        "599": 0.7382287979125977
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.955"
+          ],
+          [
+            0,
+            "0.870"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.837"
+          ],
+          [
+            3,
+            "0.738"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.950"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.842"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 60,
+    "category": "Reflection",
+    "prompt": "A wooden block is moving closer to an upright mirror, with the reflection in the mirror moving closer synchronously.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_61.mp4",
+    "time": 503.91780972480774,
+    "time_breakdown": {
+      "generation": 503.54,
+      "save": 0.38,
+      "sampling": 482.71,
+      "decode": 20.73
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.557976484298706,
+    "all_scores": {
+      "0": {
+        "599": 0.39104703068733215
+      },
+      "1": {
+        "599": 0.586492121219635,
+        "399": 0.557976484298706
+      },
+      "2": {
+        "599": 0.23241174221038818
+      },
+      "3": {
+        "599": 0.4547378718852997,
+        "399": 0.42060792446136475
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.586"
+          ],
+          [
+            3,
+            "0.455"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.391"
+          ],
+          [
+            2,
+            "0.232"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.558"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.421"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 61,
+    "category": "Reflection",
+    "prompt": "A football is rolling towards a vertical window, with the reflection in the window moving closer synchronously.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_62.mp4",
+    "time": 504.0987026691437,
+    "time_breakdown": {
+      "generation": 503.7,
+      "save": 0.4,
+      "sampling": 482.83,
+      "decode": 20.76
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.5629478693008423,
+    "all_scores": {
+      "0": {
+        "599": 0.37765783071517944
+      },
+      "1": {
+        "599": 0.239816814661026
+      },
+      "2": {
+        "599": 0.4290156960487366,
+        "399": 0.4414406418800354
+      },
+      "3": {
+        "599": 0.6324021220207214,
+        "399": 0.5629478693008423
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.632"
+          ],
+          [
+            2,
+            "0.429"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.378"
+          ],
+          [
+            1,
+            "0.240"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.563"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.441"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 62,
+    "category": "Reflection",
+    "prompt": "A toy car is driving towards a standing glass, with the reflection in the glass moving closer synchronously.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_63.mp4",
+    "time": 503.51107954978943,
+    "time_breakdown": {
+      "generation": 503.1,
+      "save": 0.41,
+      "sampling": 482.39,
+      "decode": 20.61
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.45951157808303833,
+    "all_scores": {
+      "0": {
+        "599": 0.5315195322036743,
+        "399": 0.4381117522716522
+      },
+      "1": {
+        "599": 0.41426101326942444
+      },
+      "2": {
+        "599": 0.5015932321548462,
+        "399": 0.45951157808303833
+      },
+      "3": {
+        "599": 0.3376477360725403
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.532"
+          ],
+          [
+            2,
+            "0.502"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.414"
+          ],
+          [
+            3,
+            "0.338"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.460"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.438"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 63,
+    "category": "Reflection",
+    "prompt": "A basketball is being moved closer to a shiny metallic surface, with the reflection on the metallic surface moving closer synchronously.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_64.mp4",
+    "time": 504.1443419456482,
+    "time_breakdown": {
+      "generation": 503.66,
+      "save": 0.49,
+      "sampling": 482.81,
+      "decode": 20.75
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.913644015789032,
+    "all_scores": {
+      "0": {
+        "599": 0.6188812255859375
+      },
+      "1": {
+        "599": 0.7263518571853638
+      },
+      "2": {
+        "599": 0.9147398471832275,
+        "399": 0.913644015789032
+      },
+      "3": {
+        "599": 0.8713273406028748,
+        "399": 0.7459934949874878
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.915"
+          ],
+          [
+            3,
+            "0.871"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.726"
+          ],
+          [
+            0,
+            "0.619"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.914"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.746"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 64,
+    "category": "Reflection",
+    "prompt": "A rubber duck is floating closer to a calm water surface, with the reflection in the water moving closer synchronously.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_65.mp4",
+    "time": 504.43274879455566,
+    "time_breakdown": {
+      "generation": 503.66,
+      "save": 0.78,
+      "sampling": 482.82,
+      "decode": 20.73
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.9218486547470093,
+    "all_scores": {
+      "0": {
+        "599": 0.9054998159408569,
+        "399": 0.9218486547470093
+      },
+      "1": {
+        "599": 0.8764551281929016,
+        "399": 0.9105530381202698
+      },
+      "2": {
+        "599": 0.8717637062072754
+      },
+      "3": {
+        "599": 0.8416928648948669
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.905"
+          ],
+          [
+            1,
+            "0.876"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.872"
+          ],
+          [
+            3,
+            "0.842"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.922"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.911"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 65,
+    "category": "Refraction",
+    "prompt": "A magnifying glass is gradually moving closer to the pages of an open book, revealing the intricate details and textures of the printed text as it approaches.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_66.mp4",
+    "time": 504.2876443862915,
+    "time_breakdown": {
+      "generation": 503.7,
+      "save": 0.59,
+      "sampling": 482.79,
+      "decode": 20.8
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.7219023108482361,
+    "all_scores": {
+      "0": {
+        "599": 0.7794253826141357,
+        "399": 0.6733934879302979
+      },
+      "1": {
+        "599": 0.8004379272460938,
+        "399": 0.7219023108482361
+      },
+      "2": {
+        "599": 0.7451021671295166
+      },
+      "3": {
+        "599": 0.5785844922065735
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.800"
+          ],
+          [
+            0,
+            "0.779"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.745"
+          ],
+          [
+            3,
+            "0.579"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.722"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.673"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 66,
+    "category": "Refraction",
+    "prompt": "A magnifying glass is gradually moving closer to the face of a wristwatch, revealing the intricate details and textures of the clock hands and numbers as it approaches.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_67.mp4",
+    "time": 504.21066999435425,
+    "time_breakdown": {
+      "generation": 503.69,
+      "save": 0.52,
+      "sampling": 482.79,
+      "decode": 20.79
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.7008466720581055,
+    "all_scores": {
+      "0": {
+        "599": 0.49668240547180176
+      },
+      "1": {
+        "599": 0.7414655685424805,
+        "399": 0.7008466720581055
+      },
+      "2": {
+        "599": 0.5204690098762512,
+        "399": 0.49287983775138855
+      },
+      "3": {
+        "599": 0.44217854738235474
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.741"
+          ],
+          [
+            2,
+            "0.520"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.497"
+          ],
+          [
+            3,
+            "0.442"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.701"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.493"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 67,
+    "category": "Refraction",
+    "prompt": "A magnifying glass is gradually moving closer to a leaf, revealing the intricate details and textures of the veins and surface patterns as it approaches.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_68.mp4",
+    "time": 504.4469528198242,
+    "time_breakdown": {
+      "generation": 503.9,
+      "save": 0.55,
+      "sampling": 483.04,
+      "decode": 20.76
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.6088127493858337,
+    "all_scores": {
+      "0": {
+        "599": 0.6434089541435242,
+        "399": 0.6088127493858337
+      },
+      "1": {
+        "599": 0.19191904366016388
+      },
+      "2": {
+        "599": 0.24571853876113892
+      },
+      "3": {
+        "599": 0.4367021918296814,
+        "399": 0.4443700611591339
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.643"
+          ],
+          [
+            3,
+            "0.437"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.246"
+          ],
+          [
+            1,
+            "0.192"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.609"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.444"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 68,
+    "category": "Refraction",
+    "prompt": "A magnifying glass is gradually moving closer to a coin, revealing the intricate details and textures of the embossed design as it approaches.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_69.mp4",
+    "time": 504.38763666152954,
+    "time_breakdown": {
+      "generation": 503.82,
+      "save": 0.57,
+      "sampling": 482.91,
+      "decode": 20.81
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.262239933013916,
+    "all_scores": {
+      "0": {
+        "599": 0.2537873387336731
+      },
+      "1": {
+        "599": 0.29796090722084045,
+        "399": 0.262239933013916
+      },
+      "2": {
+        "599": 0.18568085134029388
+      },
+      "3": {
+        "599": 0.34849855303764343,
+        "399": 0.16434995830059052
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.348"
+          ],
+          [
+            1,
+            "0.298"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.254"
+          ],
+          [
+            2,
+            "0.186"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.262"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.164"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 69,
+    "category": "Refraction",
+    "prompt": "A magnifying glass is gradually moving closer to the petals of a flower, revealing the intricate details and textures of the flower as it approaches.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_70.mp4",
+    "time": 504.51252722740173,
+    "time_breakdown": {
+      "generation": 503.92,
+      "save": 0.6,
+      "sampling": 483.0,
+      "decode": 20.81
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.24049748480319977,
+    "all_scores": {
+      "0": {
+        "599": 0.05778343603014946
+      },
+      "1": {
+        "599": 0.18703371286392212
+      },
+      "2": {
+        "599": 0.22258765995502472,
+        "399": 0.24049748480319977
+      },
+      "3": {
+        "599": 0.32082638144493103,
+        "399": 0.20094861090183258
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.321"
+          ],
+          [
+            2,
+            "0.223"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.187"
+          ],
+          [
+            0,
+            "0.058"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.240"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.201"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 70,
+    "category": "Refraction",
+    "prompt": "A clear plastic straw is slowly inserted into a glass of crystal-clear water, revealing the fascinating visual changes and reflections that occur as the straw interacts with the liquid.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_71.mp4",
+    "time": 504.3830316066742,
+    "time_breakdown": {
+      "generation": 503.69,
+      "save": 0.7,
+      "sampling": 482.87,
+      "decode": 20.71
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.5104120373725891,
+    "all_scores": {
+      "0": {
+        "599": 0.20575308799743652
+      },
+      "1": {
+        "599": 0.5548058748245239,
+        "399": 0.5104120373725891
+      },
+      "2": {
+        "599": 0.5079083442687988,
+        "399": 0.49177756905555725
+      },
+      "3": {
+        "599": 0.29537373781204224
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.555"
+          ],
+          [
+            2,
+            "0.508"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.295"
+          ],
+          [
+            0,
+            "0.206"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.510"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.492"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 71,
+    "category": "Refraction",
+    "prompt": "A silver spoon is slowly inserted into a glass of crystal-clear water, revealing the fascinating visual changes and reflections as the spoon interacts with the liquid.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_72.mp4",
+    "time": 504.33767318725586,
+    "time_breakdown": {
+      "generation": 503.6,
+      "save": 0.73,
+      "sampling": 482.82,
+      "decode": 20.68
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.6327115893363953,
+    "all_scores": {
+      "0": {
+        "599": 0.2505994737148285
+      },
+      "1": {
+        "599": 0.6488445997238159,
+        "399": 0.6327115893363953
+      },
+      "2": {
+        "599": 0.34046217799186707
+      },
+      "3": {
+        "599": 0.5353944301605225,
+        "399": 0.47339487075805664
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.649"
+          ],
+          [
+            3,
+            "0.535"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.340"
+          ],
+          [
+            0,
+            "0.251"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.633"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.473"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 72,
+    "category": "Refraction",
+    "prompt": "A wooden pencil is carefully dipped into a glass of crystal-clear water, showing the intriguing visual shifts and reflections caused by the interaction between the pencil and the liquid.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_73.mp4",
+    "time": 504.2797966003418,
+    "time_breakdown": {
+      "generation": 503.69,
+      "save": 0.59,
+      "sampling": 482.78,
+      "decode": 20.81
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.48381587862968445,
+    "all_scores": {
+      "0": {
+        "599": 0.3900185823440552,
+        "399": 0.4592772126197815
+      },
+      "1": {
+        "599": 0.3102988004684448
+      },
+      "2": {
+        "599": 0.508400022983551,
+        "399": 0.48381587862968445
+      },
+      "3": {
+        "599": 0.34054553508758545
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.508"
+          ],
+          [
+            0,
+            "0.390"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.341"
+          ],
+          [
+            1,
+            "0.310"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.484"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.459"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 73,
+    "category": "Refraction",
+    "prompt": "A metal fork is gently placed into a glass of crystal-clear water, displaying the interesting visual distortions and reflections as the fork meets the liquid.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_74.mp4",
+    "time": 504.31717324256897,
+    "time_breakdown": {
+      "generation": 503.72,
+      "save": 0.6,
+      "sampling": 482.71,
+      "decode": 20.9
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.6242992877960205,
+    "all_scores": {
+      "0": {
+        "599": 0.39687222242355347
+      },
+      "1": {
+        "599": 0.5676150321960449,
+        "399": 0.5646064877510071
+      },
+      "2": {
+        "599": 0.308418869972229
+      },
+      "3": {
+        "599": 0.7178456783294678,
+        "399": 0.6242992877960205
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.718"
+          ],
+          [
+            1,
+            "0.568"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.397"
+          ],
+          [
+            2,
+            "0.308"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.624"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.565"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 74,
+    "category": "Refraction",
+    "prompt": "A plastic ruler is slowly submerged into a glass of crystal-clear water, highlighting the noticeable visual changes and reflections as the ruler interacts with the liquid.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_75.mp4",
+    "time": 504.1313986778259,
+    "time_breakdown": {
+      "generation": 503.5,
+      "save": 0.63,
+      "sampling": 482.66,
+      "decode": 20.74
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.4343481659889221,
+    "all_scores": {
+      "0": {
+        "599": 0.45736098289489746,
+        "399": 0.4343481659889221
+      },
+      "1": {
+        "599": 0.18177586793899536
+      },
+      "2": {
+        "599": 0.28195425868034363
+      },
+      "3": {
+        "599": 0.4007456302642822,
+        "399": 0.37782758474349976
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.457"
+          ],
+          [
+            3,
+            "0.401"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.282"
+          ],
+          [
+            1,
+            "0.182"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.434"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.378"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 75,
+    "category": "Interference & Diffraction",
+    "prompt": "A large number of soap bubbles are floating in the air under the sunlight.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_76.mp4",
+    "time": 504.6711800098419,
+    "time_breakdown": {
+      "generation": 503.74,
+      "save": 0.93,
+      "sampling": 482.83,
+      "decode": 20.81
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.6758008599281311,
+    "all_scores": {
+      "0": {
+        "599": 0.6057387590408325,
+        "399": 0.6758008599281311
+      },
+      "1": {
+        "599": 0.5606653094291687,
+        "399": 0.5434229969978333
+      },
+      "2": {
+        "599": 0.24643036723136902
+      },
+      "3": {
+        "599": 0.4213223159313202
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.606"
+          ],
+          [
+            1,
+            "0.561"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.421"
+          ],
+          [
+            2,
+            "0.246"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.676"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.543"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 76,
+    "category": "Interference & Diffraction",
+    "prompt": "A group of oil droplets is floating on the surface of water in the sunlight.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_77.mp4",
+    "time": 504.41651487350464,
+    "time_breakdown": {
+      "generation": 503.72,
+      "save": 0.7,
+      "sampling": 482.9,
+      "decode": 20.71
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.05242617800831795,
+    "all_scores": {
+      "0": {
+        "599": 0.03336643427610397,
+        "399": 0.050623100250959396
+      },
+      "1": {
+        "599": 0.049549732357263565,
+        "399": 0.05242617800831795
+      },
+      "2": {
+        "599": 0.02949799969792366
+      },
+      "3": {
+        "599": 0.021596085280179977
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.050"
+          ],
+          [
+            0,
+            "0.033"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.029"
+          ],
+          [
+            3,
+            "0.022"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.052"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.051"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 77,
+    "category": "Interference & Diffraction",
+    "prompt": "Several glass marbles are placed on a floor under the sunlight.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_78.mp4",
+    "time": 504.2348802089691,
+    "time_breakdown": {
+      "generation": 503.64,
+      "save": 0.59,
+      "sampling": 482.87,
+      "decode": 20.67
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.984794557094574,
+    "all_scores": {
+      "0": {
+        "599": 0.9068112373352051
+      },
+      "1": {
+        "599": 0.970693826675415,
+        "399": 0.984794557094574
+      },
+      "2": {
+        "599": 0.9379745125770569,
+        "399": 0.9437074661254883
+      },
+      "3": {
+        "599": 0.8241230249404907
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.971"
+          ],
+          [
+            2,
+            "0.938"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.907"
+          ],
+          [
+            3,
+            "0.824"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.985"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.944"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 78,
+    "category": "Interference & Diffraction",
+    "prompt": "A bunch of mist particles are suspended in the air under the sunlight.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_79.mp4",
+    "time": 504.593994140625,
+    "time_breakdown": {
+      "generation": 503.76,
+      "save": 0.84,
+      "sampling": 482.85,
+      "decode": 20.8
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.8682021498680115,
+    "all_scores": {
+      "0": {
+        "599": 0.9293460249900818,
+        "399": 0.8682021498680115
+      },
+      "1": {
+        "599": 0.212707057595253
+      },
+      "2": {
+        "599": 0.8677265048027039,
+        "399": 0.8680128455162048
+      },
+      "3": {
+        "599": 0.8668361306190491
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.929"
+          ],
+          [
+            2,
+            "0.868"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.867"
+          ],
+          [
+            1,
+            "0.213"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.868"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.868"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 79,
+    "category": "Interference & Diffraction",
+    "prompt": "A collection of prisms is arranged in a pattern with sunlight shining through them.",
+    "output": "outputs/phygenbench/videophy_temporal_causal_l10_full/output_video_80.mp4",
+    "time": 504.42361783981323,
+    "time_breakdown": {
+      "generation": 503.79,
+      "save": 0.63,
+      "sampling": 482.94,
+      "decode": 20.74
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.6213703751564026,
+    "all_scores": {
+      "0": {
+        "599": 0.6530599594116211
+      },
+      "1": {
+        "599": 0.624538242816925
+      },
+      "2": {
+        "599": 0.6587474942207336,
+        "399": 0.6213703751564026
+      },
+      "3": {
+        "599": 0.7542903423309326,
+        "399": 0.5877975225448608
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.754"
+          ],
+          [
+            2,
+            "0.659"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.653"
+          ],
+          [
+            1,
+            "0.625"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.621"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.588"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  }
+]

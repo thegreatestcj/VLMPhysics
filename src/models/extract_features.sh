@@ -45,7 +45,7 @@ DATA_DIR="/users/$USER/scratch/physics/videophy_data"
 OUTPUT_DIR="/users/$USER/scratch/physics/videophy_features_2"
 
 # Layers to extract (for ablation study)
-LAYERS="10 15 20 25"
+LAYERS="0 5 29"
 
 # Timesteps (for trajectory pruning checkpoints)
 TIMESTEPS="200 400 600"
@@ -76,41 +76,41 @@ echo "  Max videos: $MAX_VIDEOS"
 echo ""
 
 
-echo "Extracting..."
-Run extraction for shard 0
-python -m src.models.extract_features \
-    --data_dir $DATA_DIR \
-    --output_dir $OUTPUT_DIR \
-    --layers 10 15 20 25 \
-    --dataset videophy \
-    --timesteps 200 400 600 \
-    --use-8bit \
-    --use-text \
-    --pool \
-    --shard 0 \
-    --num_shards 2
-
-
-echo "=========================================="
-echo "Shard 0 completed: $(date)"
-echo "=========================================="
-
-# Run extraction for shard 1
+# echo "Extracting..."
+# Run extraction for shard 0
 # python -m src.models.extract_features \
 #     --data_dir $DATA_DIR \
 #     --output_dir $OUTPUT_DIR \
-#     --layers 10 15 20 25 \
+#     --layers $LAYERS \
 #     --dataset videophy \
 #     --timesteps 200 400 600 \
 #     --use-8bit \
 #     --use-text \
 #     --pool \
-#     --shard 1 \
+#     --shard 0 \
 #     --num_shards 2
 
+
 # echo "=========================================="
-# echo "Shard 1 completed: $(date)"
+# echo "Shard 0 completed: $(date)"
 # echo "=========================================="
+
+# Run extraction for shard 1
+python -m src.models.extract_features \
+    --data_dir $DATA_DIR \
+    --output_dir $OUTPUT_DIR \
+    --layers $LAYERS \
+    --dataset videophy \
+    --timesteps 200 400 600 \
+    --use-8bit \
+    --use-text \
+    --pool \
+    --shard 1 \
+    --num_shards 2
+
+echo "=========================================="
+echo "Shard 1 completed: $(date)"
+echo "=========================================="
 
 echo ""
 echo "Output directory contents:"

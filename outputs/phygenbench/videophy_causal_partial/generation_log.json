@@ -1,0 +1,6242 @@
+[
+  {
+    "index": 80,
+    "category": "Interference & Diffraction",
+    "prompt": "A puddle of oil on the road under the sunlight.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_81.mp4",
+    "time": 497.09691524505615,
+    "time_breakdown": {
+      "generation": 495.99,
+      "save": 1.11,
+      "sampling": 474.79,
+      "decode": 20.96
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.8649831414222717,
+    "all_scores": {
+      "0": {
+        "599": 0.7458100914955139,
+        "399": 0.8478074669837952
+      },
+      "1": {
+        "599": 0.5306854844093323
+      },
+      "2": {
+        "599": 0.18128295242786407
+      },
+      "3": {
+        "599": 0.78798907995224,
+        "399": 0.8649831414222717
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.788"
+          ],
+          [
+            0,
+            "0.746"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.531"
+          ],
+          [
+            2,
+            "0.181"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.865"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.848"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 81,
+    "category": "Interference & Diffraction",
+    "prompt": "A soap bubble floating in the air under the sunlight.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_82.mp4",
+    "time": 497.55798530578613,
+    "time_breakdown": {
+      "generation": 496.91,
+      "save": 0.65,
+      "sampling": 476.02,
+      "decode": 20.78
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.7330349087715149,
+    "all_scores": {
+      "0": {
+        "599": 0.23005357384681702,
+        "399": 0.3780590295791626
+      },
+      "1": {
+        "599": 0.11091741919517517
+      },
+      "2": {
+        "599": 0.6575808525085449,
+        "399": 0.7330349087715149
+      },
+      "3": {
+        "599": 0.03257179260253906
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.658"
+          ],
+          [
+            0,
+            "0.230"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.111"
+          ],
+          [
+            3,
+            "0.033"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.733"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.378"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 82,
+    "category": "Interference & Diffraction",
+    "prompt": "A film of soap on a wand under the sunlight.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_83.mp4",
+    "time": 497.30351972579956,
+    "time_breakdown": {
+      "generation": 496.74,
+      "save": 0.57,
+      "sampling": 475.87,
+      "decode": 20.76
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.7254403829574585,
+    "all_scores": {
+      "0": {
+        "599": 0.6139916181564331,
+        "399": 0.5620579719543457
+      },
+      "1": {
+        "599": 0.6698015928268433,
+        "399": 0.7254403829574585
+      },
+      "2": {
+        "599": 0.37012383341789246
+      },
+      "3": {
+        "599": 0.3300077021121979
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.670"
+          ],
+          [
+            0,
+            "0.614"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.370"
+          ],
+          [
+            3,
+            "0.330"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.725"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.562"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 83,
+    "category": "Interference & Diffraction",
+    "prompt": "A thin layer of gasoline on water under the sunlight.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_84.mp4",
+    "time": 497.19156670570374,
+    "time_breakdown": {
+      "generation": 496.55,
+      "save": 0.64,
+      "sampling": 475.79,
+      "decode": 20.65
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.653520941734314,
+    "all_scores": {
+      "0": {
+        "599": 0.4620923399925232,
+        "399": 0.3805127739906311
+      },
+      "1": {
+        "599": 0.06229278817772865
+      },
+      "2": {
+        "599": 0.04799486696720123
+      },
+      "3": {
+        "599": 0.4005216062068939,
+        "399": 0.653520941734314
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.462"
+          ],
+          [
+            3,
+            "0.401"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.062"
+          ],
+          [
+            2,
+            "0.048"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.654"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.381"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 84,
+    "category": "Interference & Diffraction",
+    "prompt": "A layer of detergent on a wet surface under the sunlight.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_85.mp4",
+    "time": 497.20503664016724,
+    "time_breakdown": {
+      "generation": 496.58,
+      "save": 0.62,
+      "sampling": 475.86,
+      "decode": 20.62
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.887946367263794,
+    "all_scores": {
+      "0": {
+        "599": 0.7557894587516785,
+        "399": 0.8566243648529053
+      },
+      "1": {
+        "599": 0.09382039308547974
+      },
+      "2": {
+        "599": 0.8077507019042969,
+        "399": 0.887946367263794
+      },
+      "3": {
+        "599": 0.5936069488525391
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.808"
+          ],
+          [
+            0,
+            "0.756"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.594"
+          ],
+          [
+            1,
+            "0.094"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.888"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.857"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 85,
+    "category": "Dispersion",
+    "prompt": "A beam of light passes through a prism.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_86.mp4",
+    "time": 496.93092107772827,
+    "time_breakdown": {
+      "generation": 496.5,
+      "save": 0.43,
+      "sampling": 475.78,
+      "decode": 20.62
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.18442748486995697,
+    "all_scores": {
+      "0": {
+        "599": 0.14362868666648865,
+        "399": 0.162493035197258
+      },
+      "1": {
+        "599": 0.1886102259159088,
+        "399": 0.18442748486995697
+      },
+      "2": {
+        "599": 0.10137335956096649
+      },
+      "3": {
+        "599": 0.06729535013437271
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.189"
+          ],
+          [
+            0,
+            "0.144"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.101"
+          ],
+          [
+            3,
+            "0.067"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.184"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.162"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 86,
+    "category": "Dispersion",
+    "prompt": "A beam of light passes through a crystal chandelier.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_87.mp4",
+    "time": 497.3149428367615,
+    "time_breakdown": {
+      "generation": 496.77,
+      "save": 0.55,
+      "sampling": 476.05,
+      "decode": 20.62
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.2856409251689911,
+    "all_scores": {
+      "0": {
+        "599": 0.19950179755687714,
+        "399": 0.23731310665607452
+      },
+      "1": {
+        "599": 0.07395916432142258
+      },
+      "2": {
+        "599": 0.06689769774675369
+      },
+      "3": {
+        "599": 0.19009733200073242,
+        "399": 0.2856409251689911
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.200"
+          ],
+          [
+            3,
+            "0.190"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.074"
+          ],
+          [
+            2,
+            "0.067"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.286"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.237"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 87,
+    "category": "Dispersion",
+    "prompt": "A beam of light passes through a droplet of water.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_88.mp4",
+    "time": 497.1966860294342,
+    "time_breakdown": {
+      "generation": 496.63,
+      "save": 0.57,
+      "sampling": 475.91,
+      "decode": 20.61
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.2149428278207779,
+    "all_scores": {
+      "0": {
+        "599": 0.10742705315351486,
+        "399": 0.16099044680595398
+      },
+      "1": {
+        "599": 0.08760194480419159
+      },
+      "2": {
+        "599": 0.07119090110063553
+      },
+      "3": {
+        "599": 0.2029770463705063,
+        "399": 0.2149428278207779
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.203"
+          ],
+          [
+            0,
+            "0.107"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.088"
+          ],
+          [
+            2,
+            "0.071"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.215"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.161"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 88,
+    "category": "Dispersion",
+    "prompt": "A beam of light passes through a glass diamond.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_89.mp4",
+    "time": 497.1953809261322,
+    "time_breakdown": {
+      "generation": 496.66,
+      "save": 0.53,
+      "sampling": 475.87,
+      "decode": 20.69
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.461573988199234,
+    "all_scores": {
+      "0": {
+        "599": 0.2857096195220947,
+        "399": 0.3088209927082062
+      },
+      "1": {
+        "599": 0.2025066465139389
+      },
+      "2": {
+        "599": 0.19742096960544586
+      },
+      "3": {
+        "599": 0.3305150270462036,
+        "399": 0.461573988199234
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.331"
+          ],
+          [
+            0,
+            "0.286"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.203"
+          ],
+          [
+            2,
+            "0.197"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.462"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.309"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 89,
+    "category": "Dispersion",
+    "prompt": "A beam of light passes through a soap bubble.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_90.mp4",
+    "time": 497.2615895271301,
+    "time_breakdown": {
+      "generation": 496.72,
+      "save": 0.55,
+      "sampling": 475.99,
+      "decode": 20.63
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.2794441878795624,
+    "all_scores": {
+      "0": {
+        "599": 0.09699831157922745
+      },
+      "1": {
+        "599": 0.20260564982891083,
+        "399": 0.16339251399040222
+      },
+      "2": {
+        "599": 0.20865043997764587,
+        "399": 0.2794441878795624
+      },
+      "3": {
+        "599": 0.14282767474651337
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.209"
+          ],
+          [
+            1,
+            "0.203"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.143"
+          ],
+          [
+            0,
+            "0.097"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.279"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.163"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 90,
+    "category": "Solidification",
+    "prompt": "A timelapse captures the transformation of a glass of water as the temperature significantly drops to very low levels.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_91.mp4",
+    "time": 497.47553396224976,
+    "time_breakdown": {
+      "generation": 496.94,
+      "save": 0.53,
+      "sampling": 476.23,
+      "decode": 20.61
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.3914691209793091,
+    "all_scores": {
+      "0": {
+        "599": 0.1791079342365265,
+        "399": 0.17012740671634674
+      },
+      "1": {
+        "599": 0.05952898785471916
+      },
+      "2": {
+        "599": 0.03700830787420273
+      },
+      "3": {
+        "599": 0.29270458221435547,
+        "399": 0.3914691209793091
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.293"
+          ],
+          [
+            0,
+            "0.179"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.060"
+          ],
+          [
+            2,
+            "0.037"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.391"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.170"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 91,
+    "category": "Solidification",
+    "prompt": "A timelapse captures the transformation of a glass of juice as the temperature significantly drops to very low levels.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_92.mp4",
+    "time": 497.650999546051,
+    "time_breakdown": {
+      "generation": 497.12,
+      "save": 0.53,
+      "sampling": 476.27,
+      "decode": 20.74
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.5051543116569519,
+    "all_scores": {
+      "0": {
+        "599": 0.4135339856147766,
+        "399": 0.49384284019470215
+      },
+      "1": {
+        "599": 0.4566930830478668,
+        "399": 0.5051543116569519
+      },
+      "2": {
+        "599": 0.1253768801689148
+      },
+      "3": {
+        "599": 0.20308543741703033
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.457"
+          ],
+          [
+            0,
+            "0.414"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.203"
+          ],
+          [
+            2,
+            "0.125"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.505"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.494"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 92,
+    "category": "Solidification",
+    "prompt": "A timelapse captures the transformation of a glass of milk as the temperature significantly drops to very low levels.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_93.mp4",
+    "time": 497.4916191101074,
+    "time_breakdown": {
+      "generation": 496.93,
+      "save": 0.56,
+      "sampling": 476.17,
+      "decode": 20.66
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.7052013278007507,
+    "all_scores": {
+      "0": {
+        "599": 0.4588737189769745
+      },
+      "1": {
+        "599": 0.498464971780777,
+        "399": 0.5512747764587402
+      },
+      "2": {
+        "599": 0.48757675290107727
+      },
+      "3": {
+        "599": 0.6506341695785522,
+        "399": 0.7052013278007507
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.651"
+          ],
+          [
+            1,
+            "0.498"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.488"
+          ],
+          [
+            0,
+            "0.459"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.705"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.551"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 93,
+    "category": "Solidification",
+    "prompt": "A timelapse captures the transformation of a glass of oil as the temperature significantly drops to very low levels.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_94.mp4",
+    "time": 497.74429154396057,
+    "time_breakdown": {
+      "generation": 497.21,
+      "save": 0.54,
+      "sampling": 476.5,
+      "decode": 20.6
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.3365209996700287,
+    "all_scores": {
+      "0": {
+        "599": 0.1943022757768631,
+        "399": 0.3365209996700287
+      },
+      "1": {
+        "599": 0.07748298346996307
+      },
+      "2": {
+        "599": 0.02153741754591465
+      },
+      "3": {
+        "599": 0.14677847921848297,
+        "399": 0.17699959874153137
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.194"
+          ],
+          [
+            3,
+            "0.147"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.077"
+          ],
+          [
+            2,
+            "0.022"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.337"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.177"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 94,
+    "category": "Solidification",
+    "prompt": "A timelapse captures the transformation of a glass of beer as the temperature significantly drops to very low levels.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_95.mp4",
+    "time": 497.73461723327637,
+    "time_breakdown": {
+      "generation": 497.21,
+      "save": 0.53,
+      "sampling": 476.35,
+      "decode": 20.76
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.4518136978149414,
+    "all_scores": {
+      "0": {
+        "599": 0.3180031478404999,
+        "399": 0.38141509890556335
+      },
+      "1": {
+        "599": 0.025668900460004807
+      },
+      "2": {
+        "599": 0.23044684529304504,
+        "399": 0.4518136978149414
+      },
+      "3": {
+        "599": 0.04736641049385071
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.318"
+          ],
+          [
+            2,
+            "0.230"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.047"
+          ],
+          [
+            1,
+            "0.026"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.452"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.381"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 95,
+    "category": "Melting",
+    "prompt": "A timelapse captures the gradual transformation of a piece of ice as the temperature rises significantly.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_96.mp4",
+    "time": 497.52485489845276,
+    "time_breakdown": {
+      "generation": 496.92,
+      "save": 0.6,
+      "sampling": 476.17,
+      "decode": 20.65
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.839794397354126,
+    "all_scores": {
+      "0": {
+        "599": 0.40083929896354675,
+        "399": 0.3035283088684082
+      },
+      "1": {
+        "599": 0.03610900416970253
+      },
+      "2": {
+        "599": 0.29111015796661377
+      },
+      "3": {
+        "599": 0.851424515247345,
+        "399": 0.839794397354126
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.851"
+          ],
+          [
+            0,
+            "0.401"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.291"
+          ],
+          [
+            1,
+            "0.036"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.840"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.304"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 96,
+    "category": "Melting",
+    "prompt": "A timelapse captures the gradual transformation of a candle as the temperature rises significantly.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_97.mp4",
+    "time": 497.35768151283264,
+    "time_breakdown": {
+      "generation": 496.78,
+      "save": 0.58,
+      "sampling": 476.09,
+      "decode": 20.59
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.33402353525161743,
+    "all_scores": {
+      "0": {
+        "599": 0.11864390224218369
+      },
+      "1": {
+        "599": 0.19954514503479004,
+        "399": 0.18748559057712555
+      },
+      "2": {
+        "599": 0.3047448396682739,
+        "399": 0.33402353525161743
+      },
+      "3": {
+        "599": 0.13581186532974243
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.305"
+          ],
+          [
+            1,
+            "0.200"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.136"
+          ],
+          [
+            0,
+            "0.119"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.334"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.187"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 97,
+    "category": "Melting",
+    "prompt": "A timelapse captures the gradual transformation of butter as the temperature rises significantly.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_98.mp4",
+    "time": 497.27545738220215,
+    "time_breakdown": {
+      "generation": 496.66,
+      "save": 0.61,
+      "sampling": 475.87,
+      "decode": 20.69
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.4585669934749603,
+    "all_scores": {
+      "0": {
+        "599": 0.21009716391563416
+      },
+      "1": {
+        "599": 0.3599512279033661,
+        "399": 0.41903701424598694
+      },
+      "2": {
+        "599": 0.5151625275611877,
+        "399": 0.4585669934749603
+      },
+      "3": {
+        "599": 0.21047011017799377
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.515"
+          ],
+          [
+            1,
+            "0.360"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.210"
+          ],
+          [
+            0,
+            "0.210"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.459"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.419"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 98,
+    "category": "Melting",
+    "prompt": "A timelapse captures the gradual transformation of ice cream as the temperature rises significantly.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_99.mp4",
+    "time": 497.0180435180664,
+    "time_breakdown": {
+      "generation": 496.58,
+      "save": 0.44,
+      "sampling": 475.78,
+      "decode": 20.69
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.3765735328197479,
+    "all_scores": {
+      "0": {
+        "599": 0.3312835395336151,
+        "399": 0.3765735328197479
+      },
+      "1": {
+        "599": 0.09029074758291245
+      },
+      "2": {
+        "599": 0.16491343080997467,
+        "399": 0.1983640491962433
+      },
+      "3": {
+        "599": 0.1299823373556137
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.331"
+          ],
+          [
+            2,
+            "0.165"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.130"
+          ],
+          [
+            1,
+            "0.090"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.377"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.198"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 99,
+    "category": "Melting",
+    "prompt": "A timelapse captures the gradual transformation of wax as the temperature rises significantly.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_100.mp4",
+    "time": 497.10503482818604,
+    "time_breakdown": {
+      "generation": 496.61,
+      "save": 0.5,
+      "sampling": 475.78,
+      "decode": 20.72
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.4730563461780548,
+    "all_scores": {
+      "0": {
+        "599": 0.3861168622970581,
+        "399": 0.4021408259868622
+      },
+      "1": {
+        "599": 0.3193238377571106
+      },
+      "2": {
+        "599": 0.4661944508552551,
+        "399": 0.4730563461780548
+      },
+      "3": {
+        "599": 0.2854454219341278
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.466"
+          ],
+          [
+            0,
+            "0.386"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.319"
+          ],
+          [
+            3,
+            "0.285"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.473"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.402"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 100,
+    "category": "Liquefaction",
+    "prompt": "A timelapse captures the transformation as water vapor in a humid environment comes into contact with a cool glass surface.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_101.mp4",
+    "time": 497.307914018631,
+    "time_breakdown": {
+      "generation": 496.56,
+      "save": 0.75,
+      "sampling": 475.78,
+      "decode": 20.68
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.7210204005241394,
+    "all_scores": {
+      "0": {
+        "599": 0.5280095338821411
+      },
+      "1": {
+        "599": 0.6635705232620239,
+        "399": 0.4926490783691406
+      },
+      "2": {
+        "599": 0.600483238697052
+      },
+      "3": {
+        "599": 0.6844870448112488,
+        "399": 0.7210204005241394
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.684"
+          ],
+          [
+            1,
+            "0.664"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.600"
+          ],
+          [
+            0,
+            "0.528"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.721"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.493"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 101,
+    "category": "Liquefaction",
+    "prompt": "A timelapse captures the transformation as fog in a cold environment comes into contact with a warm car window.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_102.mp4",
+    "time": 497.3569974899292,
+    "time_breakdown": {
+      "generation": 496.69,
+      "save": 0.67,
+      "sampling": 475.91,
+      "decode": 20.68
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.7087993025779724,
+    "all_scores": {
+      "0": {
+        "599": 0.516335129737854,
+        "399": 0.5773334503173828
+      },
+      "1": {
+        "599": 0.38679924607276917
+      },
+      "2": {
+        "599": 0.2736167907714844
+      },
+      "3": {
+        "599": 0.6588685512542725,
+        "399": 0.7087993025779724
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.659"
+          ],
+          [
+            0,
+            "0.516"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.387"
+          ],
+          [
+            2,
+            "0.274"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.709"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.577"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 102,
+    "category": "Liquefaction",
+    "prompt": "A timelapse captures the transformation as steam in a kitchen environment comes into contact with a cool metal pot lid.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_103.mp4",
+    "time": 497.6377465724945,
+    "time_breakdown": {
+      "generation": 496.95,
+      "save": 0.68,
+      "sampling": 476.09,
+      "decode": 20.76
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.7032362818717957,
+    "all_scores": {
+      "0": {
+        "599": 0.5913668870925903
+      },
+      "1": {
+        "599": 0.6628527641296387,
+        "399": 0.7032362818717957
+      },
+      "2": {
+        "599": 0.6418632864952087
+      },
+      "3": {
+        "599": 0.6498631834983826,
+        "399": 0.6813297867774963
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.663"
+          ],
+          [
+            3,
+            "0.650"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.642"
+          ],
+          [
+            0,
+            "0.591"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.703"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.681"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 103,
+    "category": "Liquefaction",
+    "prompt": "A timelapse captures the transformation as mist in a greenhouse environment comes into contact with a cool plastic sheet.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_104.mp4",
+    "time": 497.5517165660858,
+    "time_breakdown": {
+      "generation": 496.92,
+      "save": 0.63,
+      "sampling": 476.14,
+      "decode": 20.68
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.7568181157112122,
+    "all_scores": {
+      "0": {
+        "599": 0.4972388744354248,
+        "399": 0.372991144657135
+      },
+      "1": {
+        "599": 0.7740533351898193,
+        "399": 0.7568181157112122
+      },
+      "2": {
+        "599": 0.047621339559555054
+      },
+      "3": {
+        "599": 0.2798078954219818
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.774"
+          ],
+          [
+            0,
+            "0.497"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.280"
+          ],
+          [
+            2,
+            "0.048"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.757"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.373"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 104,
+    "category": "Liquefaction",
+    "prompt": "A timelapse captures the transformation as water vapor in a greenhouse environment comes into contact with a cool plastic sheet.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_105.mp4",
+    "time": 497.416131734848,
+    "time_breakdown": {
+      "generation": 496.86,
+      "save": 0.56,
+      "sampling": 476.01,
+      "decode": 20.75
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.7335928082466125,
+    "all_scores": {
+      "0": {
+        "599": 0.7041894197463989
+      },
+      "1": {
+        "599": 0.5506883263587952
+      },
+      "2": {
+        "599": 0.789844274520874,
+        "399": 0.693715512752533
+      },
+      "3": {
+        "599": 0.8138002157211304,
+        "399": 0.7335928082466125
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.814"
+          ],
+          [
+            2,
+            "0.790"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.704"
+          ],
+          [
+            1,
+            "0.551"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.734"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.694"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 105,
+    "category": "Boiling",
+    "prompt": "A timelapse captures the transformation of water in a pot as the temperature rapidly rises above 100°C.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_106.mp4",
+    "time": 497.36989545822144,
+    "time_breakdown": {
+      "generation": 496.67,
+      "save": 0.7,
+      "sampling": 475.94,
+      "decode": 20.62
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.6671673655509949,
+    "all_scores": {
+      "0": {
+        "599": 0.1498950719833374
+      },
+      "1": {
+        "599": 0.6646286845207214,
+        "399": 0.6671673655509949
+      },
+      "2": {
+        "599": 0.4460378587245941,
+        "399": 0.3103095591068268
+      },
+      "3": {
+        "599": 0.15360736846923828
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.665"
+          ],
+          [
+            2,
+            "0.446"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.154"
+          ],
+          [
+            0,
+            "0.150"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.667"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.310"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 106,
+    "category": "Boiling",
+    "prompt": "A timelapse captures the transformation of milk in a kettle as the temperature rapidly rises above 100°C.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_107.mp4",
+    "time": 497.3666088581085,
+    "time_breakdown": {
+      "generation": 496.69,
+      "save": 0.68,
+      "sampling": 475.96,
+      "decode": 20.63
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.6524330377578735,
+    "all_scores": {
+      "0": {
+        "599": 0.6054394245147705,
+        "399": 0.6466856002807617
+      },
+      "1": {
+        "599": 0.3900783360004425
+      },
+      "2": {
+        "599": 0.4991358518600464
+      },
+      "3": {
+        "599": 0.6510847210884094,
+        "399": 0.6524330377578735
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.651"
+          ],
+          [
+            0,
+            "0.605"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.499"
+          ],
+          [
+            1,
+            "0.390"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.652"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.647"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 107,
+    "category": "Boiling",
+    "prompt": "A timelapse captures the transformation of soup in a saucepan as the temperature rapidly rises above 100°C.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_108.mp4",
+    "time": 497.6219868659973,
+    "time_breakdown": {
+      "generation": 496.89,
+      "save": 0.73,
+      "sampling": 476.17,
+      "decode": 20.62
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.5098475813865662,
+    "all_scores": {
+      "0": {
+        "599": 0.5962734222412109,
+        "399": 0.49933284521102905
+      },
+      "1": {
+        "599": 0.32956308126449585
+      },
+      "2": {
+        "599": 0.5227338671684265,
+        "399": 0.5098475813865662
+      },
+      "3": {
+        "599": 0.397763192653656
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.596"
+          ],
+          [
+            2,
+            "0.523"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.398"
+          ],
+          [
+            1,
+            "0.330"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.510"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.499"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 108,
+    "category": "Boiling",
+    "prompt": "A timelapse captures the transformation of tea in a teapot as the temperature rapidly rises above 100°C.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_109.mp4",
+    "time": 497.29733061790466,
+    "time_breakdown": {
+      "generation": 496.73,
+      "save": 0.57,
+      "sampling": 475.93,
+      "decode": 20.7
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.33740371465682983,
+    "all_scores": {
+      "0": {
+        "599": 0.2445109635591507,
+        "399": 0.2686675786972046
+      },
+      "1": {
+        "599": 0.08375731110572815
+      },
+      "2": {
+        "599": 0.3396311104297638,
+        "399": 0.33740371465682983
+      },
+      "3": {
+        "599": 0.12029837816953659
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.340"
+          ],
+          [
+            0,
+            "0.245"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.120"
+          ],
+          [
+            1,
+            "0.084"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.337"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.269"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 109,
+    "category": "Boiling",
+    "prompt": "A timelapse captures the transformation of oil in a cauldron as the temperature rapidly rises above 100°C.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_110.mp4",
+    "time": 497.5315749645233,
+    "time_breakdown": {
+      "generation": 496.81,
+      "save": 0.72,
+      "sampling": 476.09,
+      "decode": 20.63
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.6710262894630432,
+    "all_scores": {
+      "0": {
+        "599": 0.7027565836906433,
+        "399": 0.6710262894630432
+      },
+      "1": {
+        "599": 0.45016810297966003
+      },
+      "2": {
+        "599": 0.4606078267097473
+      },
+      "3": {
+        "599": 0.47666114568710327,
+        "399": 0.4870213568210602
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.703"
+          ],
+          [
+            3,
+            "0.477"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.461"
+          ],
+          [
+            1,
+            "0.450"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.671"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.487"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 110,
+    "category": "deposition",
+    "prompt": "A timelapse captures the transformation as water vapor in a humid environment comes into contact with a cold glass surface.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_111.mp4",
+    "time": 497.5431296825409,
+    "time_breakdown": {
+      "generation": 496.79,
+      "save": 0.75,
+      "sampling": 476.08,
+      "decode": 20.61
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.8074923753738403,
+    "all_scores": {
+      "0": {
+        "599": 0.6035134792327881
+      },
+      "1": {
+        "599": 0.7555865049362183,
+        "399": 0.8074923753738403
+      },
+      "2": {
+        "599": 0.6229630708694458,
+        "399": 0.5673379302024841
+      },
+      "3": {
+        "599": 0.5738534927368164
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.756"
+          ],
+          [
+            2,
+            "0.623"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.604"
+          ],
+          [
+            3,
+            "0.574"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.807"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.567"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 111,
+    "category": "deposition",
+    "prompt": "A timelapse captures the transformation as steam in a kitchen comes into contact with a cold window.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_112.mp4",
+    "time": 497.2516598701477,
+    "time_breakdown": {
+      "generation": 496.56,
+      "save": 0.7,
+      "sampling": 475.87,
+      "decode": 20.59
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.6206477284431458,
+    "all_scores": {
+      "0": {
+        "599": 0.5336378216743469,
+        "399": 0.4305572509765625
+      },
+      "1": {
+        "599": 0.4483589828014374
+      },
+      "2": {
+        "599": 0.41207680106163025
+      },
+      "3": {
+        "599": 0.5862569212913513,
+        "399": 0.6206477284431458
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.586"
+          ],
+          [
+            0,
+            "0.534"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.448"
+          ],
+          [
+            2,
+            "0.412"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.621"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.431"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 112,
+    "category": "deposition",
+    "prompt": "A timelapse captures the transformation as mist in a rainforest comes into contact with a cold metal surface.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_113.mp4",
+    "time": 497.3111822605133,
+    "time_breakdown": {
+      "generation": 496.58,
+      "save": 0.73,
+      "sampling": 475.89,
+      "decode": 20.6
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.6875245571136475,
+    "all_scores": {
+      "0": {
+        "599": 0.6741244196891785,
+        "399": 0.6163296103477478
+      },
+      "1": {
+        "599": 0.6095460653305054
+      },
+      "2": {
+        "599": 0.5359686613082886
+      },
+      "3": {
+        "599": 0.6370994448661804,
+        "399": 0.6875245571136475
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.674"
+          ],
+          [
+            3,
+            "0.637"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.610"
+          ],
+          [
+            2,
+            "0.536"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.688"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.616"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 113,
+    "category": "deposition",
+    "prompt": "A timelapse captures the transformation as fog in a mountainous region comes into contact with a cold car windshield.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_114.mp4",
+    "time": 497.2589271068573,
+    "time_breakdown": {
+      "generation": 496.65,
+      "save": 0.61,
+      "sampling": 475.93,
+      "decode": 20.62
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.7858738899230957,
+    "all_scores": {
+      "0": {
+        "599": 0.6361187100410461
+      },
+      "1": {
+        "599": 0.6842136979103088,
+        "399": 0.7246684432029724
+      },
+      "2": {
+        "599": 0.6355606317520142
+      },
+      "3": {
+        "599": 0.6883107423782349,
+        "399": 0.7858738899230957
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.688"
+          ],
+          [
+            1,
+            "0.684"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.636"
+          ],
+          [
+            2,
+            "0.636"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.786"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.725"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 114,
+    "category": "deposition",
+    "prompt": "A timelapse captures the transformation as moisture in the air of a refrigerated room comes into contact with a cold plastic bottle.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_115.mp4",
+    "time": 497.3735291957855,
+    "time_breakdown": {
+      "generation": 496.7,
+      "save": 0.67,
+      "sampling": 476.0,
+      "decode": 20.6
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.6581752300262451,
+    "all_scores": {
+      "0": {
+        "599": 0.43846550583839417,
+        "399": 0.6581752300262451
+      },
+      "1": {
+        "599": 0.626990556716919,
+        "399": 0.638562023639679
+      },
+      "2": {
+        "599": 0.1686968356370926
+      },
+      "3": {
+        "599": 0.4069448411464691
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.627"
+          ],
+          [
+            0,
+            "0.438"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.407"
+          ],
+          [
+            2,
+            "0.169"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.658"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.639"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 115,
+    "category": "Sublimation",
+    "prompt": "A timelapse captures the transformation of dry ice as it is exposed to a gradually increasing temperature at room temperature",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_116.mp4",
+    "time": 497.1056156158447,
+    "time_breakdown": {
+      "generation": 496.55,
+      "save": 0.55,
+      "sampling": 475.87,
+      "decode": 20.58
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.7134510278701782,
+    "all_scores": {
+      "0": {
+        "599": 0.5538482666015625
+      },
+      "1": {
+        "599": 0.6283143162727356,
+        "399": 0.7134510278701782
+      },
+      "2": {
+        "599": 0.564644992351532,
+        "399": 0.586586594581604
+      },
+      "3": {
+        "599": 0.299542099237442
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.628"
+          ],
+          [
+            2,
+            "0.565"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.554"
+          ],
+          [
+            3,
+            "0.300"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.713"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.587"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 116,
+    "category": "Sublimation",
+    "prompt": "A timelapse captures the transformation of naphthalene as it is exposed to gradually increasing temperature at room temperature",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_117.mp4",
+    "time": 497.23395895957947,
+    "time_breakdown": {
+      "generation": 496.69,
+      "save": 0.55,
+      "sampling": 476.01,
+      "decode": 20.57
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.28004252910614014,
+    "all_scores": {
+      "0": {
+        "599": 0.22951987385749817,
+        "399": 0.2757069766521454
+      },
+      "1": {
+        "599": 0.08098052442073822
+      },
+      "2": {
+        "599": 0.1877499222755432
+      },
+      "3": {
+        "599": 0.23885394632816315,
+        "399": 0.28004252910614014
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.239"
+          ],
+          [
+            0,
+            "0.230"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.188"
+          ],
+          [
+            1,
+            "0.081"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.280"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.276"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 117,
+    "category": "Sublimation",
+    "prompt": "A timelapse captures the transformation of iodine crystals as they are exposed to gradually increasing temperature at room temperature",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_118.mp4",
+    "time": 497.58561873435974,
+    "time_breakdown": {
+      "generation": 496.99,
+      "save": 0.59,
+      "sampling": 476.28,
+      "decode": 20.61
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.023959359154105186,
+    "all_scores": {
+      "0": {
+        "599": 0.0194618608802557,
+        "399": 0.011428656056523323
+      },
+      "1": {
+        "599": 0.002903762273490429
+      },
+      "2": {
+        "599": 0.01538067776709795,
+        "399": 0.023959359154105186
+      },
+      "3": {
+        "599": 0.007909547537565231
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.019"
+          ],
+          [
+            2,
+            "0.015"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.008"
+          ],
+          [
+            1,
+            "0.003"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.024"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.011"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 118,
+    "category": "Sublimation",
+    "prompt": "A timelapse captures the transformation of camphor as it is exposed to gradually increasing temperature at room temperature",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_119.mp4",
+    "time": 497.62266850471497,
+    "time_breakdown": {
+      "generation": 497.1,
+      "save": 0.52,
+      "sampling": 476.32,
+      "decode": 20.68
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.3593161702156067,
+    "all_scores": {
+      "0": {
+        "599": 0.23715227842330933
+      },
+      "1": {
+        "599": 0.2748069763183594,
+        "399": 0.30176374316215515
+      },
+      "2": {
+        "599": 0.3090074062347412,
+        "399": 0.3593161702156067
+      },
+      "3": {
+        "599": 0.251618355512619
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.309"
+          ],
+          [
+            1,
+            "0.275"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.252"
+          ],
+          [
+            0,
+            "0.237"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.359"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.302"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 119,
+    "category": "Sublimation",
+    "prompt": "A timelapse captures the transformation of arsenic trioxide as it is exposed to gradually increasing temperature at room temperature",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_120.mp4",
+    "time": 497.38614892959595,
+    "time_breakdown": {
+      "generation": 496.83,
+      "save": 0.56,
+      "sampling": 476.11,
+      "decode": 20.61
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.4043680429458618,
+    "all_scores": {
+      "0": {
+        "599": 0.24157141149044037,
+        "399": 0.2850838005542755
+      },
+      "1": {
+        "599": 0.3514408469200134,
+        "399": 0.4043680429458618
+      },
+      "2": {
+        "599": 0.10794923454523087
+      },
+      "3": {
+        "599": 0.11215320974588394
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.351"
+          ],
+          [
+            0,
+            "0.242"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.112"
+          ],
+          [
+            2,
+            "0.108"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.404"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.285"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 120,
+    "category": "Color",
+    "prompt": "Equal amounts of red and blue paint are rapidly combined, with the mixture being vigorously stirred until fully blended.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_121.mp4",
+    "time": 497.10026574134827,
+    "time_breakdown": {
+      "generation": 496.38,
+      "save": 0.72,
+      "sampling": 475.7,
+      "decode": 20.58
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.2698303461074829,
+    "all_scores": {
+      "0": {
+        "599": 0.31278443336486816,
+        "399": 0.2698303461074829
+      },
+      "1": {
+        "599": 0.036185842007398605
+      },
+      "2": {
+        "599": 0.3688395023345947,
+        "399": 0.22478270530700684
+      },
+      "3": {
+        "599": 0.14876866340637207
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.369"
+          ],
+          [
+            0,
+            "0.313"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.149"
+          ],
+          [
+            1,
+            "0.036"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.270"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.225"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 121,
+    "category": "Color",
+    "prompt": "Equal amounts of yellow and red paint are rapidly combined, with the mixture being vigorously stirred until fully blended.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_122.mp4",
+    "time": 497.42809319496155,
+    "time_breakdown": {
+      "generation": 496.68,
+      "save": 0.75,
+      "sampling": 476.02,
+      "decode": 20.56
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.40146833658218384,
+    "all_scores": {
+      "0": {
+        "599": 0.5879461765289307,
+        "399": 0.32218971848487854
+      },
+      "1": {
+        "599": 0.4316611886024475
+      },
+      "2": {
+        "599": 0.25328630208969116
+      },
+      "3": {
+        "599": 0.4365268051624298,
+        "399": 0.40146833658218384
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.588"
+          ],
+          [
+            3,
+            "0.437"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.432"
+          ],
+          [
+            2,
+            "0.253"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.401"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.322"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 122,
+    "category": "Color",
+    "prompt": "Equal amounts of green and blue paint are rapidly combined, with the mixture being vigorously stirred until fully blended.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_123.mp4",
+    "time": 497.3507730960846,
+    "time_breakdown": {
+      "generation": 496.51,
+      "save": 0.84,
+      "sampling": 475.81,
+      "decode": 20.6
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.08662233501672745,
+    "all_scores": {
+      "0": {
+        "599": 0.050758909434080124
+      },
+      "1": {
+        "599": 0.06472780555486679,
+        "399": 0.06230480223894119
+      },
+      "2": {
+        "599": 0.048584189265966415
+      },
+      "3": {
+        "599": 0.09282523393630981,
+        "399": 0.08662233501672745
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.093"
+          ],
+          [
+            1,
+            "0.065"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.051"
+          ],
+          [
+            2,
+            "0.049"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.087"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.062"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 123,
+    "category": "Color",
+    "prompt": "Equal amounts of cyan and magenta paint are rapidly combined, with the mixture being vigorously stirred until fully blended.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_124.mp4",
+    "time": 497.39653301239014,
+    "time_breakdown": {
+      "generation": 496.56,
+      "save": 0.84,
+      "sampling": 475.87,
+      "decode": 20.58
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.09559684991836548,
+    "all_scores": {
+      "0": {
+        "599": 0.11952003091573715,
+        "399": 0.09559684991836548
+      },
+      "1": {
+        "599": 0.05129106715321541
+      },
+      "2": {
+        "599": 0.08206366002559662,
+        "399": 0.055704835802316666
+      },
+      "3": {
+        "599": 0.0643698051571846
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.120"
+          ],
+          [
+            2,
+            "0.082"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.064"
+          ],
+          [
+            1,
+            "0.051"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.096"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.056"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 124,
+    "category": "Color",
+    "prompt": "Equal amounts of pink and white paint are rapidly combined, with the mixture being vigorously stirred until fully blended.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_125.mp4",
+    "time": 497.0672197341919,
+    "time_breakdown": {
+      "generation": 496.31,
+      "save": 0.76,
+      "sampling": 475.64,
+      "decode": 20.57
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.15393958985805511,
+    "all_scores": {
+      "0": {
+        "599": 0.0865183025598526
+      },
+      "1": {
+        "599": 0.1711619645357132,
+        "399": 0.13939954340457916
+      },
+      "2": {
+        "599": 0.17911946773529053,
+        "399": 0.15393958985805511
+      },
+      "3": {
+        "599": 0.15890111029148102
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.179"
+          ],
+          [
+            1,
+            "0.171"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.159"
+          ],
+          [
+            0,
+            "0.087"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.154"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.139"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 125,
+    "category": "Flame Reaction",
+    "prompt": "A piece of copper is ignited, emitting a vivid and unique flame as it burns steadily.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_126.mp4",
+    "time": 497.14132952690125,
+    "time_breakdown": {
+      "generation": 496.55,
+      "save": 0.59,
+      "sampling": 475.83,
+      "decode": 20.62
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.17386889457702637,
+    "all_scores": {
+      "0": {
+        "599": 0.11791366338729858,
+        "399": 0.12723718583583832
+      },
+      "1": {
+        "599": 0.18857622146606445,
+        "399": 0.17386889457702637
+      },
+      "2": {
+        "599": 0.06699495017528534
+      },
+      "3": {
+        "599": 0.11398953199386597
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.189"
+          ],
+          [
+            0,
+            "0.118"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.114"
+          ],
+          [
+            2,
+            "0.067"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.174"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.127"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 126,
+    "category": "Flame Reaction",
+    "prompt": "A piece of magnesium is ignited, emitting a vivid and unique flame as it burns steadily.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_127.mp4",
+    "time": 497.3019392490387,
+    "time_breakdown": {
+      "generation": 496.68,
+      "save": 0.62,
+      "sampling": 475.95,
+      "decode": 20.63
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.13430747389793396,
+    "all_scores": {
+      "0": {
+        "599": 0.13689954578876495,
+        "399": 0.10242555290460587
+      },
+      "1": {
+        "599": 0.09393712878227234
+      },
+      "2": {
+        "599": 0.15271194279193878,
+        "399": 0.13430747389793396
+      },
+      "3": {
+        "599": 0.10832564532756805
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.153"
+          ],
+          [
+            0,
+            "0.137"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.108"
+          ],
+          [
+            1,
+            "0.094"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.134"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.102"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 127,
+    "category": "Flame Reaction",
+    "prompt": "A piece of lithium is ignited, emitting a vivid and unique flame as it burns steadily.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_128.mp4",
+    "time": 497.06728410720825,
+    "time_breakdown": {
+      "generation": 496.56,
+      "save": 0.5,
+      "sampling": 475.85,
+      "decode": 20.61
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.1371772587299347,
+    "all_scores": {
+      "0": {
+        "599": 0.10111933201551437
+      },
+      "1": {
+        "599": 0.13835132122039795,
+        "399": 0.13385871052742004
+      },
+      "2": {
+        "599": 0.14379218220710754,
+        "399": 0.1371772587299347
+      },
+      "3": {
+        "599": 0.08899213373661041
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.144"
+          ],
+          [
+            1,
+            "0.138"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.101"
+          ],
+          [
+            3,
+            "0.089"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.137"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.134"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 128,
+    "category": "Flame Reaction",
+    "prompt": "A piece of sodium is ignited, emitting a vivid and unique flame as it burns steadily.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_129.mp4",
+    "time": 496.76709032058716,
+    "time_breakdown": {
+      "generation": 496.36,
+      "save": 0.4,
+      "sampling": 475.69,
+      "decode": 20.57
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.20370140671730042,
+    "all_scores": {
+      "0": {
+        "599": 0.15048401057720184,
+        "399": 0.12379703670740128
+      },
+      "1": {
+        "599": 0.14288683235645294
+      },
+      "2": {
+        "599": 0.1462545543909073
+      },
+      "3": {
+        "599": 0.17996758222579956,
+        "399": 0.20370140671730042
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.180"
+          ],
+          [
+            0,
+            "0.150"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.146"
+          ],
+          [
+            1,
+            "0.143"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.204"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.124"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 129,
+    "category": "Flame Reaction",
+    "prompt": "A piece of potassium is ignited, emitting a vivid and unique flame as it burns steadily.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_130.mp4",
+    "time": 497.1340947151184,
+    "time_breakdown": {
+      "generation": 496.64,
+      "save": 0.49,
+      "sampling": 475.9,
+      "decode": 20.64
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.16061343252658844,
+    "all_scores": {
+      "0": {
+        "599": 0.12055806815624237
+      },
+      "1": {
+        "599": 0.09415408968925476
+      },
+      "2": {
+        "599": 0.13953492045402527,
+        "399": 0.13771146535873413
+      },
+      "3": {
+        "599": 0.15144306421279907,
+        "399": 0.16061343252658844
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.151"
+          ],
+          [
+            2,
+            "0.140"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.121"
+          ],
+          [
+            1,
+            "0.094"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.161"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.138"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 130,
+    "category": "Hardness",
+    "prompt": "A delicate, fragile egg is hurled with significant force towards a rugged, solid rock surface, where it collides upon impact",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_131.mp4",
+    "time": 496.90782856941223,
+    "time_breakdown": {
+      "generation": 496.55,
+      "save": 0.36,
+      "sampling": 475.85,
+      "decode": 20.6
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.791236162185669,
+    "all_scores": {
+      "0": {
+        "599": 0.6473203301429749,
+        "399": 0.6145609021186829
+      },
+      "1": {
+        "599": 0.2363571971654892
+      },
+      "2": {
+        "599": 0.8035785555839539,
+        "399": 0.791236162185669
+      },
+      "3": {
+        "599": 0.532658040523529
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.804"
+          ],
+          [
+            0,
+            "0.647"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.533"
+          ],
+          [
+            1,
+            "0.236"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.791"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.615"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 131,
+    "category": "Hardness",
+    "prompt": "A lightweight, fragile vase is thrown with great force against a sturdy, concrete wall, where it collides upon impact",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_132.mp4",
+    "time": 496.7584993839264,
+    "time_breakdown": {
+      "generation": 496.39,
+      "save": 0.37,
+      "sampling": 475.68,
+      "decode": 20.61
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.45846837759017944,
+    "all_scores": {
+      "0": {
+        "599": 0.2091723084449768
+      },
+      "1": {
+        "599": 0.4086202383041382,
+        "399": 0.43650972843170166
+      },
+      "2": {
+        "599": 0.450305312871933,
+        "399": 0.45846837759017944
+      },
+      "3": {
+        "599": 0.24462579190731049
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.450"
+          ],
+          [
+            1,
+            "0.409"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.245"
+          ],
+          [
+            0,
+            "0.209"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.458"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.437"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 132,
+    "category": "Hardness",
+    "prompt": "A delicate, fragile glass bottle is hurled with significant force towards a rugged, solid rock surface, where it collides upon impact",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_133.mp4",
+    "time": 496.4998540878296,
+    "time_breakdown": {
+      "generation": 496.13,
+      "save": 0.37,
+      "sampling": 475.48,
+      "decode": 20.55
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.6867967844009399,
+    "all_scores": {
+      "0": {
+        "599": 0.7020822763442993,
+        "399": 0.6867967844009399
+      },
+      "1": {
+        "599": 0.7113481163978577,
+        "399": 0.6794796586036682
+      },
+      "2": {
+        "599": 0.580750048160553
+      },
+      "3": {
+        "599": 0.3249402940273285
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.711"
+          ],
+          [
+            0,
+            "0.702"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.581"
+          ],
+          [
+            3,
+            "0.325"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.687"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.679"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 133,
+    "category": "Hardness",
+    "prompt": "A flimsy, brittle glass cup is propelled with force towards a solid, metallic surface, where it collides upon impact",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_134.mp4",
+    "time": 496.6505002975464,
+    "time_breakdown": {
+      "generation": 496.26,
+      "save": 0.39,
+      "sampling": 475.42,
+      "decode": 20.74
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.8174353837966919,
+    "all_scores": {
+      "0": {
+        "599": 0.7614375948905945
+      },
+      "1": {
+        "599": 0.7756122350692749
+      },
+      "2": {
+        "599": 0.8087491393089294,
+        "399": 0.7952464818954468
+      },
+      "3": {
+        "599": 0.7917037010192871,
+        "399": 0.8174353837966919
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.809"
+          ],
+          [
+            3,
+            "0.792"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.776"
+          ],
+          [
+            0,
+            "0.761"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.817"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.795"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 134,
+    "category": "Hardness",
+    "prompt": "A weak, frail porcelain plate is flung with significant speed at a robust, wooden table, where it collides upon impact",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_135.mp4",
+    "time": 496.44086265563965,
+    "time_breakdown": {
+      "generation": 496.03,
+      "save": 0.41,
+      "sampling": 475.37,
+      "decode": 20.56
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.7745115756988525,
+    "all_scores": {
+      "0": {
+        "599": 0.727265477180481
+      },
+      "1": {
+        "599": 0.801875114440918,
+        "399": 0.7745115756988525
+      },
+      "2": {
+        "599": 0.7363580465316772,
+        "399": 0.7674887776374817
+      },
+      "3": {
+        "599": 0.4216862618923187
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.802"
+          ],
+          [
+            2,
+            "0.736"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.727"
+          ],
+          [
+            3,
+            "0.422"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.775"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.767"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 135,
+    "category": "Solubility",
+    "prompt": "A clear glass of oil is gently poured into a glass of water.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_136.mp4",
+    "time": 496.51315426826477,
+    "time_breakdown": {
+      "generation": 496.09,
+      "save": 0.42,
+      "sampling": 475.42,
+      "decode": 20.57
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.7353423833847046,
+    "all_scores": {
+      "0": {
+        "599": 0.47133663296699524,
+        "399": 0.5762465596199036
+      },
+      "1": {
+        "599": 0.28391796350479126
+      },
+      "2": {
+        "599": 0.7294941544532776,
+        "399": 0.7353423833847046
+      },
+      "3": {
+        "599": 0.23699460923671722
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.729"
+          ],
+          [
+            0,
+            "0.471"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.284"
+          ],
+          [
+            3,
+            "0.237"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.735"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.576"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 136,
+    "category": "Solubility",
+    "prompt": "A clear glass of honey is gently poured into a glass of milk.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_137.mp4",
+    "time": 496.0567321777344,
+    "time_breakdown": {
+      "generation": 495.69,
+      "save": 0.37,
+      "sampling": 475.1,
+      "decode": 20.49
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.6542221903800964,
+    "all_scores": {
+      "0": {
+        "599": 0.5070484280586243,
+        "399": 0.5463184118270874
+      },
+      "1": {
+        "599": 0.6276041269302368,
+        "399": 0.6542221903800964
+      },
+      "2": {
+        "599": 0.3451412320137024
+      },
+      "3": {
+        "599": 0.29283401370048523
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.628"
+          ],
+          [
+            0,
+            "0.507"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.345"
+          ],
+          [
+            3,
+            "0.293"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.654"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.546"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 137,
+    "category": "Solubility",
+    "prompt": "A clear glass of vinegar is gently poured into a glass of water.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_138.mp4",
+    "time": 496.2072696685791,
+    "time_breakdown": {
+      "generation": 495.68,
+      "save": 0.53,
+      "sampling": 475.04,
+      "decode": 20.54
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.6196032762527466,
+    "all_scores": {
+      "0": {
+        "599": 0.49381154775619507,
+        "399": 0.5858768224716187
+      },
+      "1": {
+        "599": 0.25867006182670593
+      },
+      "2": {
+        "599": 0.582291305065155,
+        "399": 0.6196032762527466
+      },
+      "3": {
+        "599": 0.4773445129394531
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.582"
+          ],
+          [
+            0,
+            "0.494"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.477"
+          ],
+          [
+            1,
+            "0.259"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.620"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.586"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 138,
+    "category": "Solubility",
+    "prompt": "A clear glass of juice is gently poured into a glass of water.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_139.mp4",
+    "time": 496.4435908794403,
+    "time_breakdown": {
+      "generation": 495.95,
+      "save": 0.5,
+      "sampling": 475.24,
+      "decode": 20.6
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.7464860081672668,
+    "all_scores": {
+      "0": {
+        "599": 0.19428560137748718
+      },
+      "1": {
+        "599": 0.5411815643310547,
+        "399": 0.7464860081672668
+      },
+      "2": {
+        "599": 0.2418469339609146,
+        "399": 0.2858322262763977
+      },
+      "3": {
+        "599": 0.05877779424190521
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.541"
+          ],
+          [
+            2,
+            "0.242"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.194"
+          ],
+          [
+            3,
+            "0.059"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.746"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.286"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 139,
+    "category": "Solubility",
+    "prompt": "A bottle of vinegar is gently poured into a glass of oil.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_140.mp4",
+    "time": 496.4574809074402,
+    "time_breakdown": {
+      "generation": 496.0,
+      "save": 0.46,
+      "sampling": 475.28,
+      "decode": 20.61
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.7149554491043091,
+    "all_scores": {
+      "0": {
+        "599": 0.5253148078918457
+      },
+      "1": {
+        "599": 0.5258579254150391,
+        "399": 0.693357527256012
+      },
+      "2": {
+        "599": 0.08071120828390121
+      },
+      "3": {
+        "599": 0.6326251029968262,
+        "399": 0.7149554491043091
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.633"
+          ],
+          [
+            1,
+            "0.526"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.525"
+          ],
+          [
+            2,
+            "0.081"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.715"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.693"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 140,
+    "category": "Combustibility",
+    "prompt": "A small burning ball of paper was thrown into a pile of dry paper.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_141.mp4",
+    "time": 496.475332736969,
+    "time_breakdown": {
+      "generation": 496.02,
+      "save": 0.46,
+      "sampling": 475.36,
+      "decode": 20.56
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.4435524642467499,
+    "all_scores": {
+      "0": {
+        "599": 0.2241869568824768
+      },
+      "1": {
+        "599": 0.22780491411685944,
+        "399": 0.252895325422287
+      },
+      "2": {
+        "599": 0.4664613604545593,
+        "399": 0.4435524642467499
+      },
+      "3": {
+        "599": 0.09164749830961227
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.466"
+          ],
+          [
+            1,
+            "0.228"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.224"
+          ],
+          [
+            3,
+            "0.092"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.444"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.253"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 141,
+    "category": "Combustibility",
+    "prompt": "A small burning match was thrown into a pile of dry leaves.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_142.mp4",
+    "time": 496.7336702346802,
+    "time_breakdown": {
+      "generation": 496.17,
+      "save": 0.57,
+      "sampling": 475.41,
+      "decode": 20.66
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.4606406092643738,
+    "all_scores": {
+      "0": {
+        "599": 0.4821900427341461,
+        "399": 0.40644222497940063
+      },
+      "1": {
+        "599": 0.44673463702201843,
+        "399": 0.4606406092643738
+      },
+      "2": {
+        "599": 0.184343621134758
+      },
+      "3": {
+        "599": 0.03036482445895672
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.482"
+          ],
+          [
+            1,
+            "0.447"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.184"
+          ],
+          [
+            3,
+            "0.030"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.461"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.406"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 142,
+    "category": "Combustibility",
+    "prompt": "A small burning stick was thrown into a pile of hay.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_143.mp4",
+    "time": 496.8115484714508,
+    "time_breakdown": {
+      "generation": 496.15,
+      "save": 0.66,
+      "sampling": 475.48,
+      "decode": 20.57
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.20515277981758118,
+    "all_scores": {
+      "0": {
+        "599": 0.23821602761745453,
+        "399": 0.20515277981758118
+      },
+      "1": {
+        "599": 0.2105649709701538,
+        "399": 0.20274698734283447
+      },
+      "2": {
+        "599": 0.009506240487098694
+      },
+      "3": {
+        "599": 0.06654835492372513
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.238"
+          ],
+          [
+            1,
+            "0.211"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.067"
+          ],
+          [
+            2,
+            "0.010"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.205"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.203"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 143,
+    "category": "Combustibility",
+    "prompt": "A small burning candle was thrown into a pile of dry grass.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_144.mp4",
+    "time": 496.5640478134155,
+    "time_breakdown": {
+      "generation": 496.08,
+      "save": 0.49,
+      "sampling": 475.4,
+      "decode": 20.58
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.6327149868011475,
+    "all_scores": {
+      "0": {
+        "599": 0.53825443983078
+      },
+      "1": {
+        "599": 0.1490347534418106
+      },
+      "2": {
+        "599": 0.6387171149253845,
+        "399": 0.6327149868011475
+      },
+      "3": {
+        "599": 0.6134721636772156,
+        "399": 0.5942012071609497
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.639"
+          ],
+          [
+            3,
+            "0.613"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.538"
+          ],
+          [
+            1,
+            "0.149"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.633"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.594"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 144,
+    "category": "Combustibility",
+    "prompt": "A small burning piece of cloth was thrown into a pile of old newspapers.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_145.mp4",
+    "time": 496.914776802063,
+    "time_breakdown": {
+      "generation": 496.23,
+      "save": 0.68,
+      "sampling": 475.54,
+      "decode": 20.59
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.10982254892587662,
+    "all_scores": {
+      "0": {
+        "599": 0.009782643057405949
+      },
+      "1": {
+        "599": 0.08385227620601654,
+        "399": 0.0654911920428276
+      },
+      "2": {
+        "599": 0.12824693322181702,
+        "399": 0.10982254892587662
+      },
+      "3": {
+        "599": 0.05046607181429863
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.128"
+          ],
+          [
+            1,
+            "0.084"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.050"
+          ],
+          [
+            0,
+            "0.010"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.110"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.065"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 145,
+    "category": "Acidity and Alkalinity",
+    "prompt": "A timelapse captures the transformation as colorless vinegar is poured into a glass of purple litmus solution.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_146.mp4",
+    "time": 496.5781924724579,
+    "time_breakdown": {
+      "generation": 496.06,
+      "save": 0.52,
+      "sampling": 475.38,
+      "decode": 20.58
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.777607262134552,
+    "all_scores": {
+      "0": {
+        "599": 0.462934285402298,
+        "399": 0.5287831425666809
+      },
+      "1": {
+        "599": 0.1684081256389618
+      },
+      "2": {
+        "599": 0.15398602187633514
+      },
+      "3": {
+        "599": 0.6640528440475464,
+        "399": 0.777607262134552
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.664"
+          ],
+          [
+            0,
+            "0.463"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.168"
+          ],
+          [
+            2,
+            "0.154"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.778"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.529"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 146,
+    "category": "Acidity and Alkalinity",
+    "prompt": "A timelapse captures the transformation as hydrochloric acid is poured into a glass of purple litmus solution.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_147.mp4",
+    "time": 496.76777601242065,
+    "time_breakdown": {
+      "generation": 496.23,
+      "save": 0.54,
+      "sampling": 475.54,
+      "decode": 20.59
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.7718267440795898,
+    "all_scores": {
+      "0": {
+        "599": 0.06635241955518723
+      },
+      "1": {
+        "599": 0.12709268927574158
+      },
+      "2": {
+        "599": 0.6886599063873291,
+        "399": 0.7718267440795898
+      },
+      "3": {
+        "599": 0.3577260375022888,
+        "399": 0.5456428527832031
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.689"
+          ],
+          [
+            3,
+            "0.358"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.127"
+          ],
+          [
+            0,
+            "0.066"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.772"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.546"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 147,
+    "category": "Acidity and Alkalinity",
+    "prompt": "A timelapse captures the transformation as colorless soda water is added to a glass of blue litmus solution.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_148.mp4",
+    "time": 496.6491713523865,
+    "time_breakdown": {
+      "generation": 496.14,
+      "save": 0.51,
+      "sampling": 475.49,
+      "decode": 20.54
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.43234333395957947,
+    "all_scores": {
+      "0": {
+        "599": 0.07414191216230392
+      },
+      "1": {
+        "599": 0.35465008020401,
+        "399": 0.43234333395957947
+      },
+      "2": {
+        "599": 0.15580207109451294,
+        "399": 0.24764376878738403
+      },
+      "3": {
+        "599": 0.06761385500431061
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.355"
+          ],
+          [
+            2,
+            "0.156"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.074"
+          ],
+          [
+            3,
+            "0.068"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.432"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.248"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 148,
+    "category": "Acidity and Alkalinity",
+    "prompt": "A timelapse captures the transformation as lemon juice is poured into a glass of red cabbage juice.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_149.mp4",
+    "time": 496.82547974586487,
+    "time_breakdown": {
+      "generation": 496.31,
+      "save": 0.52,
+      "sampling": 475.63,
+      "decode": 20.57
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.5455964803695679,
+    "all_scores": {
+      "0": {
+        "599": 0.5106005668640137,
+        "399": 0.5455964803695679
+      },
+      "1": {
+        "599": 0.1206200048327446
+      },
+      "2": {
+        "599": 0.23777934908866882,
+        "399": 0.24391081929206848
+      },
+      "3": {
+        "599": 0.020285064354538918
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.511"
+          ],
+          [
+            2,
+            "0.238"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.121"
+          ],
+          [
+            3,
+            "0.020"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.546"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.244"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 149,
+    "category": "Acidity and Alkalinity",
+    "prompt": "A timelapse captures the transformation as orange juice is mixed with baking soda in a clear cup.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_150.mp4",
+    "time": 496.76151990890503,
+    "time_breakdown": {
+      "generation": 496.21,
+      "save": 0.55,
+      "sampling": 475.54,
+      "decode": 20.56
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.5706251263618469,
+    "all_scores": {
+      "0": {
+        "599": 0.2204330563545227
+      },
+      "1": {
+        "599": 0.4735451638698578,
+        "399": 0.5706251263618469
+      },
+      "2": {
+        "599": 0.29641592502593994,
+        "399": 0.34056356549263
+      },
+      "3": {
+        "599": 0.2500091791152954
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.474"
+          ],
+          [
+            2,
+            "0.296"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.250"
+          ],
+          [
+            0,
+            "0.220"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.571"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.341"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 150,
+    "category": "Dehydration property",
+    "prompt": "A timelapse captures the reaction as concentrated sulfuric acid is poured onto a piece of bread.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_151.mp4",
+    "time": 496.642972946167,
+    "time_breakdown": {
+      "generation": 496.12,
+      "save": 0.53,
+      "sampling": 475.46,
+      "decode": 20.55
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.49002107977867126,
+    "all_scores": {
+      "0": {
+        "599": 0.49445995688438416,
+        "399": 0.49002107977867126
+      },
+      "1": {
+        "599": 0.13887082040309906
+      },
+      "2": {
+        "599": 0.07343744486570358
+      },
+      "3": {
+        "599": 0.21314097940921783,
+        "399": 0.3168695271015167
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.494"
+          ],
+          [
+            3,
+            "0.213"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.139"
+          ],
+          [
+            2,
+            "0.073"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.490"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.317"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 151,
+    "category": "Dehydration property",
+    "prompt": "A timelapse captures the reaction as concentrated sulfuric acid is poured onto a slice of apple.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_152.mp4",
+    "time": 496.8436975479126,
+    "time_breakdown": {
+      "generation": 496.21,
+      "save": 0.64,
+      "sampling": 475.57,
+      "decode": 20.54
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.5350619554519653,
+    "all_scores": {
+      "0": {
+        "599": 0.436369925737381,
+        "399": 0.36029019951820374
+      },
+      "1": {
+        "599": 0.2577459514141083
+      },
+      "2": {
+        "599": 0.404293417930603
+      },
+      "3": {
+        "599": 0.5184945464134216,
+        "399": 0.5350619554519653
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.518"
+          ],
+          [
+            0,
+            "0.436"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.404"
+          ],
+          [
+            1,
+            "0.258"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.535"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.360"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 152,
+    "category": "Dehydration property",
+    "prompt": "A timelapse captures the reaction as concentrated sulfuric acid is poured onto a sheet of paper.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_153.mp4",
+    "time": 496.6557309627533,
+    "time_breakdown": {
+      "generation": 496.07,
+      "save": 0.59,
+      "sampling": 475.39,
+      "decode": 20.58
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.6434842944145203,
+    "all_scores": {
+      "0": {
+        "599": 0.4876249432563782
+      },
+      "1": {
+        "599": 0.5810934901237488,
+        "399": 0.5963693261146545
+      },
+      "2": {
+        "599": 0.481032133102417
+      },
+      "3": {
+        "599": 0.5787760019302368,
+        "399": 0.6434842944145203
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.581"
+          ],
+          [
+            3,
+            "0.579"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.488"
+          ],
+          [
+            2,
+            "0.481"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.643"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.596"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 153,
+    "category": "Dehydration property",
+    "prompt": "A timelapse captures the reaction as concentrated sulfuric acid is poured onto a cotton ball.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_154.mp4",
+    "time": 496.741393327713,
+    "time_breakdown": {
+      "generation": 496.09,
+      "save": 0.65,
+      "sampling": 475.37,
+      "decode": 20.62
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.5568024516105652,
+    "all_scores": {
+      "0": {
+        "599": 0.25310853123664856
+      },
+      "1": {
+        "599": 0.48349225521087646,
+        "399": 0.5568024516105652
+      },
+      "2": {
+        "599": 0.5400302410125732,
+        "399": 0.4309961795806885
+      },
+      "3": {
+        "599": 0.3837692439556122
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.540"
+          ],
+          [
+            1,
+            "0.483"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.384"
+          ],
+          [
+            0,
+            "0.253"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.557"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.431"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 154,
+    "category": "Dehydration property",
+    "prompt": "A timelapse captures the reaction as concentrated sulfuric acid is poured onto a sponge.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_155.mp4",
+    "time": 496.7195098400116,
+    "time_breakdown": {
+      "generation": 496.08,
+      "save": 0.64,
+      "sampling": 475.4,
+      "decode": 20.58
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 0,
+    "best_score": 0.7585113644599915,
+    "all_scores": {
+      "0": {
+        "599": 0.7099738121032715,
+        "399": 0.7585113644599915
+      },
+      "1": {
+        "599": 0.502496600151062,
+        "399": 0.45024749636650085
+      },
+      "2": {
+        "599": 0.17695945501327515
+      },
+      "3": {
+        "599": 0.33450281620025635
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            0,
+            "0.710"
+          ],
+          [
+            1,
+            "0.502"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.335"
+          ],
+          [
+            2,
+            "0.177"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            0,
+            "0.759"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.450"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 155,
+    "category": "Redox property",
+    "prompt": "A timelapse captures the transformation of a clean and smooth piece of iron in a humid environment over decades.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_156.mp4",
+    "time": 496.4926948547363,
+    "time_breakdown": {
+      "generation": 495.99,
+      "save": 0.51,
+      "sampling": 475.32,
+      "decode": 20.56
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.5730729699134827,
+    "all_scores": {
+      "0": {
+        "599": 0.31753113865852356
+      },
+      "1": {
+        "599": 0.42027169466018677
+      },
+      "2": {
+        "599": 0.5352521538734436,
+        "399": 0.5730729699134827
+      },
+      "3": {
+        "599": 0.4959753155708313,
+        "399": 0.44665539264678955
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.535"
+          ],
+          [
+            3,
+            "0.496"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.420"
+          ],
+          [
+            0,
+            "0.318"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.573"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.447"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 156,
+    "category": "Redox property",
+    "prompt": "A timelapse captures the transformation of a clean and smooth piece of steel in a humid environment over decades.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_157.mp4",
+    "time": 496.56623673439026,
+    "time_breakdown": {
+      "generation": 495.98,
+      "save": 0.59,
+      "sampling": 475.31,
+      "decode": 20.57
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 3,
+    "best_score": 0.605431854724884,
+    "all_scores": {
+      "0": {
+        "599": 0.3149079382419586
+      },
+      "1": {
+        "599": 0.3818620443344116
+      },
+      "2": {
+        "599": 0.527908444404602,
+        "399": 0.4333842396736145
+      },
+      "3": {
+        "599": 0.5416910648345947,
+        "399": 0.605431854724884
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            3,
+            "0.542"
+          ],
+          [
+            2,
+            "0.528"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.382"
+          ],
+          [
+            0,
+            "0.315"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            3,
+            "0.605"
+          ]
+        ],
+        "pruned": [
+          [
+            2,
+            "0.433"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 157,
+    "category": "Redox property",
+    "prompt": "A timelapse shows the changes in a shiny and new metal chair left outdoors in the rain over a long period.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_158.mp4",
+    "time": 496.8708391189575,
+    "time_breakdown": {
+      "generation": 496.24,
+      "save": 0.63,
+      "sampling": 475.55,
+      "decode": 20.59
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.43721097707748413,
+    "all_scores": {
+      "0": {
+        "599": 0.12368346005678177
+      },
+      "1": {
+        "599": 0.16193218529224396
+      },
+      "2": {
+        "599": 0.3940785527229309,
+        "399": 0.43721097707748413
+      },
+      "3": {
+        "599": 0.21661829948425293,
+        "399": 0.18523533642292023
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.394"
+          ],
+          [
+            3,
+            "0.217"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.162"
+          ],
+          [
+            0,
+            "0.124"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.437"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.185"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 158,
+    "category": "Redox property",
+    "prompt": "A timelapse video documents the gradual decay of a polished metal railing exposed to the elements over years.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_159.mp4",
+    "time": 496.6162269115448,
+    "time_breakdown": {
+      "generation": 496.11,
+      "save": 0.51,
+      "sampling": 475.43,
+      "decode": 20.58
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 2,
+    "best_score": 0.8882620334625244,
+    "all_scores": {
+      "0": {
+        "599": 0.5193151235580444
+      },
+      "1": {
+        "599": 0.7570065855979919,
+        "399": 0.795912504196167
+      },
+      "2": {
+        "599": 0.8752403259277344,
+        "399": 0.8882620334625244
+      },
+      "3": {
+        "599": 0.4821484684944153
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            2,
+            "0.875"
+          ],
+          [
+            1,
+            "0.757"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.519"
+          ],
+          [
+            3,
+            "0.482"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            2,
+            "0.888"
+          ]
+        ],
+        "pruned": [
+          [
+            1,
+            "0.796"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  },
+  {
+    "index": 159,
+    "category": "Redox property",
+    "prompt": "A timelapse records the oxidation process of a bright and new metal bedframe kept in a damp location over several years.",
+    "output": "outputs/phygenbench/videophy_causal_partial/output_video_160.mp4",
+    "time": 496.7701692581177,
+    "time_breakdown": {
+      "generation": 496.21,
+      "save": 0.56,
+      "sampling": 475.52,
+      "decode": 20.59
+    },
+    "status": "success",
+    "mode": "prune",
+    "best_trajectory": 1,
+    "best_score": 0.41666632890701294,
+    "all_scores": {
+      "0": {
+        "599": 0.2722240388393402,
+        "399": 0.34472015500068665
+      },
+      "1": {
+        "599": 0.5005671977996826,
+        "399": 0.41666632890701294
+      },
+      "2": {
+        "599": 0.009947406128048897
+      },
+      "3": {
+        "599": 0.21602734923362732
+      }
+    },
+    "scoring_history": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "kept": [
+          [
+            1,
+            "0.501"
+          ],
+          [
+            0,
+            "0.272"
+          ]
+        ],
+        "pruned": [
+          [
+            3,
+            "0.216"
+          ],
+          [
+            2,
+            "0.010"
+          ]
+        ],
+        "action": "prune"
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "kept": [
+          [
+            1,
+            "0.417"
+          ]
+        ],
+        "pruned": [
+          [
+            0,
+            "0.345"
+          ]
+        ],
+        "action": "prune"
+      }
+    ],
+    "num_trajectories": 4
+  }
+]

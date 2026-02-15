@@ -91,7 +91,7 @@ PROJECT_ROOT="${PROJECT_ROOT:-$HOME/repos/VLMPhysics}"
 cd "$PROJECT_ROOT"
 
 # Input/Output paths
-VIDEOS_DIR="outputs/phygenbench/videophy_mean_full"
+VIDEOS_DIR="outputs/phygenbench/videophy_mean_l15_full_traj8"
 OUTPUT_DIR="results/eval/phygenbench"
 
 # Stages to run (1=VQAScore, 2=MultiFrame GPT-4o, 3=Video GPT-4o)
