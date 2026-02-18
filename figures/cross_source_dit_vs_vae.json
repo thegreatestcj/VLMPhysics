@@ -1,0 +1,18 @@
+{
+  "config": {
+    "dit_layer": 10,
+    "dit_timestep": 600
+  },
+  "vae_cross_source": {
+    "cogvideox-2b->cogvideox-2b": 0.5253507666456626,
+    "cogvideox-2b->cogvideox-5b": 0.48037816712515513,
+    "cogvideox-5b->cogvideox-2b": 0.47832992965736326,
+    "cogvideox-5b->cogvideox-5b": 0.597081006522483
+  },
+  "dit_cross_source": {
+    "cogvideox-2b->cogvideox-2b": 0.6311377161660715,
+    "cogvideox-2b->cogvideox-5b": 0.5533489268429027,
+    "cogvideox-5b->cogvideox-2b": 0.5541184479237578,
+    "cogvideox-5b->cogvideox-5b": 0.6109094235320558
+  }
+}
