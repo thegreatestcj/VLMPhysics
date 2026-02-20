@@ -1,0 +1,6073 @@
+{
+  "config": {
+    "videos_dir": "outputs/phygenbench/baseline",
+    "prompts_file": "data/phygenbench/prompts.json",
+    "single_question_file": "data/phygenbench/single_question.json",
+    "multi_question_file": "data/phygenbench/multi_question.json",
+    "video_question_file": "data/phygenbench/video_question.json",
+    "output_dir": "results/eval/phygenbench",
+    "stages": [
+      1,
+      2,
+      3
+    ],
+    "num_frames_stage1": 8,
+    "num_frames_stage2": 4,
+    "num_frames_stage3": 8,
+    "vqascore_model": "clip-flant5-xxl",
+    "gpt_model": "gpt-4o",
+    "gpt_max_tokens": 200,
+    "resume": true,
+    "max_videos": null,
+    "dry_run": false
+  },
+  "timestamp": "2026-02-18T13:56:00.145333",
+  "per_video": [
+    {
+      "index": 0,
+      "video_path": "outputs/phygenbench/baseline/output_video_1.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The water floats out of the cup",
+            "score_pos": 0.41686177253723145,
+            "score_neg": 0.18211305141448975,
+            "binary": 1
+          },
+          {
+            "statement": "The water forms spherical droplets",
+            "score_pos": 0.3946765661239624,
+            "score_neg": 0.6494419574737549,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The water forms droplets in mid-air.",
+        "desc2": "The water forms droplets in mid-air."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 1,
+      "video_path": "outputs/phygenbench/baseline/output_video_2.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The oil forms spherical droplets",
+            "score_pos": 0.695388674736023,
+            "score_neg": 0.6018095016479492,
+            "binary": 1
+          },
+          {
+            "statement": "The oil does not fall to the ground",
+            "score_pos": 0.518791675567627,
+            "score_neg": 0.6846083998680115,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The oil is starting to float away from the cup.",
+        "desc2": "The oil is floating in small droplets away from the cup."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 2,
+      "video_path": "outputs/phygenbench/baseline/output_video_3.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The liquid forms floating globules",
+            "score_pos": 0.5544127225875854,
+            "score_neg": 0.5787548422813416,
+            "binary": 0
+          },
+          {
+            "statement": "The liquid does not move in straight lines",
+            "score_pos": 0.7489644289016724,
+            "score_neg": 0.6609587669372559,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The juice starts to leave the bottle and forms small floating droplets.",
+        "desc2": "The droplets continue to spread out, and more juice exits the bottle."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 3,
+      "video_path": "outputs/phygenbench/baseline/output_video_4.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The honey forms globules",
+            "score_pos": 0.8241837620735168,
+            "score_neg": 0.44897690415382385,
+            "binary": 1
+          },
+          {
+            "statement": "The honey is floating",
+            "score_pos": 0.6953896284103394,
+            "score_neg": 0.3455895781517029,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "Honey starts spreading outwards.",
+        "desc2": "The honey continues to spread in the surrounding area."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 4,
+      "video_path": "outputs/phygenbench/baseline/output_video_5.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The liquid forms floating blobs",
+            "score_pos": 0.5187925100326538,
+            "score_neg": 0.6609588861465454,
+            "binary": 0
+          },
+          {
+            "statement": "The liquid does not fall to the ground",
+            "score_pos": 0.5310949087142944,
+            "score_neg": 0.7287618517875671,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The soda is starting to float out of the can.",
+        "desc2": "The soda is continuously spreading out, forming droplets floating in the air."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 5,
+      "video_path": "outputs/phygenbench/baseline/output_video_6.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 0.5,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The iron piece sinks immediately",
+            "score_pos": 0.39467665553092957,
+            "score_neg": 0.5901700258255005,
+            "binary": 0
+          },
+          {
+            "statement": "The iron piece is underwater",
+            "score_pos": 0.7387940883636475,
+            "score_neg": 0.7387937307357788,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The iron piece starts to sink.",
+        "desc2": "The iron piece continues to sink."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 6,
+      "video_path": "outputs/phygenbench/baseline/output_video_7.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 1,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The stone sinks to the bottom of the pool",
+            "score_pos": 0.30978479981422424,
+            "score_neg": 0.7489619255065918,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The stone is partially submerged, causing ripples on the water surface.",
+        "desc2": "The stone continues to sink, with more ripples on the water surface."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 7,
+      "video_path": "outputs/phygenbench/baseline/output_video_8.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 1.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 1,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The tennis ball floats on the water",
+            "score_pos": 0.9091758131980896,
+            "score_neg": 0.405616819858551,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The tennis ball is halfway submerged in the water.",
+        "desc2": "The tennis ball is floating on the water surface."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 8,
+      "video_path": "outputs/phygenbench/baseline/output_video_9.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The wood block floats on the surface of the water",
+            "score_pos": 0.5415686964988708,
+            "score_neg": 0.2528384029865265,
+            "binary": 1
+          },
+          {
+            "statement": "The wood block remains above the water surface",
+            "score_pos": 0.8322709202766418,
+            "score_neg": 0.2528384029865265,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The wood block is unmoved, floating on the water surface.",
+        "desc2": "The wood block is still floating on the water surface."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 9,
+      "video_path": "outputs/phygenbench/baseline/output_video_10.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The glass ball begins to sink",
+            "score_pos": 0.15335489809513092,
+            "score_neg": 0.14294248819351196,
+            "binary": 1
+          },
+          {
+            "statement": "The glass ball is completely submerged",
+            "score_pos": 0.19385772943496704,
+            "score_neg": 0.7887483835220337,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The glass ball is being submerged.",
+        "desc2": "The glass ball is sinking deeper."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 10,
+      "video_path": "outputs/phygenbench/baseline/output_video_11.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The sponge shrinks significantly",
+            "score_pos": 0.5787539482116699,
+            "score_neg": 0.4267463684082031,
+            "binary": 1
+          },
+          {
+            "statement": "Water is visibly squeezed out of the sponge",
+            "score_pos": 0.6136693954467773,
+            "score_neg": 0.5067744851112366,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The sponge is getting smaller and water is beginning to be expelled.",
+        "desc2": "The sponge is smaller and more water has been expelled."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 11,
+      "video_path": "outputs/phygenbench/baseline/output_video_12.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 1,
+      "stage3_score": 0.67,
+      "overall_score": 0.67,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "Water gets squeezed out from the towel",
+            "score_pos": 0.7063393592834473,
+            "score_neg": 0.29101595282554626,
+            "binary": 1
+          },
+          {
+            "statement": "The towel appears shrunken",
+            "score_pos": 0.638125479221344,
+            "score_neg": 0.6257833242416382,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The towel is shrinking and water droplets are starting to appear.",
+        "desc2": "The towel continues to shrink and more water is being squeezed out."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 12,
+      "video_path": "outputs/phygenbench/baseline/output_video_13.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 1.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The balloon is visibly distorted",
+            "score_pos": 0.541565477848053,
+            "score_neg": 0.5187917351722717,
+            "binary": 1
+          },
+          {
+            "statement": "The balloon appears significantly smaller than at the start",
+            "score_pos": 0.6726763248443604,
+            "score_neg": 0.638125479221344,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The balloon is shrinking.",
+        "desc2": "The balloon is deforming."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 13,
+      "video_path": "outputs/phygenbench/baseline/output_video_14.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The toothpaste comes out of the tube",
+            "score_pos": 0.5415692925453186,
+            "score_neg": 0.590168833732605,
+            "binary": 0
+          },
+          {
+            "statement": "The tube is visibly deformed",
+            "score_pos": 0.6018093824386597,
+            "score_neg": 0.6381257772445679,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The tube is slightly deformed and a small amount of toothpaste is being squeezed out.",
+        "desc2": "The tube is noticeably more deformed and more toothpaste is squeezed out."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 14,
+      "video_path": "outputs/phygenbench/baseline/output_video_15.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "Water drips out of the cloth",
+            "score_pos": 0.2842748761177063,
+            "score_neg": 0.39467665553092957,
+            "binary": 0
+          },
+          {
+            "statement": "The cloth is visibly shrunk",
+            "score_pos": 0.6846082210540771,
+            "score_neg": 0.4835678040981293,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The cloth appears slightly smaller and damp, with some water droplets starting to form.",
+        "desc2": "The cloth is noticeably smaller and wetter, with more water droplets visible."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 15,
+      "video_path": "outputs/phygenbench/baseline/output_video_16.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The plastic bottle is shrinking as air is extracted",
+            "score_pos": 0.7063358426094055,
+            "score_neg": 0.8153738975524902,
+            "binary": 0
+          },
+          {
+            "statement": "The plastic bottle appears deformed or collapsed due to air extraction",
+            "score_pos": 0.6381226181983948,
+            "score_neg": 0.6494411826133728,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The bottle is shrinking.",
+        "desc2": "The bottle is shrinking."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 16,
+      "video_path": "outputs/phygenbench/baseline/output_video_17.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The aluminum can shows signs of deformation",
+            "score_pos": 0.5901671051979065,
+            "score_neg": 0.6609572172164917,
+            "binary": 0
+          },
+          {
+            "statement": "The aluminum can shrinks",
+            "score_pos": 0.5310946106910706,
+            "score_neg": 0.7795600891113281,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The aluminum can is shrinking.",
+        "desc2": "The aluminum can is shrinking."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 17,
+      "video_path": "outputs/phygenbench/baseline/output_video_18.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The plastic ball appears to shrink",
+            "score_pos": 0.6148784756660461,
+            "score_neg": 0.7387940287590027,
+            "binary": 0
+          },
+          {
+            "statement": "The plastic ball's surface is visibly deformed",
+            "score_pos": 0.5415684580802917,
+            "score_neg": 0.7287623286247253,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The plastic ball is shrinking.",
+        "desc2": "The plastic ball is shrinking."
+      },
+      "stage3_details": {
+        "stage3_score": 0,
+        "level": 1,
+        "answer": "1"
+      }
+    },
+    {
+      "index": 18,
+      "video_path": "outputs/phygenbench/baseline/output_video_19.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The can crumples as air is pulled out",
+            "score_pos": 0.37513428926467896,
+            "score_neg": 0.7387943267822266,
+            "binary": 0
+          },
+          {
+            "statement": "The can is fully crumpled in the end",
+            "score_pos": 0.27552804350852966,
+            "score_neg": 0.6494418978691101,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The can is beginning to crumple.",
+        "desc2": "The can is noticeably more crumpled."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 19,
+      "video_path": "outputs/phygenbench/baseline/output_video_20.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The balloon shrinks visibly over time",
+            "score_pos": 0.36501607298851013,
+            "score_neg": 0.36501625180244446,
+            "binary": 0
+          },
+          {
+            "statement": "The balloon is fully collapsed",
+            "score_pos": 0.42674633860588074,
+            "score_neg": 0.8322727084159851,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The balloon is starting to collapse.",
+        "desc2": "The balloon is continuing to collapse inward."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 20,
+      "video_path": "outputs/phygenbench/baseline/output_video_21.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 1,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The balloon explodes",
+            "score_pos": 0.10057249665260315,
+            "score_neg": 0.7489626407623291,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "the balloon does not explode.",
+        "desc2": "the balloon explodes."
+      },
+      "stage3_details": {
+        "stage3_score": 0,
+        "level": 1,
+        "answer": "1"
+      }
+    },
+    {
+      "index": 21,
+      "video_path": "outputs/phygenbench/baseline/output_video_22.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The rubber sheet shows visible signs of tearing",
+            "score_pos": 0.41686147451400757,
+            "score_neg": 0.38403084874153137,
+            "binary": 1
+          },
+          {
+            "statement": "The rubber sheet is ruptured",
+            "score_pos": 0.2842750549316406,
+            "score_neg": 0.3455905020236969,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "the rubber sheet does not tear.",
+        "desc2": "the rubber sheet tears."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 22,
+      "video_path": "outputs/phygenbench/baseline/output_video_23.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 1,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The plastic wrap ruptures",
+            "score_pos": 0.33495771884918213,
+            "score_neg": 0.2450602501630783,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The plastic wrap does not rupture, and the fork remains positioned against it.",
+        "desc2": "The plastic wrap ruptures, with the tines of the fork passing through it."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 23,
+      "video_path": "outputs/phygenbench/baseline/output_video_24.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 1,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 1,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The balloon bursts due to the high pressure of the pin",
+            "score_pos": 0.3349572420120239,
+            "score_neg": 0.39467620849609375,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "the balloon does not explode.",
+        "desc2": "the balloon explodes."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 24,
+      "video_path": "outputs/phygenbench/baseline/output_video_25.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 0,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The balloon explodes",
+            "score_pos": 0.19845592975616455,
+            "score_neg": 0.12913767993450165,
+            "binary": 1
+          },
+          {
+            "statement": "The pencil is no longer in contact with the balloon after the explosion",
+            "score_pos": 0.42674720287323,
+            "score_neg": 0.2248799055814743,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "the balloon does not explode.",
+        "desc2": "the balloon explodes."
+      },
+      "stage3_details": {
+        "stage3_score": 0,
+        "level": 1,
+        "answer": "1"
+      }
+    },
+    {
+      "index": 25,
+      "video_path": "outputs/phygenbench/baseline/output_video_26.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The ball bounces back up after hitting the ground",
+            "score_pos": 0.426744669675827,
+            "score_neg": 0.7063379883766174,
+            "binary": 0
+          },
+          {
+            "statement": "The ball is in the air",
+            "score_pos": 0.160714253783226,
+            "score_neg": 0.9230432510375977,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The ball approaches the ground without making contact yet.",
+        "desc2": "The ball deforms upon impact with the ground."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 26,
+      "video_path": "outputs/phygenbench/baseline/output_video_27.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The basketball compresses upon hitting the ground",
+            "score_pos": 0.41686105728149414,
+            "score_neg": 0.6257826089859009,
+            "binary": 0
+          },
+          {
+            "statement": "The basketball bounces back up after hitting the ground",
+            "score_pos": 0.3840293288230896,
+            "score_neg": 0.23751993477344513,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The basketball compresses upon impact.",
+        "desc2": "The basketball starts to rebound after compression."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 27,
+      "video_path": "outputs/phygenbench/baseline/output_video_28.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The tennis ball flattens upon impact due to the force exerted.",
+            "score_pos": 0.4056169390678406,
+            "score_neg": 0.2910161018371582,
+            "binary": 1
+          },
+          {
+            "statement": "The tennis ball bounces back up from the ground due to its elasticity.",
+            "score_pos": 0.26705119013786316,
+            "score_neg": 0.7387942671775818,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The ball begins to deform upon contacting the ground.",
+        "desc2": "The ball deforms and then starts to bounce back up."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 28,
+      "video_path": "outputs/phygenbench/baseline/output_video_29.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The football shows signs of compression upon hitting the ground",
+            "score_pos": 0.31713077425956726,
+            "score_neg": 0.6148791909217834,
+            "binary": 0
+          },
+          {
+            "statement": "The football bounces upward after impact",
+            "score_pos": 0.19385823607444763,
+            "score_neg": 0.6018095016479492,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The football compresses upon hitting the ground.",
+        "desc2": "The football starts to regain its shape while lifting off the ground."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 29,
+      "video_path": "outputs/phygenbench/baseline/output_video_30.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 1,
+      "stage3_score": 0.67,
+      "overall_score": 0.335,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The beach ball deforms upon hitting the ground",
+            "score_pos": 0.4950266480445862,
+            "score_neg": 0.4723638594150543,
+            "binary": 1
+          },
+          {
+            "statement": "The beach ball bounces up after impact",
+            "score_pos": 0.590164065361023,
+            "score_neg": 0.6609556674957275,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "the ball does not deform and begins to compress.",
+        "desc2": "the ball deforms and then starts to rebound."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 30,
+      "video_path": "outputs/phygenbench/baseline/output_video_31.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "There are white marks on the blackboard",
+            "score_pos": 0.8688123226165771,
+            "score_neg": 0.4168606698513031,
+            "binary": 1
+          },
+          {
+            "statement": "The chalk is worn down slightly",
+            "score_pos": 0.8066665530204773,
+            "score_neg": 0.5787550806999207,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "A chalk mark starts to appear on the blackboard.",
+        "desc2": "The chalk mark becomes longer on the blackboard."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 31,
+      "video_path": "outputs/phygenbench/baseline/output_video_32.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "There is a blue mark left on the whiteboard",
+            "score_pos": 0.19385871291160583,
+            "score_neg": 0.6726804375648499,
+            "binary": 0
+          },
+          {
+            "statement": "The whiteboard shows signs of writing",
+            "score_pos": 0.3002541661262512,
+            "score_neg": 0.7980480194091797,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The whiteboard has partial blue writing on it.",
+        "desc2": "The writing on the whiteboard becomes longer and more complete."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 32,
+      "video_path": "outputs/phygenbench/baseline/output_video_33.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "There is a visible red mark on the paper",
+            "score_pos": 0.7980437874794006,
+            "score_neg": 0.5415692925453186,
+            "binary": 1
+          },
+          {
+            "statement": "The white surface of the paper is altered",
+            "score_pos": 0.868813157081604,
+            "score_neg": 0.6148780584335327,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The crayon is in contact with the paper, leaving a red mark.",
+        "desc2": "The crayon continues to move, lengthening the red mark on the paper."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 33,
+      "video_path": "outputs/phygenbench/baseline/output_video_34.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "A yellow mark is visible on the cardboard",
+            "score_pos": 0.9230417609214783,
+            "score_neg": 0.25283896923065186,
+            "binary": 1
+          },
+          {
+            "statement": "The cardboard surface remains rough",
+            "score_pos": 0.7697266340255737,
+            "score_neg": 0.5067744851112366,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "A faint yellow mark starts to appear on the cardboard.",
+        "desc2": "The yellow mark becomes more prominent on the cardboard."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 34,
+      "video_path": "outputs/phygenbench/baseline/output_video_35.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "There is a visible mark on the notebook",
+            "score_pos": 0.7489629983901978,
+            "score_neg": 0.5901690721511841,
+            "binary": 1
+          },
+          {
+            "statement": "The white surface of the notebook is still smooth everywhere except the marked area",
+            "score_pos": 0.8933346271514893,
+            "score_neg": 0.29101619124412537,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The notebook remains white, and the pen makes a mark.",
+        "desc2": "The pen continues to make a mark on the notebook."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 35,
+      "video_path": "outputs/phygenbench/baseline/output_video_36.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 0.5,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The dewdrop retains a spherical shape while sliding",
+            "score_pos": 0.6257826089859009,
+            "score_neg": 0.5787537693977356,
+            "binary": 1
+          },
+          {
+            "statement": "The dewdrop is still intact as a spherical droplet",
+            "score_pos": 0.5067740678787231,
+            "score_neg": 0.779560387134552,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The dewdrop is unchanged and slides over the leaf.",
+        "desc2": "The dewdrop's position has changed, but it remains spherical."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 36,
+      "video_path": "outputs/phygenbench/baseline/output_video_37.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The dewdrop maintains a spherical shape",
+            "score_pos": 0.4835677742958069,
+            "score_neg": 0.5787549614906311,
+            "binary": 0
+          },
+          {
+            "statement": "The dewdrop is still in one piece without breaking apart",
+            "score_pos": 0.4835679233074188,
+            "score_neg": 0.34559041261672974,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The dewdrop starts its movement, slightly changing its shape.",
+        "desc2": "The dewdrop maintains a spherical shape while in motion."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 37,
+      "video_path": "outputs/phygenbench/baseline/output_video_38.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The dewdrop maintains a spherical shape",
+            "score_pos": 0.5067744255065918,
+            "score_neg": 0.6846089363098145,
+            "binary": 0
+          },
+          {
+            "statement": "The dewdrop does not spread out flat on the apple",
+            "score_pos": 0.7697266340255737,
+            "score_neg": 0.6609587669372559,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The dewdrop is slightly moved on the surface of the apple.",
+        "desc2": "The dewdrop maintains its spherical shape."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 38,
+      "video_path": "outputs/phygenbench/baseline/output_video_39.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The dewdrop forms a spherical shape",
+            "score_pos": 0.5544126629829407,
+            "score_neg": 0.7489641308784485,
+            "binary": 0
+          },
+          {
+            "statement": "The dewdrop maintains a spherical form",
+            "score_pos": 0.438576340675354,
+            "score_neg": 0.847859263420105,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The dewdrop is sliding across the vase.",
+        "desc2": "The dewdrop is continuing to slide across the vase."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 39,
+      "video_path": "outputs/phygenbench/baseline/output_video_40.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The dewdrop maintains a spherical shape",
+            "score_pos": 0.4950349032878876,
+            "score_neg": 0.7489641308784485,
+            "binary": 0
+          },
+          {
+            "statement": "The dewdrop does not spread flat on the surface",
+            "score_pos": 0.7795606255531311,
+            "score_neg": 0.7174637913703918,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The dewdrop maintains a spherical shape as it moves.",
+        "desc2": "The dewdrop maintains a spherical shape as it moves."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 40,
+      "video_path": "outputs/phygenbench/baseline/output_video_41.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The shadow of the wooden block appears at the bottom",
+            "score_pos": 0.309785395860672,
+            "score_neg": 0.4723663032054901,
+            "binary": 0
+          },
+          {
+            "statement": "The shadow of the wooden block is cast on another surface",
+            "score_pos": 0.38403069972991943,
+            "score_neg": 0.541570246219635,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The shadow of the wooden block appears at the bottom.",
+        "desc2": "The shadow of the wooden block moves slightly."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 41,
+      "video_path": "outputs/phygenbench/baseline/output_video_42.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The shadow of the can appears at the bottom",
+            "score_pos": 0.2375207096338272,
+            "score_neg": 0.49503564834594727,
+            "binary": 0
+          },
+          {
+            "statement": "The metal can is blocking the path of the light",
+            "score_pos": 0.4056176543235779,
+            "score_neg": 0.578755259513855,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The light shines and the shadow of the can appears at the bottom.",
+        "desc2": "The position and shape of the shadow of the can at the bottom remain consistent."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 42,
+      "video_path": "outputs/phygenbench/baseline/output_video_43.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The shadow of the glass bottle appears at the bottom",
+            "score_pos": 0.2375207096338272,
+            "score_neg": 0.43857723474502563,
+            "binary": 0
+          },
+          {
+            "statement": "The path of the light is blocked by the glass bottle",
+            "score_pos": 0.4835680425167084,
+            "score_neg": 0.5310956835746765,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The shadow of the glass bottle is forming.",
+        "desc2": "The shadow of the glass bottle is more defined."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 43,
+      "video_path": "outputs/phygenbench/baseline/output_video_44.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The shadow of the plastic cup is visible at the bottom",
+            "score_pos": 0.31713175773620605,
+            "score_neg": 0.4267474114894867,
+            "binary": 0
+          },
+          {
+            "statement": "The path of light is blocked by the plastic cup",
+            "score_pos": 0.48356813192367554,
+            "score_neg": 0.5653483867645264,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The shadow of the plastic cup appears at the bottom.",
+        "desc2": "The shadow of the plastic cup appears at the bottom and stays in place."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 44,
+      "video_path": "outputs/phygenbench/baseline/output_video_45.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The shadow of the cardboard box appears at the bottom",
+            "score_pos": 0.2608654499053955,
+            "score_neg": 0.4596250057220459,
+            "binary": 0
+          },
+          {
+            "statement": "The light source is shining diagonally",
+            "score_pos": 0.43857696652412415,
+            "score_neg": 0.7063412070274353,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The shadow of the cardboard box appears at the bottom.",
+        "desc2": "The shadow of the cardboard box remains at the bottom."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 45,
+      "video_path": "outputs/phygenbench/baseline/output_video_46.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "There is a clearly visible light path in the milk",
+            "score_pos": 0.7287622690200806,
+            "score_neg": 0.3097851276397705,
+            "binary": 1
+          },
+          {
+            "statement": "Intricate patterns are visible within the milk",
+            "score_pos": 0.5415703654289246,
+            "score_neg": 0.5187927484512329,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The beam of light is entering the glass of milk, with no visible path yet.",
+        "desc2": "The beam of light creates a visible path within the milk, with clear patterns and hues."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 46,
+      "video_path": "outputs/phygenbench/baseline/output_video_47.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "There is a clearly visible light path in the water",
+            "score_pos": 0.8816331028938293,
+            "score_neg": 0.1878940314054489,
+            "binary": 1
+          },
+          {
+            "statement": "Intricate patterns are visible in the water",
+            "score_pos": 0.6494408845901489,
+            "score_neg": 0.6148795485496521,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The beam of light is visible entering the murky water.",
+        "desc2": "The beam of light interacts with water particles, casting patterns."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 47,
+      "video_path": "outputs/phygenbench/baseline/output_video_48.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "There is a clearly visible light path in the air",
+            "score_pos": 0.6953895688056946,
+            "score_neg": 0.25283917784690857,
+            "binary": 1
+          },
+          {
+            "statement": "Intricate patterns and subtle hues are visible in the air",
+            "score_pos": 0.6381258964538574,
+            "score_neg": 0.6494423151016235,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The beam of light begins to illuminate the dust particles.",
+        "desc2": "The patterns of light and dust become more pronounced."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 48,
+      "video_path": "outputs/phygenbench/baseline/output_video_49.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 1.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The light path is clearly visible in the muddy water",
+            "score_pos": 0.8933339715003967,
+            "score_neg": 0.2910159230232239,
+            "binary": 1
+          },
+          {
+            "statement": "Intricate patterns and subtle hues are visible due to the light interacting with mud particles",
+            "score_pos": 0.8241832852363586,
+            "score_neg": 0.42674699425697327,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The light beam starts creating patterns, becoming visible in the muddy water.",
+        "desc2": "The light beam continues to be visible and creates more intricate patterns in the muddy water."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 49,
+      "video_path": "outputs/phygenbench/baseline/output_video_50.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 1.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "There is a visible light path created in the juice",
+            "score_pos": 0.9230425357818604,
+            "score_neg": 0.18789419531822205,
+            "binary": 1
+          },
+          {
+            "statement": "Intricate patterns and subtle hues appear within the liquid",
+            "score_pos": 0.8985830545425415,
+            "score_neg": 0.17651021480560303,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The light starts to form visible patterns inside the juice.",
+        "desc2": "The patterns become more intricate as the light interacts with the juice particles."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 50,
+      "video_path": "outputs/phygenbench/baseline/output_video_51.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The path of light is visible in the fog",
+            "score_pos": 0.4950348436832428,
+            "score_neg": 0.7387943863868713,
+            "binary": 0
+          },
+          {
+            "statement": "There is a distinct beam of light in the fog",
+            "score_pos": 0.2450590878725052,
+            "score_neg": 0.7795611619949341,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The light path begins to form in the fog.",
+        "desc2": "The light path is visible in the fog."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 51,
+      "video_path": "outputs/phygenbench/baseline/output_video_52.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 1.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 1,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The light path is clearly visible",
+            "score_pos": 0.8153789043426514,
+            "score_neg": 0.37513482570648193,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The light path begins to appear among the dust particles.",
+        "desc2": "The light path becomes more pronounced."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 52,
+      "video_path": "outputs/phygenbench/baseline/output_video_53.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The path of the light is clearly visible",
+            "score_pos": 0.5415701866149902,
+            "score_neg": 0.6494419574737549,
+            "binary": 0
+          },
+          {
+            "statement": "The laser beam is still visible within the smoke",
+            "score_pos": 0.8688127994537354,
+            "score_neg": 0.49503445625305176,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The path of light becomes visible.",
+        "desc2": "The path of light is clearly visible."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 53,
+      "video_path": "outputs/phygenbench/baseline/output_video_54.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The path of the light is visible in the mist",
+            "score_pos": 0.9612194895744324,
+            "score_neg": 0.42674651741981506,
+            "binary": 1
+          },
+          {
+            "statement": "A clear light path is observed",
+            "score_pos": 0.6381250023841858,
+            "score_neg": 0.3650158941745758,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The light path is becoming visible in the mist.",
+        "desc2": "The light path is becoming more pronounced in the mist."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 54,
+      "video_path": "outputs/phygenbench/baseline/output_video_55.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The light path is clearly visible in the dust",
+            "score_pos": 0.5787548422813416,
+            "score_neg": 0.6136796474456787,
+            "binary": 0
+          },
+          {
+            "statement": "The dust particles are illuminated by the light",
+            "score_pos": 0.6257829070091248,
+            "score_neg": 0.541570246219635,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The room becomes slightly brighter.",
+        "desc2": "The light path becomes more pronounced."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 55,
+      "video_path": "outputs/phygenbench/baseline/output_video_56.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The reflection of the bird is visible on the lake surface",
+            "score_pos": 0.9851493239402771,
+            "score_neg": 0.2608645260334015,
+            "binary": 1
+          },
+          {
+            "statement": "The reflection of the bird is the same size as the bird itself",
+            "score_pos": 0.638125479221344,
+            "score_neg": 0.7980465888977051,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The bird is flying, and its reflection is visible on the water surface.",
+        "desc2": "The bird continues to fly, and its reflection has changed position in the water."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 56,
+      "video_path": "outputs/phygenbench/baseline/output_video_57.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The reflection of the kite appears inverted on the water surface",
+            "score_pos": 0.31713125109672546,
+            "score_neg": 0.31713151931762695,
+            "binary": 0
+          },
+          {
+            "statement": "The reflection of the kite is the same size as the kite itself",
+            "score_pos": 0.4835680425167084,
+            "score_neg": 0.6381258368492126,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The kite is soaring, and its reflection is visible on the pond surface.",
+        "desc2": "The kite is soaring, and its reflection is visible on the pond surface."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 57,
+      "video_path": "outputs/phygenbench/baseline/output_video_58.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The reflection of the plane is inverted on the water surface",
+            "score_pos": 0.706337034702301,
+            "score_neg": 0.6846085786819458,
+            "binary": 1
+          },
+          {
+            "statement": "The sizes of the plane, sky, and surrounding landscapes in the reflection are the same as the original entities",
+            "score_pos": 0.6494390964508057,
+            "score_neg": 0.6953719854354858,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The plane is gliding over the river, and its reflection is visible on the water surface.",
+        "desc2": "The plane continues to glide, and its reflection remains visible on the water surface."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 58,
+      "video_path": "outputs/phygenbench/baseline/output_video_59.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The reflection of the drone is identical in size to the actual drone",
+            "score_pos": 0.6381245851516724,
+            "score_neg": 0.7795593738555908,
+            "binary": 0
+          },
+          {
+            "statement": "The image of the sky is inverted on the water surface",
+            "score_pos": 0.7887457013130188,
+            "score_neg": 0.5653473138809204,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The drone hovers steadily, its reflection appears clearly in the still water.",
+        "desc2": "The reflection of the drone remains steady in the water as the drone maintains its position."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 59,
+      "video_path": "outputs/phygenbench/baseline/output_video_60.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The reflection of the balloon is inverted",
+            "score_pos": 0.7489621043205261,
+            "score_neg": 0.6846089959144592,
+            "binary": 1
+          },
+          {
+            "statement": "The sizes of the balloon and its reflection are the same",
+            "score_pos": 0.5415701270103455,
+            "score_neg": 0.625782310962677,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The balloon is floating over the ocean with its reflection visible on the water surface.",
+        "desc2": "The balloon remains floating over the ocean, with the reflection still visible on the water surface."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 60,
+      "video_path": "outputs/phygenbench/baseline/output_video_61.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The size of the block in the mirror is the same as the original block.",
+            "score_pos": 0.6726799011230469,
+            "score_neg": 0.5187916159629822,
+            "binary": 1
+          },
+          {
+            "statement": "The wooden block's reflection is moving in sync with the original block.",
+            "score_pos": 0.4267454147338867,
+            "score_neg": 0.6018083095550537,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The wooden block is closer to the mirror, and its reflection in the mirror is similarly closer.",
+        "desc2": "The wooden block is even closer to the mirror, and its reflection in the mirror is similarly even closer."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 61,
+      "video_path": "outputs/phygenbench/baseline/output_video_62.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The reflected image in the window is the same size as the original football",
+            "score_pos": 0.4950352907180786,
+            "score_neg": 0.7697262763977051,
+            "binary": 0
+          },
+          {
+            "statement": "The football reaches the window",
+            "score_pos": 0.3171316087245941,
+            "score_neg": 0.5544134378433228,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The football is rolling closer to the window, and the reflection is also closer in the glass.",
+        "desc2": "The football is even closer to the window, and the reflection has moved correspondingly."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 62,
+      "video_path": "outputs/phygenbench/baseline/output_video_63.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The reflection of the toy car appears the same size as the actual toy car",
+            "score_pos": 0.518792450428009,
+            "score_neg": 0.5787544846534729,
+            "binary": 0
+          },
+          {
+            "statement": "The toy car maintains the same size throughout the video",
+            "score_pos": 0.6257829070091248,
+            "score_neg": 0.5787538886070251,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The toy car is moving closer to the glass.",
+        "desc2": "The reflection of the toy car in the glass is also moving closer."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 63,
+      "video_path": "outputs/phygenbench/baseline/output_video_64.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The reflected image is the same size as the basketball",
+            "score_pos": 0.4950351417064667,
+            "score_neg": 0.7287611961364746,
+            "binary": 0
+          },
+          {
+            "statement": "The reflected image is moving synchronously with the basketball",
+            "score_pos": 0.6494413018226624,
+            "score_neg": 0.6953892707824707,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The reflection of the basketball appears closer.",
+        "desc2": "The reflection of the basketball appears even closer."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 64,
+      "video_path": "outputs/phygenbench/baseline/output_video_65.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The reflected image is the same size as the rubber duck",
+            "score_pos": 0.7287617921829224,
+            "score_neg": 0.6609570384025574,
+            "binary": 1
+          },
+          {
+            "statement": "The rubber duck is floating without submersion",
+            "score_pos": 0.7063381671905518,
+            "score_neg": 0.8688123822212219,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The rubber duck is floating closer to the water surface and its reflection is also moving closer.",
+        "desc2": "The rubber duck continues to float closer to the water surface, and its reflection is moving even closer."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 65,
+      "video_path": "outputs/phygenbench/baseline/output_video_66.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The characters under the magnifying glass are larger than those outside it",
+            "score_pos": 0.7063403725624084,
+            "score_neg": 0.7489644289016724,
+            "binary": 0
+          },
+          {
+            "statement": "The text visible through the magnifying glass is magnified",
+            "score_pos": 0.7887475490570068,
+            "score_neg": 0.5901696681976318,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The magnifying glass is closer to the book, and the printed text appears slightly larger.",
+        "desc2": "The magnifying glass is even closer to the book, and the printed text appears even larger."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 66,
+      "video_path": "outputs/phygenbench/baseline/output_video_67.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The clock hands and numbers are bigger under the magnifying glass",
+            "score_pos": 0.74896240234375,
+            "score_neg": 0.8241833448410034,
+            "binary": 0
+          },
+          {
+            "statement": "The magnifying glass shows more details compared to the wristwatch without it",
+            "score_pos": 0.8322719931602478,
+            "score_neg": 0.3650161027908325,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The clock hands and numbers appear slightly larger through the magnifying glass.",
+        "desc2": "The clock hands and numbers appear larger and more detailed through the magnifying glass."
+      },
+      "stage3_details": {
+        "stage3_score": 0,
+        "level": 1,
+        "answer": "1"
+      }
+    },
+    {
+      "index": 67,
+      "video_path": "outputs/phygenbench/baseline/output_video_68.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The veins and surface patterns in the magnifying glass are bigger than those on the leaf",
+            "score_pos": 0.5787544250488281,
+            "score_neg": 0.7387942671775818,
+            "binary": 0
+          },
+          {
+            "statement": "The magnifying glass is not reducing the size of the veins and surface patterns",
+            "score_pos": 0.5415700078010559,
+            "score_neg": 0.47236573696136475,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The veins and surface patterns of the leaf appear larger under the magnifying glass.",
+        "desc2": "The veins and surface patterns of the leaf appear even larger and more detailed under the magnifying glass."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 68,
+      "video_path": "outputs/phygenbench/baseline/output_video_69.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The embossed design appears bigger through the magnifying glass",
+            "score_pos": 0.8816341757774353,
+            "score_neg": 0.8933343291282654,
+            "binary": 0
+          },
+          {
+            "statement": "The intricate details of the embossed design are clearly visible",
+            "score_pos": 0.8620516657829285,
+            "score_neg": 0.5653480291366577,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The details of the coin are beginning to enlarge.",
+        "desc2": "The details of the coin continue to enlarge."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 69,
+      "video_path": "outputs/phygenbench/baseline/output_video_70.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The petal details appear larger through the magnifying glass",
+            "score_pos": 0.7795605063438416,
+            "score_neg": 0.6609588265419006,
+            "binary": 1
+          },
+          {
+            "statement": "The details on the flower are smaller than those seen through the magnifying glass",
+            "score_pos": 0.5067747831344604,
+            "score_neg": 0.448977530002594,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The details of the flower are becoming clearer.",
+        "desc2": "The details of the flower are becoming even more apparent."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 70,
+      "video_path": "outputs/phygenbench/baseline/output_video_71.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "There is a visible offset at the water surface",
+            "score_pos": 0.8241811394691467,
+            "score_neg": 0.5544122457504272,
+            "binary": 1
+          },
+          {
+            "statement": "The straw appears bent at the water surface",
+            "score_pos": 0.7174622416496277,
+            "score_neg": 0.6846078634262085,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The straw is partially submerged in the water and appears bent at the water's surface.",
+        "desc2": "The straw is more submerged and continues to appear bent at the water's surface."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 71,
+      "video_path": "outputs/phygenbench/baseline/output_video_72.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The spoon appears bent or offset at the water's surface",
+            "score_pos": 0.7387925386428833,
+            "score_neg": 0.6846083998680115,
+            "binary": 1
+          },
+          {
+            "statement": "The entire spoon remains intact",
+            "score_pos": 0.3650150001049042,
+            "score_neg": 0.39467498660087585,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The spoon partially submerged in water shows a noticeable optical change where it enters the water.",
+        "desc2": "The submerged part of the spoon continues to show visual distortions, while the portion of the spoon above water remains unchanged."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 72,
+      "video_path": "outputs/phygenbench/baseline/output_video_73.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The pencil appears to bend at the water's surface",
+            "score_pos": 0.7063316106796265,
+            "score_neg": 0.7287598252296448,
+            "binary": 0
+          },
+          {
+            "statement": "There is a clear visual offset between the submerged and non-submerged parts of the pencil",
+            "score_pos": 0.8620439767837524,
+            "score_neg": 0.6494399905204773,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The pencil appears straight above the water and bent at the water surface.",
+        "desc2": "The pencil appears straight above the water and bent at the water surface."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 73,
+      "video_path": "outputs/phygenbench/baseline/output_video_74.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "There is a visible offset in the position of the fork at the water surface",
+            "score_pos": 0.8396122455596924,
+            "score_neg": 0.5653467774391174,
+            "binary": 1
+          },
+          {
+            "statement": "The part of the fork in water appears bent compared to the part above water",
+            "score_pos": 0.7980465292930603,
+            "score_neg": 0.759273886680603,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The fork appears slightly bent at the water's surface.",
+        "desc2": "The fork remains in water, and its apparent bend remains the same."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 74,
+      "video_path": "outputs/phygenbench/baseline/output_video_75.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The ruler appears bent at the water surface",
+            "score_pos": 0.6846045851707458,
+            "score_neg": 0.7387933135032654,
+            "binary": 0
+          },
+          {
+            "statement": "There is a noticeable offset between the part of the ruler above and below the water",
+            "score_pos": 0.7980441451072693,
+            "score_neg": 0.7063402533531189,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The ruler is partially submerged, and the refraction causes a visible distortion where the ruler enters the water.",
+        "desc2": "More of the ruler is submerged, enhancing the distortion at the water's surface."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 75,
+      "video_path": "outputs/phygenbench/baseline/output_video_76.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The bubbles are displaying multiple colors",
+            "score_pos": 0.6381139755249023,
+            "score_neg": 0.5787540674209595,
+            "binary": 1
+          },
+          {
+            "statement": "There are no colorless bubbles visible",
+            "score_pos": 0.3097851276397705,
+            "score_neg": 0.7174637317657471,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "Some bubbles are starting to show colors.",
+        "desc2": "More bubbles are showing vibrant colors."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 76,
+      "video_path": "outputs/phygenbench/baseline/output_video_77.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 0.5,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The oil droplets are colorful",
+            "score_pos": 0.8322727084159851,
+            "score_neg": 0.1938580870628357,
+            "binary": 1
+          },
+          {
+            "statement": "There is a visible rainbow-like pattern on the surface",
+            "score_pos": 0.4950316846370697,
+            "score_neg": 0.518792450428009,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The oil droplets are colorful, floating on the surface of the water.",
+        "desc2": "The oil droplets remain colorful, with no change in their floating behavior."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 77,
+      "video_path": "outputs/phygenbench/baseline/output_video_78.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 0.5,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The glass marbles are showing a variety of colors",
+            "score_pos": 0.44897621870040894,
+            "score_neg": 0.30978453159332275,
+            "binary": 1
+          },
+          {
+            "statement": "There is evidence of rainbow-like patterns on the marbles",
+            "score_pos": 0.5067645311355591,
+            "score_neg": 0.6846087574958801,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The marbles remain unchanged, but the light pattern might shift.",
+        "desc2": "The marbles remain unchanged, but the light pattern shifts."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 78,
+      "video_path": "outputs/phygenbench/baseline/output_video_79.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The mist particles appear colorful",
+            "score_pos": 0.6846085786819458,
+            "score_neg": 0.5653477907180786,
+            "binary": 1
+          },
+          {
+            "statement": "There are visible bands of color in the mist",
+            "score_pos": 0.854508638381958,
+            "score_neg": 0.334957480430603,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The mist particles remain suspended in the air and become slightly colorful.",
+        "desc2": "The colorful mist particles remain suspended in the air."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 79,
+      "video_path": "outputs/phygenbench/baseline/output_video_80.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 1,
+      "stage3_score": 0.67,
+      "overall_score": 0.335,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The prisms show colors",
+            "score_pos": 0.8620520830154419,
+            "score_neg": 0.4168614447116852,
+            "binary": 1
+          },
+          {
+            "statement": "There is a visible spectrum of colors around the prisms",
+            "score_pos": 0.38403061032295227,
+            "score_neg": 0.5544133186340332,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The prisms begin to show colors due to interference.",
+        "desc2": "The colors intensify and spread through the prisms."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 80,
+      "video_path": "outputs/phygenbench/baseline/output_video_81.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The oil displays colorful patterns",
+            "score_pos": 0.33495762944221497,
+            "score_neg": 0.7063412666320801,
+            "binary": 0
+          },
+          {
+            "statement": "The oil is visibly reflecting light",
+            "score_pos": 0.9384936094284058,
+            "score_neg": 0.31713125109672546,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The puddle of oil is becoming more colorful.",
+        "desc2": "The puddle of oil remains colorful."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 81,
+      "video_path": "outputs/phygenbench/baseline/output_video_82.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 1.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The bubble is colorful",
+            "score_pos": 0.9509491920471191,
+            "score_neg": 0.5787544846534729,
+            "binary": 1
+          },
+          {
+            "statement": "The colors on the bubble can be seen",
+            "score_pos": 0.8688133358955383,
+            "score_neg": 0.4267469048500061,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The bubble starts to form colorful patterns due to interference and diffraction.",
+        "desc2": "The bubble continues to display varying colorful patterns as it floats."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 82,
+      "video_path": "outputs/phygenbench/baseline/output_video_83.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The soap film is colorful due to interference and diffraction",
+            "score_pos": 0.7887496948242188,
+            "score_neg": 0.22487983107566833,
+            "binary": 1
+          },
+          {
+            "statement": "Multiple colors are visible on the soap film due to interference and diffraction",
+            "score_pos": 0.7592730522155762,
+            "score_neg": 0.6148784756660461,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The film remains colorful.",
+        "desc2": "The film appears more colorful."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 83,
+      "video_path": "outputs/phygenbench/baseline/output_video_84.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The thin layer appears colorful",
+            "score_pos": 0.9140734672546387,
+            "score_neg": 0.5067747235298157,
+            "binary": 1
+          },
+          {
+            "statement": "There is a visible spectrum of colors on the thin layer",
+            "score_pos": 0.7887492179870605,
+            "score_neg": 0.4950351417064667,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The gasoline layer starts showing some colors.",
+        "desc2": "The gasoline layer shows more prominent colors."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 84,
+      "video_path": "outputs/phygenbench/baseline/output_video_85.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The detergent layer displays multiple colors",
+            "score_pos": 0.2842749357223511,
+            "score_neg": 0.5787551999092102,
+            "binary": 0
+          },
+          {
+            "statement": "There is a visible spectrum of colors on the detergent layer",
+            "score_pos": 0.3002540171146393,
+            "score_neg": 0.6953901648521423,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The detergent layer starts showing faint colors.",
+        "desc2": "The colors on the detergent layer become more vivid."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 85,
+      "video_path": "outputs/phygenbench/baseline/output_video_86.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The prism emits multicolored light",
+            "score_pos": 0.2302127480506897,
+            "score_neg": 0.4723661541938782,
+            "binary": 0
+          },
+          {
+            "statement": "There is a visible spectrum of colors produced",
+            "score_pos": 0.3349568843841553,
+            "score_neg": 0.6846088767051697,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The light is beginning to pass through the prism.",
+        "desc2": "The light is passing through the prism and starts to split into different colors."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 86,
+      "video_path": "outputs/phygenbench/baseline/output_video_87.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "Multicolored light is visible after the beam passes through the chandelier",
+            "score_pos": 0.7795585989952087,
+            "score_neg": 0.6381254196166992,
+            "binary": 1
+          },
+          {
+            "statement": "The chandelier emits light of different colors",
+            "score_pos": 0.5653407573699951,
+            "score_neg": 0.7592737078666687,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The light enters the crystal.",
+        "desc2": "The light exits the crystal, displaying multiple colors."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 87,
+      "video_path": "outputs/phygenbench/baseline/output_video_88.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The visible spectrum of colors is around the droplet",
+            "score_pos": 0.39467665553092957,
+            "score_neg": 0.5067746639251709,
+            "binary": 0
+          },
+          {
+            "statement": "The light appears multicolored as it exits the droplet",
+            "score_pos": 0.3171314597129822,
+            "score_neg": 0.7287625670433044,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The beam of light enters the water droplet.",
+        "desc2": "A spectrum of colors starts to form as the light exits the water droplet."
+      },
+      "stage3_details": {
+        "stage3_score": 0,
+        "level": 1,
+        "answer": "1"
+      }
+    },
+    {
+      "index": 88,
+      "video_path": "outputs/phygenbench/baseline/output_video_89.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "Multiple colors are seen in the light coming out",
+            "score_pos": 0.7887483239173889,
+            "score_neg": 0.25283917784690857,
+            "binary": 1
+          },
+          {
+            "statement": "The light emitted is not a single color",
+            "score_pos": 0.8241844773292542,
+            "score_neg": 0.5653479695320129,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The beam of light enters the glass diamond.",
+        "desc2": "The beam of light starts to disperse into multiple colors."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 89,
+      "video_path": "outputs/phygenbench/baseline/output_video_90.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The bubble emits multicolored light",
+            "score_pos": 0.8153781890869141,
+            "score_neg": 0.2670513093471527,
+            "binary": 1
+          },
+          {
+            "statement": "The light is visibly dispersed into different colors",
+            "score_pos": 0.7174623608589172,
+            "score_neg": 0.6018098592758179,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The light begins to pass through the soap bubble, starting to show some color dispersion.",
+        "desc2": "The light continues to pass through the soap bubble, showing a pattern of multicolored light."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 90,
+      "video_path": "outputs/phygenbench/baseline/output_video_91.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "Ice crystals appear in the water",
+            "score_pos": 0.11396357417106628,
+            "score_neg": 0.8241852521896362,
+            "binary": 0
+          },
+          {
+            "statement": "The glass of water is completely frozen",
+            "score_pos": 0.22487953305244446,
+            "score_neg": 0.6953892707824707,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The water starts crystallizing.",
+        "desc2": "The water is mostly frozen."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 91,
+      "video_path": "outputs/phygenbench/baseline/output_video_92.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The juice is frozen",
+            "score_pos": 0.8066644668579102,
+            "score_neg": 0.7697262167930603,
+            "binary": 1
+          },
+          {
+            "statement": "The glass is still intact",
+            "score_pos": 0.832273006439209,
+            "score_neg": 0.252838134765625,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The juice begins to form ice crystals.",
+        "desc2": "The juice continues to solidify."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 92,
+      "video_path": "outputs/phygenbench/baseline/output_video_93.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 1,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "Milk forms ice crystals",
+            "score_pos": 0.23021288216114044,
+            "score_neg": 0.37513500452041626,
+            "binary": 0
+          },
+          {
+            "statement": "The milk is in a solid state",
+            "score_pos": 0.48356813192367554,
+            "score_neg": 0.7287628650665283,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The milk starts to form ice crystals.",
+        "desc2": "The milk continues freezing."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 93,
+      "video_path": "outputs/phygenbench/baseline/output_video_94.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The oil appears solidified",
+            "score_pos": 0.32719820737838745,
+            "score_neg": 0.8985844850540161,
+            "binary": 0
+          },
+          {
+            "statement": "There is no visible sign of liquid oil remaining",
+            "score_pos": 0.38403013348579407,
+            "score_neg": 0.7697261571884155,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The oil in the glass is starting to become cloudy.",
+        "desc2": "The oil in the glass is beginning to solidify."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 94,
+      "video_path": "outputs/phygenbench/baseline/output_video_95.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The beer shows signs of freezing",
+            "score_pos": 0.3946758806705475,
+            "score_neg": 0.7887499928474426,
+            "binary": 0
+          },
+          {
+            "statement": "The entire glass of beer has frozen solid",
+            "score_pos": 0.11045727878808975,
+            "score_neg": 0.7387939691543579,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The beer starts forming ice crystals.",
+        "desc2": "The ice crystals increase, covering more of the beer."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 95,
+      "video_path": "outputs/phygenbench/baseline/output_video_96.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 0.5,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The ice completely melts",
+            "score_pos": 0.35378536581993103,
+            "score_neg": 0.8985843062400818,
+            "binary": 0
+          },
+          {
+            "statement": "The ice shows signs of melting",
+            "score_pos": 0.881630003452301,
+            "score_neg": 0.5544124245643616,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The ice is partially melted.",
+        "desc2": "The ice is melting further."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 96,
+      "video_path": "outputs/phygenbench/baseline/output_video_97.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The candle shows visible signs of melting",
+            "score_pos": 0.4168592393398285,
+            "score_neg": 0.7063403129577637,
+            "binary": 0
+          },
+          {
+            "statement": "The candle is completely melted",
+            "score_pos": 0.09157221019268036,
+            "score_neg": 0.3751346170902252,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The candle starts to melt.",
+        "desc2": "The candle is melting at an accelerated rate."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 97,
+      "video_path": "outputs/phygenbench/baseline/output_video_98.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The butter changes its state from solid to liquid",
+            "score_pos": 0.47236472368240356,
+            "score_neg": 0.7063406109809875,
+            "binary": 0
+          },
+          {
+            "statement": "The butter is in a liquid state",
+            "score_pos": 0.5544100999832153,
+            "score_neg": 0.684606671333313,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The butter softens slightly.",
+        "desc2": "The butter becomes more liquid and starts to lose its solid shape."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 98,
+      "video_path": "outputs/phygenbench/baseline/output_video_99.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The ice cream shows signs of melting",
+            "score_pos": 0.7980391383171082,
+            "score_neg": 0.3455885350704193,
+            "binary": 1
+          },
+          {
+            "statement": "The ice cream is in a melted liquid state",
+            "score_pos": 0.6381126046180725,
+            "score_neg": 0.39467528462409973,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The ice cream starts to melt and has softened.",
+        "desc2": "The ice cream has partially melted and becomes a semi-liquid."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 99,
+      "video_path": "outputs/phygenbench/baseline/output_video_100.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The wax starts to lose its solid form",
+            "score_pos": 0.7592741250991821,
+            "score_neg": 0.554412841796875,
+            "binary": 1
+          },
+          {
+            "statement": "The wax is in a liquid state",
+            "score_pos": 0.8241824507713318,
+            "score_neg": 0.21795932948589325,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The wax begins to soften.",
+        "desc2": "The wax continues to melt."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 100,
+      "video_path": "outputs/phygenbench/baseline/output_video_101.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "Water droplets form on the glass surface",
+            "score_pos": 0.23752059042453766,
+            "score_neg": 0.3097851872444153,
+            "binary": 0
+          },
+          {
+            "statement": "The glass surface is covered with condensation",
+            "score_pos": 0.1332370489835739,
+            "score_neg": 0.4596250057220459,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The water droplets begin to form on the glass surface.",
+        "desc2": "The water droplets start to become larger."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 101,
+      "video_path": "outputs/phygenbench/baseline/output_video_102.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "There are visible water droplets on the car window",
+            "score_pos": 0.1938585489988327,
+            "score_neg": 0.6257835626602173,
+            "binary": 0
+          },
+          {
+            "statement": "The car window appears wet",
+            "score_pos": 0.31713175773620605,
+            "score_neg": 0.5415706634521484,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "Fog begins to condense on the window.",
+        "desc2": "Condensed droplets of water form on the window."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 102,
+      "video_path": "outputs/phygenbench/baseline/output_video_103.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "Water droplets form on the pot lid",
+            "score_pos": 0.6726795434951782,
+            "score_neg": 0.317131370306015,
+            "binary": 1
+          },
+          {
+            "statement": "There is visible condensation on the pot lid",
+            "score_pos": 0.9348353147506714,
+            "score_neg": 0.193858340382576,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "Steam forms water droplets.",
+        "desc2": "Water droplets increase in number and size."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 103,
+      "video_path": "outputs/phygenbench/baseline/output_video_104.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The mist forms water droplets on the plastic sheet",
+            "score_pos": 0.6846087574958801,
+            "score_neg": 0.5067747831344604,
+            "binary": 1
+          },
+          {
+            "statement": "There are visible water droplets on the plastic sheet",
+            "score_pos": 0.6018095016479492,
+            "score_neg": 0.3946765959262848,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "Mist begins to condense on the plastic sheet.",
+        "desc2": "Water droplets start forming on the plastic sheet."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 104,
+      "video_path": "outputs/phygenbench/baseline/output_video_105.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "Water droplets form on the plastic sheet",
+            "score_pos": 0.824183464050293,
+            "score_neg": 0.18211303651332855,
+            "binary": 1
+          },
+          {
+            "statement": "The plastic sheet is covered with visible water droplets",
+            "score_pos": 0.8756273984909058,
+            "score_neg": 0.15216076374053955,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "Droplets begin to form on the plastic sheet.",
+        "desc2": "Droplets increases on the plastic sheet."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 105,
+      "video_path": "outputs/phygenbench/baseline/output_video_106.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "A large number of bubbles are visible on the water surface",
+            "score_pos": 0.35378551483154297,
+            "score_neg": 0.5415703654289246,
+            "binary": 0
+          },
+          {
+            "statement": "The water is continuously boiling",
+            "score_pos": 0.7697256207466125,
+            "score_neg": 0.15576936304569244,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The water in the pot starts to form bubbles.",
+        "desc2": "The water in the pot forms more bubbles and begins to boil."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 106,
+      "video_path": "outputs/phygenbench/baseline/output_video_107.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The milk shows visible bubbles on its surface",
+            "score_pos": 0.7287601232528687,
+            "score_neg": 0.506774365901947,
+            "binary": 1
+          },
+          {
+            "statement": "There is steam or vapor visible above the kettle",
+            "score_pos": 0.44897404313087463,
+            "score_neg": 0.4385768175125122,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The milk begins to produce bubbles.",
+        "desc2": "The amount of bubbles increases on the milk surface."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 107,
+      "video_path": "outputs/phygenbench/baseline/output_video_108.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "Bubbles are visible on the surface",
+            "score_pos": 0.6726788878440857,
+            "score_neg": 0.47236576676368713,
+            "binary": 1
+          },
+          {
+            "statement": "The soup is visibly boiling",
+            "score_pos": 0.7387935519218445,
+            "score_neg": 0.4596245288848877,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "Few bubbles start to form.",
+        "desc2": "An increasing number of bubbles appear on the surface."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 108,
+      "video_path": "outputs/phygenbench/baseline/output_video_109.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "There are visible bubbles on the surface of the tea",
+            "score_pos": 0.554408073425293,
+            "score_neg": 0.6148789525032043,
+            "binary": 0
+          },
+          {
+            "statement": "The tea is boiling",
+            "score_pos": 0.4835678040981293,
+            "score_neg": 0.6257831454277039,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "Tea starts to form small bubbles.",
+        "desc2": "Tea forms large bubbles."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 109,
+      "video_path": "outputs/phygenbench/baseline/output_video_110.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "Bubbles form on the surface of the oil",
+            "score_pos": 0.601807713508606,
+            "score_neg": 0.37513449788093567,
+            "binary": 1
+          },
+          {
+            "statement": "The oil is boiling vigorously",
+            "score_pos": 0.8153762221336365,
+            "score_neg": 0.14294230937957764,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The oil starts forming bubbles.",
+        "desc2": "The number of bubbles increases as the oil temperature rises."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 110,
+      "video_path": "outputs/phygenbench/baseline/output_video_111.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "Frost forms on the glass",
+            "score_pos": 0.267051637172699,
+            "score_neg": 0.3171316683292389,
+            "binary": 0
+          },
+          {
+            "statement": "The glass surface is covered in frost",
+            "score_pos": 0.10539917647838593,
+            "score_neg": 0.4596250355243683,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The vapor is beginning to form frost on the glass surface.",
+        "desc2": "The frost layer is thickening on the glass surface."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 111,
+      "video_path": "outputs/phygenbench/baseline/output_video_112.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The window shows a layer of frost forming",
+            "score_pos": 0.4596248269081116,
+            "score_neg": 0.32719817757606506,
+            "binary": 1
+          },
+          {
+            "statement": "Visible frost is on the window",
+            "score_pos": 0.2910163402557373,
+            "score_neg": 0.7489649653434753,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The window starts to show water droplets forming.",
+        "desc2": "The water droplets become more dense."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 112,
+      "video_path": "outputs/phygenbench/baseline/output_video_113.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "Frost forms on the metal surface",
+            "score_pos": 0.43857643008232117,
+            "score_neg": 0.7063404321670532,
+            "binary": 0
+          },
+          {
+            "statement": "The mist turns into frost over time",
+            "score_pos": 0.405617356300354,
+            "score_neg": 0.4950355589389801,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "Mist begins to condense on the metal surface.",
+        "desc2": "Condensed droplets turn into frost."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 113,
+      "video_path": "outputs/phygenbench/baseline/output_video_114.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "Frost starts to form on the windshield",
+            "score_pos": 0.9271079301834106,
+            "score_neg": 0.45962369441986084,
+            "binary": 1
+          },
+          {
+            "statement": "The windshield is covered in a layer of frost",
+            "score_pos": 0.7287613749504089,
+            "score_neg": 0.649441123008728,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The fog is approaching the windshield.",
+        "desc2": "Frost starts forming on the windshield."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 114,
+      "video_path": "outputs/phygenbench/baseline/output_video_115.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 1.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "Frost forms on the bottle",
+            "score_pos": 0.8478558659553528,
+            "score_neg": 0.3455897569656372,
+            "binary": 1
+          },
+          {
+            "statement": "The bottle is covered with frost",
+            "score_pos": 0.8066650032997131,
+            "score_neg": 0.3349559009075165,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The bottle begins to form a thin layer of frost.",
+        "desc2": "The frost layer thickens and becomes more apparent."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 115,
+      "video_path": "outputs/phygenbench/baseline/output_video_116.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The fog is visible around the dry ice",
+            "score_pos": 0.9773109555244446,
+            "score_neg": 0.4385768473148346,
+            "binary": 1
+          },
+          {
+            "statement": "The dry ice is completely transformed into vapor",
+            "score_pos": 0.4950292110443115,
+            "score_neg": 0.19385680556297302,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "Dry ice is partly sublimated and some visible fog appears.",
+        "desc2": "Dry ice diminishes further, and more visible fog forms."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 116,
+      "video_path": "outputs/phygenbench/baseline/output_video_117.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "Visible vapor forms above the naphthalene",
+            "score_pos": 0.3650161623954773,
+            "score_neg": 0.448977530002594,
+            "binary": 0
+          },
+          {
+            "statement": "Naphthalene is visibly reduced in size",
+            "score_pos": 0.5415698289871216,
+            "score_neg": 0.4056171476840973,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "Naphthalene is partially solid and emitting vapor.",
+        "desc2": "Naphthalene is partially solid and emitting vapor."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 117,
+      "video_path": "outputs/phygenbench/baseline/output_video_118.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The iodine crystals turn into purple vapor",
+            "score_pos": 0.3751343786716461,
+            "score_neg": 0.717462956905365,
+            "binary": 0
+          },
+          {
+            "statement": "There are no visible signs of liquid iodine",
+            "score_pos": 0.375133752822876,
+            "score_neg": 0.7887483835220337,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The iodine crystals are partially sublimated, with some areas showing purple vapor.",
+        "desc2": "The iodine crystals have turned completely into purple vapor."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 118,
+      "video_path": "outputs/phygenbench/baseline/output_video_119.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The camphor starts transforming from solid to gas",
+            "score_pos": 0.5653473138809204,
+            "score_neg": 0.4723657965660095,
+            "binary": 1
+          },
+          {
+            "statement": "There is a visible release of gas from the camphor",
+            "score_pos": 0.7387889623641968,
+            "score_neg": 0.4056169092655182,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The camphor remains solid with slight reduction in size.",
+        "desc2": "The camphor is significantly reduced in size and beginning to emit gas."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 119,
+      "video_path": "outputs/phygenbench/baseline/output_video_120.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The arsenic trioxide produces a white vapor without liquefying",
+            "score_pos": 0.39467647671699524,
+            "score_neg": 0.42674705386161804,
+            "binary": 0
+          },
+          {
+            "statement": "There is no sign of liquid formation around the arsenic trioxide",
+            "score_pos": 0.30025365948677063,
+            "score_neg": 0.8153771162033081,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "Arsenic trioxide is solid.",
+        "desc2": "Arsenic trioxide starts releasing vapor without melting."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 120,
+      "video_path": "outputs/phygenbench/baseline/output_video_121.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The resulting color appears purple",
+            "score_pos": 0.8747729063034058,
+            "score_neg": 0.4835676848888397,
+            "binary": 1
+          },
+          {
+            "statement": "There is no area of the mixture that shows only red or blue paint",
+            "score_pos": 0.6018092036247253,
+            "score_neg": 0.815376341342926,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The red and blue paints are partially mixed, creating a streaked effect.",
+        "desc2": "The partially mixed paints are more blended, showing a mostly purple color with some streaks."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 121,
+      "video_path": "outputs/phygenbench/baseline/output_video_122.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 1,
+      "stage3_score": 0,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 1,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The resulting color is orange",
+            "score_pos": 0.8322727680206299,
+            "score_neg": 0.2608652114868164,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The paints begin to mix, showing streaks of yellow and red.",
+        "desc2": "The paints show a more uniform orange color."
+      },
+      "stage3_details": {
+        "stage3_score": 0,
+        "level": 1,
+        "answer": "1"
+      }
+    },
+    {
+      "index": 122,
+      "video_path": "outputs/phygenbench/baseline/output_video_123.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 1.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 1,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The resulting color is teal",
+            "score_pos": 0.8153781294822693,
+            "score_neg": 0.39467647671699524,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The green and blue paint begin to mix.",
+        "desc2": "The colors start to merge but are not fully combined yet."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 123,
+      "video_path": "outputs/phygenbench/baseline/output_video_124.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The resulting color is purple",
+            "score_pos": 0.7387942671775818,
+            "score_neg": 0.38403084874153137,
+            "binary": 1
+          },
+          {
+            "statement": "The mixture is a single, uniform color",
+            "score_pos": 0.4596245288848877,
+            "score_neg": 0.8545087575912476,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The cyan and magenta paints are being mixed, but the mixture is not fully blended yet.",
+        "desc2": "The mixture starts turning purple, but the colors are not yet uniform."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 124,
+      "video_path": "outputs/phygenbench/baseline/output_video_125.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The resulting color is light pink",
+            "score_pos": 0.717464029788971,
+            "score_neg": 0.7387945055961609,
+            "binary": 0
+          },
+          {
+            "statement": "The resulting mixture is uniformly a single color",
+            "score_pos": 0.4267469346523285,
+            "score_neg": 0.8322719931602478,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The paint colors begin to blend, with some white and pink swirls visible.",
+        "desc2": "The paint appears uniformly light pink."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 125,
+      "video_path": "outputs/phygenbench/baseline/output_video_126.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The flame is green",
+            "score_pos": 0.05057106539607048,
+            "score_neg": 0.8933349847793579,
+            "binary": 0
+          },
+          {
+            "statement": "The color of the flame does not change over time",
+            "score_pos": 0.5310952663421631,
+            "score_neg": 0.5067721009254456,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "A piece of copper emits a green flame.",
+        "desc2": "The flame continues to be green."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 126,
+      "video_path": "outputs/phygenbench/baseline/output_video_127.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 1,
+      "stage3_score": 0.67,
+      "overall_score": 0.335,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The flame color is white",
+            "score_pos": 0.3271983563899994,
+            "score_neg": 0.8688141703605652,
+            "binary": 0
+          },
+          {
+            "statement": "The magnesium is still emitting a flame",
+            "score_pos": 0.9271085858345032,
+            "score_neg": 0.10215611010789871,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The magnesium starts to burn, emitting a white flame.",
+        "desc2": "The white flame continues to burn brightly."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 127,
+      "video_path": "outputs/phygenbench/baseline/output_video_128.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 1,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The flame color is red",
+            "score_pos": 0.7980474829673767,
+            "score_neg": 0.4267471730709076,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The lithium is burning, and the flame starts to show a red color.",
+        "desc2": "The lithium continues to burn with a steady red flame."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 128,
+      "video_path": "outputs/phygenbench/baseline/output_video_129.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 1.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The flame color is yellow",
+            "score_pos": 0.8816346526145935,
+            "score_neg": 0.4835677742958069,
+            "binary": 1
+          },
+          {
+            "statement": "The flame is still burning",
+            "score_pos": 0.9348363876342773,
+            "score_neg": 0.059123214334249496,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "A piece of sodium starts burning, flame color changes to yellow.",
+        "desc2": "The sodium piece continues to burn, flame color remains yellow."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 129,
+      "video_path": "outputs/phygenbench/baseline/output_video_130.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The flame color is lilac",
+            "score_pos": 0.5787551999092102,
+            "score_neg": 0.748964786529541,
+            "binary": 0
+          },
+          {
+            "statement": "The flame emission is steady",
+            "score_pos": 0.8478596806526184,
+            "score_neg": 0.6018092036247253,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The flame is burning steadily.",
+        "desc2": "The flame is lilac in color and burning steadily."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 130,
+      "video_path": "outputs/phygenbench/baseline/output_video_131.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The egg shows signs of breaking",
+            "score_pos": 0.19845545291900635,
+            "score_neg": 0.934836208820343,
+            "binary": 0
+          },
+          {
+            "statement": "The stone remains undamaged",
+            "score_pos": 0.3840310275554657,
+            "score_neg": 0.8241845965385437,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The egg does not break, and the rock remains unchanged.",
+        "desc2": "The egg breaks, but the rock remains unchanged."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 131,
+      "video_path": "outputs/phygenbench/baseline/output_video_132.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The vase shatters upon hitting the wall",
+            "score_pos": 0.2528392970561981,
+            "score_neg": 0.25283926725387573,
+            "binary": 1
+          },
+          {
+            "statement": "The concrete wall remains undamaged",
+            "score_pos": 0.6018098592758179,
+            "score_neg": 0.5415664315223694,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The vase does not break, and the wall remains unchanged.",
+        "desc2": "The vase breaks, but the wall remains unchanged."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 132,
+      "video_path": "outputs/phygenbench/baseline/output_video_133.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The glass bottle shows visible signs of shattering or deformation",
+            "score_pos": 0.47236597537994385,
+            "score_neg": 0.267051637172699,
+            "binary": 1
+          },
+          {
+            "statement": "The rock remains intact after the collision",
+            "score_pos": 0.3946753740310669,
+            "score_neg": 0.8153782486915588,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "the glass bottle does not break, and the rock remains unchanged.",
+        "desc2": "the glass bottle breaks, but the rock remains unchanged."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 133,
+      "video_path": "outputs/phygenbench/baseline/output_video_134.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The glass cup shows visible signs of breakage",
+            "score_pos": 0.42674675583839417,
+            "score_neg": 0.41686156392097473,
+            "binary": 1
+          },
+          {
+            "statement": "The metal surface remains intact",
+            "score_pos": 0.6381261348724365,
+            "score_neg": 0.3097851872444153,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The glass cup approaches the metal surface intact.",
+        "desc2": "The glass cup breaks on impact, while the metal surface remains unchanged."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 134,
+      "video_path": "outputs/phygenbench/baseline/output_video_135.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The porcelain plate breaks upon impact",
+            "score_pos": 0.4950355589389801,
+            "score_neg": 0.24505996704101562,
+            "binary": 1
+          },
+          {
+            "statement": "The wooden table remains undamaged",
+            "score_pos": 0.2112547755241394,
+            "score_neg": 0.8396164178848267,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "the porcelain plate does not break, and the table remains unchanged.",
+        "desc2": "the porcelain plate breaks, but the table remains unchanged."
+      },
+      "stage3_details": {
+        "stage3_score": 0,
+        "level": 1,
+        "answer": "1"
+      }
+    },
+    {
+      "index": 135,
+      "video_path": "outputs/phygenbench/baseline/output_video_136.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The oil forms a separate layer on top of the water",
+            "score_pos": 0.7063358426094055,
+            "score_neg": 0.35378509759902954,
+            "binary": 1
+          },
+          {
+            "statement": "There is a clear distinction between the oil and water layers",
+            "score_pos": 0.6846009492874146,
+            "score_neg": 0.5067728161811829,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "Oil is spreading over the water.",
+        "desc2": "Oil is spreading over the water."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 136,
+      "video_path": "outputs/phygenbench/baseline/output_video_137.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "There are visible layers of honey and milk",
+            "score_pos": 0.2910163998603821,
+            "score_neg": 0.6494423151016235,
+            "binary": 0
+          },
+          {
+            "statement": "The milk remains separate from the honey in the glass",
+            "score_pos": 0.5415688157081604,
+            "score_neg": 0.23752030730247498,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "Honey begins to settle at the bottom of the glass.",
+        "desc2": "Honey continues to settle at the bottom while milk remains on top."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 137,
+      "video_path": "outputs/phygenbench/baseline/output_video_138.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The mixture appears homogeneous",
+            "score_pos": 0.5544129610061646,
+            "score_neg": 0.5415703058242798,
+            "binary": 1
+          },
+          {
+            "statement": "No separate layers of vinegar and water are visible",
+            "score_pos": 0.5310951471328735,
+            "score_neg": 0.37513428926467896,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The vinegar is partially mixing with the water.",
+        "desc2": "The vinegar and water are mixing consistently."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 138,
+      "video_path": "outputs/phygenbench/baseline/output_video_139.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The juice starts mixing with the water",
+            "score_pos": 0.5544111728668213,
+            "score_neg": 0.6846075057983398,
+            "binary": 0
+          },
+          {
+            "statement": "The juice is completely mixed with the water",
+            "score_pos": 0.23021213710308075,
+            "score_neg": 0.684607982635498,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "Juice starts mixing with water, forming a layered pattern.",
+        "desc2": "Juice and water mix completely, resulting in a homogenous mixture."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 139,
+      "video_path": "outputs/phygenbench/baseline/output_video_140.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 1,
+      "stage3_score": 0.67,
+      "overall_score": 0.335,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "There are two distinct layers of liquids visible",
+            "score_pos": 0.6846051216125488,
+            "score_neg": 0.3650157153606415,
+            "binary": 1
+          },
+          {
+            "statement": "There is no mixing of vinegar and oil evident",
+            "score_pos": 0.4385766088962555,
+            "score_neg": 0.5310933589935303,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The vinegar starts to form a layer beneath the oil.",
+        "desc2": "The vinegar and oil do not mix, but form distinct layers."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 140,
+      "video_path": "outputs/phygenbench/baseline/output_video_141.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 0.5,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The pile of dry paper catches on fire",
+            "score_pos": 0.8396187424659729,
+            "score_neg": 0.2755279242992401,
+            "binary": 1
+          },
+          {
+            "statement": "The fire is spreading to the rest of the pile",
+            "score_pos": 0.42674586176872253,
+            "score_neg": 0.7174637913703918,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The pile of dry paper begins to burn.",
+        "desc2": "The fire intensifies as it spreads through the pile of dry paper."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 141,
+      "video_path": "outputs/phygenbench/baseline/output_video_142.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 1.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The leaves start burning",
+            "score_pos": 0.9509496092796326,
+            "score_neg": 0.07021080702543259,
+            "binary": 1
+          },
+          {
+            "statement": "The leaves burn vigorously",
+            "score_pos": 0.969350278377533,
+            "score_neg": 0.05730442702770233,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "the leaves do not begin to burn.",
+        "desc2": "the leaves start to burn."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 142,
+      "video_path": "outputs/phygenbench/baseline/output_video_143.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 1.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The hay starts to catch fire",
+            "score_pos": 0.8747727870941162,
+            "score_neg": 0.1385437548160553,
+            "binary": 1
+          },
+          {
+            "statement": "The fire on the hay appears to have spread",
+            "score_pos": 0.8478567004203796,
+            "score_neg": 0.20475225150585175,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The hay does not ignite.",
+        "desc2": "The hay ignites and starts to burn mildly."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 143,
+      "video_path": "outputs/phygenbench/baseline/output_video_144.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 1,
+      "stage3_score": 1,
+      "overall_score": 1.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The grass ignites",
+            "score_pos": 0.638125479221344,
+            "score_neg": 0.5653478503227234,
+            "binary": 1
+          },
+          {
+            "statement": "There is more fire on the grass",
+            "score_pos": 0.6257833242416382,
+            "score_neg": 0.11943254619836807,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 1,
+        "answer": "B",
+        "desc1": "The grass starts to catch fire, and the flame becomes noticeable.",
+        "desc2": "The grass burns more intensely, and the flame grows larger."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 144,
+      "video_path": "outputs/phygenbench/baseline/output_video_145.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The piece of cloth ignites the newspapers",
+            "score_pos": 0.8688129782676697,
+            "score_neg": 0.22487935423851013,
+            "binary": 1
+          },
+          {
+            "statement": "The pile of newspapers is burning vigorously",
+            "score_pos": 0.9038612246513367,
+            "score_neg": 0.4168591797351837,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The cloth is burning, and the edge of the newspapers starts to catch fire.",
+        "desc2": "The fire is spreading more throughout the newspapers."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 145,
+      "video_path": "outputs/phygenbench/baseline/output_video_146.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The litmus solution changes color",
+            "score_pos": 0.61487877368927,
+            "score_neg": 0.2670513093471527,
+            "binary": 1
+          },
+          {
+            "statement": "The final color of the litmus solution is red",
+            "score_pos": 0.3537850081920624,
+            "score_neg": 0.9230406284332275,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The litmus solution starts turning from purple to red.",
+        "desc2": "The litmus solution continues changing from purple to red."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 146,
+      "video_path": "outputs/phygenbench/baseline/output_video_147.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The color of the litmus solution changes",
+            "score_pos": 0.638124942779541,
+            "score_neg": 0.6726798415184021,
+            "binary": 0
+          },
+          {
+            "statement": "The color of the litmus solution is red",
+            "score_pos": 0.5544122457504272,
+            "score_neg": 0.958875298500061,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The litmus solution changes from purple to red.",
+        "desc2": "The litmus solution changes from purple to red."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 147,
+      "video_path": "outputs/phygenbench/baseline/output_video_148.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The solution remains blue after the soda water is added",
+            "score_pos": 0.8322722911834717,
+            "score_neg": 0.4385758638381958,
+            "binary": 1
+          },
+          {
+            "statement": "The final color of the solution is blue",
+            "score_pos": 0.9311919212341309,
+            "score_neg": 0.2528392970561981,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The solution remains blue.",
+        "desc2": "The solution remains blue."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 148,
+      "video_path": "outputs/phygenbench/baseline/output_video_149.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The color of the mixture changes",
+            "score_pos": 0.660956621170044,
+            "score_neg": 0.5187922120094299,
+            "binary": 1
+          },
+          {
+            "statement": "Bubbles or gases are visible in the mixture",
+            "score_pos": 0.7387903928756714,
+            "score_neg": 0.33495721220970154,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The red cabbage juice gradually changes color.",
+        "desc2": "The red cabbage juice undergoes a significant color change."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    },
+    {
+      "index": 149,
+      "video_path": "outputs/phygenbench/baseline/output_video_150.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "Bubbles are visible in the mixture",
+            "score_pos": 0.33495643734931946,
+            "score_neg": 0.7174639105796814,
+            "binary": 0
+          },
+          {
+            "statement": "The volume of the mixture increases due to the reaction",
+            "score_pos": 0.2588350176811218,
+            "score_neg": 0.495035320520401,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "Small bubbles start forming in the liquid.",
+        "desc2": "More bubbles form and the liquid becomes cloudy."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 150,
+      "video_path": "outputs/phygenbench/baseline/output_video_151.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The bread shrinks visibly",
+            "score_pos": 0.5653468370437622,
+            "score_neg": 0.5787539482116699,
+            "binary": 0
+          },
+          {
+            "statement": "The bread has turned black",
+            "score_pos": 0.1385444700717926,
+            "score_neg": 0.6018094420433044,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The bread starts to shrink and blacken.",
+        "desc2": "The bread is significantly shrunk and has turned mostly black, with acidic gas being released."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 151,
+      "video_path": "outputs/phygenbench/baseline/output_video_152.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The apple slice shows visible signs of shrinking and turning black",
+            "score_pos": 0.38402852416038513,
+            "score_neg": 0.7063403725624084,
+            "binary": 0
+          },
+          {
+            "statement": "There is visible acidic gas around the apple slice",
+            "score_pos": 0.6381139755249023,
+            "score_neg": 0.39467573165893555,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The apple slice starts to shrink slightly and the color begins to darken.",
+        "desc2": "The apple slice continues to shrink and blacken more noticeably."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 152,
+      "video_path": "outputs/phygenbench/baseline/output_video_153.mp4",
+      "stage1_score": 0.0,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.0,
+        "num_questions": 2,
+        "correct": 0,
+        "details": [
+          {
+            "statement": "The paper shows signs of blackening",
+            "score_pos": 0.24506030976772308,
+            "score_neg": 0.6257836818695068,
+            "binary": 0
+          },
+          {
+            "statement": "The paper is significantly shrunken and carbonized",
+            "score_pos": 0.24506016075611115,
+            "score_neg": 0.5901698470115662,
+            "binary": 0
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The paper remains unchanged.",
+        "desc2": "The paper begins to shrink and blacken."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 153,
+      "video_path": "outputs/phygenbench/baseline/output_video_154.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The cotton ball shrinks and turns black",
+            "score_pos": 0.17107941210269928,
+            "score_neg": 0.5787546038627625,
+            "binary": 0
+          },
+          {
+            "statement": "There is visible emission of gas",
+            "score_pos": 0.8756279945373535,
+            "score_neg": 0.14747968316078186,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "the cotton ball starts to shrink and change color.",
+        "desc2": "the cotton ball is significantly smaller and darkened."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 154,
+      "video_path": "outputs/phygenbench/baseline/output_video_155.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The sponge appears to shrink significantly",
+            "score_pos": 0.6494410634040833,
+            "score_neg": 0.6726800799369812,
+            "binary": 0
+          },
+          {
+            "statement": "The sponge turns black and releases visible gas",
+            "score_pos": 0.2450602501630783,
+            "score_neg": 0.2450600266456604,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The sponge begins to shrink.",
+        "desc2": "The sponge continues shrinking and starts to blacken."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 155,
+      "video_path": "outputs/phygenbench/baseline/output_video_156.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The iron piece exhibits rusting",
+            "score_pos": 0.8688132762908936,
+            "score_neg": 0.13323691487312317,
+            "binary": 1
+          },
+          {
+            "statement": "The iron piece's surface is not smooth and clean",
+            "score_pos": 0.8756282329559326,
+            "score_neg": 0.20475539565086365,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The iron piece starts to show signs of rust.",
+        "desc2": "More extensive rust covers the iron."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 156,
+      "video_path": "outputs/phygenbench/baseline/output_video_157.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 0.33,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "The steel shows signs of rust",
+            "score_pos": 0.6609585285186768,
+            "score_neg": 0.44897720217704773,
+            "binary": 1
+          },
+          {
+            "statement": "The piece of steel is no longer smooth",
+            "score_pos": 0.8241845965385437,
+            "score_neg": 0.4835677444934845,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The steel shows initial signs of rust.",
+        "desc2": "The rust on the steel is visibly advanced."
+      },
+      "stage3_details": {
+        "stage3_score": 0.33,
+        "level": 2,
+        "answer": "2"
+      }
+    },
+    {
+      "index": 157,
+      "video_path": "outputs/phygenbench/baseline/output_video_158.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 0,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The chair has visible rust patches",
+            "score_pos": 0.3349575698375702,
+            "score_neg": 0.7287628054618835,
+            "binary": 0
+          },
+          {
+            "statement": "The chair appears degraded compared to its initial state",
+            "score_pos": 0.47236576676368713,
+            "score_neg": 0.3455900251865387,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The chair looks shiny and new.",
+        "desc2": "The chair starts to show signs of rust."
+      },
+      "stage3_details": {
+        "stage3_score": 0,
+        "level": 1,
+        "answer": "1"
+      }
+    },
+    {
+      "index": 158,
+      "video_path": "outputs/phygenbench/baseline/output_video_159.mp4",
+      "stage1_score": 1.0,
+      "stage2_score": 0,
+      "stage3_score": 0.67,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 1.0,
+        "num_questions": 2,
+        "correct": 2,
+        "details": [
+          {
+            "statement": "There is visible rust on the metal railing",
+            "score_pos": 0.9384896755218506,
+            "score_neg": 0.19385817646980286,
+            "binary": 1
+          },
+          {
+            "statement": "The overall condition of the railing has deteriorated due to rust",
+            "score_pos": 0.927103579044342,
+            "score_neg": 0.10539904236793518,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The metal railing shows slight discoloration.",
+        "desc2": "The metal railing shows an increased amount of rust."
+      },
+      "stage3_details": {
+        "stage3_score": 0.67,
+        "level": 3,
+        "answer": "3"
+      }
+    },
+    {
+      "index": 159,
+      "video_path": "outputs/phygenbench/baseline/output_video_160.mp4",
+      "stage1_score": 0.5,
+      "stage2_score": 0,
+      "stage3_score": 1,
+      "overall_score": 0.0,
+      "stage1_details": {
+        "stage1_score": 0.5,
+        "num_questions": 2,
+        "correct": 1,
+        "details": [
+          {
+            "statement": "The metal bedframe appears shiny",
+            "score_pos": 0.6494417786598206,
+            "score_neg": 0.759274423122406,
+            "binary": 0
+          },
+          {
+            "statement": "The metal bedframe shows signs of rust",
+            "score_pos": 0.854509174823761,
+            "score_neg": 0.160714253783226,
+            "binary": 1
+          }
+        ]
+      },
+      "stage2_details": {
+        "stage2_score": 0,
+        "answer": "A",
+        "desc1": "The bedframe begins showing some rust patches.",
+        "desc2": "The bedframe is showing more extensive rust patches."
+      },
+      "stage3_details": {
+        "stage3_score": 1,
+        "level": 4,
+        "answer": "4"
+      }
+    }
+  ],
+  "summary": {
+    "total_videos": 160,
+    "valid_videos": 160,
+    "stages_evaluated": [
+      1,
+      2,
+      3
+    ],
+    "stage1_avg": 0.534375,
+    "stage2_avg": 0.19375,
+    "stage3_avg": 0.7855625,
+    "overall_avg": 0.1063125,
+    "per_category": {
+      "Force": 0.10012499999999999,
+      "Light": 0.1067,
+      "Heat": 0.05,
+      "Physical Properties": 0.2468,
+      "Chemical Properties": 0.0
+    }
+  }
+}

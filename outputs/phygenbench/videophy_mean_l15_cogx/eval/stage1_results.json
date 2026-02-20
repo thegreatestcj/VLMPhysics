@@ -1,0 +1,3776 @@
+[
+  {
+    "stage1_score": 2,
+    "raw_score": 1.9295547307889402,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.3393845857541502,
+        "clip_retrieval_stored": 0.684602677822113,
+        "window": [
+          0,
+          3
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.59017014503479,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 0
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.988603355099901,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.4232561008236253,
+        "clip_retrieval_stored": 0.8545089960098267,
+        "window": [
+          26,
+          31
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.5653472542762756,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 1
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.4166487345056047,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.554596055443715,
+        "clip_retrieval_stored": 0.9271012544631958,
+        "window": [
+          14,
+          19
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8620526790618896,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 2
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.863305762139932,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.4686289575973905,
+        "clip_retrieval_stored": 0.7980450987815857,
+        "window": [
+          0,
+          4
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.3946768045425415,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 3
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.9151125901131771,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.0828405373482846,
+        "clip_retrieval_stored": 0.6726751923561096,
+        "window": [
+          29,
+          32
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8322720527648926,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 4
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 2.125155286748553,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.2706456946922784,
+        "clip_retrieval_stored": 0.8756283521652222,
+        "window": [
+          1,
+          6
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8545095920562744,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 5
+  },
+  {
+    "stage1_score": 0,
+    "raw_score": 0.21125487983226776,
+    "num_questions": 1,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "last_frame",
+        "score_final": 0.21125487983226776,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 6
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.4742351856645242,
+    "num_questions": 1,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.4742351856645242,
+        "clip_retrieval_stored": 0.8153784275054932,
+        "window": [
+          2,
+          7
+        ]
+      }
+    ],
+    "index": 7
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.2551590417477363,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.3795314048382514,
+        "clip_retrieval_stored": 0.6018091440200806,
+        "window": [
+          20,
+          25
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8756276369094849,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 8
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.5717993455914119,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.2715459841278651,
+        "clip_retrieval_stored": 0.7592743039131165,
+        "window": [
+          24,
+          29
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.30025336146354675,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 9
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 2.112736722194571,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.2311154210204074,
+        "clip_retrieval_stored": 0.6136788725852966,
+        "window": [
+          20,
+          25
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8816213011741638,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 10
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 2.2317566181305057,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.5142929459694037,
+        "clip_retrieval_stored": 0.3349575698375702,
+        "window": [
+          3,
+          8
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.7174636721611023,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 11
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.8452522535387987,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.2315743346278185,
+        "clip_retrieval_stored": 0.3650128245353699,
+        "window": [
+          26,
+          31
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.6136779189109802,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 12
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.8995574165465885,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.1298316169860416,
+        "clip_retrieval_stored": 0.506767749786377,
+        "window": [
+          1,
+          6
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.7697257995605469,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 13
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.9871755890120912,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.4084212831725527,
+        "clip_retrieval_stored": 0.6953883171081543,
+        "window": [
+          22,
+          27
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.5787543058395386,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 14
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.9343211274028986,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.3441549162746638,
+        "clip_retrieval_stored": 0.8478399515151978,
+        "window": [
+          8,
+          13
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.5901662111282349,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 15
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.9944206708303913,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.4156666034094318,
+        "clip_retrieval_stored": 0.8747431039810181,
+        "window": [
+          0,
+          4
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.5787540674209595,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 16
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 2.002260428401496,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.3413039264407416,
+        "clip_retrieval_stored": 0.824175238609314,
+        "window": [
+          21,
+          26
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.6609565019607544,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 17
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.2020583329519972,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.0199452368340238,
+        "clip_retrieval_stored": 0.2755281925201416,
+        "window": [
+          16,
+          21
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.18211309611797333,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 18
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.7000626047264182,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.2944459636818015,
+        "clip_retrieval_stored": 0.7887407541275024,
+        "window": [
+          28,
+          32
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.4056166410446167,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 19
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.1544075899671786,
+    "num_questions": 1,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.1544075899671786,
+        "clip_retrieval_stored": 0.8153704404830933,
+        "window": [
+          0,
+          3
+        ]
+      }
+    ],
+    "index": 20
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.451576198138523,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.1059856663125036,
+        "clip_retrieval_stored": 0.4835664927959442,
+        "window": [
+          0,
+          3
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.3455905318260193,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 21
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.5182778688803689,
+    "num_questions": 1,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.5182778688803689,
+        "clip_retrieval_stored": 0.7795456647872925,
+        "window": [
+          5,
+          10
+        ]
+      }
+    ],
+    "index": 22
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.128182126844611,
+    "num_questions": 1,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.128182126844611,
+        "clip_retrieval_stored": 0.6018092036247253,
+        "window": [
+          21,
+          26
+        ]
+      }
+    ],
+    "index": 23
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.0085826625179175,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.6547967602561835,
+        "clip_retrieval_stored": 0.1509772092103958,
+        "window": [
+          16,
+          21
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.353785902261734,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 24
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.4316991238460042,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.9129071502551533,
+        "clip_retrieval_stored": 0.25883495807647705,
+        "window": [
+          10,
+          15
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.5187919735908508,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 25
+  },
+  {
+    "stage1_score": 0,
+    "raw_score": 0.9586196280596464,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.6236627734778135,
+        "clip_retrieval_stored": 0.20475469529628754,
+        "window": [
+          14,
+          19
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.3349568545818329,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 26
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.3151050411547571,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.1272110544527918,
+        "clip_retrieval_stored": 0.495035320520401,
+        "window": [
+          4,
+          9
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.18789398670196533,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 27
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.0077113181129982,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.7468462258354713,
+        "clip_retrieval_stored": 0.3271985352039337,
+        "window": [
+          0,
+          3
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.26086509227752686,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 28
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.3714400822079513,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.146560400143895,
+        "clip_retrieval_stored": 0.8478586673736572,
+        "window": [
+          22,
+          27
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.2248796820640564,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 29
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 2.233247037471487,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.393626983703329,
+        "clip_retrieval_stored": 0.7174616456031799,
+        "window": [
+          5,
+          10
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.839620053768158,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 30
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.4930364711035295,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.1658396048296495,
+        "clip_retrieval_stored": 0.56534743309021,
+        "window": [
+          0,
+          4
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.32719686627388,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 31
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.3755567458490265,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.5067440059999362,
+        "clip_retrieval_stored": 0.798044741153717,
+        "window": [
+          0,
+          3
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8688127398490906,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 32
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.3267359887297827,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.4722266350920874,
+        "clip_retrieval_stored": 0.8322662115097046,
+        "window": [
+          29,
+          32
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8545093536376953,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 33
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.4110337238825394,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.5233520012415482,
+        "clip_retrieval_stored": 0.8816311955451965,
+        "window": [
+          0,
+          5
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8876817226409912,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 34
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.6376751866836723,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.0358657446403678,
+        "clip_retrieval_stored": 0.5415688157081604,
+        "window": [
+          0,
+          3
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.6018094420433044,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 35
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.2341733858101487,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.052060185384047,
+        "clip_retrieval_stored": 0.6494414210319519,
+        "window": [
+          0,
+          5
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.18211320042610168,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 36
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 2.1866047039307563,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.3320952906884165,
+        "clip_retrieval_stored": 0.8241826891899109,
+        "window": [
+          5,
+          10
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8545094132423401,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 37
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.740372833356215,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.2335986462682023,
+        "clip_retrieval_stored": 0.7795594930648804,
+        "window": [
+          11,
+          16
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.5067741870880127,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 38
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.5386667596510581,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.1736503886393241,
+        "clip_retrieval_stored": 0.6609578728675842,
+        "window": [
+          0,
+          3
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.365016371011734,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 39
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.1179429184934024,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.7232665311833745,
+        "clip_retrieval_stored": 0.3271983563899994,
+        "window": [
+          0,
+          3
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.3946763873100281,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 40
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.27840563554968,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.416356115533963,
+        "clip_retrieval_stored": 0.6953815817832947,
+        "window": [
+          19,
+          24
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8620495200157166,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 41
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.424702709576437,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.626657730004141,
+        "clip_retrieval_stored": 0.7174598574638367,
+        "window": [
+          12,
+          17
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.7980449795722961,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 42
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 2.1597351237401208,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.3052291675671774,
+        "clip_retrieval_stored": 0.43857550621032715,
+        "window": [
+          9,
+          14
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8545059561729431,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 43
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.6375756028131427,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.7897164586023273,
+        "clip_retrieval_stored": 0.40561753511428833,
+        "window": [
+          23,
+          28
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8478591442108154,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 44
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.8695409585250287,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.4427936066401867,
+        "clip_retrieval_stored": 0.6726800203323364,
+        "window": [
+          10,
+          15
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.4267473518848419,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 45
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.439324859300788,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.7105631267225103,
+        "clip_retrieval_stored": 0.9038631916046143,
+        "window": [
+          12,
+          17
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.7287617325782776,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 46
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.2797499789189772,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.5951409233998732,
+        "clip_retrieval_stored": 0.8747724294662476,
+        "window": [
+          9,
+          14
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.684609055519104,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 47
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.380920694097281,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.719962821229697,
+        "clip_retrieval_stored": 0.931189775466919,
+        "window": [
+          0,
+          4
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.6609578728675842,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 48
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.280400074288389,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.482353544995329,
+        "clip_retrieval_stored": 0.717462420463562,
+        "window": [
+          21,
+          26
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.7980465292930603,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 49
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.8604381605837523,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.5933875068876922,
+        "clip_retrieval_stored": 0.927107572555542,
+        "window": [
+          11,
+          16
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.2670506536960602,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 50
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.5900551848312885,
+    "num_questions": 1,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.5900551848312885,
+        "clip_retrieval_stored": 0.9091765284538269,
+        "window": [
+          8,
+          13
+        ]
+      }
+    ],
+    "index": 51
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.421981498170806,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.4871456469783317,
+        "clip_retrieval_stored": 0.8688119649887085,
+        "window": [
+          16,
+          21
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.9348358511924744,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 52
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.462361327936909,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.6736121695544934,
+        "clip_retrieval_stored": 0.9384931921958923,
+        "window": [
+          24,
+          29
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.7887491583824158,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 53
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.8070288081305317,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.2168593187468342,
+        "clip_retrieval_stored": 0.6494399905204773,
+        "window": [
+          26,
+          31
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.5901694893836975,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 54
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.3999998403449565,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.7863206101317914,
+        "clip_retrieval_stored": 0.9711267948150635,
+        "window": [
+          22,
+          27
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.6136792302131653,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 55
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 2.075710826804051,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.4969559845227096,
+        "clip_retrieval_stored": 0.9311854243278503,
+        "window": [
+          26,
+          31
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.5787548422813416,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 56
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 2.0618373959044414,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.44815971541204,
+        "clip_retrieval_stored": 0.9481610655784607,
+        "window": [
+          0,
+          4
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.6136776804924011,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 57
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.6625170213161946,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.9898430210529805,
+        "clip_retrieval_stored": 0.36501553654670715,
+        "window": [
+          19,
+          24
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.6726740002632141,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 58
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.906319690631681,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.4573420116174751,
+        "clip_retrieval_stored": 0.909172534942627,
+        "window": [
+          0,
+          4
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.44897767901420593,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 59
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.3311808301211996,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.84761377108113,
+        "clip_retrieval_stored": 0.43857622146606445,
+        "window": [
+          20,
+          25
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.4835670590400696,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 60
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.3981738045264305,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.0034974768210472,
+        "clip_retrieval_stored": 0.518791913986206,
+        "window": [
+          13,
+          18
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.3946763277053833,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 61
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.6917591819107856,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.2748974689781989,
+        "clip_retrieval_stored": 0.847858726978302,
+        "window": [
+          0,
+          3
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.41686171293258667,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 62
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.872674856985198,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.2468924268132315,
+        "clip_retrieval_stored": 0.7592744827270508,
+        "window": [
+          0,
+          3
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.6257824301719666,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 63
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.436171293258667,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "last_frame",
+        "score_final": 0.6381250619888306,
+        "clip_retrieval_stored": 0.0
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.7980462312698364,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 64
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.6447498274484453,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.9601415467897234,
+        "clip_retrieval_stored": 0.48356199264526367,
+        "window": [
+          0,
+          3
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.6846082806587219,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 65
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.5974806537784272,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.7578607788242036,
+        "clip_retrieval_stored": 0.2670506238937378,
+        "window": [
+          12,
+          17
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8396198749542236,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 66
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.82633104154181,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.3877560419709634,
+        "clip_retrieval_stored": 0.9038639664649963,
+        "window": [
+          28,
+          32
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.43857499957084656,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 67
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.362209918803014,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.4805764582813161,
+        "clip_retrieval_stored": 0.9563036561012268,
+        "window": [
+          4,
+          9
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.881633460521698,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 68
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.274308386926858,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.476261023168771,
+        "clip_retrieval_stored": 0.9230418801307678,
+        "window": [
+          6,
+          11
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.7980473637580872,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 69
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 2.2304834218646903,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.4607576223041436,
+        "clip_retrieval_stored": 0.6953890323638916,
+        "window": [
+          0,
+          5
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.7697257995605469,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 70
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.6106500328354398,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.2568648458294431,
+        "clip_retrieval_stored": 0.3650156557559967,
+        "window": [
+          27,
+          32
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.3537851870059967,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 71
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.261735051220097,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.437558739727177,
+        "clip_retrieval_stored": 0.8396177291870117,
+        "window": [
+          12,
+          17
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8241763114929199,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 72
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 2.1650976068530516,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.3497202522311642,
+        "clip_retrieval_stored": 0.7887478470802307,
+        "window": [
+          5,
+          10
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8153773546218872,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 73
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.274739990194731,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.3931102847656538,
+        "clip_retrieval_stored": 0.7795595526695251,
+        "window": [
+          23,
+          28
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8816297054290771,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 74
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.9589514241704178,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.5533339486607742,
+        "clip_retrieval_stored": 0.8396164774894714,
+        "window": [
+          0,
+          3
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.40561747550964355,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 75
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.9044264598630667,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.594644163443923,
+        "clip_retrieval_stored": 0.7795583009719849,
+        "window": [
+          1,
+          6
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.3097822964191437,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 76
+  },
+  {
+    "stage1_score": 0,
+    "raw_score": 0.9453417360782623,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "last_frame",
+        "score_final": 0.4385755956172943,
+        "clip_retrieval_stored": 0.0
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.506766140460968,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 77
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.338947713826586,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.52357000157683,
+        "clip_retrieval_stored": 0.9091759920120239,
+        "window": [
+          22,
+          27
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8153777122497559,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 78
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.295953934729453,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.471770768702384,
+        "clip_retrieval_stored": 0.4835653305053711,
+        "window": [
+          0,
+          3
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8241831660270691,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 79
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 2.127898686539519,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.2187229329460743,
+        "clip_retrieval_stored": 0.8066661953926086,
+        "window": [
+          0,
+          3
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.9091757535934448,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 80
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.5821181719693973,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.7276092951688604,
+        "clip_retrieval_stored": 0.9588757157325745,
+        "window": [
+          16,
+          21
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8545088768005371,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 81
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.7693104537453903,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.2277415784325851,
+        "clip_retrieval_stored": 0.8066662549972534,
+        "window": [
+          12,
+          17
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.5415688753128052,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 82
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 2.11691542728314,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.3881538139141523,
+        "clip_retrieval_stored": 0.33495762944221497,
+        "window": [
+          13,
+          18
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.728761613368988,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 83
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.4366861254459224,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.0526553661113582,
+        "clip_retrieval_stored": 0.5187925100326538,
+        "window": [
+          18,
+          23
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.3840307593345642,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 84
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.48890729199818,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.0942314113276326,
+        "clip_retrieval_stored": 0.5544132590293884,
+        "window": [
+          20,
+          25
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.3946758806705475,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 85
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.7933331428884371,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.3337146936773165,
+        "clip_retrieval_stored": 0.9311866164207458,
+        "window": [
+          0,
+          3
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.4596184492111206,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 86
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.4484169205834616,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.1312859973122824,
+        "clip_retrieval_stored": 0.6136748790740967,
+        "window": [
+          28,
+          32
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.3171309232711792,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 87
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.3548903027979273,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.5482237497774498,
+        "clip_retrieval_stored": 0.8872437477111816,
+        "window": [
+          19,
+          24
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8066665530204773,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 88
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.4432584638056098,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.0485828811582862,
+        "clip_retrieval_stored": 0.6846081614494324,
+        "window": [
+          6,
+          11
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.3946755826473236,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 89
+  },
+  {
+    "stage1_score": 0,
+    "raw_score": 0.7987089973049714,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.5316582243996216,
+        "clip_retrieval_stored": 0.2755286693572998,
+        "window": [
+          15,
+          20
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.26705077290534973,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 90
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.3897128141792088,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.535203281727579,
+        "clip_retrieval_stored": 0.8545081615447998,
+        "window": [
+          1,
+          6
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8545095324516296,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 91
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.1974164054718348,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.936551998647723,
+        "clip_retrieval_stored": 0.518790066242218,
+        "window": [
+          26,
+          31
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.26086440682411194,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 92
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.2923268267348786,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.9825427123740693,
+        "clip_retrieval_stored": 0.7287626266479492,
+        "window": [
+          20,
+          25
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.3097841143608093,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 93
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.5168012144571728,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.4010430934435314,
+        "clip_retrieval_stored": 0.5787540078163147,
+        "window": [
+          13,
+          18
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.11575812101364136,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 94
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.099847225639755,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "last_frame",
+        "score_final": 0.2588347792625427,
+        "clip_retrieval_stored": 0.0
+      },
+      {
+        "j": 1,
+        "type": "clip_retrieval",
+        "score_final": 0.8410124463772123,
+        "clip_retrieval_stored": 0.49502599239349365,
+        "window": [
+          17,
+          22
+        ]
+      }
+    ],
+    "index": 95
+  },
+  {
+    "stage1_score": 0,
+    "raw_score": 0.6470180117893999,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.5674586930681055,
+        "clip_retrieval_stored": 0.35378560423851013,
+        "window": [
+          7,
+          12
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.0795593187212944,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 96
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.7836800632129783,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.2648891029010887,
+        "clip_retrieval_stored": 0.5787549614906311,
+        "window": [
+          7,
+          12
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.5187909603118896,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 97
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.8633028627232275,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.4464413286045752,
+        "clip_retrieval_stored": 0.41686153411865234,
+        "window": [
+          0,
+          5
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.41686153411865234,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 98
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.5963676574761694,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.3293164971406286,
+        "clip_retrieval_stored": 0.4950355589389801,
+        "window": [
+          13,
+          18
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.26705116033554077,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 99
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.399596329873126,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.640323218052905,
+        "clip_retrieval_stored": 0.7887494564056396,
+        "window": [
+          13,
+          18
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.759273111820221,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 100
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.549234698861609,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.6400588856635192,
+        "clip_retrieval_stored": 0.9230418801307678,
+        "window": [
+          4,
+          9
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.9091758131980896,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 101
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.4968342484992125,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.6152006091635802,
+        "clip_retrieval_stored": 0.7887494564056396,
+        "window": [
+          12,
+          17
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8816336393356323,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 102
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 2.2168328862886337,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.4880716305475143,
+        "clip_retrieval_stored": 0.7387945055961609,
+        "window": [
+          14,
+          19
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.7287612557411194,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 103
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.4172481860936563,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.5356155004323404,
+        "clip_retrieval_stored": 0.7980475425720215,
+        "window": [
+          1,
+          6
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8816326856613159,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 104
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.9963175502885004,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.6425315586197993,
+        "clip_retrieval_stored": 0.824184238910675,
+        "window": [
+          10,
+          15
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.35378599166870117,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 105
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 2.1135427333069368,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.452591595764212,
+        "clip_retrieval_stored": 0.8478583693504333,
+        "window": [
+          21,
+          26
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.6609511375427246,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 106
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.6202238646699225,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.6457732168389594,
+        "clip_retrieval_stored": 0.7980448007583618,
+        "window": [
+          8,
+          13
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.9744506478309631,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 107
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 2.2085479432862325,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.2814406091492694,
+        "clip_retrieval_stored": 0.7697248458862305,
+        "window": [
+          0,
+          3
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.9271073341369629,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 108
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.3270827536049787,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.5573580865326826,
+        "clip_retrieval_stored": 0.8241833448410034,
+        "window": [
+          6,
+          11
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.7697246670722961,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 109
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.9922216550331413,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.5654748395901024,
+        "clip_retrieval_stored": 0.903864860534668,
+        "window": [
+          19,
+          24
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.42674681544303894,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 110
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.8150834282878385,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.4979519685748564,
+        "clip_retrieval_stored": 0.8153782486915588,
+        "window": [
+          11,
+          16
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.3171314597129822,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 111
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.6892538301775881,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.3242374889681765,
+        "clip_retrieval_stored": 0.9230425953865051,
+        "window": [
+          26,
+          31
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.3650163412094116,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 112
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 2.0574832387687114,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.585117680621281,
+        "clip_retrieval_stored": 0.9417070746421814,
+        "window": [
+          25,
+          30
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.4723655581474304,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 113
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.5242514110339886,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.6426192022098312,
+        "clip_retrieval_stored": 0.862050473690033,
+        "window": [
+          4,
+          9
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8816322088241577,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 114
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.9455625951750597,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.380217486665996,
+        "clip_retrieval_stored": 0.7063408493995667,
+        "window": [
+          4,
+          9
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.5653451085090637,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 115
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.6251062003815175,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.2082446662628652,
+        "clip_retrieval_stored": 0.41686153411865234,
+        "window": [
+          15,
+          20
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.41686153411865234,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 116
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.3590573839417786,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.7441781930199951,
+        "clip_retrieval_stored": 0.3349566161632538,
+        "window": [
+          24,
+          29
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.6148791909217834,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 117
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.259101652825698,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.4194899437078088,
+        "clip_retrieval_stored": 0.6726797223091125,
+        "window": [
+          0,
+          3
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8396117091178894,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 118
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.1181614152014834,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.7832041731894595,
+        "clip_retrieval_stored": 0.2670515179634094,
+        "window": [
+          6,
+          11
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.3349572420120239,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 119
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.658478843393724,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.1273845307258774,
+        "clip_retrieval_stored": 0.6136789917945862,
+        "window": [
+          1,
+          6
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.5310943126678467,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 120
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 1.4593100297562474,
+    "num_questions": 1,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.4593100297562474,
+        "clip_retrieval_stored": 0.638124406337738,
+        "window": [
+          8,
+          13
+        ]
+      }
+    ],
+    "index": 121
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.537041443559783,
+    "num_questions": 1,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.537041443559783,
+        "clip_retrieval_stored": 0.8816289305686951,
+        "window": [
+          14,
+          19
+        ]
+      }
+    ],
+    "index": 122
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.3108542450103955,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.1501401551399426,
+        "clip_retrieval_stored": 0.4950348436832428,
+        "window": [
+          29,
+          32
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.16071408987045288,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 123
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.4588098929408209,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.167793820905985,
+        "clip_retrieval_stored": 0.6136792302131653,
+        "window": [
+          28,
+          32
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.2910160720348358,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 124
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.0266215728664023,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "last_frame",
+        "score_final": 0.0669957622885704,
+        "clip_retrieval_stored": 0.0
+      },
+      {
+        "j": 1,
+        "type": "clip_retrieval",
+        "score_final": 0.9596258105778319,
+        "clip_retrieval_stored": 0.3946765661239624,
+        "window": [
+          1,
+          6
+        ]
+      }
+    ],
+    "index": 125
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.7913523617056017,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.8728050294187671,
+        "clip_retrieval_stored": 0.554412305355072,
+        "window": [
+          3,
+          8
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.9185473322868347,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 126
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 1.2457448369513275,
+    "num_questions": 1,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.2457448369513275,
+        "clip_retrieval_stored": 0.448977530002594,
+        "window": [
+          19,
+          24
+        ]
+      }
+    ],
+    "index": 127
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.4909470245469976,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.5492386386026313,
+        "clip_retrieval_stored": 0.7980479598045349,
+        "window": [
+          0,
+          4
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.9417083859443665,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 128
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.7993478479842768,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.0197872224311457,
+        "clip_retrieval_stored": 0.4056171774864197,
+        "window": [
+          0,
+          3
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.7795606255531311,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 129
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.5493184413503673,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.8647090878080396,
+        "clip_retrieval_stored": 0.6257824897766113,
+        "window": [
+          0,
+          4
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.6846093535423279,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 130
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.1813359573370135,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.7644744530206835,
+        "clip_retrieval_stored": 0.19845588505268097,
+        "window": [
+          4,
+          9
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.41686150431632996,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 131
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.8141513123936046,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.307377363724171,
+        "clip_retrieval_stored": 0.5187908411026001,
+        "window": [
+          7,
+          12
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.5067739486694336,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 132
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.1729122531727518,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.6893443596676554,
+        "clip_retrieval_stored": 0.11758113652467728,
+        "window": [
+          0,
+          4
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.48356789350509644,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 133
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 2.0604901882496267,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.3995310040798574,
+        "clip_retrieval_stored": 0.8241844773292542,
+        "window": [
+          1,
+          6
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.6609591841697693,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 134
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 2.15903183305334,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.4636535891301528,
+        "clip_retrieval_stored": 0.78874671459198,
+        "window": [
+          14,
+          19
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.6953782439231873,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 135
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.4990411194401507,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.0604639741020923,
+        "clip_retrieval_stored": 0.41686123609542847,
+        "window": [
+          3,
+          8
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.43857714533805847,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 136
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.7523196280361308,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.162150734698881,
+        "clip_retrieval_stored": 0.625774621963501,
+        "window": [
+          12,
+          17
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.5901688933372498,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 137
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.440850960236652,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.0239900519667697,
+        "clip_retrieval_stored": 0.3171285390853882,
+        "window": [
+          4,
+          9
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.4168609082698822,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 138
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.8688535010478835,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.3620794927738051,
+        "clip_retrieval_stored": 0.6257803440093994,
+        "window": [
+          28,
+          32
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.5067740082740784,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 139
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.2597564526847544,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "last_frame",
+        "score_final": 0.8545070290565491,
+        "clip_retrieval_stored": 0.0
+      },
+      {
+        "j": 1,
+        "type": "clip_retrieval",
+        "score_final": 1.4052494236282054,
+        "clip_retrieval_stored": 0.9693488478660583,
+        "window": [
+          12,
+          17
+        ]
+      }
+    ],
+    "index": 140
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.7474074548904417,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.805698890132141,
+        "clip_retrieval_stored": 0.9038644433021545,
+        "window": [
+          1,
+          6
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.9417085647583008,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 141
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.3906357038421158,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.536129926483107,
+        "clip_retrieval_stored": 0.6846083998680115,
+        "window": [
+          15,
+          20
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8545057773590088,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 142
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.7936562667297293,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.2748635778831412,
+        "clip_retrieval_stored": 0.7387934923171997,
+        "window": [
+          0,
+          3
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.5187926888465881,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 143
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.381137463263169,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.506368252447739,
+        "clip_retrieval_stored": 0.5653464198112488,
+        "window": [
+          19,
+          24
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8747692108154297,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 144
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.6257048689733127,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.366870477140961,
+        "clip_retrieval_stored": 0.5901671051979065,
+        "window": [
+          0,
+          4
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.2588343918323517,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 145
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.135561543126053,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.9926196956824724,
+        "clip_retrieval_stored": 0.317129909992218,
+        "window": [
+          0,
+          5
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.14294184744358063,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 146
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 2.2476572394268595,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.329110383977183,
+        "clip_retrieval_stored": 0.5544089078903198,
+        "window": [
+          10,
+          15
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.9185468554496765,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 147
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.4749340994621012,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.121150342967579,
+        "clip_retrieval_stored": 0.6494410634040833,
+        "window": [
+          0,
+          4
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.3537837564945221,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 148
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.5367231762973113,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.2778880394068999,
+        "clip_retrieval_stored": 0.6609522104263306,
+        "window": [
+          23,
+          28
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.2588351368904114,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 149
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.2371355673098838,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.1381223952198303,
+        "clip_retrieval_stored": 0.34558844566345215,
+        "window": [
+          1,
+          6
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.09901317209005356,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 150
+  },
+  {
+    "stage1_score": 1,
+    "raw_score": 1.4727029009243777,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.800029019870453,
+        "clip_retrieval_stored": 0.4723609685897827,
+        "window": [
+          1,
+          6
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.6726738810539246,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 151
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.524414462764055,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.0056228468010728,
+        "clip_retrieval_stored": 0.5415703058242798,
+        "window": [
+          21,
+          26
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.5187916159629822,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 152
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 2.1591171350209715,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.1936633314816951,
+        "clip_retrieval_stored": 0.6609576344490051,
+        "window": [
+          24,
+          29
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.9654538035392761,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 153
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.5153934214096538,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.0557688925247661,
+        "clip_retrieval_stored": 0.43857720494270325,
+        "window": [
+          29,
+          32
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.4596245288848877,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 154
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.614959889083641,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.8353997999723128,
+        "clip_retrieval_stored": 0.56534743309021,
+        "window": [
+          1,
+          6
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.7795600891113281,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 155
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.351786692044614,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.512166519067167,
+        "clip_retrieval_stored": 0.7174639701843262,
+        "window": [
+          5,
+          10
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8396201729774475,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 156
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.6838116840224204,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.7183588937621055,
+        "clip_retrieval_stored": 0.815376877784729,
+        "window": [
+          20,
+          25
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.9654527902603149,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 157
+  },
+  {
+    "stage1_score": 3,
+    "raw_score": 2.4200095489493507,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 1.5452393248549599,
+        "clip_retrieval_stored": 0.8066654801368713,
+        "window": [
+          11,
+          16
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.8747702240943909,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 158
+  },
+  {
+    "stage1_score": 2,
+    "raw_score": 1.6397507689250896,
+    "num_questions": 2,
+    "per_question": [
+      {
+        "j": 0,
+        "type": "clip_retrieval",
+        "score_final": 0.7411678335918377,
+        "clip_retrieval_stored": 0.2842733561992645,
+        "window": [
+          9,
+          14
+        ]
+      },
+      {
+        "j": 1,
+        "type": "last_frame",
+        "score_final": 0.898582935333252,
+        "clip_retrieval_stored": 0.0
+      }
+    ],
+    "index": 159
+  }
+]

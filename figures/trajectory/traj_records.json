@@ -1,0 +1,4882 @@
+[
+  {
+    "video_idx": 80,
+    "prompt_preview": "Interference & Diffraction: A puddle of oil on the road under the sunlight",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            1,
+            0.998
+          ],
+          [
+            0,
+            0.98
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.87
+          ],
+          [
+            2,
+            0.062
+          ]
+        ],
+        "all_scores": {
+          "1": 0.998,
+          "0": 0.98,
+          "3": 0.87,
+          "2": 0.062
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            1,
+            1.0
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.999
+          ]
+        ],
+        "all_scores": {
+          "1": 1.0,
+          "0": 0.999
+        }
+      }
+    ],
+    "final_idx": 1,
+    "final_score": 1.0,
+    "sampling_time": 474.6,
+    "total_time": 497.3
+  },
+  {
+    "video_idx": 81,
+    "prompt_preview": "Interference & Diffraction: A soap bubble floating in the air under the sunlight",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            0.75
+          ],
+          [
+            0,
+            0.191
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.012
+          ],
+          [
+            1,
+            0.005
+          ]
+        ],
+        "all_scores": {
+          "2": 0.75,
+          "0": 0.191,
+          "3": 0.012,
+          "1": 0.005
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.478
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.45
+          ]
+        ],
+        "all_scores": {
+          "0": 0.478,
+          "2": 0.45
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.478,
+    "sampling_time": 475.8,
+    "total_time": 497.3
+  },
+  {
+    "video_idx": 82,
+    "prompt_preview": "Interference & Diffraction: A film of soap on a wand under the sunlight",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            1,
+            1.0
+          ],
+          [
+            3,
+            0.92
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.893
+          ],
+          [
+            0,
+            0.038
+          ]
+        ],
+        "all_scores": {
+          "1": 1.0,
+          "3": 0.92,
+          "2": 0.893,
+          "0": 0.038
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            1,
+            1.0
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.937
+          ]
+        ],
+        "all_scores": {
+          "1": 1.0,
+          "3": 0.937
+        }
+      }
+    ],
+    "final_idx": 1,
+    "final_score": 1.0,
+    "sampling_time": 475.8,
+    "total_time": 497.3
+  },
+  {
+    "video_idx": 83,
+    "prompt_preview": "Interference & Diffraction: A thin layer of gasoline on water under the sunlight",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            3,
+            0.06
+          ],
+          [
+            1,
+            0.0
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "all_scores": {
+          "3": 0.06,
+          "1": 0.0,
+          "0": 0.0,
+          "2": 0.0
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            3,
+            0.211
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.0
+          ]
+        ],
+        "all_scores": {
+          "3": 0.211,
+          "1": 0.0
+        }
+      }
+    ],
+    "final_idx": 3,
+    "final_score": 0.211,
+    "sampling_time": 475.7,
+    "total_time": 497.4
+  },
+  {
+    "video_idx": 84,
+    "prompt_preview": "Interference & Diffraction: A layer of detergent on a wet surface under the sunl",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.977
+          ],
+          [
+            1,
+            0.199
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.013
+          ],
+          [
+            3,
+            0.002
+          ]
+        ],
+        "all_scores": {
+          "0": 0.977,
+          "1": 0.199,
+          "2": 0.013,
+          "3": 0.002
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.788
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.001
+          ]
+        ],
+        "all_scores": {
+          "0": 0.788,
+          "1": 0.001
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.788,
+    "sampling_time": 475.8,
+    "total_time": 497.5
+  },
+  {
+    "video_idx": 85,
+    "prompt_preview": "Dispersion: A beam of light passes through a prism",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            0.122
+          ],
+          [
+            3,
+            0.071
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.039
+          ],
+          [
+            1,
+            0.037
+          ]
+        ],
+        "all_scores": {
+          "2": 0.122,
+          "3": 0.071,
+          "0": 0.039,
+          "1": 0.037
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            0.225
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.106
+          ]
+        ],
+        "all_scores": {
+          "2": 0.225,
+          "3": 0.106
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 0.225,
+    "sampling_time": 475.6,
+    "total_time": 497.1
+  },
+  {
+    "video_idx": 86,
+    "prompt_preview": "Dispersion: A beam of light passes through a crystal chandelier",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.977
+          ],
+          [
+            1,
+            0.568
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.079
+          ],
+          [
+            3,
+            0.018
+          ]
+        ],
+        "all_scores": {
+          "0": 0.977,
+          "1": 0.568,
+          "2": 0.079,
+          "3": 0.018
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.991
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.945
+          ]
+        ],
+        "all_scores": {
+          "0": 0.991,
+          "1": 0.945
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.991,
+    "sampling_time": 475.6,
+    "total_time": 497.1
+  },
+  {
+    "video_idx": 87,
+    "prompt_preview": "Dispersion: A beam of light passes through a droplet of water",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            1,
+            0.414
+          ],
+          [
+            0,
+            0.228
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.133
+          ],
+          [
+            2,
+            0.006
+          ]
+        ],
+        "all_scores": {
+          "1": 0.414,
+          "0": 0.228,
+          "3": 0.133,
+          "2": 0.006
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.829
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.465
+          ]
+        ],
+        "all_scores": {
+          "0": 0.829,
+          "1": 0.465
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.829,
+    "sampling_time": 475.6,
+    "total_time": 497.0
+  },
+  {
+    "video_idx": 88,
+    "prompt_preview": "Dispersion: A beam of light passes through a glass diamond",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            3,
+            0.993
+          ],
+          [
+            1,
+            0.649
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.221
+          ],
+          [
+            2,
+            0.03
+          ]
+        ],
+        "all_scores": {
+          "3": 0.993,
+          "1": 0.649,
+          "0": 0.221,
+          "2": 0.03
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            3,
+            0.991
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.679
+          ]
+        ],
+        "all_scores": {
+          "3": 0.991,
+          "1": 0.679
+        }
+      }
+    ],
+    "final_idx": 3,
+    "final_score": 0.991,
+    "sampling_time": 475.6,
+    "total_time": 497.0
+  },
+  {
+    "video_idx": 89,
+    "prompt_preview": "Dispersion: A beam of light passes through a soap bubble",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            0.313
+          ],
+          [
+            0,
+            0.299
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.104
+          ],
+          [
+            3,
+            0.021
+          ]
+        ],
+        "all_scores": {
+          "2": 0.313,
+          "0": 0.299,
+          "1": 0.104,
+          "3": 0.021
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            0.539
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.25
+          ]
+        ],
+        "all_scores": {
+          "2": 0.539,
+          "0": 0.25
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 0.539,
+    "sampling_time": 475.5,
+    "total_time": 496.9
+  },
+  {
+    "video_idx": 90,
+    "prompt_preview": "Solidification: A timelapse captures the transformation of a glass of water",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            3,
+            0.076
+          ],
+          [
+            1,
+            0.029
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.015
+          ],
+          [
+            0,
+            0.015
+          ]
+        ],
+        "all_scores": {
+          "3": 0.076,
+          "1": 0.029,
+          "2": 0.015,
+          "0": 0.015
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            3,
+            0.073
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.031
+          ]
+        ],
+        "all_scores": {
+          "3": 0.073,
+          "1": 0.031
+        }
+      }
+    ],
+    "final_idx": 3,
+    "final_score": 0.073,
+    "sampling_time": 475.4,
+    "total_time": 497.0
+  },
+  {
+    "video_idx": 91,
+    "prompt_preview": "Solidification: A timelapse captures the transformation of a glass of juice",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            1,
+            0.68
+          ],
+          [
+            0,
+            0.592
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.028
+          ],
+          [
+            2,
+            0.016
+          ]
+        ],
+        "all_scores": {
+          "1": 0.68,
+          "0": 0.592,
+          "3": 0.028,
+          "2": 0.016
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            1,
+            0.868
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.626
+          ]
+        ],
+        "all_scores": {
+          "1": 0.868,
+          "0": 0.626
+        }
+      }
+    ],
+    "final_idx": 1,
+    "final_score": 0.868,
+    "sampling_time": 475.6,
+    "total_time": 497.0
+  },
+  {
+    "video_idx": 92,
+    "prompt_preview": "Solidification: A timelapse captures the transformation of a glass of milk a",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.344
+          ],
+          [
+            2,
+            0.085
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.038
+          ],
+          [
+            3,
+            0.033
+          ]
+        ],
+        "all_scores": {
+          "0": 0.344,
+          "2": 0.085,
+          "1": 0.038,
+          "3": 0.033
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.346
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.085
+          ]
+        ],
+        "all_scores": {
+          "0": 0.346,
+          "2": 0.085
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.346,
+    "sampling_time": 475.5,
+    "total_time": 497.0
+  },
+  {
+    "video_idx": 93,
+    "prompt_preview": "Solidification: A timelapse captures the transformation of a glass of oil as",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.164
+          ],
+          [
+            1,
+            0.086
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.045
+          ],
+          [
+            3,
+            0.016
+          ]
+        ],
+        "all_scores": {
+          "0": 0.164,
+          "1": 0.086,
+          "2": 0.045,
+          "3": 0.016
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.223
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.121
+          ]
+        ],
+        "all_scores": {
+          "0": 0.223,
+          "1": 0.121
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.223,
+    "sampling_time": 475.5,
+    "total_time": 497.0
+  },
+  {
+    "video_idx": 94,
+    "prompt_preview": "Solidification: A timelapse captures the transformation of a glass of beer a",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            0.342
+          ],
+          [
+            0,
+            0.321
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.188
+          ],
+          [
+            3,
+            0.122
+          ]
+        ],
+        "all_scores": {
+          "2": 0.342,
+          "0": 0.321,
+          "1": 0.188,
+          "3": 0.122
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.534
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.203
+          ]
+        ],
+        "all_scores": {
+          "0": 0.534,
+          "2": 0.203
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.534,
+    "sampling_time": 475.5,
+    "total_time": 496.9
+  },
+  {
+    "video_idx": 95,
+    "prompt_preview": "Melting: A timelapse captures the gradual transformation of a piece o",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            3,
+            0.942
+          ],
+          [
+            2,
+            0.176
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.151
+          ],
+          [
+            1,
+            0.001
+          ]
+        ],
+        "all_scores": {
+          "3": 0.942,
+          "2": 0.176,
+          "0": 0.151,
+          "1": 0.001
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            3,
+            0.949
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.321
+          ]
+        ],
+        "all_scores": {
+          "3": 0.949,
+          "2": 0.321
+        }
+      }
+    ],
+    "final_idx": 3,
+    "final_score": 0.949,
+    "sampling_time": 475.5,
+    "total_time": 496.9
+  },
+  {
+    "video_idx": 96,
+    "prompt_preview": "Melting: A timelapse captures the gradual transformation of a candle",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            3,
+            0.059
+          ],
+          [
+            1,
+            0.005
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.0
+          ],
+          [
+            0,
+            0.0
+          ]
+        ],
+        "all_scores": {
+          "3": 0.059,
+          "1": 0.005,
+          "2": 0.0,
+          "0": 0.0
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            3,
+            0.026
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.001
+          ]
+        ],
+        "all_scores": {
+          "3": 0.026,
+          "1": 0.001
+        }
+      }
+    ],
+    "final_idx": 3,
+    "final_score": 0.026,
+    "sampling_time": 475.6,
+    "total_time": 497.1
+  },
+  {
+    "video_idx": 97,
+    "prompt_preview": "Melting: A timelapse captures the gradual transformation of butter as",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            1,
+            0.375
+          ],
+          [
+            2,
+            0.241
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.145
+          ],
+          [
+            3,
+            0.072
+          ]
+        ],
+        "all_scores": {
+          "1": 0.375,
+          "2": 0.241,
+          "0": 0.145,
+          "3": 0.072
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            0.222
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.17
+          ]
+        ],
+        "all_scores": {
+          "2": 0.222,
+          "1": 0.17
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 0.222,
+    "sampling_time": 475.5,
+    "total_time": 497.0
+  },
+  {
+    "video_idx": 98,
+    "prompt_preview": "Melting: A timelapse captures the gradual transformation of ice cream",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            3,
+            0.212
+          ],
+          [
+            0,
+            0.151
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.012
+          ],
+          [
+            1,
+            0.008
+          ]
+        ],
+        "all_scores": {
+          "3": 0.212,
+          "0": 0.151,
+          "2": 0.012,
+          "1": 0.008
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.194
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.153
+          ]
+        ],
+        "all_scores": {
+          "0": 0.194,
+          "3": 0.153
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.194,
+    "sampling_time": 475.4,
+    "total_time": 496.7
+  },
+  {
+    "video_idx": 99,
+    "prompt_preview": "Melting: A timelapse captures the gradual transformation of wax as th",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            1,
+            0.814
+          ],
+          [
+            3,
+            0.799
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.334
+          ],
+          [
+            2,
+            0.251
+          ]
+        ],
+        "all_scores": {
+          "1": 0.814,
+          "3": 0.799,
+          "0": 0.334,
+          "2": 0.251
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            3,
+            0.792
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.698
+          ]
+        ],
+        "all_scores": {
+          "3": 0.792,
+          "1": 0.698
+        }
+      }
+    ],
+    "final_idx": 3,
+    "final_score": 0.792,
+    "sampling_time": 475.4,
+    "total_time": 496.8
+  },
+  {
+    "video_idx": 100,
+    "prompt_preview": "Liquefaction: A timelapse captures the transformation as water vapor in a",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            0.993
+          ],
+          [
+            3,
+            0.581
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.506
+          ],
+          [
+            0,
+            0.123
+          ]
+        ],
+        "all_scores": {
+          "2": 0.993,
+          "3": 0.581,
+          "1": 0.506,
+          "0": 0.123
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            0.992
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.272
+          ]
+        ],
+        "all_scores": {
+          "2": 0.992,
+          "3": 0.272
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 0.992,
+    "sampling_time": 475.3,
+    "total_time": 497.0
+  },
+  {
+    "video_idx": 101,
+    "prompt_preview": "Liquefaction: A timelapse captures the transformation as fog in a cold env",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.536
+          ],
+          [
+            1,
+            0.226
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.201
+          ],
+          [
+            2,
+            0.055
+          ]
+        ],
+        "all_scores": {
+          "0": 0.536,
+          "1": 0.226,
+          "3": 0.201,
+          "2": 0.055
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.733
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.366
+          ]
+        ],
+        "all_scores": {
+          "0": 0.733,
+          "1": 0.366
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.733,
+    "sampling_time": 475.2,
+    "total_time": 496.8
+  },
+  {
+    "video_idx": 102,
+    "prompt_preview": "Liquefaction: A timelapse captures the transformation as steam in a kitche",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.648
+          ],
+          [
+            2,
+            0.522
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.27
+          ],
+          [
+            1,
+            0.096
+          ]
+        ],
+        "all_scores": {
+          "0": 0.648,
+          "2": 0.522,
+          "3": 0.27,
+          "1": 0.096
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.748
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.671
+          ]
+        ],
+        "all_scores": {
+          "0": 0.748,
+          "2": 0.671
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.748,
+    "sampling_time": 475.3,
+    "total_time": 497.0
+  },
+  {
+    "video_idx": 103,
+    "prompt_preview": "Liquefaction: A timelapse captures the transformation as mist in a greenho",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.882
+          ],
+          [
+            1,
+            0.816
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.628
+          ],
+          [
+            2,
+            0.286
+          ]
+        ],
+        "all_scores": {
+          "0": 0.882,
+          "1": 0.816,
+          "3": 0.628,
+          "2": 0.286
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.926
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.857
+          ]
+        ],
+        "all_scores": {
+          "0": 0.926,
+          "1": 0.857
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.926,
+    "sampling_time": 475.3,
+    "total_time": 496.8
+  },
+  {
+    "video_idx": 104,
+    "prompt_preview": "Liquefaction: A timelapse captures the transformation as water vapor in a",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            3,
+            0.905
+          ],
+          [
+            2,
+            0.481
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.247
+          ],
+          [
+            1,
+            0.139
+          ]
+        ],
+        "all_scores": {
+          "3": 0.905,
+          "2": 0.481,
+          "0": 0.247,
+          "1": 0.139
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            3,
+            0.952
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.727
+          ]
+        ],
+        "all_scores": {
+          "3": 0.952,
+          "2": 0.727
+        }
+      }
+    ],
+    "final_idx": 3,
+    "final_score": 0.952,
+    "sampling_time": 475.2,
+    "total_time": 496.7
+  },
+  {
+    "video_idx": 105,
+    "prompt_preview": "Boiling: A timelapse captures the transformation of water in a pot as",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            1,
+            0.356
+          ],
+          [
+            2,
+            0.274
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.033
+          ],
+          [
+            3,
+            0.007
+          ]
+        ],
+        "all_scores": {
+          "1": 0.356,
+          "2": 0.274,
+          "0": 0.033,
+          "3": 0.007
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            1,
+            0.282
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.203
+          ]
+        ],
+        "all_scores": {
+          "1": 0.282,
+          "2": 0.203
+        }
+      }
+    ],
+    "final_idx": 1,
+    "final_score": 0.282,
+    "sampling_time": 475.3,
+    "total_time": 496.8
+  },
+  {
+    "video_idx": 106,
+    "prompt_preview": "Boiling: A timelapse captures the transformation of milk in a kettle",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            0.585
+          ],
+          [
+            3,
+            0.479
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.437
+          ],
+          [
+            1,
+            0.174
+          ]
+        ],
+        "all_scores": {
+          "2": 0.585,
+          "3": 0.479,
+          "0": 0.437,
+          "1": 0.174
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            0.708
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.491
+          ]
+        ],
+        "all_scores": {
+          "2": 0.708,
+          "3": 0.491
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 0.708,
+    "sampling_time": 475.2,
+    "total_time": 496.8
+  },
+  {
+    "video_idx": 107,
+    "prompt_preview": "Boiling: A timelapse captures the transformation of soup in a saucepa",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.431
+          ],
+          [
+            1,
+            0.128
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.099
+          ],
+          [
+            3,
+            0.047
+          ]
+        ],
+        "all_scores": {
+          "0": 0.431,
+          "1": 0.128,
+          "2": 0.099,
+          "3": 0.047
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.571
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.324
+          ]
+        ],
+        "all_scores": {
+          "0": 0.571,
+          "1": 0.324
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.571,
+    "sampling_time": 475.5,
+    "total_time": 497.0
+  },
+  {
+    "video_idx": 108,
+    "prompt_preview": "Boiling: A timelapse captures the transformation of tea in a teapot a",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.206
+          ],
+          [
+            2,
+            0.006
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.004
+          ],
+          [
+            3,
+            0.0
+          ]
+        ],
+        "all_scores": {
+          "0": 0.206,
+          "2": 0.006,
+          "1": 0.004,
+          "3": 0.0
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.326
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.003
+          ]
+        ],
+        "all_scores": {
+          "0": 0.326,
+          "2": 0.003
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.326,
+    "sampling_time": 475.4,
+    "total_time": 496.7
+  },
+  {
+    "video_idx": 109,
+    "prompt_preview": "Boiling: A timelapse captures the transformation of oil in a cauldron",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            0.364
+          ],
+          [
+            1,
+            0.06
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.04
+          ],
+          [
+            3,
+            0.029
+          ]
+        ],
+        "all_scores": {
+          "2": 0.364,
+          "1": 0.06,
+          "0": 0.04,
+          "3": 0.029
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            0.255
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.043
+          ]
+        ],
+        "all_scores": {
+          "2": 0.255,
+          "1": 0.043
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 0.255,
+    "sampling_time": 475.4,
+    "total_time": 497.1
+  },
+  {
+    "video_idx": 110,
+    "prompt_preview": "deposition: A timelapse captures the transformation as water vapor in a",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            1,
+            0.776
+          ],
+          [
+            3,
+            0.546
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.463
+          ],
+          [
+            2,
+            0.133
+          ]
+        ],
+        "all_scores": {
+          "1": 0.776,
+          "3": 0.546,
+          "0": 0.463,
+          "2": 0.133
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            1,
+            0.651
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.384
+          ]
+        ],
+        "all_scores": {
+          "1": 0.651,
+          "3": 0.384
+        }
+      }
+    ],
+    "final_idx": 1,
+    "final_score": 0.651,
+    "sampling_time": 475.2,
+    "total_time": 496.8
+  },
+  {
+    "video_idx": 111,
+    "prompt_preview": "deposition: A timelapse captures the transformation as steam in a kitche",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            1,
+            0.832
+          ],
+          [
+            0,
+            0.745
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.642
+          ],
+          [
+            3,
+            0.37
+          ]
+        ],
+        "all_scores": {
+          "1": 0.832,
+          "0": 0.745,
+          "2": 0.642,
+          "3": 0.37
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.712
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.603
+          ]
+        ],
+        "all_scores": {
+          "0": 0.712,
+          "1": 0.603
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.712,
+    "sampling_time": 475.2,
+    "total_time": 496.8
+  },
+  {
+    "video_idx": 112,
+    "prompt_preview": "deposition: A timelapse captures the transformation as mist in a rainfor",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.885
+          ],
+          [
+            1,
+            0.81
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.479
+          ],
+          [
+            2,
+            0.301
+          ]
+        ],
+        "all_scores": {
+          "0": 0.885,
+          "1": 0.81,
+          "3": 0.479,
+          "2": 0.301
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.864
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.846
+          ]
+        ],
+        "all_scores": {
+          "0": 0.864,
+          "1": 0.846
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.864,
+    "sampling_time": 475.1,
+    "total_time": 496.6
+  },
+  {
+    "video_idx": 113,
+    "prompt_preview": "deposition: A timelapse captures the transformation as fog in a mountain",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.912
+          ],
+          [
+            1,
+            0.74
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.687
+          ],
+          [
+            2,
+            0.581
+          ]
+        ],
+        "all_scores": {
+          "0": 0.912,
+          "1": 0.74,
+          "3": 0.687,
+          "2": 0.581
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.969
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.901
+          ]
+        ],
+        "all_scores": {
+          "0": 0.969,
+          "1": 0.901
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.969,
+    "sampling_time": 475.1,
+    "total_time": 496.9
+  },
+  {
+    "video_idx": 114,
+    "prompt_preview": "deposition: A timelapse captures the transformation as moisture in the a",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            0.534
+          ],
+          [
+            1,
+            0.397
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.332
+          ],
+          [
+            3,
+            0.053
+          ]
+        ],
+        "all_scores": {
+          "2": 0.534,
+          "1": 0.397,
+          "0": 0.332,
+          "3": 0.053
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            0.622
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.611
+          ]
+        ],
+        "all_scores": {
+          "2": 0.622,
+          "1": 0.611
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 0.622,
+    "sampling_time": 475.2,
+    "total_time": 496.8
+  },
+  {
+    "video_idx": 115,
+    "prompt_preview": "Sublimation: A timelapse captures the transformation of dry ice as it is",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            1,
+            0.708
+          ],
+          [
+            3,
+            0.667
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.423
+          ],
+          [
+            0,
+            0.08
+          ]
+        ],
+        "all_scores": {
+          "1": 0.708,
+          "3": 0.667,
+          "2": 0.423,
+          "0": 0.08
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            3,
+            0.72
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.679
+          ]
+        ],
+        "all_scores": {
+          "3": 0.72,
+          "1": 0.679
+        }
+      }
+    ],
+    "final_idx": 3,
+    "final_score": 0.72,
+    "sampling_time": 475.1,
+    "total_time": 496.5
+  },
+  {
+    "video_idx": 116,
+    "prompt_preview": "Sublimation: A timelapse captures the transformation of naphthalene as it",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            0.322
+          ],
+          [
+            3,
+            0.147
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.014
+          ],
+          [
+            1,
+            0.012
+          ]
+        ],
+        "all_scores": {
+          "2": 0.322,
+          "3": 0.147,
+          "0": 0.014,
+          "1": 0.012
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            0.345
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.113
+          ]
+        ],
+        "all_scores": {
+          "2": 0.345,
+          "3": 0.113
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 0.345,
+    "sampling_time": 475.3,
+    "total_time": 496.7
+  },
+  {
+    "video_idx": 117,
+    "prompt_preview": "Sublimation: A timelapse captures the transformation of iodine crystals a",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            3,
+            0.144
+          ],
+          [
+            1,
+            0.025
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.001
+          ],
+          [
+            0,
+            0.0
+          ]
+        ],
+        "all_scores": {
+          "3": 0.144,
+          "1": 0.025,
+          "2": 0.001,
+          "0": 0.0
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            3,
+            0.146
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.02
+          ]
+        ],
+        "all_scores": {
+          "3": 0.146,
+          "1": 0.02
+        }
+      }
+    ],
+    "final_idx": 3,
+    "final_score": 0.146,
+    "sampling_time": 475.4,
+    "total_time": 496.9
+  },
+  {
+    "video_idx": 118,
+    "prompt_preview": "Sublimation: A timelapse captures the transformation of camphor as it is",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            3,
+            0.23
+          ],
+          [
+            0,
+            0.152
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.091
+          ],
+          [
+            2,
+            0.006
+          ]
+        ],
+        "all_scores": {
+          "3": 0.23,
+          "0": 0.152,
+          "1": 0.091,
+          "2": 0.006
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            3,
+            0.254
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.152
+          ]
+        ],
+        "all_scores": {
+          "3": 0.254,
+          "0": 0.152
+        }
+      }
+    ],
+    "final_idx": 3,
+    "final_score": 0.254,
+    "sampling_time": 475.2,
+    "total_time": 496.6
+  },
+  {
+    "video_idx": 119,
+    "prompt_preview": "Sublimation: A timelapse captures the transformation of arsenic trioxide",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.041
+          ],
+          [
+            2,
+            0.01
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.004
+          ],
+          [
+            3,
+            0.001
+          ]
+        ],
+        "all_scores": {
+          "0": 0.041,
+          "2": 0.01,
+          "1": 0.004,
+          "3": 0.001
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.019
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.003
+          ]
+        ],
+        "all_scores": {
+          "0": 0.019,
+          "2": 0.003
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.019,
+    "sampling_time": 475.3,
+    "total_time": 496.7
+  },
+  {
+    "video_idx": 120,
+    "prompt_preview": "Color: Equal amounts of red and blue paint are rapidly combined, wi",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            0.808
+          ],
+          [
+            0,
+            0.121
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.039
+          ],
+          [
+            3,
+            0.013
+          ]
+        ],
+        "all_scores": {
+          "2": 0.808,
+          "0": 0.121,
+          "1": 0.039,
+          "3": 0.013
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.169
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.055
+          ]
+        ],
+        "all_scores": {
+          "0": 0.169,
+          "2": 0.055
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.169,
+    "sampling_time": 475.3,
+    "total_time": 497.0
+  },
+  {
+    "video_idx": 121,
+    "prompt_preview": "Color: Equal amounts of yellow and red paint are rapidly combined,",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.181
+          ],
+          [
+            1,
+            0.117
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.022
+          ],
+          [
+            3,
+            0.02
+          ]
+        ],
+        "all_scores": {
+          "0": 0.181,
+          "1": 0.117,
+          "2": 0.022,
+          "3": 0.02
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            1,
+            0.079
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.049
+          ]
+        ],
+        "all_scores": {
+          "1": 0.079,
+          "0": 0.049
+        }
+      }
+    ],
+    "final_idx": 1,
+    "final_score": 0.079,
+    "sampling_time": 475.3,
+    "total_time": 497.0
+  },
+  {
+    "video_idx": 122,
+    "prompt_preview": "Color: Equal amounts of green and blue paint are rapidly combined,",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.386
+          ],
+          [
+            2,
+            0.101
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.024
+          ],
+          [
+            3,
+            0.022
+          ]
+        ],
+        "all_scores": {
+          "0": 0.386,
+          "2": 0.101,
+          "1": 0.024,
+          "3": 0.022
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            0.188
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.147
+          ]
+        ],
+        "all_scores": {
+          "2": 0.188,
+          "0": 0.147
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 0.188,
+    "sampling_time": 475.3,
+    "total_time": 497.1
+  },
+  {
+    "video_idx": 123,
+    "prompt_preview": "Color: Equal amounts of cyan and magenta paint are rapidly combined",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.883
+          ],
+          [
+            2,
+            0.379
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.242
+          ],
+          [
+            1,
+            0.0
+          ]
+        ],
+        "all_scores": {
+          "0": 0.883,
+          "2": 0.379,
+          "3": 0.242,
+          "1": 0.0
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.94
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.063
+          ]
+        ],
+        "all_scores": {
+          "0": 0.94,
+          "2": 0.063
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.94,
+    "sampling_time": 475.3,
+    "total_time": 497.1
+  },
+  {
+    "video_idx": 124,
+    "prompt_preview": "Color: Equal amounts of pink and white paint are rapidly combined,",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            3,
+            0.212
+          ],
+          [
+            1,
+            0.074
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.056
+          ],
+          [
+            2,
+            0.012
+          ]
+        ],
+        "all_scores": {
+          "3": 0.212,
+          "1": 0.074,
+          "0": 0.056,
+          "2": 0.012
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            3,
+            0.098
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.023
+          ]
+        ],
+        "all_scores": {
+          "3": 0.098,
+          "1": 0.023
+        }
+      }
+    ],
+    "final_idx": 3,
+    "final_score": 0.098,
+    "sampling_time": 475.3,
+    "total_time": 497.0
+  },
+  {
+    "video_idx": 125,
+    "prompt_preview": "Flame Reaction: A piece of copper is ignited, emitting a vivid and unique fl",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.211
+          ],
+          [
+            2,
+            0.198
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.129
+          ],
+          [
+            1,
+            0.068
+          ]
+        ],
+        "all_scores": {
+          "0": 0.211,
+          "2": 0.198,
+          "3": 0.129,
+          "1": 0.068
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            0.069
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.012
+          ]
+        ],
+        "all_scores": {
+          "2": 0.069,
+          "0": 0.012
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 0.069,
+    "sampling_time": 475.3,
+    "total_time": 496.8
+  },
+  {
+    "video_idx": 126,
+    "prompt_preview": "Flame Reaction: A piece of magnesium is ignited, emitting a vivid and unique",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            1,
+            0.125
+          ],
+          [
+            0,
+            0.022
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.02
+          ],
+          [
+            2,
+            0.001
+          ]
+        ],
+        "all_scores": {
+          "1": 0.125,
+          "0": 0.022,
+          "3": 0.02,
+          "2": 0.001
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            1,
+            0.088
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.001
+          ]
+        ],
+        "all_scores": {
+          "1": 0.088,
+          "0": 0.001
+        }
+      }
+    ],
+    "final_idx": 1,
+    "final_score": 0.088,
+    "sampling_time": 475.2,
+    "total_time": 496.7
+  },
+  {
+    "video_idx": 127,
+    "prompt_preview": "Flame Reaction: A piece of lithium is ignited, emitting a vivid and unique f",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            0.317
+          ],
+          [
+            1,
+            0.088
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.042
+          ],
+          [
+            0,
+            0.028
+          ]
+        ],
+        "all_scores": {
+          "2": 0.317,
+          "1": 0.088,
+          "3": 0.042,
+          "0": 0.028
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            0.256
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.034
+          ]
+        ],
+        "all_scores": {
+          "2": 0.256,
+          "1": 0.034
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 0.256,
+    "sampling_time": 475.3,
+    "total_time": 496.7
+  },
+  {
+    "video_idx": 128,
+    "prompt_preview": "Flame Reaction: A piece of sodium is ignited, emitting a vivid and unique fl",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            1,
+            0.065
+          ],
+          [
+            0,
+            0.055
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.015
+          ],
+          [
+            2,
+            0.014
+          ]
+        ],
+        "all_scores": {
+          "1": 0.065,
+          "0": 0.055,
+          "3": 0.015,
+          "2": 0.014
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            1,
+            0.062
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.046
+          ]
+        ],
+        "all_scores": {
+          "1": 0.062,
+          "0": 0.046
+        }
+      }
+    ],
+    "final_idx": 1,
+    "final_score": 0.062,
+    "sampling_time": 475.2,
+    "total_time": 496.5
+  },
+  {
+    "video_idx": 129,
+    "prompt_preview": "Flame Reaction: A piece of potassium is ignited, emitting a vivid and unique",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.35
+          ],
+          [
+            3,
+            0.101
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.046
+          ],
+          [
+            2,
+            0.043
+          ]
+        ],
+        "all_scores": {
+          "0": 0.35,
+          "3": 0.101,
+          "1": 0.046,
+          "2": 0.043
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.216
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.094
+          ]
+        ],
+        "all_scores": {
+          "0": 0.216,
+          "3": 0.094
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.216,
+    "sampling_time": 475.3,
+    "total_time": 496.7
+  },
+  {
+    "video_idx": 130,
+    "prompt_preview": "Hardness: A delicate, fragile egg is hurled with significant force tow",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            1.0
+          ],
+          [
+            1,
+            0.914
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.42
+          ],
+          [
+            3,
+            0.065
+          ]
+        ],
+        "all_scores": {
+          "2": 1.0,
+          "1": 0.914,
+          "0": 0.42,
+          "3": 0.065
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            1.0
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.975
+          ]
+        ],
+        "all_scores": {
+          "2": 1.0,
+          "1": 0.975
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 1.0,
+    "sampling_time": 475.2,
+    "total_time": 496.4
+  },
+  {
+    "video_idx": 131,
+    "prompt_preview": "Hardness: A lightweight, fragile vase is thrown with great force again",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            1,
+            0.832
+          ],
+          [
+            2,
+            0.81
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.022
+          ],
+          [
+            0,
+            0.003
+          ]
+        ],
+        "all_scores": {
+          "1": 0.832,
+          "2": 0.81,
+          "3": 0.022,
+          "0": 0.003
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            0.836
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.803
+          ]
+        ],
+        "all_scores": {
+          "2": 0.836,
+          "1": 0.803
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 0.836,
+    "sampling_time": 475.2,
+    "total_time": 496.5
+  },
+  {
+    "video_idx": 132,
+    "prompt_preview": "Hardness: A delicate, fragile glass bottle is hurled with significant",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.992
+          ],
+          [
+            2,
+            0.984
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.969
+          ],
+          [
+            3,
+            0.896
+          ]
+        ],
+        "all_scores": {
+          "0": 0.992,
+          "2": 0.984,
+          "1": 0.969,
+          "3": 0.896
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            1.0
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.995
+          ]
+        ],
+        "all_scores": {
+          "0": 1.0,
+          "2": 0.995
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 1.0,
+    "sampling_time": 475.1,
+    "total_time": 496.3
+  },
+  {
+    "video_idx": 133,
+    "prompt_preview": "Hardness: A flimsy, brittle glass cup is propelled with force towards",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            1,
+            0.783
+          ],
+          [
+            2,
+            0.653
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.61
+          ],
+          [
+            0,
+            0.279
+          ]
+        ],
+        "all_scores": {
+          "1": 0.783,
+          "2": 0.653,
+          "3": 0.61,
+          "0": 0.279
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            1,
+            0.8
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.696
+          ]
+        ],
+        "all_scores": {
+          "1": 0.8,
+          "2": 0.696
+        }
+      }
+    ],
+    "final_idx": 1,
+    "final_score": 0.8,
+    "sampling_time": 475.1,
+    "total_time": 496.4
+  },
+  {
+    "video_idx": 134,
+    "prompt_preview": "Hardness: A weak, frail porcelain plate is flung with significant spee",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            1,
+            0.849
+          ],
+          [
+            0,
+            0.806
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.425
+          ],
+          [
+            3,
+            0.114
+          ]
+        ],
+        "all_scores": {
+          "1": 0.849,
+          "0": 0.806,
+          "2": 0.425,
+          "3": 0.114
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            1,
+            0.928
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.866
+          ]
+        ],
+        "all_scores": {
+          "1": 0.928,
+          "0": 0.866
+        }
+      }
+    ],
+    "final_idx": 1,
+    "final_score": 0.928,
+    "sampling_time": 475.1,
+    "total_time": 496.4
+  },
+  {
+    "video_idx": 135,
+    "prompt_preview": "Solubility: A clear glass of oil is gently poured into a glass of water",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.385
+          ],
+          [
+            1,
+            0.292
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.256
+          ],
+          [
+            3,
+            0.087
+          ]
+        ],
+        "all_scores": {
+          "0": 0.385,
+          "1": 0.292,
+          "2": 0.256,
+          "3": 0.087
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.404
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.319
+          ]
+        ],
+        "all_scores": {
+          "0": 0.404,
+          "1": 0.319
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.404,
+    "sampling_time": 475.2,
+    "total_time": 496.6
+  },
+  {
+    "video_idx": 136,
+    "prompt_preview": "Solubility: A clear glass of honey is gently poured into a glass of milk",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            3,
+            0.286
+          ],
+          [
+            0,
+            0.276
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.224
+          ],
+          [
+            1,
+            0.198
+          ]
+        ],
+        "all_scores": {
+          "3": 0.286,
+          "0": 0.276,
+          "2": 0.224,
+          "1": 0.198
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            3,
+            0.3
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.293
+          ]
+        ],
+        "all_scores": {
+          "3": 0.3,
+          "0": 0.293
+        }
+      }
+    ],
+    "final_idx": 3,
+    "final_score": 0.3,
+    "sampling_time": 475.1,
+    "total_time": 496.4
+  },
+  {
+    "video_idx": 137,
+    "prompt_preview": "Solubility: A clear glass of vinegar is gently poured into a glass of wa",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            0.558
+          ],
+          [
+            3,
+            0.294
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.278
+          ],
+          [
+            1,
+            0.24
+          ]
+        ],
+        "all_scores": {
+          "2": 0.558,
+          "3": 0.294,
+          "0": 0.278,
+          "1": 0.24
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            0.555
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.33
+          ]
+        ],
+        "all_scores": {
+          "2": 0.555,
+          "3": 0.33
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 0.555,
+    "sampling_time": 475.1,
+    "total_time": 496.5
+  },
+  {
+    "video_idx": 138,
+    "prompt_preview": "Solubility: A clear glass of juice is gently poured into a glass of wate",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            0.367
+          ],
+          [
+            3,
+            0.108
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.042
+          ],
+          [
+            1,
+            0.026
+          ]
+        ],
+        "all_scores": {
+          "2": 0.367,
+          "3": 0.108,
+          "0": 0.042,
+          "1": 0.026
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            0.402
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.097
+          ]
+        ],
+        "all_scores": {
+          "2": 0.402,
+          "3": 0.097
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 0.402,
+    "sampling_time": 475.0,
+    "total_time": 496.4
+  },
+  {
+    "video_idx": 139,
+    "prompt_preview": "Solubility: A bottle of vinegar is gently poured into a glass of oil",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            3,
+            0.52
+          ],
+          [
+            0,
+            0.35
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.161
+          ],
+          [
+            2,
+            0.118
+          ]
+        ],
+        "all_scores": {
+          "3": 0.52,
+          "0": 0.35,
+          "1": 0.161,
+          "2": 0.118
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            3,
+            0.637
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.476
+          ]
+        ],
+        "all_scores": {
+          "3": 0.637,
+          "0": 0.476
+        }
+      }
+    ],
+    "final_idx": 3,
+    "final_score": 0.637,
+    "sampling_time": 475.2,
+    "total_time": 496.5
+  },
+  {
+    "video_idx": 140,
+    "prompt_preview": "Combustibility: A small burning ball of paper was thrown into a pile of dry",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            0.417
+          ],
+          [
+            1,
+            0.174
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.071
+          ],
+          [
+            0,
+            0.004
+          ]
+        ],
+        "all_scores": {
+          "2": 0.417,
+          "1": 0.174,
+          "3": 0.071,
+          "0": 0.004
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            0.422
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.308
+          ]
+        ],
+        "all_scores": {
+          "2": 0.422,
+          "1": 0.308
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 0.422,
+    "sampling_time": 475.2,
+    "total_time": 496.5
+  },
+  {
+    "video_idx": 141,
+    "prompt_preview": "Combustibility: A small burning match was thrown into a pile of dry leaves",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            3,
+            0.57
+          ],
+          [
+            0,
+            0.291
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.026
+          ],
+          [
+            1,
+            0.0
+          ]
+        ],
+        "all_scores": {
+          "3": 0.57,
+          "0": 0.291,
+          "2": 0.026,
+          "1": 0.0
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            3,
+            0.61
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.251
+          ]
+        ],
+        "all_scores": {
+          "3": 0.61,
+          "0": 0.251
+        }
+      }
+    ],
+    "final_idx": 3,
+    "final_score": 0.61,
+    "sampling_time": 475.2,
+    "total_time": 496.9
+  },
+  {
+    "video_idx": 142,
+    "prompt_preview": "Combustibility: A small burning stick was thrown into a pile of hay",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            0.067
+          ],
+          [
+            3,
+            0.022
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.018
+          ],
+          [
+            0,
+            0.004
+          ]
+        ],
+        "all_scores": {
+          "2": 0.067,
+          "3": 0.022,
+          "1": 0.018,
+          "0": 0.004
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            0.158
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.138
+          ]
+        ],
+        "all_scores": {
+          "2": 0.158,
+          "3": 0.138
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 0.158,
+    "sampling_time": 475.2,
+    "total_time": 496.9
+  },
+  {
+    "video_idx": 143,
+    "prompt_preview": "Combustibility: A small burning candle was thrown into a pile of dry grass",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            0.977
+          ],
+          [
+            0,
+            0.879
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.065
+          ],
+          [
+            1,
+            0.0
+          ]
+        ],
+        "all_scores": {
+          "2": 0.977,
+          "0": 0.879,
+          "3": 0.065,
+          "1": 0.0
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            0.988
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.876
+          ]
+        ],
+        "all_scores": {
+          "2": 0.988,
+          "0": 0.876
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 0.988,
+    "sampling_time": 475.1,
+    "total_time": 496.5
+  },
+  {
+    "video_idx": 144,
+    "prompt_preview": "Combustibility: A small burning piece of cloth was thrown into a pile of old",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.206
+          ],
+          [
+            1,
+            0.024
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.006
+          ],
+          [
+            3,
+            0.005
+          ]
+        ],
+        "all_scores": {
+          "0": 0.206,
+          "1": 0.024,
+          "2": 0.006,
+          "3": 0.005
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.077
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.022
+          ]
+        ],
+        "all_scores": {
+          "0": 0.077,
+          "1": 0.022
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.077,
+    "sampling_time": 475.2,
+    "total_time": 496.8
+  },
+  {
+    "video_idx": 145,
+    "prompt_preview": "Acidity and Alkalinity: A timelapse captures the transformation as colorless vin",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.241
+          ],
+          [
+            3,
+            0.134
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.104
+          ],
+          [
+            1,
+            0.048
+          ]
+        ],
+        "all_scores": {
+          "0": 0.241,
+          "3": 0.134,
+          "2": 0.104,
+          "1": 0.048
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.333
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.256
+          ]
+        ],
+        "all_scores": {
+          "0": 0.333,
+          "3": 0.256
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.333,
+    "sampling_time": 475.2,
+    "total_time": 496.6
+  },
+  {
+    "video_idx": 146,
+    "prompt_preview": "Acidity and Alkalinity: A timelapse captures the transformation as hydrochloric ",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            0.207
+          ],
+          [
+            0,
+            0.064
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.051
+          ],
+          [
+            3,
+            0.01
+          ]
+        ],
+        "all_scores": {
+          "2": 0.207,
+          "0": 0.064,
+          "1": 0.051,
+          "3": 0.01
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            0.218
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.05
+          ]
+        ],
+        "all_scores": {
+          "2": 0.218,
+          "0": 0.05
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 0.218,
+    "sampling_time": 475.3,
+    "total_time": 496.7
+  },
+  {
+    "video_idx": 147,
+    "prompt_preview": "Acidity and Alkalinity: A timelapse captures the transformation as colorless sod",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            1,
+            0.578
+          ],
+          [
+            0,
+            0.496
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.379
+          ],
+          [
+            2,
+            0.178
+          ]
+        ],
+        "all_scores": {
+          "1": 0.578,
+          "0": 0.496,
+          "3": 0.379,
+          "2": 0.178
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            1,
+            0.712
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.542
+          ]
+        ],
+        "all_scores": {
+          "1": 0.712,
+          "0": 0.542
+        }
+      }
+    ],
+    "final_idx": 1,
+    "final_score": 0.712,
+    "sampling_time": 475.3,
+    "total_time": 496.7
+  },
+  {
+    "video_idx": 148,
+    "prompt_preview": "Acidity and Alkalinity: A timelapse captures the transformation as lemon juice i",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.605
+          ],
+          [
+            2,
+            0.005
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.003
+          ],
+          [
+            3,
+            0.001
+          ]
+        ],
+        "all_scores": {
+          "0": 0.605,
+          "2": 0.005,
+          "1": 0.003,
+          "3": 0.001
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.67
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.004
+          ]
+        ],
+        "all_scores": {
+          "0": 0.67,
+          "2": 0.004
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.67,
+    "sampling_time": 475.1,
+    "total_time": 496.5
+  },
+  {
+    "video_idx": 149,
+    "prompt_preview": "Acidity and Alkalinity: A timelapse captures the transformation as orange juice ",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            1,
+            0.184
+          ],
+          [
+            2,
+            0.04
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.017
+          ],
+          [
+            3,
+            0.015
+          ]
+        ],
+        "all_scores": {
+          "1": 0.184,
+          "2": 0.04,
+          "0": 0.017,
+          "3": 0.015
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            1,
+            0.214
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.024
+          ]
+        ],
+        "all_scores": {
+          "1": 0.214,
+          "2": 0.024
+        }
+      }
+    ],
+    "final_idx": 1,
+    "final_score": 0.214,
+    "sampling_time": 475.1,
+    "total_time": 496.5
+  },
+  {
+    "video_idx": 150,
+    "prompt_preview": "Dehydration property: A timelapse captures the reaction as concentrated sulfuric",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.791
+          ],
+          [
+            3,
+            0.709
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.163
+          ],
+          [
+            1,
+            0.061
+          ]
+        ],
+        "all_scores": {
+          "0": 0.791,
+          "3": 0.709,
+          "2": 0.163,
+          "1": 0.061
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.788
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.704
+          ]
+        ],
+        "all_scores": {
+          "0": 0.788,
+          "3": 0.704
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.788,
+    "sampling_time": 475.1,
+    "total_time": 496.5
+  },
+  {
+    "video_idx": 151,
+    "prompt_preview": "Dehydration property: A timelapse captures the reaction as concentrated sulfuric",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            0.124
+          ],
+          [
+            3,
+            0.083
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.067
+          ],
+          [
+            1,
+            0.026
+          ]
+        ],
+        "all_scores": {
+          "2": 0.124,
+          "3": 0.083,
+          "0": 0.067,
+          "1": 0.026
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            0.321
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.071
+          ]
+        ],
+        "all_scores": {
+          "2": 0.321,
+          "3": 0.071
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 0.321,
+    "sampling_time": 475.1,
+    "total_time": 496.5
+  },
+  {
+    "video_idx": 152,
+    "prompt_preview": "Dehydration property: A timelapse captures the reaction as concentrated sulfuric",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            3,
+            0.638
+          ],
+          [
+            0,
+            0.539
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.513
+          ],
+          [
+            2,
+            0.445
+          ]
+        ],
+        "all_scores": {
+          "3": 0.638,
+          "0": 0.539,
+          "1": 0.513,
+          "2": 0.445
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            3,
+            0.733
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.587
+          ]
+        ],
+        "all_scores": {
+          "3": 0.733,
+          "0": 0.587
+        }
+      }
+    ],
+    "final_idx": 3,
+    "final_score": 0.733,
+    "sampling_time": 475.0,
+    "total_time": 496.5
+  },
+  {
+    "video_idx": 153,
+    "prompt_preview": "Dehydration property: A timelapse captures the reaction as concentrated sulfuric",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            1,
+            0.839
+          ],
+          [
+            2,
+            0.685
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.639
+          ],
+          [
+            3,
+            0.61
+          ]
+        ],
+        "all_scores": {
+          "1": 0.839,
+          "2": 0.685,
+          "0": 0.639,
+          "3": 0.61
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            1,
+            0.819
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.613
+          ]
+        ],
+        "all_scores": {
+          "1": 0.819,
+          "2": 0.613
+        }
+      }
+    ],
+    "final_idx": 1,
+    "final_score": 0.819,
+    "sampling_time": 475.1,
+    "total_time": 496.7
+  },
+  {
+    "video_idx": 154,
+    "prompt_preview": "Dehydration property: A timelapse captures the reaction as concentrated sulfuric",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.812
+          ],
+          [
+            2,
+            0.735
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.575
+          ],
+          [
+            1,
+            0.377
+          ]
+        ],
+        "all_scores": {
+          "0": 0.812,
+          "2": 0.735,
+          "3": 0.575,
+          "1": 0.377
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.844
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.594
+          ]
+        ],
+        "all_scores": {
+          "0": 0.844,
+          "2": 0.594
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.844,
+    "sampling_time": 475.2,
+    "total_time": 496.8
+  },
+  {
+    "video_idx": 155,
+    "prompt_preview": "Redox property: A timelapse captures the transformation of a clean and smoot",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            0.555
+          ],
+          [
+            0,
+            0.17
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.057
+          ],
+          [
+            1,
+            0.009
+          ]
+        ],
+        "all_scores": {
+          "2": 0.555,
+          "0": 0.17,
+          "3": 0.057,
+          "1": 0.009
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            0.64
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.363
+          ]
+        ],
+        "all_scores": {
+          "2": 0.64,
+          "0": 0.363
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 0.64,
+    "sampling_time": 475.7,
+    "total_time": 497.6
+  },
+  {
+    "video_idx": 156,
+    "prompt_preview": "Redox property: A timelapse captures the transformation of a clean and smoot",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            1,
+            0.768
+          ],
+          [
+            2,
+            0.191
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.05
+          ],
+          [
+            0,
+            0.011
+          ]
+        ],
+        "all_scores": {
+          "1": 0.768,
+          "2": 0.191,
+          "3": 0.05,
+          "0": 0.011
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            1,
+            0.899
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.317
+          ]
+        ],
+        "all_scores": {
+          "1": 0.899,
+          "2": 0.317
+        }
+      }
+    ],
+    "final_idx": 1,
+    "final_score": 0.899,
+    "sampling_time": 475.2,
+    "total_time": 497.2
+  },
+  {
+    "video_idx": 157,
+    "prompt_preview": "Redox property: A timelapse shows the changes in a shiny and new metal chair",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            0.015
+          ],
+          [
+            0,
+            0.0
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.0
+          ],
+          [
+            1,
+            0.0
+          ]
+        ],
+        "all_scores": {
+          "2": 0.015,
+          "0": 0.0,
+          "3": 0.0,
+          "1": 0.0
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            2,
+            0.029
+          ]
+        ],
+        "prune": [
+          [
+            0,
+            0.001
+          ]
+        ],
+        "all_scores": {
+          "2": 0.029,
+          "0": 0.001
+        }
+      }
+    ],
+    "final_idx": 2,
+    "final_score": 0.029,
+    "sampling_time": 475.4,
+    "total_time": 497.2
+  },
+  {
+    "video_idx": 158,
+    "prompt_preview": "Redox property: A timelapse video documents the gradual decay of a polished",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            2,
+            0.988
+          ],
+          [
+            3,
+            0.987
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.953
+          ],
+          [
+            0,
+            0.633
+          ]
+        ],
+        "all_scores": {
+          "2": 0.988,
+          "3": 0.987,
+          "1": 0.953,
+          "0": 0.633
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            3,
+            0.998
+          ]
+        ],
+        "prune": [
+          [
+            2,
+            0.973
+          ]
+        ],
+        "all_scores": {
+          "3": 0.998,
+          "2": 0.973
+        }
+      }
+    ],
+    "final_idx": 3,
+    "final_score": 0.998,
+    "sampling_time": 475.0,
+    "total_time": 497.0
+  },
+  {
+    "video_idx": 159,
+    "prompt_preview": "Redox property: A timelapse records the oxidation process of a bright and ne",
+    "n_trajectories": 4,
+    "checkpoints": [
+      {
+        "step": 20,
+        "timestep": 599,
+        "keep": [
+          [
+            0,
+            0.946
+          ],
+          [
+            3,
+            0.899
+          ]
+        ],
+        "prune": [
+          [
+            1,
+            0.685
+          ],
+          [
+            2,
+            0.045
+          ]
+        ],
+        "all_scores": {
+          "0": 0.946,
+          "3": 0.899,
+          "1": 0.685,
+          "2": 0.045
+        }
+      },
+      {
+        "step": 30,
+        "timestep": 399,
+        "keep": [
+          [
+            0,
+            0.912
+          ]
+        ],
+        "prune": [
+          [
+            3,
+            0.842
+          ]
+        ],
+        "all_scores": {
+          "0": 0.912,
+          "3": 0.842
+        }
+      }
+    ],
+    "final_idx": 0,
+    "final_score": 0.912,
+    "sampling_time": 474.8,
+    "total_time": 496.7
+  }
+]

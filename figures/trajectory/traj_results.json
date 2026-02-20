@@ -1,0 +1,188 @@
+{
+  "total_videos": 80,
+  "first_checkpoint_agreement": 66,
+  "first_checkpoint_disagreement": 14,
+  "disagreement_cases": [
+    {
+      "video_idx": 81,
+      "prompt": "Interference & Diffraction: A soap bubble floating in the air under the sunlight",
+      "cp1_winner": 2,
+      "cp1_winner_score": 0.75,
+      "final_winner": 0,
+      "final_winner_score": 0.478,
+      "final_winner_cp1_score": 0.191,
+      "score_gap_at_cp1": 0.5589999999999999,
+      "cp1_winner_survived_cp1": true
+    },
+    {
+      "video_idx": 87,
+      "prompt": "Dispersion: A beam of light passes through a droplet of water",
+      "cp1_winner": 1,
+      "cp1_winner_score": 0.414,
+      "final_winner": 0,
+      "final_winner_score": 0.829,
+      "final_winner_cp1_score": 0.228,
+      "score_gap_at_cp1": 0.18599999999999997,
+      "cp1_winner_survived_cp1": true
+    },
+    {
+      "video_idx": 94,
+      "prompt": "Solidification: A timelapse captures the transformation of a glass of beer a",
+      "cp1_winner": 2,
+      "cp1_winner_score": 0.342,
+      "final_winner": 0,
+      "final_winner_score": 0.534,
+      "final_winner_cp1_score": 0.321,
+      "score_gap_at_cp1": 0.02100000000000002,
+      "cp1_winner_survived_cp1": true
+    },
+    {
+      "video_idx": 97,
+      "prompt": "Melting: A timelapse captures the gradual transformation of butter as",
+      "cp1_winner": 1,
+      "cp1_winner_score": 0.375,
+      "final_winner": 2,
+      "final_winner_score": 0.222,
+      "final_winner_cp1_score": 0.241,
+      "score_gap_at_cp1": 0.134,
+      "cp1_winner_survived_cp1": true
+    },
+    {
+      "video_idx": 98,
+      "prompt": "Melting: A timelapse captures the gradual transformation of ice cream",
+      "cp1_winner": 3,
+      "cp1_winner_score": 0.212,
+      "final_winner": 0,
+      "final_winner_score": 0.194,
+      "final_winner_cp1_score": 0.151,
+      "score_gap_at_cp1": 0.061,
+      "cp1_winner_survived_cp1": true
+    },
+    {
+      "video_idx": 99,
+      "prompt": "Melting: A timelapse captures the gradual transformation of wax as th",
+      "cp1_winner": 1,
+      "cp1_winner_score": 0.814,
+      "final_winner": 3,
+      "final_winner_score": 0.792,
+      "final_winner_cp1_score": 0.799,
+      "score_gap_at_cp1": 0.014999999999999902,
+      "cp1_winner_survived_cp1": true
+    },
+    {
+      "video_idx": 111,
+      "prompt": "deposition: A timelapse captures the transformation as steam in a kitche",
+      "cp1_winner": 1,
+      "cp1_winner_score": 0.832,
+      "final_winner": 0,
+      "final_winner_score": 0.712,
+      "final_winner_cp1_score": 0.745,
+      "score_gap_at_cp1": 0.08699999999999997,
+      "cp1_winner_survived_cp1": true
+    },
+    {
+      "video_idx": 115,
+      "prompt": "Sublimation: A timelapse captures the transformation of dry ice as it is",
+      "cp1_winner": 1,
+      "cp1_winner_score": 0.708,
+      "final_winner": 3,
+      "final_winner_score": 0.72,
+      "final_winner_cp1_score": 0.667,
+      "score_gap_at_cp1": 0.040999999999999925,
+      "cp1_winner_survived_cp1": true
+    },
+    {
+      "video_idx": 120,
+      "prompt": "Color: Equal amounts of red and blue paint are rapidly combined, wi",
+      "cp1_winner": 2,
+      "cp1_winner_score": 0.808,
+      "final_winner": 0,
+      "final_winner_score": 0.169,
+      "final_winner_cp1_score": 0.121,
+      "score_gap_at_cp1": 0.687,
+      "cp1_winner_survived_cp1": true
+    },
+    {
+      "video_idx": 121,
+      "prompt": "Color: Equal amounts of yellow and red paint are rapidly combined,",
+      "cp1_winner": 0,
+      "cp1_winner_score": 0.181,
+      "final_winner": 1,
+      "final_winner_score": 0.079,
+      "final_winner_cp1_score": 0.117,
+      "score_gap_at_cp1": 0.06399999999999999,
+      "cp1_winner_survived_cp1": true
+    },
+    {
+      "video_idx": 122,
+      "prompt": "Color: Equal amounts of green and blue paint are rapidly combined,",
+      "cp1_winner": 0,
+      "cp1_winner_score": 0.386,
+      "final_winner": 2,
+      "final_winner_score": 0.188,
+      "final_winner_cp1_score": 0.101,
+      "score_gap_at_cp1": 0.28500000000000003,
+      "cp1_winner_survived_cp1": true
+    },
+    {
+      "video_idx": 125,
+      "prompt": "Flame Reaction: A piece of copper is ignited, emitting a vivid and unique fl",
+      "cp1_winner": 0,
+      "cp1_winner_score": 0.211,
+      "final_winner": 2,
+      "final_winner_score": 0.069,
+      "final_winner_cp1_score": 0.198,
+      "score_gap_at_cp1": 0.012999999999999984,
+      "cp1_winner_survived_cp1": true
+    },
+    {
+      "video_idx": 131,
+      "prompt": "Hardness: A lightweight, fragile vase is thrown with great force again",
+      "cp1_winner": 1,
+      "cp1_winner_score": 0.832,
+      "final_winner": 2,
+      "final_winner_score": 0.836,
+      "final_winner_cp1_score": 0.81,
+      "score_gap_at_cp1": 0.02199999999999991,
+      "cp1_winner_survived_cp1": true
+    },
+    {
+      "video_idx": 158,
+      "prompt": "Redox property: A timelapse video documents the gradual decay of a polished",
+      "cp1_winner": 2,
+      "cp1_winner_score": 0.988,
+      "final_winner": 3,
+      "final_winner_score": 0.998,
+      "final_winner_cp1_score": 0.987,
+      "score_gap_at_cp1": 0.0010000000000000009,
+      "cp1_winner_survived_cp1": true
+    }
+  ],
+  "score_distributions": {
+    "first_checkpoint_argmax_score": {
+      "mean": 0.53175,
+      "std": 0.31630173489881463,
+      "min": 0.015,
+      "max": 1.0
+    },
+    "final_winner_score": {
+      "mean": 0.543575,
+      "std": 0.32702258236244175,
+      "min": 0.019,
+      "max": 1.0
+    }
+  },
+  "per_checkpoint_stats": [
+    {
+      "checkpoint_idx": 0,
+      "score_spread_mean": 0.43206249999999996,
+      "score_spread_std": 0.28623501461866957
+    },
+    {
+      "checkpoint_idx": 1,
+      "score_spread_mean": 0.17582499999999998,
+      "score_spread_std": 0.1839500458684368
+    }
+  ],
+  "agreement_rate": 0.825
+}

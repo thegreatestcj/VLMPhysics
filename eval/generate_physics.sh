@@ -4,9 +4,9 @@
 #SBATCH -C geforce3090
 #SBATCH --mem=48G
 #SBATCH -n 4
-#SBATCH -t 24:00:00
+#SBATCH -t 20:00:00
 #SBATCH -N 1
-#SBATCH --output=slurm/phygenbench/physics/traj8-%j.out
+#SBATCH --output=slurm/phygenbench/random/random-%j.out
 
 # ============================================================
 # PhyGenBench Generation with Physics Head Trajectory Pruning
@@ -61,14 +61,14 @@ cd ~/repos/VLMPhysics
 
 # Best config from ablation: mean head, layer 15, with SA multi-task
 # UPDATE this path to your actual best checkpoint
-PHYSICS_HEAD="results/training/final_head/mean_l15_full.pt"
+PHYSICS_HEAD="results/training/final_head/mean_l15_cogx2b.pt" 
 HEAD_TYPE="mean"
 EXTRACT_LAYER=15
 
 # Mode: "prune" (ours), "best_of_n" (baseline), "random" (ablation)
-MODE="prune"
+MODE="random"
 
-OUTPUT_DIR="outputs/phygenbench/videophy_mean_l15_full_traj8"
+OUTPUT_DIR="outputs/phygenbench/random"
 
 # Check if physics head exists
 if [ ! -f "$PHYSICS_HEAD" ]; then
@@ -112,8 +112,7 @@ python eval/generate_physics.py \
     --head-type "$HEAD_TYPE" \
     --extract-layer $EXTRACT_LAYER \
     --mode "$MODE" \
-    --num-trajectories 8 \
-    --checkpoints 600 400 200 \
+    --num-trajectories 4 \
     --steps 50 \
     --frames 49 \
     --guidance 6.0 \
@@ -121,7 +120,7 @@ python eval/generate_physics.py \
     --start 0 \
     --end 80 \
     --skip-existing
-    --force-head-type
+#     --force-head-type
 
 # --- Block B: prompts 80-159 ---
 # python eval/generate_physics.py \
@@ -131,8 +130,7 @@ python eval/generate_physics.py \
 #     --head-type "$HEAD_TYPE" \
 #     --extract-layer $EXTRACT_LAYER \
 #     --mode "$MODE" \
-#     --num-trajectories 8 \
-#     --checkpoints 600 400 200 \
+#     --num-trajectories 4 \
 #     --steps 50 \
 #     --frames 49 \
 #     --guidance 6.0 \

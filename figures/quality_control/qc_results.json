@@ -1,0 +1,68 @@
+{
+  "config": {
+    "feature_dir": "/users/ctang33/scratch/physics/videophy_cogx_features",
+    "metadata_file": "/users/ctang33/scratch/physics/videophy_cogx/metadata.json",
+    "vqascores_file": "/users/ctang33/scratch/physics/videophy_cogx/vqascores.json",
+    "layer": 10,
+    "timesteps": [
+      200,
+      400,
+      600
+    ]
+  },
+  "per_timestep": {
+    "200": {
+      "original": {
+        "auc_mean": 0.6307822727896073,
+        "auc_std": 0.03323823949430991
+      },
+      "residual": {
+        "auc_mean": 0.6336017048002207,
+        "auc_std": 0.03357559552430842
+      },
+      "quality_only_auc": 0.5548844681263129,
+      "n_samples": 1275,
+      "auc_drop": -0.0028194320106134096
+    },
+    "400": {
+      "original": {
+        "auc_mean": 0.6440349527189129,
+        "auc_std": 0.03976275056044437
+      },
+      "residual": {
+        "auc_mean": 0.6416776781188029,
+        "auc_std": 0.04467666765013547
+      },
+      "quality_only_auc": 0.5548844681263129,
+      "n_samples": 1275,
+      "auc_drop": 0.0023572746001099265
+    },
+    "600": {
+      "original": {
+        "auc_mean": 0.6429918627531045,
+        "auc_std": 0.028848787992929965
+      },
+      "residual": {
+        "auc_mean": 0.6406252752349417,
+        "auc_std": 0.03019461416167293
+      },
+      "quality_only_auc": 0.5548844681263129,
+      "n_samples": 1275,
+      "auc_drop": 0.002366587518162766
+    }
+  },
+  "comparisons": {
+    "quality_only": {
+      "auc_mean": 0.5548844681263129,
+      "auc_std": 0
+    },
+    "original": {
+      "auc_mean": 0.6307822727896073,
+      "auc_std": 0.03323823949430991
+    },
+    "residual_projection": {
+      "auc_mean": 0.6336017048002207,
+      "auc_std": 0.03357559552430842
+    }
+  }
+}
